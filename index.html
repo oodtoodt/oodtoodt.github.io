@@ -238,6 +238,106 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/08/11-8/" itemprop="url">
+                  11.8
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-11-08T22:13:18+08:00" content="2016-11-08">
+              2016-11-08
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>虽然hexo还不是很会用，没有怎么用心去学，但是我心痒难耐想记点什么，提个纲好了。
+</code></pre><hr>
+<p><strong>1.2.1 整数划分</strong><br>不允许重复的整数划分，则在允许重复的基础上修改方程即可<br>（原为f(i,j)=f(i,j-1)+f(i-j,j).)<br>  改为f(i,j)=f(i,j-1)+f(i-j,j-1);</p>
+<p> 注意<br> +该题数据取值巨大，最后用mod 19901004表示，却不能在打表基础上使用（表内数据会直接超出范围），故而在打表时使用 (a+b)%c=(a%c+b%c)%c<br> +动态规划时应添加i&lt;j时 f(i,j)=f(i,i)<br> +f(0,0)=1<br> +循环从i=0，j=1开始</p>
+<hr>
+<p> <strong>1.2.2 凤神与狗</strong><br> 纯数学问题，与递归或dp有些许联系，其过程以后贴上来，现只写注意事项</p>
+<p> 注意<br> +当数据很大时，应使用longlongint型；<br> +在longlongint初赋值时，若类似<!--0--> long long int p=a*b;其中a b为Int则应先进行强制转换，否则longlong无效<br> +在约分分数时，先记录分子分母的值，而非记录约分后的值（其实完全是蠢hh）</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/04/hello-world/" itemprop="url">
                   Hello World
                 </a>
@@ -360,13 +460,20 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
           
 
         </nav>
