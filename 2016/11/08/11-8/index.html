@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/08/11-8/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="虽然hexo还不是很会用，没有怎么用心去学，但是我心痒难耐想记点什么，提个纲好了。">
-<meta property="og:updated_time" content="2016-11-08T14:33:55.817Z">
+<meta property="og:updated_time" content="2016-11-09T10:38:22.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="11.8">
 <meta name="twitter:description" content="虽然hexo还不是很会用，没有怎么用心去学，但是我心痒难耐想记点什么，提个纲好了。">
@@ -283,10 +283,21 @@
 </code></pre><hr>
 <a id="more"></a>
 <p><strong>1.2.1 整数划分</strong><br>不允许重复的整数划分，则在允许重复的基础上修改方程即可<br>（原为f(i,j)=f(i,j-1)+f(i-j,j).)<br>  改为f(i,j)=f(i,j-1)+f(i-j,j-1);</p>
-<p> 注意<br> +该题数据取值巨大，最后用mod 19901004表示，却不能在打表基础上使用（表内数据会直接超出范围），故而在打表时使用 (a+b)%c=(a%c+b%c)%c<br> +动态规划时应添加i&lt;j时 f(i,j)=f(i,i)<br> +f(0,0)=1<br> +循环从i=0，j=1开始</p>
+<p> 注意</p>
+<ul>
+<li>该题数据取值巨大，最后用mod 19901004表示，却不能在打表基础上使用（表内数据会直接超出范围），故而在打表时使用 (a+b)%c=(a%c+b%c)%c</li>
+<li>动态规划时应添加i&lt;j时 f(i,j)=f(i,i)</li>
+<li>f(0,0)=1</li>
+<li>循环从i=0，j=1开始</li>
+</ul>
 <hr>
 <p> <strong>1.2.2 凤神与狗</strong><br> 纯数学问题，与递归或dp有些许联系，其过程以后贴上来，现只写注意事项</p>
-<p> 注意<br> +当数据很大时，应使用longlongint型；<br> +在longlongint初赋值时，若类似<!--0--> long long int p=a*b;其中a b为Int则应先进行强制转换，否则longlong无效<br> +在约分分数时，先记录分子分母的值，而非记录约分后的值（其实完全是蠢hh）</p>
+<p> 注意</p>
+<ul>
+<li>当数据很大时，应使用longlongint型；</li>
+<li>在longlongint初赋值时，若类似<!--0--> long long int p=a*b;其中a b为Int则应先进行强制转换，否则longlong无效</li>
+<li>在约分分数时，先记录分子分母的值，而非记录约分后的值（其实完全是蠢hh）</li>
+</ul>
 
       
     </div>
