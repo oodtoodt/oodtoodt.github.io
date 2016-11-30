@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="oodt's blog">
 <meta property="og:description" content="an AC a day！吐血中……但这两天血本有归，激动啊。
 ……不过今天舌头打弯，说话不利索">
-<meta property="og:updated_time" content="2016-11-28T14:14:57.256Z">
+<meta property="og:updated_time" content="2016-11-30T06:38:07.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="11.22">
 <meta name="twitter:description" content="an AC a day！吐血中……但这两天血本有归，激动啊。
@@ -320,75 +320,8 @@
 <p>第一次，思路有误：认为只要两个立方体的3对对面都相同即可。一番周折后发现不可行————首先骰子存在顺序这个东西，很大程度上左右了判断。其次两个对面在做反转(就是为了凑配而把相对的面的字符调转)时其实对顺序也是有影响的。嘛……不提也罢。</p>
 <p>最后无奈的找题解，豁然开朗=。=第二次，思路对了。即固定一个顶面，然后对侧面进行旋转。然而旋转的方式不对。我的实现方法是是调换其中几个标号所在的字符，并进行映射(思维僵化，只晓得调换反转了……其实也难怪，是从一个基点出发的，没有考虑其他的方式)，一番周折后发现固定顶面的时候侧面的标号其实是(伪)混乱的，即不按原先的顺序来。</p>
 <p>事先用一个二维数组记录各种固定顶面后标号所在位置(就是我刚才说伪混乱的原因)，就可以把一个立方体固定顶面且满足原序号不变，之后直接进行旋转就可以了，因为这时的立方体是固定的、确定的而非之前调换时随固定面变换而改变的。</p>
-<p>代码如下</p>
-<pre><code>#include &quot;cstdio&quot;
-#include &quot;algorithm&quot;
-#include &quot;cmath&quot;
-#include &quot;cstring&quot;
-#include &quot;cstdlib&quot;
-
-using namespace std;
-
-int dir[6][6]={ {0,1,2,3,4,5},{1,5,2,3,0,4},{2,1,5,0,4,3},{3,1,0,5,4,2},
-                {4,0,2,3,5,1},{5,4,2,3,1,0} };//太关键
-
-int check(char ch[],char ch2[])
-{
-    int i;
-    int ii=0;
-    char ch_t1[6];
-    memset(ch_t1,0,sizeof(ch_t1));
-    for(int i=0;i&lt;6;i++)
-    {
-        for(int j=0;j&lt;6;j++)
-        {
-            ch_t1[j]=ch[dir[i][j]];
-        }
-        for(int t=0;t&lt;4;t++)
-        {
-            char ch_c=ch_t1[1];
-            ch_t1[1]=ch_t1[2];
-            ch_t1[2]=ch_t1[4];
-            ch_t1[4]=ch_t1[3];
-            ch_t1[3]=ch_c;
-            if(strcmp(ch_t1,ch2)==0)
-                return 1;
-        }
-    }
-    return 0;
-  //  printf(&quot;%s------%s\n&quot;,ch,ch2);
- //   printf(&quot;%s------%s\n&quot;,ch_t1,ch_t2);
-}
-
-int main()
-{
-   // freopen(&quot;input.txt&quot;,&quot;r&quot;,stdin);
-   // freopen(&quot;output.txt&quot;,&quot;w&quot;,stdout);
-    char ch[15];
-    while(scanf(&quot;%s&quot;,ch)!=EOF)
-    {
-        char ch1[15]={0};
-        char ch2[15]={0};
-        for(int i=0;i&lt;6;i++)
-        {
-            ch1[i]=ch[i];
-        }
-        for(int i=6;i&lt;12;i++)
-        {
-            ch2[i-6]=ch[i];
-        }
-        int t=check(ch1,ch2);
-      //  printf(&quot;%s=.=%s\n\n%d\n\n&quot;,ch1,ch2,t);
-        if(t==1)
-        {
-            printf(&quot;TRUE\n&quot;);
-        }
-        else
-            printf(&quot;FALSE\n&quot;);
-    }
-    return 0;
-}
-</code></pre><p>还复习了下怎么用google hhh</p>
+<p>代码如下<br><figure class="highlight cpp"><figcaption><span>uva253</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstdio"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"algorithm"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cmath"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstring"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstdlib"</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> dir[<span class="number">6</span>][<span class="number">6</span>]=&#123; &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,&#123;<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">4</span>&#125;,&#123;<span class="number">2</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">0</span>,<span class="number">4</span>,<span class="number">3</span>&#125;,&#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">2</span>&#125;,</div><div class="line">                &#123;<span class="number">4</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>&#125;,&#123;<span class="number">5</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">0</span>&#125; &#125;;<span class="comment">//太关键</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">(<span class="keyword">char</span> ch[],<span class="keyword">char</span> ch2[])</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">int</span> ii=<span class="number">0</span>;</div><div class="line">    <span class="keyword">char</span> ch_t1[<span class="number">6</span>];</div><div class="line">    <span class="built_in">memset</span>(ch_t1,<span class="number">0</span>,<span class="keyword">sizeof</span>(ch_t1));</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">6</span>;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">6</span>;j++)</div><div class="line">        &#123;</div><div class="line">            ch_t1[j]=ch[dir[i][j]];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> t=<span class="number">0</span>;t&lt;<span class="number">4</span>;t++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">char</span> ch_c=ch_t1[<span class="number">1</span>];</div><div class="line">            ch_t1[<span class="number">1</span>]=ch_t1[<span class="number">2</span>];</div><div class="line">            ch_t1[<span class="number">2</span>]=ch_t1[<span class="number">4</span>];</div><div class="line">            ch_t1[<span class="number">4</span>]=ch_t1[<span class="number">3</span>];</div><div class="line">            ch_t1[<span class="number">3</span>]=ch_c;</div><div class="line">            <span class="keyword">if</span>(<span class="built_in">strcmp</span>(ch_t1,ch2)==<span class="number">0</span>)</div><div class="line">                <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">  <span class="comment">//  printf("%s------%s\n",ch,ch2);</span></div><div class="line"> <span class="comment">//   printf("%s------%s\n",ch_t1,ch_t2);</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   <span class="comment">// freopen("input.txt","r",stdin);</span></div><div class="line">   <span class="comment">// freopen("output.txt","w",stdout);</span></div><div class="line">    <span class="keyword">char</span> ch[<span class="number">15</span>];</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s"</span>,ch)!=EOF)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">char</span> ch1[<span class="number">15</span>]=&#123;<span class="number">0</span>&#125;;</div><div class="line">        <span class="keyword">char</span> ch2[<span class="number">15</span>]=&#123;<span class="number">0</span>&#125;;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">6</span>;i++)</div><div class="line">        &#123;</div><div class="line">            ch1[i]=ch[i];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">6</span>;i&lt;<span class="number">12</span>;i++)</div><div class="line">        &#123;</div><div class="line">            ch2[i<span class="number">-6</span>]=ch[i];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> t=check(ch1,ch2);</div><div class="line">      <span class="comment">//  printf("%s=.=%s\n\n%d\n\n",ch1,ch2,t);</span></div><div class="line">        <span class="keyword">if</span>(t==<span class="number">1</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"TRUE\n"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">printf</span>(<span class="string">"FALSE\n"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>还复习了下怎么用google hhh</p>
 <hr>
 <p><strong>4-5 IP Networks</strong></p>
 <p>起初我以为只要随便减减就能做了……没想到最后还是要用到位运算……<br>辣鸡子网掩码什么的差点没看懂。<br><strong>子网掩码前32-n为1，后n位为0，网络地址前32-n为任意，后n位为0(这里的网络地址好像又叫网络号？)</strong></p>
@@ -398,133 +331,8 @@ int main()
 <li>^ 按位异或，    0^0=0; 1^1=0; 0^1=1;</li>
 </ul>
 <p>使用这两个玩意即可方便的求出掩码(我纠结了很久要不要用二进制直接模拟……最后懒惰战胜了执着)<br>typedef好像在c++里就被Ignore了<br>还有啊，我读取竟然做了2h………实在也是蠢 ip这种东西想用<code>(%d*c)</code>之类的来读……scanf的%d没有空格回车是会gg的</p>
-<p>代码如下</p>
-<pre><code>#include &lt;cstdio&gt;
-#include &quot;algorithm&quot;
-#include &quot;cmath&quot;
-#include &quot;cstring&quot;
-#include &quot;cstdlib&quot;
-
-using namespace std;
-
-typedef struct cyw{
-    int a[4];
-};
-
-int cmp(cyw a,cyw b)
-{
-    int i;
-    for(i=0;i&lt;4;i++)
-    {
-        if(a.a[i]!=b.a[i])
-        {
-            return a.a[i]&lt;b.a[i];
-        }
-    }
-    return a.a[3]&lt;b.a[3];
-}
-
-int main()
-{
- //   freopen(&quot;input.txt&quot;,&quot;r&quot;,stdin);
- //   freopen(&quot;output.txt&quot;,&quot;w&quot;,stdout);
-    int t,i,j,k,n;
-    cyw p[1000];
-    while(scanf(&quot;%d&quot;,&amp;n)!=EOF)
-    {
-        memset(p,0,sizeof(p));
-        for(i=0;i&lt;n;i++)
-        {
-            for(int j=0;j&lt;4;j++)
-            {
-                scanf(&quot;%d&quot;,&amp;p[i].a[j]);
-                getchar();
-            }
-
-    //        printf(&quot;%2d&quot;,i);
-        }
-        sort(p,p+n,cmp);
-        int temp=0;
-        for(i=0;i&lt;4;i++)
-        {
-            t=p[n-1].a[i]-p[0].a[i];
-            if(t!=0)
-            {
-                t=p[n-1].a[i]^p[0].a[i];
-                temp=i;
-                break;
-            }
-            if(i==3)
-            {
-                temp=4;
-            }
-        }
-        int a[4]={0};
-        for(i=0;i&lt;4;i++)
-        {
-            if(i&lt;temp)
-                a[i]=255;
-            else
-                a[i]=0;
-        }
-        if(temp&lt;4)
-        {
-            //NOW lets do a[temp]
-            a[temp]=256;
-            for(i=0;i&lt;8;i++)
-            {
-                t/=2;
-                if(t==0)
-                {
-                    t=i+1;
-                    break;
-                }
-            }
-            k=1;
-            for(i=0;i&lt;t;i++)
-            {
-                k*=2;
-            }
-            a[temp]-=k;
-            p[0].a[temp]&amp;=a[temp];
-            for(i=temp+1;i&lt;4;i++)
-            {
-                p[0].a[i]=0;
-            }
-        }
-                /*
-                for(i=0;i&lt;n;i++)
-                {
-                    for(int i_1=0;i_1&lt;4;i_1++)
-                    {
-                        printf(&quot;%d &quot;,p[i].a[i_1]);
-                    }
-                    printf(&quot;\n&quot;);
-                }
-                printf(&quot;%d\n&quot;,temp);
-                */
-
-        for(int i_1=0;i_1&lt;4;i_1++)
-        {
-            if(i_1!=3)
-            {
-                printf(&quot;%d.&quot;,p[0].a[i_1]);
-            }
-            else
-                printf(&quot;%d\n&quot;,p[0].a[i_1]);
-        }
-        for(int i_1=0;i_1&lt;4;i_1++)
-        {
-            if(i_1!=3)
-                printf(&quot;%d.&quot;,a[i_1]);
-            else
-                printf(&quot;%d\n&quot;,a[i_1]);
-        }
-  //  printf(&quot;\n&quot;);
-    }
-    return 0;
-}
-</code></pre><p>ok，<em>每天心碎一点点。</em>    </p>
+<p>代码如下<br><figure class="highlight cpp"><figcaption><span>uva1590</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"algorithm"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cmath"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstring"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstdlib"</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> cyw&#123;</div><div class="line">    <span class="keyword">int</span> a[<span class="number">4</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(cyw a,cyw b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(a.a[i]!=b.a[i])</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> a.a[i]&lt;b.a[i];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> a.a[<span class="number">3</span>]&lt;b.a[<span class="number">3</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"> <span class="comment">//   freopen("input.txt","r",stdin);</span></div><div class="line"> <span class="comment">//   freopen("output.txt","w",stdout);</span></div><div class="line">    <span class="keyword">int</span> t,i,j,k,n;</div><div class="line">    cyw p[<span class="number">1000</span>];</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)!=EOF)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">memset</span>(p,<span class="number">0</span>,<span class="keyword">sizeof</span>(p));</div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">4</span>;j++)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;p[i].a[j]);</div><div class="line">                getchar();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">    <span class="comment">//        printf("%2d",i);</span></div><div class="line">        &#125;</div><div class="line">        sort(p,p+n,cmp);</div><div class="line">        <span class="keyword">int</span> temp=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)</div><div class="line">        &#123;</div><div class="line">            t=p[n<span class="number">-1</span>].a[i]-p[<span class="number">0</span>].a[i];</div><div class="line">            <span class="keyword">if</span>(t!=<span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                t=p[n<span class="number">-1</span>].a[i]^p[<span class="number">0</span>].a[i];</div><div class="line">                temp=i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(i==<span class="number">3</span>)</div><div class="line">            &#123;</div><div class="line">                temp=<span class="number">4</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> a[<span class="number">4</span>]=&#123;<span class="number">0</span>&#125;;</div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(i&lt;temp)</div><div class="line">                a[i]=<span class="number">255</span>;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                a[i]=<span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(temp&lt;<span class="number">4</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="comment">//NOW lets do a[temp]</span></div><div class="line">            a[temp]=<span class="number">256</span>;</div><div class="line">            <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)</div><div class="line">            &#123;</div><div class="line">                t/=<span class="number">2</span>;</div><div class="line">                <span class="keyword">if</span>(t==<span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    t=i+<span class="number">1</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            k=<span class="number">1</span>;</div><div class="line">            <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;t;i++)</div><div class="line">            &#123;</div><div class="line">                k*=<span class="number">2</span>;</div><div class="line">            &#125;</div><div class="line">            a[temp]-=k;</div><div class="line">            p[<span class="number">0</span>].a[temp]&amp;=a[temp];</div><div class="line">            <span class="keyword">for</span>(i=temp+<span class="number">1</span>;i&lt;<span class="number">4</span>;i++)</div><div class="line">            &#123;</div><div class="line">                p[<span class="number">0</span>].a[i]=<span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">				<span class="comment">/*</span></div><div class="line">                   for(i=0;i&lt;n;i++)</div><div class="line">                   &#123;</div><div class="line">                       for(int i_1=0;i_1&lt;4;i_1++)</div><div class="line">                       &#123;</div><div class="line">                           printf("%d ",p[i].a[i_1]);</div><div class="line">                       &#125;</div><div class="line">                       printf("\n");</div><div class="line">                   &#125;</div><div class="line">        		printf("%d\n",temp);</div><div class="line">        		*/</div><div class="line">        		</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i_1=<span class="number">0</span>;i_1&lt;<span class="number">4</span>;i_1++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(i_1!=<span class="number">3</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d."</span>,p[<span class="number">0</span>].a[i_1]);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,p[<span class="number">0</span>].a[i_1]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i_1=<span class="number">0</span>;i_1&lt;<span class="number">4</span>;i_1++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(i_1!=<span class="number">3</span>)</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d."</span>,a[i_1]);</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a[i_1]);</div><div class="line">        &#125;</div><div class="line">  <span class="comment">//  printf("\n");</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>ok，<em>每天心碎一点点。</em>    </p>
 
       
     </div>
