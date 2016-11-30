@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -63,7 +63,7 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
@@ -97,9 +97,10 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
@@ -107,20 +108,29 @@
     duoshuo: {
       userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http://oodtoodt.github.io/2016/11/30/记11-26选拔/"/>
+
+
+
 
 
   <title> 记11.26选拔 | oodt's blog </title>
 </head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -141,7 +151,7 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -209,6 +219,8 @@
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -222,13 +234,26 @@
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2016/11/30/记11-26选拔/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="eco_sola">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="oodt's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="oodt's blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -247,13 +272,11 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-30T13:20:41+08:00" content="2016-11-30">
-              2016-11-30
-            </time>
+            
+
+            
+
+            
           </span>
 
           
@@ -268,6 +291,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -317,6 +343,7 @@
       
     </div>
 
+
     <footer class="post-footer">
       
 
@@ -329,6 +356,8 @@
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -391,8 +420,8 @@
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
                alt="eco_sola" />
@@ -432,19 +461,27 @@
         
         
 
+        
+
+
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-简单求和-poj1844"><span class="nav-number">1.0.1.</span> <span class="nav-text">A.简单求和 poj1844</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解题思路"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#题后感"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">题后感</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-悉宇大大的问题-CodeForces707c"><span class="nav-number">1.0.2.</span> <span class="nav-text">B.悉宇大大的问题  CodeForces707c</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-1"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-老陶的幸福生活-HDU1273"><span class="nav-number">1.0.3.</span> <span class="nav-text">C.老陶的幸福生活  HDU1273</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-2"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-小朋友吃汉堡-uva557"><span class="nav-number">1.0.4.</span> <span class="nav-text">D.小朋友吃汉堡  uva557</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-3"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-2"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-水题"><span class="nav-number">1.0.5.</span> <span class="nav-text">E.水题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#F-Boss买披萨"><span class="nav-number">1.0.6.</span> <span class="nav-text">F.Boss买披萨</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-4"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-3"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">思路</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
+
           </div>
         </section>
+      <!--/noindex-->
       
 
     </div>
@@ -467,16 +504,7 @@
   <span class="author" itemprop="copyrightHolder">eco_sola</span>
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
         
 
@@ -562,29 +590,36 @@
 
 
 
+	
+
+
+
+
   
   
 
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
 
 
   
