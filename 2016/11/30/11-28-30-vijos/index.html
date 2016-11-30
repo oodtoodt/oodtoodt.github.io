@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="acm," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="虽然hexo还不是很会用，没有怎么用心去学，但是我心痒难耐想记点什么，提个纲好了。">
+<meta name="description" content="sb vijos，总之低头心碎就对了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="11.8">
-<meta property="og:url" content="http://oodtoodt.github.io/2016/11/08/11-8/index.html">
+<meta property="og:title" content="11.28-30_vijos">
+<meta property="og:url" content="http://oodtoodt.github.io/2016/11/30/11-28-30-vijos/index.html">
 <meta property="og:site_name" content="oodt's blog">
-<meta property="og:description" content="虽然hexo还不是很会用，没有怎么用心去学，但是我心痒难耐想记点什么，提个纲好了。">
-<meta property="og:updated_time" content="2016-11-22T14:34:42.271Z">
+<meta property="og:description" content="sb vijos，总之低头心碎就对了。">
+<meta property="og:updated_time" content="2016-11-30T05:24:28.334Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="11.8">
-<meta name="twitter:description" content="虽然hexo还不是很会用，没有怎么用心去学，但是我心痒难耐想记点什么，提个纲好了。">
+<meta name="twitter:title" content="11.28-30_vijos">
+<meta name="twitter:description" content="sb vijos，总之低头心碎就对了。">
 
 
 
@@ -114,10 +114,10 @@
 
 
 
-  <link rel="canonical" href="http://oodtoodt.github.io/2016/11/08/11-8/"/>
+  <link rel="canonical" href="http://oodtoodt.github.io/2016/11/30/11-28-30-vijos/"/>
 
 
-  <title> 11.8 | oodt's blog </title>
+  <title> 11.28-30_vijos | oodt's blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -239,7 +239,7 @@
             
             
               
-                11.8
+                11.28-30_vijos
               
             
           </h1>
@@ -251,8 +251,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-08T22:13:18+08:00" content="2016-11-08">
-              2016-11-08
+            <time itemprop="dateCreated" datetime="2016-11-30T13:22:53+08:00" content="2016-11-30">
+              2016-11-30
             </time>
           </span>
 
@@ -279,25 +279,37 @@
       
 
       
-        <pre><code>虽然hexo还不是很会用，没有怎么用心去学，但是我心痒难耐想记点什么，提个纲好了。
-</code></pre><hr>
-<a id="more"></a>
-<p><strong>1.2.1 整数划分</strong><br>不允许重复的整数划分，则在允许重复的基础上修改方程即可<br>（原为f(i,j)=f(i,j-1)+f(i-j,j).)<br>  改为f(i,j)=f(i,j-1)+f(i-j,j-1);</p>
-<p> 注意</p>
-<ul>
-<li>该题数据取值巨大，最后用mod 19901004表示，却不能在打表基础上使用（表内数据会直接超出范围），故而在打表时使用 (a+b)%c=(a%c+b%c)%c</li>
-<li>动态规划时应添加i&lt;j时 f(i,j)=f(i,i)</li>
-<li>f(0,0)=1</li>
-<li>循环从i=0，j=1开始</li>
-</ul>
+        <p>sb vijos，总之低头心碎就对了。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h3 id="枚举（没明白这枚举啥意思）"><a href="#枚举（没明白这枚举啥意思）" class="headerlink" title="枚举（没明白这枚举啥意思）"></a>枚举（没明白这枚举啥意思）</h3><h4 id="P1304-回文数"><a href="#P1304-回文数" class="headerlink" title="P1304 回文数"></a>P1304 回文数</h4><p>当初就是从这题弃的vijos……千辛万苦（当初不比现在）模拟了一个非常复杂的回文计算（用了两天）然后发现题目数据居然超了longlongint 一看高精度，心态直接崩溃<br>再回来看的时候就没那么多事了，只在16进制处理上花了一点时间。<br>核心：n进制加法</p>
+<pre><code>for(int i=0;i&lt;n;i++)
+{
+    temp=ch_t[i]-&apos;0&apos;+ch[i]-&apos;0&apos;;
+    if(temp&gt;=p)
+    {
+        temp-=p;
+        ch[i+1]++;
+    }
+    ch[i]=temp+&apos;0&apos;;
+}
+if(ch[n]&gt;0)
+{
+    ch[n]+=&apos;0&apos;;
+    n++;
+}
+</code></pre><p>有了这个就差不多了。</p>
+<h4 id="P1335-数独验证"><a href="#P1335-数独验证" class="headerlink" title="P1335 数独验证"></a>P1335 数独验证</h4><p>做好判断，这个题就没什么了……</p>
+<h4 id="P1696-数与连分数"><a href="#P1696-数与连分数" class="headerlink" title="P1696 数与连分数"></a>P1696 数与连分数</h4><p>不好好说明什么是连分数，让我们自己去维基……还好维基很强，还给了我递推公式。<br>分数-&gt;连分数 辗转相除即可<br>连分数-&gt;分数 c[i]=c[i-1]*a[i]+c[i-2]，枚举1 2情况即可</p>
+<h2 id="……最坑的是-2-1-gt-2-2-gt-2-1-这种数据，我知道之后恨不得砸死出题人。"><a href="#……最坑的是-2-1-gt-2-2-gt-2-1-这种数据，我知道之后恨不得砸死出题人。" class="headerlink" title="……最坑的是  2/1-&gt;[2]  ||  [2]-&gt;2/1   这种数据，我知道之后恨不得砸死出题人。"></a>……最坑的是  2/1-&gt;[2]  ||  [2]-&gt;2/1   这种数据，我知道之后恨不得砸死出题人。</h2><h3 id="贪心（以前高估这些题了）"><a href="#贪心（以前高估这些题了）" class="headerlink" title="贪心（以前高估这些题了）"></a>贪心（以前高估这些题了）</h3><h4 id="P1097-合并果子"><a href="#P1097-合并果子" class="headerlink" title="P1097 合并果子"></a>P1097 合并果子</h4><p>居然可以暴力过……找最小值，找次小值，改值，n^2可以过<br>不过据说数据被改了，不然应该哈夫曼什么鬼的 不是很懂</p>
+<h4 id="P1123-均分纸牌"><a href="#P1123-均分纸牌" class="headerlink" title="P1123 均分纸牌"></a>P1123 均分纸牌</h4><p>暴力过……遍历从第一个开始满足就行</p>
+<h4 id="P1409-纪念品分组"><a href="#P1409-纪念品分组" class="headerlink" title="P1409 纪念品分组"></a>P1409 纪念品分组</h4><p>排序之后直接上下位置记录判断并运动就行</p>
+<h4 id="P1691-输油管道问题"><a href="#P1691-输油管道问题" class="headerlink" title="P1691 输油管道问题"></a>P1691 输油管道问题</h4><p>排序寻中位数</p>
 <hr>
-<p> <strong>1.2.2 凤神与狗</strong><br> 纯数学问题，与递归或dp有些许联系，其过程以后贴上来，现只写注意事项</p>
-<p> 注意</p>
-<ul>
-<li>当数据很大时，应使用longlongint型；</li>
-<li>在longlongint初赋值时，若类似<!--0--> long long int p=a*b;其中a b为Int则应先进行强制转换，否则longlong无效</li>
-<li>在约分分数时，先记录分子分母的值，而非记录约分后的值（其实完全是蠢hh）</li>
-</ul>
+<p>###排序（都很简单，用sort就行）</p>
+<h4 id="P1282-佳佳的魔法照片"><a href="#P1282-佳佳的魔法照片" class="headerlink" title="P1282 佳佳的魔法照片"></a>P1282 佳佳的魔法照片</h4><p>又一坑，题目中“序号”“标号”之类的易混淆，我就是从这里失去理智的。</p>
+<h4 id="P1316-明明的随机数"><a href="#P1316-明明的随机数" class="headerlink" title="P1316 明明的随机数"></a>P1316 明明的随机数</h4><p>错了几次，具体原因是在<!--0-->if(a[i]==a[i-1]) a[i]=-1这里，因为i++，a[i-1]显然就成了-1，改成a[i-1]=-1就好了。讲道理这种问题不该犯……</p>
+<h4 id="P1389-婚礼上的小杉"><a href="#P1389-婚礼上的小杉" class="headerlink" title="P1389 婚礼上的小杉"></a>P1389 婚礼上的小杉</h4><p>导火索……毕竟我没学stl，强行用scanf做，就是不对，然而就是不知道为什么。看了看别人说的，好像是给的数据里就没有空行？总之用scanf+getchar在对于输入非常确定的时候是可以的，然而此题有毒，此题魔性，总之低头就对了。</p>
+<hr>
+<p>后记：acm里很多题是读懂了差不多就明白了一半……………………一怕读不懂，二怕入文字陷阱，三怕没有思路。</p>
 
       
     </div>
@@ -318,28 +330,18 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/acm/" rel="tag">#acm</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/04/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/11/30/记11-26选拔/" rel="next" title="记11.26选拔">
+                <i class="fa fa-chevron-left"></i> 记11.26选拔
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/12/11-12/" rel="prev" title="11.12">
-                11.12 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -446,7 +448,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举（没明白这枚举啥意思）"><span class="nav-number">1.1.</span> <span class="nav-text">枚举（没明白这枚举啥意思）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#P1304-回文数"><span class="nav-number">1.1.1.</span> <span class="nav-text">P1304 回文数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P1335-数独验证"><span class="nav-number">1.1.2.</span> <span class="nav-text">P1335 数独验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P1696-数与连分数"><span class="nav-number">1.1.3.</span> <span class="nav-text">P1696 数与连分数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#……最坑的是-2-1-gt-2-2-gt-2-1-这种数据，我知道之后恨不得砸死出题人。"><span class="nav-number">2.</span> <span class="nav-text">……最坑的是  2/1->[2]  ||  [2]->2/1   这种数据，我知道之后恨不得砸死出题人。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心（以前高估这些题了）"><span class="nav-number">2.1.</span> <span class="nav-text">贪心（以前高估这些题了）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#P1097-合并果子"><span class="nav-number">2.1.1.</span> <span class="nav-text">P1097 合并果子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P1123-均分纸牌"><span class="nav-number">2.1.2.</span> <span class="nav-text">P1123 均分纸牌</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P1409-纪念品分组"><span class="nav-number">2.1.3.</span> <span class="nav-text">P1409 纪念品分组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P1691-输油管道问题"><span class="nav-number">2.1.4.</span> <span class="nav-text">P1691 输油管道问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P1282-佳佳的魔法照片"><span class="nav-number">2.1.5.</span> <span class="nav-text">P1282 佳佳的魔法照片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P1316-明明的随机数"><span class="nav-number">2.1.6.</span> <span class="nav-text">P1316 明明的随机数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P1389-婚礼上的小杉"><span class="nav-number">2.1.7.</span> <span class="nav-text">P1389 婚礼上的小杉</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>

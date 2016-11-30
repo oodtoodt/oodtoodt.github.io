@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="oodt's blog">
 <meta property="og:description" content="an AC a day！吐血中……但这两天血本有归，激动啊。
 ……不过今天舌头打弯，说话不利索">
-<meta property="og:updated_time" content="2016-11-22T17:00:30.368Z">
+<meta property="og:updated_time" content="2016-11-28T14:14:57.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="11.22">
 <meta name="twitter:description" content="an AC a day！吐血中……但这两天血本有归，激动啊。
@@ -284,9 +284,7 @@
       
         <pre><code>an AC a day！吐血中……但这两天血本有归，激动啊。
 ……不过今天舌头打弯，说话不利索
-</code></pre><hr>
-<a id="more"></a>
-<p><strong>4-4 骰子涂色(uva 253)</strong><br>题意：判断一个立方体旋转后能否得到另一个立方体(立方体的各个面事先标好序号，并向上涂色，看两个骰子是否相同)</p>
+</code></pre><h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p><strong>4-4 骰子涂色(uva 253)</strong><br>题意：判断一个立方体旋转后能否得到另一个立方体(立方体的各个面事先标好序号，并向上涂色，看两个骰子是否相同)</p>
 <p>第一次，思路有误：认为只要两个立方体的3对对面都相同即可。一番周折后发现不可行————首先骰子存在顺序这个东西，很大程度上左右了判断。其次两个对面在做反转(就是为了凑配而把相对的面的字符调转)时其实对顺序也是有影响的。嘛……不提也罢。</p>
 <p>最后无奈的找题解，豁然开朗=。=第二次，思路对了。即固定一个顶面，然后对侧面进行旋转。然而旋转的方式不对。我的实现方法是是调换其中几个标号所在的字符，并进行映射(思维僵化，只晓得调换反转了……其实也难怪，是从一个基点出发的，没有考虑其他的方式)，一番周折后发现固定顶面的时候侧面的标号其实是(伪)混乱的，即不按原先的顺序来。</p>
 <p>事先用一个二维数组记录各种固定顶面后标号所在位置(就是我刚才说伪混乱的原因)，就可以把一个立方体固定顶面且满足原序号不变，之后直接进行旋转就可以了，因为这时的立方体是固定的、确定的而非之前调换时随固定面变换而改变的。</p>
@@ -534,6 +532,10 @@ int main()
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/11/28/11-28/" rel="prev" title="11-28.29.30">
+                11-28.29.30 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -600,7 +602,7 @@ int main()
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -639,7 +641,7 @@ int main()
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
             
           </div>
         </section>
