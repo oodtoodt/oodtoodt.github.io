@@ -65,7 +65,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -77,7 +77,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
 
@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://oodtoodt.github.io/2016/11/30/11-28-30-vijos/index.html">
 <meta property="og:site_name" content="oodt's blog">
 <meta property="og:description" content="sb vijos，总之低头心碎就对了。">
-<meta property="og:updated_time" content="2016-11-30T06:20:49.025Z">
+<meta property="og:updated_time" content="2016-11-30T06:30:28.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="11.28-30_vijos">
 <meta name="twitter:description" content="sb vijos，总之低头心碎就对了。">
@@ -113,8 +113,8 @@
       applicationID: '',
       apiKey: '',
       indexName: '',
-      hits: "",
-      labels: ""
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
@@ -183,6 +183,8 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             首页
           </a>
         </li>
@@ -190,6 +192,8 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -199,15 +203,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            日程
+            标签
           </a>
         </li>
       
@@ -273,6 +271,14 @@
         <div class="post-meta">
           <span class="post-time">
             
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-30T13:22:53+08:00">
+                2016-11-30
+              </time>
+            
 
             
 
@@ -306,7 +312,7 @@
 
       
         <p>sb vijos，总之低头心碎就对了。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h3 id="枚举（没明白这枚举啥意思）"><a href="#枚举（没明白这枚举啥意思）" class="headerlink" title="枚举（没明白这枚举啥意思）"></a>枚举（没明白这枚举啥意思）</h3><h4 id="P1304-回文数"><a href="#P1304-回文数" class="headerlink" title="P1304 回文数"></a>P1304 回文数</h4><p>当初就是从这题弃的vijos……千辛万苦（当初不比现在）模拟了一个非常复杂的回文计算（用了两天）然后发现题目数据居然超了longlongint 一看高精度，心态直接崩溃<br>再回来看的时候就没那么多事了，只在16进制处理上花了一点时间。<br>核心：n进制加法<br><figure class="highlight plain"><figcaption><span>C++ n进制加法</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">for(int i=0;i&lt;n;i++)</div><div class="line">&#123;</div><div class="line">    temp=ch_t[i]-&apos;0&apos;+ch[i]-&apos;0&apos;;</div><div class="line">    if(temp&gt;=p)</div><div class="line">    &#123;</div><div class="line">        temp-=p;</div><div class="line">        ch[i+1]++;</div><div class="line">    &#125;</div><div class="line">    ch[i]=temp+&apos;0&apos;;</div><div class="line">&#125;</div><div class="line">if(ch[n]&gt;0)</div><div class="line">&#123;</div><div class="line">    ch[n]+=&apos;0&apos;;</div><div class="line">    n++;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br>有了这个就差不多了。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h3 id="枚举（没明白这枚举啥意思）"><a href="#枚举（没明白这枚举啥意思）" class="headerlink" title="枚举（没明白这枚举啥意思）"></a>枚举（没明白这枚举啥意思）</h3><h4 id="P1304-回文数"><a href="#P1304-回文数" class="headerlink" title="P1304 回文数"></a>P1304 回文数</h4><p>当初就是从这题弃的vijos……千辛万苦（当初不比现在）模拟了一个非常复杂的回文计算（用了两天）然后发现题目数据居然超了longlongint 一看高精度，心态直接崩溃<br>再回来看的时候就没那么多事了，只在16进制处理上花了一点时间。<br>核心：n进制加法<br><figure class="highlight c"><figcaption><span>++ n进制加法</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">&#123;</div><div class="line">    temp=<span class="keyword">ch_t</span>[i]-<span class="string">'0'</span>+ch[i]-<span class="string">'0'</span>;</div><div class="line">    <span class="keyword">if</span>(temp&gt;=p)</div><div class="line">    &#123;</div><div class="line">        temp-=p;</div><div class="line">        ch[i+<span class="number">1</span>]++;</div><div class="line">    &#125;</div><div class="line">    ch[i]=temp+<span class="string">'0'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span>(ch[n]&gt;<span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">    ch[n]+=<span class="string">'0'</span>;</div><div class="line">    n++;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br>有了这个就差不多了。</p>
 <h4 id="P1335-数独验证"><a href="#P1335-数独验证" class="headerlink" title="P1335 数独验证"></a>P1335 数独验证</h4><p>做好判断，这个题就没什么了……</p>
 <h4 id="P1696-数与连分数"><a href="#P1696-数与连分数" class="headerlink" title="P1696 数与连分数"></a>P1696 数与连分数</h4><p>不好好说明什么是连分数，让我们自己去维基……还好维基很强，还给了我递推公式。<br>分数-&gt;连分数 辗转相除即可<br>连分数-&gt;分数 c[i]=c[i-1]*a[i]+c[i-2]，枚举1 2情况即可<br>……最坑的是  2/1-&gt;[2]  ||  [2]-&gt;2/1   这种数据，我知道之后恨不得砸死出题人。</p>
 <hr>
@@ -496,6 +502,17 @@
 </div>
 
 
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
 
         
 
@@ -550,25 +567,25 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
 
 
 
   
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
 
 
