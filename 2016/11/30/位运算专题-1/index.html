@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="虽然题都很水，但是毕竟第一次现场做，出了许多差错……还在一个概率题上死脑筋的卡了1.5h……最后笔记本还没电了……万幸的是大家都放水，算是过了。这里对照题解，记一下这些有趣的题。">
+<meta name="description" content="就 摘录于此，省去些麻烦">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记11.26选拔">
-<meta property="og:url" content="http://oodtoodt.github.io/2016/11/30/记11-26选拔/index.html">
+<meta property="og:title" content="位运算专题_1">
+<meta property="og:url" content="http://oodtoodt.github.io/2016/11/30/位运算专题-1/index.html">
 <meta property="og:site_name" content="oodt's blog">
-<meta property="og:description" content="虽然题都很水，但是毕竟第一次现场做，出了许多差错……还在一个概率题上死脑筋的卡了1.5h……最后笔记本还没电了……万幸的是大家都放水，算是过了。这里对照题解，记一下这些有趣的题。">
-<meta property="og:updated_time" content="2016-11-30T09:37:51.938Z">
+<meta property="og:description" content="就 摘录于此，省去些麻烦">
+<meta property="og:updated_time" content="2016-12-01T00:22:37.637Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记11.26选拔">
-<meta name="twitter:description" content="虽然题都很水，但是毕竟第一次现场做，出了许多差错……还在一个概率题上死脑筋的卡了1.5h……最后笔记本还没电了……万幸的是大家都放水，算是过了。这里对照题解，记一下这些有趣的题。">
+<meta name="twitter:title" content="位运算专题_1">
+<meta name="twitter:description" content="就 摘录于此，省去些麻烦">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://oodtoodt.github.io/2016/11/30/记11-26选拔/"/>
+  <link rel="canonical" href="http://oodtoodt.github.io/2016/11/30/位运算专题-1/"/>
 
 
 
 
 
-  <title> 记11.26选拔 | oodt's blog </title>
+  <title> 位运算专题_1 | oodt's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -238,7 +238,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2016/11/30/记11-26选拔/">
+  <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2016/11/30/位运算专题-1/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="eco_sola">
@@ -262,7 +262,7 @@
             
             
               
-                记11.26选拔
+                位运算专题_1
               
             
           </h1>
@@ -275,7 +275,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-30T13:20:41+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-30T17:38:37+08:00">
                 2016-11-30
               </time>
             
@@ -311,29 +311,118 @@
       
 
       
-        <p>虽然题都很水，但是毕竟第一次现场做，出了许多差错……还在一个概率题上死脑筋的卡了1.5h……最后笔记本还没电了……万幸的是大家都放水，算是过了。<br>这里对照题解，记一下这些有趣的题。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h4 id="A-简单求和-poj1844"><a href="#A-简单求和-poj1844" class="headerlink" title="A.简单求和 poj1844"></a>A.简单求和 poj1844</h4><h5 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h5><p>找出最小的n，对于给定的数列S，使得<br>$$<br>S=k_1 \cdot 1 + k_2 \cdot 2 + … + k_n \cdot n \ \ (k_i = 1, -1)<br>$$</p>
-<h5 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h5><p>显然在$k_i$只能取得1和-1的情况下区分的差是偶数。</p>
-<p>欲凑出S，可使$k_i$都取1</p>
-<p>显然有 $\sum_{i=0}^n i \geq S $。</p>
-<p>若 $S_n$ %2==0 显然对于 0~$S_n$之间的偶数都成立。</p>
-<p>对于奇数，则取$S_{n+1}$至S为奇数即可。</p>
-<h5 id="题后感"><a href="#题后感" class="headerlink" title="题后感"></a>题后感</h5><p>日，解题用了10m，思路写了1h……真的落实下来是件很复杂的事情，我决定很水的题就不怎么写了……<br>mathjax出了一些不可描述的错误，总之这一段排版不好……</p>
-<hr>
-<h4 id="B-悉宇大大的问题-CodeForces707c"><a href="#B-悉宇大大的问题-CodeForces707c" class="headerlink" title="B.悉宇大大的问题  CodeForces707c"></a>B.悉宇大大的问题  CodeForces707c</h4><h5 id="题目大意-1"><a href="#题目大意-1" class="headerlink" title="题目大意"></a>题目大意</h5><p>对于给定的数$n$($ 1\leq n\leq10^9$)，请给出相应的一组勾股数</p>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>硬推就行，对于1，2无解，之后的奇数偶数分别可求得公式<br>(强行用3，4，5，奇数偶数做也行=。=)</p>
-<hr>
-<h4 id="C-老陶的幸福生活-HDU1273"><a href="#C-老陶的幸福生活-HDU1273" class="headerlink" title="C.老陶的幸福生活  HDU1273"></a>C.老陶的幸福生活  HDU1273</h4><h5 id="题目大意-2"><a href="#题目大意-2" class="headerlink" title="题目大意"></a>题目大意</h5><p>给出多边形的边n，将每个顶点与其他所有顶点连线，问有多少种不重复线路走过所有顶点的方式？</p>
-<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h5><p>……奇怪的水题。每个顶点有n-1条边，每次走少2条边，就完了。</p>
-<hr>
-<h4 id="D-小朋友吃汉堡-uva557"><a href="#D-小朋友吃汉堡-uva557" class="headerlink" title="D.小朋友吃汉堡  uva557"></a>D.小朋友吃汉堡  uva557</h4><h5 id="题目大意-3"><a href="#题目大意-3" class="headerlink" title="题目大意"></a>题目大意</h5><p>抛硬币决定n个鸡肉堡与n个牛肉堡的归属，小本和比尔最后拿，请计算小本和比尔拿到相同品种汉堡的概率。(最后只剩下一种汉堡时就不用挑了)</p>
-<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h5><p>倒着想！<br>正着计算(我就没想明白正着怎么算)会非常复杂，因为在最后剩下一种的情况会有所变化……这时候就该像高中一样倒着想啊(TAT卡了1.5h，就是一半的时间啊！跟个智障一样)<br>即是说小本和别拿到不同汉堡的概率。因为这样就不会出现最后只剩一种的情况，从而能够简单的计算概率 $P[n]=\frac{C_{2n-2}^{n-1} } {2^{2n-2}}$</p>
-<p>重点！！<br><strong>直接计算会超出范围，且计算组合数的时间复杂度过大，所以将前后概率相除化为递推式</strong></p>
-<p>$P[n+1]=P[n] \cdot (1- \frac {1} {2n})$<br>然后打表就好了……</p>
-<hr>
-<h4 id="E-水题"><a href="#E-水题" class="headerlink" title="E.水题"></a>E.水题</h4><hr>
-<h4 id="F-Boss买披萨"><a href="#F-Boss买披萨" class="headerlink" title="F.Boss买披萨"></a>F.Boss买披萨</h4><h5 id="题目大意-4"><a href="#题目大意-4" class="headerlink" title="题目大意"></a>题目大意</h5><p>有一个长度为$n$ ($ 1\leq n\leq2 \times 10^5$)的数组$a_i$($ 0\leq {a_i} \leq 10^4$)，问能否对数组经过如下处理后，使整个数组的数都化为0<br>1.a[i]减去任意偶数个数<br>2.a[i] - - 且a[i+1] - -<br>(这是已经读懂了题之后翻译过来的，我当时读完题就没做……)</p>
-<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h5><p>此题需要注意的是除了暴力之外还可以用空间复杂度O(1)的方法。<br>布尔变量owned表示上一个数是否为奇数。初始化为false。读入数据，若a[i]=0且owned=true，直接输出跳出。否则，若owned=true a[i]–,考察此时奇偶性设置owned。<br>简单地说判断与之前没什么不同，大概就是把1附在owned上，但是不需要开数组是非常好的。这种方法还是有必要记的。</p>
+        <p>就 摘录于此，省去些麻烦</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><blockquote>
+<p><strong> 1. and运算 </strong><br>    and运算通常用于二进制取位操作，例如一个数 and 1的结果就是取二进制的最末位。这可以用来判断一个整数的奇偶，二进制的 最末位为0表示该数为偶数，最末位为1表示该数为奇数.<br> === 2. or运算 ===<br>     or运算通常用于二进制特定位上的无条件赋值，例如一个数or 1的结果就是把二进制最末位强行变成1。如果需要把二进制最末位 变成0，对这个数or 1之后再减一就可以了，其实际意义就是把这个数强行变成最接近的偶数。<br> === 3. xor运算 ===<br>     xor运算通常用于对二进制的特定一位进行取反操作，因为异或可以这样定义：0和1异或0都不变，异或1则取反。     xor运算的逆运算是它本身，<strong>也就是说两次异或同一个数最后结果不变</strong>，即(a xor b) xor b = a。<strong>且满足交换和分配律</strong>。<br>     xor运算可以用于简单的加密，比如我想对我MM说1314520，但怕别人知道，于是双方约定拿我的生日19880516作为密钥。1314520 xor 19880516 = 20665500，我就 把20665500告诉MM。MM再次计算20665500 xor 19880516的值，得到1314520，于是她就明白了我的企图。<br> === 6. shr运算 (right,&gt;&gt;)===<br>    和shl相似，a shr b表示二进制右移b位（去掉末b位），相当于a除以2的b次方（取整）。我们也经常用shr 1来代替 / 2，比如二分查找、堆的插入操作等等。想办法用shr代替除法运算可以使程序效率大大提高。最大公约数的二进制算法用除以2操作来代 替慢得出奇的mod运算，效率可以提高60%。<br> ===位运算的简单应用===<br>   有时我们的程序需要一个规模不大的Hash表来记录状态。比如，做数独时我们需要27个Hash表来统计每一行、每一列和每一个小九宫格里已经有哪些数了。此时，我们可以用27个小于2^9的整数进行记录。例如，一个只填了2和5的小九宫格就用数字18表示（二进制为000010010），而某一行的状态为511则表示这一行已经填满。需要改变状态时我们不需要把这个数转成二进制修改后再转回去，而是直接进行位操作。在搜索时，把状态表示成整数可以更好地进行判重等操作。这道题是在搜索中使用位运算加速的经典例子。以后 我们会看到更多的例子。      下面列举了一些常见的二进制位的变换操作。      </p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>示例</th>
+<th>位运算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>去掉最后一位</td>
+<td>(101101-&gt;10110)</td>
+<td>x &lt;&lt; 1 </td>
+</tr>
+<tr>
+<td>在最后加一个0</td>
+<td>(101101-&gt;1011010)</td>
+<td>x &lt;&lt; 1 </td>
+</tr>
+<tr>
+<td>在最后加一个1</td>
+<td>(101101-&gt;1011011)</td>
+<td>x &lt;&lt; 1+1 </td>
+</tr>
+<tr>
+<td>把最后一位变成1</td>
+<td>(101100-&gt;101101)</td>
+<td>x or 1 </td>
+</tr>
+<tr>
+<td>把最后一位变成0</td>
+<td>(101101-&gt;101100)</td>
+<td>x or 1-1 </td>
+</tr>
+<tr>
+<td>最后一位取反</td>
+<td>(101101-&gt;101100)</td>
+<td>x xor 1  </td>
+</tr>
+<tr>
+<td>把右数第k位变成1</td>
+<td>(101001-&gt;101101,k=3)</td>
+<td>x or (1 &lt;&lt; (k-1)) </td>
+</tr>
+<tr>
+<td>把右数第k位变成0</td>
+<td>(101101-&gt;101001,k=3)</td>
+<td>x and not (1 &lt;&lt; (k-1)) </td>
+</tr>
+<tr>
+<td>右数第k位取反</td>
+<td>(101001-&gt;101101,k=3)</td>
+<td>x xor (1 &lt;&lt; (k-1))  </td>
+</tr>
+<tr>
+<td>取末三位</td>
+<td>(1101101-&gt;101)</td>
+<td>x and 7 </td>
+</tr>
+<tr>
+<td>取末k位</td>
+<td>(1101101-&gt;1101,k=5)</td>
+<td>x and (1 &lt;&lt; k-1) </td>
+</tr>
+<tr>
+<td>取右数第k位</td>
+<td>(1101101-&gt;1,k=4)</td>
+<td>x &lt;&lt; (k-1) and 1 </td>
+</tr>
+<tr>
+<td>把末k位变成1</td>
+<td>(101001-&gt;101111,k=4)</td>
+<td>x or (1 &lt;&lt; k-1) </td>
+</tr>
+<tr>
+<td>末k位取反</td>
+<td>(101001-&gt;100110,k=4)</td>
+<td>x xor (1 &lt;&lt; k-1) </td>
+</tr>
+<tr>
+<td>把右边连续的1变成0</td>
+<td>(100101111-&gt;100100000)</td>
+<td>x and (x+1) </td>
+</tr>
+<tr>
+<td>把右起第一个0变成1</td>
+<td>(100101111-&gt;100111111)</td>
+<td>x or (x+1) </td>
+</tr>
+<tr>
+<td>把右边连续的0变成1</td>
+<td>(11011000-&gt;11011111)</td>
+<td>x or (x-1) </td>
+</tr>
+<tr>
+<td>取右边连续的1</td>
+<td>(100101111-&gt;1111)</td>
+<td>(x xor (x+1)) &lt;&lt; 1 </td>
+</tr>
+<tr>
+<td>去掉右起第一个1的左边</td>
+<td>(100101000-&gt;1000)</td>
+<td>x and (x xor (x-1))        </td>
+</tr>
+</tbody>
+</table>
+<p>最后这一个在树状数组中会用到。 </p>
+<p>以上全部引用 用的到再说。</p>
 
       
     </div>
@@ -360,8 +449,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/22/11-22/" rel="next" title="11.22">
-                <i class="fa fa-chevron-left"></i> 11.22
+              <a href="/2016/11/30/11-28-30-vijos/" rel="next" title="11.28-30_vijos">
+                <i class="fa fa-chevron-left"></i> 11.28-30_vijos
               </a>
             
           </div>
@@ -369,10 +458,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/30/11-28-30-vijos/" rel="prev" title="11.28-30_vijos">
-                11.28-30_vijos <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -485,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-简单求和-poj1844"><span class="nav-number">1.0.1.</span> <span class="nav-text">A.简单求和 poj1844</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解题思路"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#题后感"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">题后感</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-悉宇大大的问题-CodeForces707c"><span class="nav-number">1.0.2.</span> <span class="nav-text">B.悉宇大大的问题  CodeForces707c</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-1"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-老陶的幸福生活-HDU1273"><span class="nav-number">1.0.3.</span> <span class="nav-text">C.老陶的幸福生活  HDU1273</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-2"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-小朋友吃汉堡-uva557"><span class="nav-number">1.0.4.</span> <span class="nav-text">D.小朋友吃汉堡  uva557</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-3"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-2"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-水题"><span class="nav-number">1.0.5.</span> <span class="nav-text">E.水题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#F-Boss买披萨"><span class="nav-number">1.0.6.</span> <span class="nav-text">F.Boss买披萨</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-4"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-3"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">思路</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
             
 
           </div>
