@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="我就从来没想到过约瑟夫环能递推……大概我数学真心不敏感吧。记得第一次接触约瑟夫环，我看着链表生无可恋。后来知道了可以用求余这种神奇的运算完成约瑟夫环……现在……我又知道了一种做法。k=2时有显式表达式，k&amp;gt;2时有递推关系。递推公式
-$$\begin{eqnarray}&amp;amp; f[1]= &amp;amp; 0\\&amp;amp; f[i]= &amp;amp; (f[i-1]+m)%i(i&amp;gt;1)\end">
+<meta name="description" content="去tm的约瑟夫环">
 <meta property="og:type" content="article">
 <meta property="og:title" content="12.2_vijos_约瑟夫环10e100">
 <meta property="og:url" content="http://oodtoodt.github.io/2016/12/02/12-2-vijos/index.html">
 <meta property="og:site_name" content="oodt's blog">
-<meta property="og:description" content="我就从来没想到过约瑟夫环能递推……大概我数学真心不敏感吧。记得第一次接触约瑟夫环，我看着链表生无可恋。后来知道了可以用求余这种神奇的运算完成约瑟夫环……现在……我又知道了一种做法。k=2时有显式表达式，k&amp;gt;2时有递推关系。递推公式
-$$\begin{eqnarray}&amp;amp; f[1]= &amp;amp; 0\\&amp;amp; f[i]= &amp;amp; (f[i-1]+m)%i(i&amp;gt;1)\end">
-<meta property="og:updated_time" content="2016-12-08T16:00:53.614Z">
+<meta property="og:description" content="去tm的约瑟夫环">
+<meta property="og:updated_time" content="2016-12-12T16:17:41.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="12.2_vijos_约瑟夫环10e100">
-<meta name="twitter:description" content="我就从来没想到过约瑟夫环能递推……大概我数学真心不敏感吧。记得第一次接触约瑟夫环，我看着链表生无可恋。后来知道了可以用求余这种神奇的运算完成约瑟夫环……现在……我又知道了一种做法。k=2时有显式表达式，k&amp;gt;2时有递推关系。递推公式
-$$\begin{eqnarray}&amp;amp; f[1]= &amp;amp; 0\\&amp;amp; f[i]= &amp;amp; (f[i-1]+m)%i(i&amp;gt;1)\end">
+<meta name="twitter:description" content="去tm的约瑟夫环">
 
 
 
@@ -323,8 +320,9 @@ $$\begin{eqnarray}&amp;amp; f[1]= &amp;amp; 0\\&amp;amp; f[i]= &amp;amp; (f[i-1]
       
 
       
-        <p>我就从来没想到过约瑟夫环能递推……大概我数学真心不敏感吧。<br>记得第一次接触约瑟夫环，我看着链表生无可恋。后来知道了可以用求余这种神奇的运算完成约瑟夫环……现在……我又知道了一种做法。<br>k=2时有显式表达式，k&gt;2时有递推关系。<br>递推公式</p>
-<p>$$<br>\begin{eqnarray}<br>&amp; f[1]= &amp; 0\\<br>&amp; f[i]= &amp; (f[i-1]+m)%i(i&gt;1)<br>\end{eqnarray}<br>$$</p>
+        <p>去tm的约瑟夫环</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p>我就从来没想到过约瑟夫环能递推……大概我数学真心不敏感吧。<br>记得第一次接触约瑟夫环，我看着链表生无可恋。后来知道了可以用求余这种神奇的运算完成约瑟夫环……现在……我又知道了一种做法。<br>k=2时有显式表达式，k&gt;2时有递推关系。<br>递推公式（m是第m个人去死，n是一开始人数，t是最后一个去死的）</p>
+<p>$$<br>\left\{<br>\begin{aligned}<br>&amp;f[1]=0 \\<br>&amp;f[i]=(f[i-1]+m)\%i (i&gt;1)<br>\end{aligned}<br>\right.<br>$$</p>
 <p>显式表达式<br>k=2时， 取a使得<br>$$<br>2^a+1&gt;n&gt;2^a=m\\<br>t=(n-m)*2+1<br>$$<br>k=2时又由显式表达式可推得另一种神奇的方法：<br>把总数n化为2进制，将第一位的1移到最后一位……啧。</p>
 <p>好了说正题<br>约瑟夫问题10E100版<br>k=2,100位n。(啧，世界哪来这么多人)<br>一开始没在意10e100，一个劲的莽RE……然后发现卧槽高精度，报警。果断找题解，于是有了以上内容。啧……不过怎么样都躲不过模拟的，再怎么搞100位的模拟都是很麻烦的事情，大概2进制的那个最简单了吧。</p>
 <hr>
@@ -422,8 +420,17 @@ $$\begin{eqnarray}&amp;amp; f[1]= &amp;amp; 0\\&amp;amp; f[i]= &amp;amp; (f[i-1]
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/fall_out_boy.jpeg"
@@ -469,6 +476,22 @@ $$\begin{eqnarray}&amp;amp; f[1]= &amp;amp; 0\\&amp;amp; f[i]= &amp;amp; (f[i-1]
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
