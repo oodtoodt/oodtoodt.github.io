@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="zishu,acm," />
 
 
 
@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://oodtoodt.github.io/2016/12/19/紫书stl学习-2/index.html">
 <meta property="og:site_name" content="oodt's blog">
 <meta property="og:description" content="这次题肯定不是上次那种动动脚趾头就能做的啦">
-<meta property="og:updated_time" content="2016-12-21T15:48:16.283Z">
+<meta property="og:updated_time" content="2016-12-29T10:32:13.805Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="紫书stl学习_2">
 <meta name="twitter:description" content="这次题肯定不是上次那种动动脚趾头就能做的啦">
@@ -345,9 +345,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sstream"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"vector"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"set"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"map"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"queue"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstdio"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cmath"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstring"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"algorithm"</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="comment">//typedef set&lt;int &gt;Set;</span></div><div class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span> ,<span class="keyword">int</span> &gt;IDcache;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span> &gt;Setcache;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">ID</span> <span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(IDcache.count(x))<span class="keyword">return</span> IDcache[x];</div><div class="line">    Setcache.push_back(x);</div><div class="line">    <span class="keyword">return</span> IDcache[x]=Setcache.size()<span class="number">-1</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">struct</span> cyw&#123;</div><div class="line">    <span class="keyword">int</span> x;</div><div class="line">    <span class="keyword">int</span> y;</div><div class="line">&#125;;<span class="comment">//q[1000];</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp1</span><span class="params">(cyw a,cyw b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> a.y&lt;b.y;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp2</span><span class="params">(cyw a,cyw b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(a.y==b.y)</div><div class="line">    <span class="keyword">return</span> a.x&lt;b.x;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">vector</span> &lt;<span class="keyword">int</span> &gt; v[<span class="number">1000</span>];</div><div class="line">    freopen(<span class="string">"input.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line"> <span class="comment">//   freopen("output.txt","w",stdout);</span></div><div class="line">    <span class="keyword">int</span> p,n;</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</div><div class="line"> <span class="comment">//   map&lt;int ,int &gt; m;</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> ii=<span class="number">0</span>;ii&lt;n;ii++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">1000</span>;i++)</div><div class="line">        &#123;</div><div class="line">            v[i].clear();</div><div class="line">        &#125;</div><div class="line">        IDcache.clear();</div><div class="line">        Setcache.clear();</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;p);</div><div class="line">   <span class="comment">//     memset(q,0,sizeof(q));</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;p;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> a,b;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</div><div class="line">            <span class="keyword">int</span> x=ID(b);</div><div class="line">            v[x].push_back(a);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">double</span> t=<span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> book=<span class="number">0</span>;</div><div class="line">        sort(v[<span class="number">0</span>].begin(),v[<span class="number">0</span>].end());</div><div class="line">        t=(v[<span class="number">0</span>][<span class="number">0</span>]+v[<span class="number">0</span>][v[<span class="number">0</span>].size()<span class="number">-1</span>])*<span class="number">1.0</span>/<span class="number">2</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;Setcache.size()&amp;&amp;!book;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> temp=v[i].size();</div><div class="line">            sort(v[i].begin(),v[i].end());</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;temp;j++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">double</span> tt=(v[i][j]+v[i][temp<span class="number">-1</span>-j])*<span class="number">1.0</span>/<span class="number">2</span>;</div><div class="line">      <span class="comment">//          printf("%.1f ",tt);</span></div><div class="line">                <span class="keyword">if</span>(tt!=t)</div><div class="line">                &#123;</div><div class="line">                    book=<span class="number">1</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(book==<span class="number">0</span>)</div><div class="line">        &#123;</div><div class="line">           <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>可以看到一些糟糕的遗留痕迹233</p>
 <hr>
-<h4 id="打印队列uva12100"><a href="#打印队列uva12100" class="headerlink" title="打印队列uva12100"></a>打印队列uva12100</h4><p>#####题意<br>有一些打印任务，按队列顺序排好了队(队首位置为0)，每个任务有一个1-9的优先级，若队伍中有优先级大于队首的任务，则队首任务排到尾部，否则打印该任务。<br>输入各优先级，及关注的任务在队列中的位置，输出被关注任务的</p>
-<p>这个题我的直接做法是好的，但是智商有限，没有想到比较好的处理标号的问题。因为标号绑定一个项目，项目又会在队列里变来变去，用map就会非常的僵硬(想都没去想)。<br>然后去看了题解……其实很简单……然而……蠢蠢的我一开始没有看懂。。。<br>整数记录。在pop出列的过程中使x++，遇到m，使x为0，m设为queue.size()-1（之所以-1就是因为每次循环一次的过程中会出列一个front）</p>
-<p><em>先写这些，回头补上</em></p>
+<p><em>近来懈怠不已，恐怕是期末临近之故。</em></p>
 
       
     </div>
@@ -368,6 +366,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zishu-acm/" rel="tag"># zishu,acm</a>
+          
+        </div>
       
 
       
@@ -437,17 +441,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/fall_out_boy.jpeg"
@@ -458,7 +453,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -493,22 +488,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#打印队列uva12100"><span class="nav-number">1.</span> <span class="nav-text">打印队列uva12100</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>
