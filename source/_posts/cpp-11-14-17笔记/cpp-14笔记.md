@@ -253,8 +253,8 @@ if ( x < y ) { return true;} if ( y < x ) {return false;}
 如果不知道你根本不会相信以前是不支持这个东西的（指复杂度会远超logn
 
 ### 新增自定义字面量特性（标准库）
-"s"，用于创建各种std::basic_string类型
-"h","min","s","ms","us","ns"用于创建相应的std::chrono::duration时间间隔
+**"s"，用于创建各种std::basic_string类型
+"h","min","s","ms","us","ns"用于创建相应的std::chrono::duration时间间隔**
 
 ### 通过类型寻址多元组
 ```c++
@@ -279,6 +279,22 @@ std::integral_constant增加了一个返回常量值的operator()
 类似于c#的可空类型，也没采用
 - concepts lite
 回炉重造了
+
+### 拾遗
+#### std::exchange
+```c++
+template< class T, class U = T >
+T exchange( T& obj, U&& new_value );
+```
+以 new_value 替换 obj 的值，并返回 obj 的旧值。
+
+#### std::integer_sequence
+```c++
+template< class T, T... Ints >
+struct integer_sequence;
+//(C++14 起)
+```
+类模板 std::integer_sequence 表示一个编译时的整数序列。在用作函数模板的实参时，能推导参数包 Ints 并将它用于包展开。
 
 ### 结语
 c++14结束啦。
