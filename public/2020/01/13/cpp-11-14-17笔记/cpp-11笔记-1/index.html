@@ -1,0 +1,1024 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c++,c++11,company," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon(1).ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="c++11的东西有点多，我到现在还欠着几项东西没学这篇包含lambda、enum、constexpr、explicit等，详见目录">
+<meta name="keywords" content="c++,c++11,company">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cpp-11笔记_1">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/01/13/cpp-11-14-17笔记/cpp-11笔记-1/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="c++11的东西有点多，我到现在还欠着几项东西没学这篇包含lambda、enum、constexpr、explicit等，详见目录">
+<meta property="og:updated_time" content="2020-01-14T09:19:38.542Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cpp-11笔记_1">
+<meta name="twitter:description" content="c++11的东西有点多，我到现在还欠着几项东西没学这篇包含lambda、enum、constexpr、explicit等，详见目录">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/01/13/cpp-11-14-17笔记/cpp-11笔记-1/"/>
+
+
+
+
+
+  <title>cpp-11笔记_1 | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/01/13/cpp-11-14-17笔记/cpp-11笔记-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cpp-11笔记_1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-13T17:33:38+08:00">
+                2020-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/13/cpp-11-14-17笔记/cpp-11笔记-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/01/13/cpp-11-14-17笔记/cpp-11笔记-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/01/13/cpp-11-14-17笔记/cpp-11笔记-1/" class="leancloud_visitors" data-flag-title="cpp-11笔记_1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>c++11的东西有点多，我到现在还欠着几项东西没学<br>这篇包含lambda、enum、constexpr、explicit等，详见目录<br><a id="more"></a></p>
+<hr>
+<h1 id="c-11"><a href="#c-11" class="headerlink" title="c++11"></a>c++11</h1><p>好了我要动手c++11了<br>主要是剩下一部分sol都比较深入了，我现在看不进去……（？）下午看看睡一觉会不会好一点</p>
+<h2 id="先放一个小故事"><a href="#先放一个小故事" class="headerlink" title="先放一个小故事"></a>先放一个小故事</h2><p>看到一个知乎回答，我觉得让我知道了移动语义的价值所在：<br>普通解答：打开冰箱门，取出大象，关上冰箱门，打开另一台冰箱门，放进大象，关上冰箱门。<br>2B解答：在第二个冰箱中启动量子复制系统，克隆一只完全相同的大象，然后启动高能激光将第一个冰箱内的大象气化消失。  </p>
+<p>注意到这里我们需要移动的是一头大象。那么这个代价是相当高昂的。当然代价是其次的，我们要从一个更高的角度理解这个问题，就是一种正常的语义理解，或者说某种功能要求——移动。（哲学！</p>
+<p>不严格的来说，左值对应变量的存储位置，而右值对应变量的值本身不严格的来说，左值对应变量的存储位置，而右值对应变量的值本身</p>
+<p><a href="http://zh.wikipedia.org/zh-cn/C++11" target="_blank" rel="external">http://zh.wikipedia.org/zh-cn/C++11</a></p>
+<p>顺便说个笑话，我看到–bullet这个东西在c++里出现，第一反应当然是lua注释？不在script字符串域里啊。那就是c++11新特性了？<br>等等？这个++怎么回事。<br>卧槽。</p>
+<hr>
+<h2 id="cpp-11-faq阅读笔记"><a href="#cpp-11-faq阅读笔记" class="headerlink" title="cpp 11 faq阅读笔记"></a>cpp 11 faq阅读笔记</h2><h3 id="auto血强。"><a href="#auto血强。" class="headerlink" title="auto血强。"></a>auto血强。</h3><h3 id="Attributes（属性）"><a href="#Attributes（属性）" class="headerlink" title="Attributes（属性）"></a>Attributes（属性）</h3><p>c++11里没啥东西，但是要认识[[]]这东西。不知道以后会不会有更多的开放的东西加进来。（noreturn这种写法确实很爽（？</p>
+<h3 id="enum"><a href="#enum" class="headerlink" title="enum"></a>enum</h3><p>?我没看懂这个C99特性可还行。</p>
+<p>枚举类：我竟然对这东西没印象、当新东西学了（不是没印象，是根本没见过）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//enum Alert&#123;green,yellow,election,red&#125; //传统枚举  </span></div><div class="line"><span class="keyword">enum</span> <span class="keyword">class</span> Color&#123;red,blue&#125;;  </div><div class="line"><span class="keyword">int</span> a = Alert::red;</div></pre></td></tr></table></figure></p>
+<p>具有传统枚举的功能，也有了一些类的特点。<br>注意如果没有class原有的枚举也是存在的。好处是不会隐式转换成int<br>枚举等价于常量<br>这东西可以用在switch语句里。<br>用了一下，不是那么会用。。具体就是说除了强制转换无法给枚举类型赋其他值，然后其他操作基本等同常量，注意可见是整个域内的，所以有了枚举类这种东西，默认int，枚举类可以前向声明类型</p>
+<h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><p>constexpr可以认为是强制要求表达式等在编译时期计算其结果值，并能保证表达式在语义上是类型安全的，比较#define的文本替换而无检查能力，以及比较const表达对接口的写权限控制及优化而言，constexpr修饰的对象强制要求其初始化表达式能够在编译器完成计算，constexpr 将编译期常量概念延伸至括用户自定义常量以及常量函数，其值的不可修改性由编译器保证，因而constexpr 表达式是一般化的，受保证的常量表达式。<br>注意constexpr如果要计算某些值必须由右值或者常量组成。<br>关于constexpr函数：<br>constexpr函数是指能用于常量表达式的函数。定义constexpr函数的方法有其他函数类似，不过要遵循几项约定：函数的返回值类型及所以形参的类型都是字面值类型，而且函数体中必须有且只有一条return语句。为了能在编译过程中随时展开，constexpr函数被隐式指定地指定为内联函数。<br>constexpr函数体内也可以包含其他语句，只要这些语句在运行时不执行任何操作就行。例如，constexpr函数中可以有空语句、类型别名以及using声明。<br>允许constexpr函数的返回值并非一个常量：<br>constexpr int scale(int cnt){return 5<em>cnt;}//如果arg是常量表达式，则scale（arg）也是常量表达式<br>　　当scale的实参是常量表达式时，它的返回值也是常量表达式；反之则不然。如果我们用一个非常量表达式调用scale函数，比如int类型的对象i，则返回值是一个非常量表达式。当把scale函数用在需要常量表达式的上下文时，由编译器负责检查函数的结果是否符合要求。如果结果恰好不是常量表达式，编译器将发出错误信息。constexpr函数不一定返回常量表达式。——这里指的是用在模板类中的情况，可能会忽略constexpr<br><em>*注意这东西…后面会反复提到，感觉地位还是很高的。c++14添了新属性，c++17添了新属性，从每次出现的新特性次数来说感觉跟auto差不多了</em></em></p>
+<h3 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h3><p>decltype – 推断表达式的数据类型,auto的某种机制，如果只需要类型可以用一下，不然直接auto就好啦<br>然而并没有那么简单。很多时候只需要类型，尤其是在传递参数的时候，特别点名一些标准库</p>
+<h3 id="delete-default"><a href="#delete-default" class="headerlink" title="delete/default"></a>delete/default</h3><p>有了default关键字，我们可以定义所有行为哪怕没有行为了，对于阅读者和编译器都很好。<br>注意，default可以用在任何的默认函数中，delete则可以用于修饰任何函数。</p>
+<h3 id="委托构造函数"><a href="#委托构造函数" class="headerlink" title="委托构造函数"></a>委托构造函数</h3><p>委托构造函数：在一个构造函数中调用另外一个构造函数，这就是委托的意味，不同的构造函数自己负责处理自己的不同情况，把最基本的构造工作委托给某个基础构造函数完成，实现分工协作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> X(int x) &#123; if (0&lt;x &amp;&amp; x&lt;=max) a=x; else throw bad_X(x); &#125;</div><div class="line">// 构造函数X()调用构造函数X(int x)</div><div class="line">X() :X&#123;42&#125; &#123; &#125;</div><div class="line">// 构造函数X(string s)调用构造函数X(int x)</div><div class="line">X(string s) :X&#123;lexical_cast&lt;int&gt;(s)&#125; &#123; &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="欠着"><a href="#欠着" class="headerlink" title="欠着"></a>欠着</h3><p>我发现官方文档（？其实我不知道微软这篇是不是官方的）里给出了分类，这些内容都是并发中的：</p>
+<p>atomic_operations原子操作。这里为多线程操作提供了一套原子操作，我们之后理解了多线程和各种锁之后回来再说。<br>current_exception()捕捉当前的异常，返回一个异常智能指针<br>Reworded sequence points<br>String compare and exchange<br>Bidirectional fences<br>Memory model<br>data-dependency ordering<br>Data-dependency ordering:function annotation<br>quick_exit<br>Atomics in signal handlers<br>Thread-local storage<br>Magic statics</p>
+<p>线程本地化存储</p>
+<h3 id="noexcept"><a href="#noexcept" class="headerlink" title="noexcept"></a>noexcept</h3><p>noexcept – 阻止异常的传播与扩散<br>如果一个经过noexcept修饰的函数抛出异常（异常会尝试逃出这个函数（？）），程序会通过调用terminate()来结束执行，异常不会抛出或者不会被接受并处理<br>extern “C” double sqrt(double) noexcept;//永远不会抛出异常</p>
+<p>关于noexcept<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">template&lt;class T&gt;</div><div class="line">void do_f(vector&lt;T&gt;&amp; v) noexcept(noexcept(f(v.at(0)))) // can throw if f(v.at(0)) can</div><div class="line">&#123;</div><div class="line">    for(int i; i&lt;v.size(); ++i)</div><div class="line">        v.at(i) = f(v.at(i));</div><div class="line">&#125;</div><div class="line">//这里的第一个noexcept()是修饰符，第二个是运算符，判断f(v.at(0))是否会抛出异常。</div></pre></td></tr></table></figure></p>
+<p>若 expression 含有至少一个下列潜在求值的构造则结果为 false ：<br>1、调用无不抛出异常指定的任意类型函数，除非它是常量表达式。<br>2、throw 表达式。<br>3、目标类型是引用类型，且转换时需要运行时检查的 dynamic_cast 表达式<br>4、参数类型是多态类类型的 typeid 表达式<br>5、所有其他情况下结果是 true 。<br>还是单纯的理解成：如果v.at(0)不发生异常，那么do_f()一定不发生异常  </p>
+<h4 id="以下情形鼓励使用noexcept："><a href="#以下情形鼓励使用noexcept：" class="headerlink" title="以下情形鼓励使用noexcept："></a>以下情形鼓励使用noexcept：</h4><p>移动构造函数（move constructor）<br>移动分配函数（move assignment）<br>析构函数（destructor）。这里提一句，在新版本的编译器中，析构函数是默认加上关键字noexcept的。下面代码可以检测编译器是否给析构函数加上关键字noexcept。<br>叶子函数（Leaf Function）。叶子函数是指在函数内部不分配栈空间，也不调用其它函数，也不存储非易失性寄存器，也不处理异常。</p>
+<h3 id="explicit"><a href="#explicit" class="headerlink" title="explicit"></a>explicit</h3><h4 id="先来历史，c-98："><a href="#先来历史，c-98：" class="headerlink" title="先来历史，c++98："></a>先来历史，c++98：</h4><p>这里是C++98的特性：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> E &#123; <span class="function"><span class="keyword">explicit</span> <span class="title">E</span><span class="params">(<span class="keyword">int</span>)</span></span>; &#125;;    <span class="comment">// 显式构造函数</span></div><div class="line"><span class="function">E <span class="title">e1</span><span class="params">(<span class="number">1</span>)</span></span>;        <span class="comment">// ok</span></div><div class="line">E e2 = <span class="number">1</span>;    <span class="comment">// 错误（但是常常会让人感到意外——这怎么会错呢？）</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(E)</span></span>;</div><div class="line"><span class="comment">// 该处会产生编译错误（而非编译通过），以避免因隐式类型转换而得到莫名其妙的结果。</span></div><div class="line"><span class="comment">// 例如std::vector::vector(int size), 该构造函数在标准库中定义为显式类型转换，</span></div><div class="line"><span class="comment">// （译注：以避免程序员为了初始化一个只含有一个元素10的数组而写出如下代码:</span></div><div class="line"><span class="comment">//    vector&lt;int&gt; vec = 10; </span></div><div class="line"><span class="comment">//   而实际上该代码的含义却是定义一个初始包含10个元素的数组）</span></div><div class="line">f(<span class="number">1</span>);</div></pre></td></tr></table></figure></p>
+<h4 id="c-11中的explicit"><a href="#c-11中的explicit" class="headerlink" title="c++11中的explicit"></a>c++11中的explicit</h4><p>C++98中无法定义”显式转换操作符”来完全禁止某个类相关的隐式转换（因为除此之外鲜有用武之地）。C++11则高瞻远瞩，添加了这个特性<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> S &#123; S(<span class="keyword">int</span>) &#123; &#125; &#125;;</div><div class="line"><span class="keyword">struct</span> SS &#123;</div><div class="line">    <span class="keyword">int</span> m;</div><div class="line">    SS(<span class="keyword">int</span> x) :m(x) &#123; &#125;</div><div class="line">    <span class="comment">// 因为结构体S中没有定义构造函数S(SS)</span></div><div class="line">    <span class="comment">// 无法将SS转换为S，所以只好在SS中定义一个返回S的转换操作符，</span></div><div class="line">    <span class="comment">// 将自己转换为S。</span></div><div class="line">    <span class="comment">// 转换动作，可以由目标类型S提供，也可以由源类型SS提供。）</span></div><div class="line">     <span class="function"><span class="keyword">explicit</span> <span class="keyword">operator</span> <span class="title">S</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> S(m); &#125;</div><div class="line">&#125;;</div><div class="line"><span class="function">SS <span class="title">ss</span><span class="params">(<span class="number">1</span>)</span></span>;    <span class="comment">// ok; 默认构造函数</span></div><div class="line">S s1 = ss;    <span class="comment">// 错误; 拷贝构造函数不能使用显式转换</span></div><div class="line"><span class="function">S <span class="title">s2</span><span class="params">(ss)</span></span>;    <span class="comment">// ok; 直接构造函数可以使用显式转换</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(S)</span></span>;</div><div class="line">f(ss);        <span class="comment">// 错误; 从SS向S的转换必须是显式的.</span></div><div class="line"><span class="comment">// 译注: 强制类型转换也可使用显式转换，例如</span></div><div class="line"><span class="comment">// S s3 = static_cast&lt;S&gt;(ss);</span></div></pre></td></tr></table></figure></p>
+<p>explicit关键字只对有一个参数的类构造函数有效, 如果类构造函数参数大于或等于两个时, 是不会产生隐式转换的（当那些参数没有默认值的时候，有并且只传1个那就有效了)<br>发生隐式转换，除非有心利用，隐式转换常常带来程序逻辑的错误，而且这种错误一旦发生是很难察觉的。<br>再来一例<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> String&#123;</div><div class="line">      <span class="function"><span class="keyword">explicit</span> <span class="title">String</span><span class="params">(<span class="keyword">int</span> n)</span></span>;</div><div class="line">      String(<span class="keyword">const</span> <span class="keyword">char</span> *p);</div><div class="line">&#125;;</div><div class="line">String s1 = <span class="string">'a'</span>; <span class="comment">//错误：不能做隐式char-&gt;String转换</span></div><div class="line"><span class="function">String <span class="title">s2</span><span class="params">(<span class="number">10</span>)</span></span>;   <span class="comment">//可以：调用explicit String(int n);</span></div><div class="line">String s3 = String(<span class="number">10</span>);<span class="comment">//可以：调用explicit String(int n);再调用默认的复制构造函数</span></div><div class="line">String s4 = <span class="string">"Brian"</span>; <span class="comment">//可以：隐式转换调用String(const char *p);再调用默认的复制构造函数</span></div><div class="line"><span class="function">String <span class="title">s5</span><span class="params">(<span class="string">"Fawlty"</span>)</span></span>; <span class="comment">//可以：正常调用String(const char *p);</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(String)</span></span>;</div><div class="line">­</div><div class="line"><span class="function">String <span class="title">g</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    f(<span class="number">10</span>); <span class="comment">//错误：不能做隐式int-&gt;String转换</span></div><div class="line">    f(<span class="string">"Arthur"</span>); <span class="comment">//可以：隐式转换，等价于f(String("Arthur"));</span></div><div class="line">    <span class="keyword">return</span> <span class="number">10</span>; <span class="comment">//同上</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> CxString  <span class="comment">// 使用关键字explicit的类声明, 显式转换  </span></div><div class="line">&#123;  </div><div class="line"><span class="keyword">public</span>:  </div><div class="line">    <span class="keyword">char</span> *_pstr;  </div><div class="line">    <span class="keyword">int</span> _size;  </div><div class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">CxString</span><span class="params">(<span class="keyword">int</span> size)</span>  </span></div><div class="line">    &#123;  </div><div class="line">        _size = size;  </div><div class="line">        <span class="comment">// 代码同上, 省略...  </span></div><div class="line">    &#125;  </div><div class="line">    CxString(<span class="keyword">const</span> <span class="keyword">char</span> *p)  </div><div class="line">    &#123;  </div><div class="line">        <span class="comment">// 代码同上, 省略...  </span></div><div class="line">    &#125;  </div><div class="line">&#125;;  </div><div class="line">  </div><div class="line">    <span class="comment">// 下面是调用:  </span></div><div class="line">  </div><div class="line">    <span class="function">CxString <span class="title">string1</span><span class="params">(<span class="number">24</span>)</span></span>;     <span class="comment">// 这样是OK的  </span></div><div class="line">    CxString string2 = <span class="number">10</span>;    <span class="comment">// 这样是不行的, 因为explicit关键字取消了隐式转换 （原来可以）</span></div><div class="line">    CxString string3;         <span class="comment">// 这样是不行的, 因为没有默认构造函数  </span></div><div class="line">    <span class="function">CxString <span class="title">string4</span><span class="params">(<span class="string">"aaaa"</span>)</span></span>; <span class="comment">// 这样是OK的  </span></div><div class="line">    CxString string5 = <span class="string">"bbb"</span>; <span class="comment">// 这样也是OK的, 调用的是CxString(const char *p)  </span></div><div class="line">    CxString string6 = <span class="string">'c'</span>;   <span class="comment">// 这样是不行的, 其实调用的是CxString(int size), 且size等于'c'的ascii码, 但explicit关键字取消了隐式转换  （原来可以）</span></div><div class="line">    string1 = <span class="number">2</span>;              <span class="comment">// 这样也是不行的, 因为取消了隐式转换  </span></div><div class="line">    string2 = <span class="number">3</span>;              <span class="comment">// 这样也是不行的, 因为取消了隐式转换 (原来可以，分配3字节)</span></div><div class="line">    string3 = string1;        <span class="comment">// 这样也是不行的, 因为取消了隐式转换, 除非类实现操作符"="的重载 (原来是可以的，但是如果析构free掉_pstr可能出错)</span></div></pre></td></tr></table></figure>
+<h3 id="扩展整型"><a href="#扩展整型" class="headerlink" title="扩展整型"></a>扩展整型</h3><p>在实际的编程中，由于这5种基本的整型适用性有限，所以有时编译器出于需要，也会自行扩展一些整型。在C++11中，标准对这样的扩展做出了一些规定。具体地讲，除了标准整型（standard integer type）之外，C++11标准允许编译器扩展自有的所谓扩展整型（extended integer type）。这些扩展整型的长度（占用内存的位数）可以比最长的标准整型（long long int，通常是一个64位长度的数据）还长，也可以介于两个标准整数的位数之间。比如在128位的架构上，编译器可以定义一个扩展整型来对应128位的的整数；而在一些嵌入式平台上，也可能需要扩展出48位的整型；不过C++11标准并没有对扩展出的类型的名称有任何的规定或建议，只是对扩展整型的使用规则做出了一定的限制。</p>
+<p>1.长度越高的整形等级越高。<br>2.长度相同的情况下，标准等级高于扩展类型<br>3.相同大小的有符号和无符号等级相同</p>
+<h3 id="外部模板"><a href="#外部模板" class="headerlink" title="外部模板"></a>外部模板</h3><h4 id="先来历史"><a href="#先来历史" class="headerlink" title="先来历史"></a>先来历史</h4><p>模板的局限性:<br>不能for all。即不能适用于所有的类型。<br>一种方案是，重载运算符+、=、&lt;等等，另一种方案是，为特定类型提供具体化的模板定义。<br>c++98中提供了这样的方法：<br>对于给定的函数名，可以有非模板函数、模板函数和显式具体化模板函数以及它们的重载版本。<br>显式具体化的原型和定义应以template&lt;&gt;开头，并通过名称来指出类型。<br>具体化优先于常规模板，而非模板函数优先于具体化和常规模板。</p>
+<blockquote>
+<p>记住，在代码中包含函数模板本身并不会生成函数定义，它只是一个用于生成函数定义的方案。编译器使用模板为特定类型生成函数定义时，得到的是模板实例(instantiation)。例如，上面代码中，函数调用Swap(i, j)导致编译器生成Swap()的一个实例，该实例使用int类型。模板并非函数定义，但使用int的模板实例是函数定义。这种实例化方式被称为隐式实例化(implict instantiation)，因为编译器之所以知道需要进行定义，是由于程序调用Swap()函数时提供了int参数。<br>最初，编译器只能通过隐式实例化， 来使用模板生成函数定义。但现在C++还允许显式实例化(explici instantiation)。这意味着可以直接命令编译器创建特定的实例，如Swap<int>()。<br>其语法是，声明所需的种类——用&lt;&gt;符号指示类型，并在声明前加上关键字template:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> <span class="keyword">void</span> Swap&lt;<span class="keyword">int</span>&gt;(<span class="keyword">int</span> , <span class="keyword">int</span>);<span class="comment">//explicit instantiation</span></div></pre></td></tr></table></figure></int></p>
+</blockquote>
+<p>实现了这种特性的编译器看到上述声明后，将使用Swap()模板生成一个使用int类型的实例。也就是说，该声明的意思是”使用Swap()模板生成int类型的函数定义。“<br>与显式实例化不同的是，显式具体化使用下面两个等价的声明之一：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;&gt; <span class="keyword">void</span> Swap&lt;<span class="keyword">int</span>&gt;(<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;);<span class="comment">//explicit specialization</span></div><div class="line"><span class="keyword">template</span> &lt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">Swap</span><span class="params">(<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;)</span></span>;<span class="comment">//explicit specialization</span></div></pre></td></tr></table></figure></p>
+<p>区别在于，这些声明的意思是“不要使用Swap()模板来生成函数定义，而应使用专门为int类型显式地定义的函数定义。”这些原型必须有自己的函数定义。显式具体化声明在关键字template后包含&lt;&gt;，而显式实例化没有。<br>警告：试图在同一个文件（或转换单元）中使用同一种类型的显式实例和显式具体化将出错。<br>注意必须要给出具体化的定义<br>还可通过在程序中使用函数来创建显式实例化。</p>
+<h4 id="为什么要显式实例化？"><a href="#为什么要显式实例化？" class="headerlink" title="为什么要显式实例化？"></a>为什么要显式实例化？</h4><pre><code>主要是提高效率，当显式实例化模板时，在使用模板之前，编译器根据显式实例化指定的类型生成模板实例
+
+然而通常又有一些特殊的情况，不能直接使用泛型模板展开实现，这时就需要针对某个特殊的类型或者是某一类特殊的类型，而实现一个特例模板————即模板特化
+
+当T如果为 一个 struct类型的，它的交换就无法进行，所以我们针对这种特殊的情形，我们专门写了一个函数，只有当T为 这种struct类型时候，才会调用这个特化的函数
+</code></pre><p>(具体化)</p>
+<h4 id="铺垫结束，c-11："><a href="#铺垫结束，c-11：" class="headerlink" title="铺垫结束，c++11："></a>铺垫结束，c++11：</h4><p>c++11中，为了这种特性添加了外部(extern)模板声明<br>为了去除重复的不同代码的编译和链接可以使得实例化去冗余化<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">void</span> fun&lt;<span class="keyword">int</span>&gt;(<span class="keyword">int</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="序列for！"><a href="#序列for！" class="headerlink" title="序列for！"></a>序列for！</h3><p>只要定义了begin()和end()，就可以<br>for (auto x : v) cout&lt;&lt;x&lt;&lt;’n’;<br>for (auto&amp; x : v) ++x;<br>超级好用的属性</p>
+<h3 id="返回值类型后置："><a href="#返回值类型后置：" class="headerlink" title="返回值类型后置："></a>返回值类型后置：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> U&gt;</div><div class="line">??? mul(T x, U y)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> x*y;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是不能直接用x和y来推断的，因为x和y不在作用域内。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">template&lt;class T, class U&gt;</div><div class="line">auto mul(T x, U y) -&gt; decltype(x*y)</div><div class="line">&#123;</div><div class="line">    return x*y;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但是最初并不是用于模板和返回值类型推导的，它实际是用于解决作用域问题的：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> List &#123;</div><div class="line">    <span class="keyword">struct</span> Link &#123; <span class="comment">/* ... */</span> &#125;;</div><div class="line">    <span class="function">Link* <span class="title">erase</span><span class="params">(Link* p)</span></span>;   <span class="comment">// 移除p并返回p之前的链接</span></div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">List::Link* List::erase(Link* p) &#123; <span class="comment">/* ... */</span> &#125;</div></pre></td></tr></table></figure></p>
+<p>第一个List::是必需的，这仅是因为List的作用域直到第二个List::才有效。更好的表示方式是：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">auto</span> List::erase(Link* p) -&gt; Link* &#123; <span class="comment">/* ... */</span> &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="类成员的内部初始化"><a href="#类成员的内部初始化" class="headerlink" title="类成员的内部初始化"></a>类成员的内部初始化</h3><p>看一眼例子就懂了。<br>C++11的基本思想是，允许非静态（non-static）数据成员在其声明处（在其所属类内部）进行初始化。这样，在运行时，需要初始值时构造函数可以使用这个初始值。考虑下面的代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> A &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> a = <span class="number">7</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>这等同于：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> A &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> a;</div><div class="line">    A() : a(<span class="number">7</span>) &#123;&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>单纯从代码来看，这样只是省去了一些文字输入，其实它的真正用武之地在于拥有多个构造函数的类。因为大多情况下，对于同一个成员，多个构造函数应使用相同的值去初始化。例如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> A &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">     A(): a(<span class="number">7</span>), b(<span class="number">5</span>), hash_algorithm(“MD5″),</div><div class="line">       s(“Constructor run”) &#123;&#125;</div><div class="line">    A(<span class="keyword">int</span> a_val) :</div><div class="line">      a(a_val), b(<span class="number">5</span>), hash_algorithm(“MD5″),</div><div class="line">      s(“Constructor run”)</div><div class="line">      &#123;&#125;</div><div class="line">    A(D d) : a(<span class="number">7</span>), b(g(d)),</div><div class="line">        hash_algorithm(“MD5″), s(“Constructor run”)</div><div class="line">        &#123;&#125;</div><div class="line">    <span class="keyword">int</span> a, b;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="comment">// 哈希加密函数可应用于类A的所有实例</span></div><div class="line">    HashingFunction hash_algorithm;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> s;  <span class="comment">// 用以指明对象正处于生命周期内何种状态的字符串</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>对于每一个构造函数，程序员必须使用完全一样的字面值来来初始化hash_algorithm和s这两个成员。但是并不是所有人都记得严格遵守这条规则，一旦出现纰漏，程序将难以维护。C++11给出了解决之道：可在成员声明的地方直接赋以初值：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> A &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    A(): a(<span class="number">7</span>), b(<span class="number">5</span>) &#123;&#125;</div><div class="line">    A(<span class="keyword">int</span> a_val) : a(a_val), b(<span class="number">5</span>) &#123;&#125;</div><div class="line">    A(D d) : a(<span class="number">7</span>), b(g(d)) &#123;&#125;</div><div class="line">    <span class="keyword">int</span> a, b;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="comment">//哈希加密函数可应用于类A的所有实例</span></div><div class="line">    HashingFunction hash_algorithm&#123;“MD5″&#125;;</div><div class="line">    <span class="comment">//用以指明对象正处于生命周期内何种状态的字符串</span></div><div class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> s&#123;“Constructor run”&#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>如果一个成员同时在类内部初始化时和构造函数内被初始化，则只有构造函数的初始化有效（这个初始化值“优先于”默认值）（译注：可以认为，类内部初始化先于构造函数初始化进行，如果是对同一个变量进行初始化，构造函数初始化会覆盖类内部初始化）。因此，我们可以进一步简化：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> A &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    A() &#123;&#125;</div><div class="line">    A(<span class="keyword">int</span> a_val) : a(a_val) &#123;&#125;</div><div class="line">    A(D d) : b(g(d)) &#123;&#125;</div><div class="line">    <span class="keyword">int</span> a = <span class="number">7</span>;</div><div class="line">    <span class="keyword">int</span> b = <span class="number">5</span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="comment">//哈希加密函数可应用于类A的所有实例</span></div><div class="line">    HashingFunction hash_algorithm&#123;“MD5″&#125;;</div><div class="line">    <span class="comment">//用以指明对象正处于生命周期内何种状态的字符串</span></div><div class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> s&#123;“Constructor run”&#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="继承的构造函数"><a href="#继承的构造函数" class="headerlink" title="继承的构造函数"></a>继承的构造函数</h3><h4 id="原来在c-98中"><a href="#原来在c-98中" class="headerlink" title="原来在c++98中"></a>原来在c++98中</h4><p>是这样的，为了解决类成员函数和变量的作用域问题，在c++98中，可以将普通的重载函数从基类“晋级”到派生类里来解决这个问题<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> D:B&#123;</div><div class="line">    <span class="keyword">using</span> B::f;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="现在在c-11中"><a href="#现在在c-11中" class="headerlink" title="现在在c++11中"></a>现在在c++11中</h4><p>在c++11中构造函数中也可以晋级了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Derived : <span class="keyword">public</span> Base &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="comment">// 提升Base类的f函数到Derived类的作用范围内</span></div><div class="line">    <span class="comment">// 这一特性已存在于C++98标准内</span></div><div class="line">    <span class="keyword">using</span> Base::f;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">char</span>)</span></span>;     <span class="comment">// 提供一个新的f函数</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span></span>;  <span class="comment">// 与Base类的f(int)函数相比更常用到这个f函数</span></div><div class="line">    <span class="comment">// 提升Base类的构造函数到Derived的作用范围内</span></div><div class="line">    <span class="comment">// 这一特性只存在于C++11标准内</span></div><div class="line">    <span class="keyword">using</span> Base::Base;</div><div class="line">    Derived(<span class="keyword">char</span>);    <span class="comment">// 提供一个新的构造函数</span></div><div class="line">    <span class="comment">// 与Base类的构造函数Base(int)相比</span></div><div class="line">    <span class="comment">// 更常用到这个构造函数</span></div><div class="line">    Derived(<span class="keyword">int</span>);</div><div class="line">    <span class="comment">// …</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>注意这里的继承构造函数是隐式声明的<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> A &#123;</div><div class="line"> A(<span class="keyword">int</span> a = <span class="number">3</span>, <span class="keyword">double</span> b = <span class="number">2.4</span>);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> B : A&#123;</div><div class="line"> <span class="keyword">using</span> A::A;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>A的构造函数可能有A(int = 3, double = 2.4); A(int = 3); A(const A &amp;)（默认的复制构造函数）; A();则相应地，B中的构造函数也会有：<br>B(int, double); B(int); B(const B &amp;); B();</p>
+<p>若碰到继承构造函数冲突的问题，需要通过显式定义继承类的冲突的构造函数，阻止隐式生成相应的继承构造函数。如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> A &#123; A(<span class="keyword">int</span>) &#123;&#125; &#125;;</div><div class="line"><span class="keyword">struct</span> B &#123; B(<span class="keyword">int</span>) &#123;&#125; &#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> C: A, B &#123;</div><div class="line"> <span class="keyword">using</span> A::A;</div><div class="line"> <span class="keyword">using</span> B::B; <span class="comment">//会造成冲突</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//使用显式定义来解决：</span></div><div class="line"><span class="keyword">struct</span> C: A, B &#123;</div><div class="line"> <span class="keyword">using</span> A::A;</div><div class="line"> <span class="keyword">using</span> B::B;</div><div class="line"></div><div class="line"> C(<span class="keyword">int</span> i):A(i),B(i) &#123;&#125; <span class="comment">//显式定义</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>注意的问题：<br>如果基类的构造函数被声明为私有成员函数，或者派生类是从基类中虚继承的，那么就不能够在派生类中声明继承构造函数。且一旦使用继承构造函数，编译器就不会再为派生类生成默认构造函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> A &#123; A(<span class="keyword">int</span>) &#123;&#125;&#125;;</div><div class="line"><span class="keyword">struct</span> B : A &#123; <span class="keyword">using</span> A::A; &#125;;</div><div class="line">B b; <span class="comment">//错误，B没有默认构造函数</span></div></pre></td></tr></table></figure></p>
+<h3 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; v2 = &#123;<span class="number">9</span>&#125;;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&amp;)</span></span>;</div><div class="line">f(&#123;<span class="number">9</span>&#125;);<span class="comment">//以列表&#123;9&#125;为参数被调用</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt; args)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> p=args.begin(); p!=args.end(); ++p)</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; *p &lt;&lt; <span class="string">"\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意仅有一个std::initializer_list的单参数构造函数被称为初始化列表构造函数，标准库容器、string和正则类型均具有初始化列表构造函数，及初始化列表赋值函数。初始化列表也可以作为一种序列供auto for使用<br>是统一初始化方案的一部分。</p>
+<h3 id="内联命名空间"><a href="#内联命名空间" class="headerlink" title="内联命名空间"></a>内联命名空间</h3><p>被inline修饰的内联命名空间，其内部所包含的所有类/函数/变量等声明，看起来就好像是直接在外围的命名空间中进行声明的一样。</p>
+<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><h4 id="什么是lambda"><a href="#什么是lambda" class="headerlink" title="什么是lambda"></a>什么是lambda</h4><p>Lambda表达式是一种描述函数对象的机制，它的主要应用是描述某些具有简单行为的函数（Lambda表达式也可以称匿名函数，具有复杂行为的函数可以采用命名函数对象【匿名函数！匿名函数！lua！lua！】）<br>一个例子:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">50</span>, <span class="number">-10</span>, <span class="number">20</span>, <span class="number">-30</span>&#125;;</div><div class="line"><span class="built_in">std</span>::sort(v.begin(), v.end());    <span class="comment">// 排序时按照默认规则</span></div><div class="line"><span class="comment">// 此时v中的数据应该是 &#123; -30, -10, 20, 50 &#125;</span></div><div class="line"></div><div class="line"><span class="comment">// 利用Lambda表达式，按照绝对值排序</span></div><div class="line"><span class="built_in">std</span>::sort(v.begin(), v.end(), [](<span class="keyword">int</span> a, <span class="keyword">int</span> b)</div><div class="line">&#123; <span class="keyword">return</span> <span class="built_in">abs</span>(a)&lt;<span class="built_in">abs</span>(b); &#125;);</div><div class="line"><span class="comment">// 此时v应该是 &#123; -10, 20, -30, 50 &#125;</span></div></pre></td></tr></table></figure></p>
+<p>这里的[]类似于function 真就匿名函数</p>
+<h4 id="捕捉列表"><a href="#捕捉列表" class="headerlink" title="捕捉列表"></a>捕捉列表</h4><p>[&amp;] 是一个“捕捉列表(capture list)”，用于描述将要被lambda函数以引用传参方式使用的局部变量。如果我们仅想“捕捉”参数v，则可以写为: [&amp;v]。而如果我们想以传值方式使用参数v，则可以写为：[=v]。如果什么都不捕捉，则为：[]。将所有的变量以引用传递方式使用时采用[&amp;], 而相对地，使用[=] 则相应地表示以传值方式使用所有变量。（译注：“所有变量”即指lambda表达式在被调用处，所能见到的所有局部变量）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="built_in">vector</span>&lt;Record&gt;&amp; v)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; indices(v.size());</div><div class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">    generate(indices.begin(),indices.end(),[&amp;count]()</div><div class="line">    &#123; <span class="keyword">return</span> count++; &#125;);</div><div class="line"></div><div class="line">    <span class="comment">// 对indices按照记录的名字域顺序进行排序</span></div><div class="line">    <span class="built_in">std</span>::sort(indices.begin(), indices.end(), [&amp;](<span class="keyword">int</span> a, <span class="keyword">int</span> b)</div><div class="line">    &#123; <span class="keyword">return</span> v[a].name&lt;v[b].name; &#125;);</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一般来说,lambda就可以当成是lua的匿名函数。</p>
+<h4 id="一小段自己的总结"><a href="#一小段自己的总结" class="headerlink" title="一小段自己的总结"></a>一小段自己的总结</h4><p>至于闭包，只能说lambda简化了闭包的操作，使得以前需要用伪函数然后重载operator()来实现的东西更简单了。<br>但是！还是存在着问题的，我们看看在c++14和c++17里有无改进（关于变量作用范围等等，我们慢慢来）<br>这么一说c++真的很深，在某些地方的奇技淫巧上相当的古怪，明明是些简单的特性却能发展出如此难以理解的东西（。</p>
+<h4 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h4><p>lambda基本形式如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[capture](parameters) <span class="keyword">mutable</span> -&gt;<span class="keyword">return</span>-type &#123;body&#125;</div></pre></td></tr></table></figure></p>
+<p>[]叫做捕获说明符，表示一个lambda表达式的开始。接下来是参数列表，即这个匿名的lambda函数的参数。<br>parameters，普通参数列表<br>mutable修饰符，默认情况下，lambda总是一个const函数，使用该修饰符时，参数列表不可省略<br>-&gt;return-type表示返回类型，如果没有返回类型，则可以省略这部分。这涉及到c++11的另一特性，参见自动类型推导，最后就是函数体部分。另外，返回类型明确也可以用auto</p>
+<hr>
+<h4 id="关于lambda与闭包"><a href="#关于lambda与闭包" class="headerlink" title="关于lambda与闭包"></a>关于lambda与闭包</h4><h5 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h5><p>以下是几手资料。看一看，能加深一点理解也是好的。</p>
+<p>一个lambda表达式，没有绑定其它环境时，我们称它为open lambda，而绑定了其它环境的lambda表达式，我们称它们为闭包（closure），评估一个open lambda的结果就是一个闭包。</p>
+<p>而关于动态作用域其实还有另一个知识我们需要知道：deep binding（深约束）和shallow binding（浅约束）。<br>在一开始的有关动态作用域的说明中，按照函数调用顺序遍历找到最近的与之相关的符号，我们称之为浅约束。<br>而将函数作为参数时，需要将自由变量在单独的一个环境中保存，然后该函数引用这个单独的环境，我们称之为深约束。而这样捆绑起来的整体也就是我们所说的闭包。<br>换句话说，动态作用域中解决FUNARG问题的技术是深约束，而深约束中使用到的环境和函数这个整体称为闭包。</p>
+<p>深约束的实现是非常困难的，另外程序员使用起来也是非常困难的，或者说非常容易出错，因为它需要使用到特殊的关键字标记函数或变量。</p>
+<p>而将闭包发扬光大的是Scheme语言（1975年），Scheme是首个使用了词法作用域的LISP方言，据说它评估lambda表达式都会产生闭包，不需要程序员们考虑深约束浅约束的问题，不需要太关心自由变量引发的FUNARG问题。所以闭包也被称为词法闭包，解析器可以通过作用域自己判断产生闭包而不需要通过预定义的关键字去标记它。</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>总的来说，如果想解释闭包是什么，有两种意义，分别是形式上的和概念上的。<br>概念上的闭包：在实现深约束（解决FUNARG问题）的过程中，函数需要引用到一个环境，而函数和这个环境形成的整体我们称为闭包。可以说闭包无处不在，例如对象。<br>形式上的闭包：词法上下文中引用了自由变量的函数，在不同语言中有不同的表现形式，并且衍生了很多运用方式，比如隐藏数据，作为简易对象使用。</p>
+<h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>相关的一些概念：</p>
+<p>lambda表达式：可以用来表示函数的语法糖，本质是一个匿名函数。<br>动态/词法作用域：动态作用域中变量的作用范围和函数的调用顺序和定义方式有关，运行时才能确定。而词法作用域中，变量的作用范围是在源代码中就可以确定的。<br>深约束：动态作用域中为了解决FUNARG问题的技术，将引用环境和函数绑定在一起，函数会在绑定的环境中查找binding，实现起来非常困难。<br>浅约束：动态作用域的查找binding的默认工作方式，函数通过遍历调用过程，找到最近的binding。</p>
+<h4 id="例子拉满"><a href="#例子拉满" class="headerlink" title="例子拉满"></a>例子拉满</h4><p>捏妈的，贴个大例子<br><a href="https://www.cnblogs.com/npbool/archive/2013/11/22/3434757.html" target="_blank" rel="external">https://www.cnblogs.com/npbool/archive/2013/11/22/3434757.html</a></p>
+<h5 id="匿名函数：lambda表达式"><a href="#匿名函数：lambda表达式" class="headerlink" title="匿名函数：lambda表达式"></a>匿名函数：lambda表达式</h5><p>假设你有一个vector<int> v, 想知道里面大于4的数有多少个。for循环谁都会写，但是STL提供了现成算法count_if，不用可惜。C++03时代，我们会这样写：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">gt4</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> x&gt;<span class="number">4</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> GT4&#123;</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> x&gt;<span class="number">4</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line">　　<span class="comment">//很多</span></div><div class="line">    v.push_back(...);</div><div class="line">　　 ...</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;count_if(v.begin(),v.end(),gt4)&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;count_if(v.begin(),v.end(),GT4())&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></int></p>
+<p>就为这样一个微功能，要么写一个函数，要么写个仿函数functor，还不如手写循环简单，这是我的感受。如果用过其他语言的lambda表达式，这种写法完全是渣渣。</p>
+<p>C++引入的lambda表达式提供了一种临时定义匿名函数的方法，可以这样写：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> res = count_if(v.begin(),v.end(),[](<span class="keyword">int</span> x)&#123; <span class="keyword">return</span> x&gt;<span class="number">4</span>; &#125;);</div></pre></td></tr></table></figure></p>
+<p>世界瞬间美好了。既然是匿名函数，函数名自然不用写了，连返回类型都不用写了~想用一个函数，用的时候再写，大大提高了algorithm里各种泛型算法的实用性。</p>
+<p>一般的lambda表达式语法是</p>
+<p>[捕获列表] (参数列表) -&gt; 返回类型 {函数体}<br>(和上面那个一样的，翻译了一下(。</p>
+<p>-&gt;返回类型可以省略；如果是无参的，(参数列表)也可以省略，真是各种省。匿名函数是个lambda对象，和函数指针有区别，但一般不用关心它。如果你想把一个匿名函数赋给一个函数指针类似物以待后续使用，可以用auto<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">auto</span> func = [](<span class="keyword">int</span> arg) &#123; ... &#125;;</div></pre></td></tr></table></figure></p>
+<p>但捕获列表是什么？接下来：</p>
+<h5 id="闭包closure"><a href="#闭包closure" class="headerlink" title="闭包closure"></a>闭包closure</h5><p>如果改主意了，要求&gt;k的个数，k运行时指定，怎么办？你可能会写<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> k;</div><div class="line"><span class="built_in">cin</span>&gt;&gt;k;</div><div class="line"><span class="keyword">int</span> res = count_if(v.begin(),v.end(),[](<span class="keyword">int</span> x)&#123;</div><div class="line">    <span class="keyword">return</span> x&gt;k;</div><div class="line">&#125;); <span class="comment">//WRONG!</span></div></pre></td></tr></table></figure></p>
+<p>但是编译器报错：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">error: variable <span class="string">'k'</span> cannot be implicitly captured <span class="keyword">in</span> a lambda</div><div class="line">      with no capture-default specified</div><div class="line">        <span class="built_in">return</span> x&gt;k;</div></pre></td></tr></table></figure></p>
+<p>匿名函数不能访问外部函数作用域的变量？太弱了！</p>
+<p>如果真是这样，实用性的确有限。lambda的捕获列表就是指定你要访问哪些外部变量，这里是k，于是<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> res = count_if(v.begin(),v.end(),[k](<span class="keyword">int</span> x)&#123; <span class="comment">//注意[]里的</span></div><div class="line">     <span class="keyword">return</span> x&gt;k;</div><div class="line">&#125;); <span class="comment">//OK!</span></div></pre></td></tr></table></figure></p>
+<p>如果要捕获多个变量，可以用逗号隔开。如果要捕获很多变量，干脆一起打包算了，用’=’捕获所有：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> res = count_if(v.begin(),v.end(),[=](<span class="keyword">int</span> x)&#123;</div><div class="line">     <span class="keyword">return</span> x&gt;k;</div><div class="line">&#125;); <span class="comment">//OK, too!</span></div></pre></td></tr></table></figure></p>
+<p>通俗的说：子函数可以使用父函数中的局部变量，这种行为就叫做闭包。</p>
+<p>解释一下各种捕获方式：</p>
+<p>捕获capture有些类似传参。使用[k], [=]声明的捕获方式是复制copy，类似传值。区别在于，函数参数传值时，对参数的修改不影响外部变量，但copy的捕获直接禁止你去修改。如果想修改，可以使用引用方式捕获，语法是[&amp;k]或[&amp;]。引用和复制可以混用，如<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i,j;</div><div class="line">[=i, &amp;j] ()&#123;...&#125;;</div></pre></td></tr></table></figure></p>
+<p>但闭包的能力远不止“使用外部变量”这么简单，最奇幻的是它可以超越传统C++对变量作用域生存期的限制。我们尝试一些刺激的。</p>
+<h5 id="词法域"><a href="#词法域" class="headerlink" title="词法域"></a>词法域</h5><p>其实怎么说呢，这个东西放在别的语言就很自然，放在c++就很魔幻。<br>假设你要写一个等差数列生成器，初值公差运行时指定，行为和函数类似，第k次调用生成第k个值，并且各个生成器互不干扰，怎么写？</p>
+<p>普通函数不好优雅地保存状态（全局变量无力了吧）。用仿函数好了，成员变量保存每个计数器的状态:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> Counter</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> cur;</div><div class="line">    <span class="keyword">int</span> step;</div><div class="line">    Counter(<span class="keyword">int</span> _init,<span class="keyword">int</span> _step)&#123;</div><div class="line">        cur = _init;</div><div class="line">        step = _step;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">operator</span><span class="params">()</span><span class="params">()</span></span>&#123;</div><div class="line">        cur = cur+step;</div><div class="line">        <span class="keyword">return</span> cur-step;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="function">Counter <span class="title">c</span><span class="params">(<span class="number">1</span>,<span class="number">3</span>)</span></span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;++i)&#123;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;c()&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125; <span class="comment">//输出1 4 7 10 </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是我们现在有了闭包！把状态作为父函数中的局部变量，各个counter就可以不影响了。由于要修改外部变量，根据之前的介绍，声明成引用捕获[&amp;]。写起来大体像这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">??? Counter(<span class="keyword">int</span> init,<span class="keyword">int</span> step)&#123;</div><div class="line">    <span class="keyword">int</span> cur = init;</div><div class="line">    <span class="keyword">return</span> [&amp;]&#123;</div><div class="line">        cur += step;</div><div class="line">        <span class="keyword">return</span> cur-step;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">auto</span> c = Counter(<span class="number">1</span>,<span class="number">3</span>);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;++i)&#123;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;c()&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>两个问题！</p>
+<p>第一个：Counter函数的返回类型怎么写？？？</p>
+<p>Counter返回值是一个lambda，赋给c时可以用auto骗过去，但声明时写类型是躲不过去了。返回类型后置+decltype救不了你，因为后置了decltype还是获取不到返回值类型。lambda对象，虽然行为像函数指针，但是不能直接赋给一个函数指针。</p>
+<p>介绍一个C++11新的模板类function，是消灭丑陋函数指针的大杀器。你可以把一个函数指针或lambda赋给它，例如<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">float</span> a,<span class="keyword">float</span> b)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> a+b;</div><div class="line">&#125;</div><div class="line">function&lt;<span class="keyword">int</span>(<span class="keyword">float</span>,<span class="keyword">float</span>)&gt; pfunc = func;</div><div class="line">function&lt;<span class="keyword">int</span>(<span class="keyword">float</span>,<span class="keyword">float</span>)&gt; plambda = [](<span class="keyword">float</span> a,<span class="keyword">float</span> b)&#123; <span class="keyword">return</span> a+b;&#125;;</div></pre></td></tr></table></figure></p>
+<p>比函数指针好看多了。<br><strong>但是要注意，这里是有转换的，lambda的返回值并不是任何一种值</strong>，如果你用decltype去推断然后扔到template里，编译器会这样告诉你：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">In instantiation of <span class="string">'T f() [with T = &lt;lambda(int, int)&gt;::&lt;lambda()&gt;]'</span>:</div></pre></td></tr></table></figure></p>
+<p>只是可以转进到function里，方便使用</p>
+<p>于是这里可以写：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">function&lt;<span class="keyword">int</span>()&gt; Counter(<span class="keyword">int</span> init,<span class="keyword">int</span> step)&#123; ... &#125;</div></pre></td></tr></table></figure></p>
+<p>但是！如果再疯狂一点，匿名函数可以省略返回类型，auto可以推导类型，结合起来这样写是可以的！<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">auto</span> Counter = [](<span class="keyword">int</span> init,<span class="keyword">int</span> step)&#123;</div><div class="line">    <span class="keyword">int</span> cur = init;</div><div class="line">    <span class="keyword">return</span> [&amp;]()&#123;</div><div class="line">        cur += step;</div><div class="line">        <span class="keyword">return</span> cur-step;</div><div class="line">    &#125;;</div><div class="line">&#125;; <span class="comment">//不要漏';' 根本上还是赋值语句</span></div></pre></td></tr></table></figure></p>
+<p>“类型推导, auto和decltype”一节里留的trick就是这个。javascript的即视感有木有！</p>
+<p>第二个：编译通过，运行输出是这个？？？</p>
+<p>$$<br>1<br>167772160<br>167772160<br>167772160<br>$$<br>看起来像是访问了无效内存。的确是这样。cur,step这两个局部变量在父函数的栈帧中，内部的匿名函数返回以后，父函数的栈帧就销毁了，而我们用的是“引用”，引用的变量已经没了。</p>
+<p>既然放在栈上会有生存期问题，那就放堆里</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">auto</span> Counter = [](<span class="keyword">int</span> init,<span class="keyword">int</span> step)&#123;</div><div class="line">    <span class="keyword">int</span>* pcur = <span class="keyword">new</span> <span class="keyword">int</span>(init);</div><div class="line">    <span class="keyword">int</span>* pstep = <span class="keyword">new</span> <span class="keyword">int</span>(step);</div><div class="line">    <span class="keyword">return</span> [=]()&#123; <span class="comment">//注意！&amp;变成了=</span></div><div class="line">        *pcur += *pstep;</div><div class="line">        <span class="keyword">return</span> *pcur-*pstep;</div><div class="line">    &#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>注意使用了[=]而不是[&amp;]。解释：</p>
+<p>我们没有直接修改捕获的指针变量，而是修改它指向的变量，和[=]的规则不冲突<br>外部的指针还是在栈上，如果用[&amp;]还是会引用到已销毁的指针。我们只需要复制一份指针值。<br>这样输出的确正常了，但是内存泄漏了。程序员的节操呢？</p>
+<p>用智能指针可以解决内存泄漏：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">auto</span> Counter = [](<span class="keyword">int</span> init,<span class="keyword">int</span> step)&#123;</div><div class="line">    <span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; pcur(<span class="keyword">new</span> <span class="keyword">int</span>(init));</div><div class="line">    <span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; pstep(<span class="keyword">new</span> <span class="keyword">int</span>(step));</div><div class="line">    <span class="keyword">return</span> [=]()&#123;</div><div class="line">        *pcur += *pstep;</div><div class="line">        <span class="keyword">return</span> *pcur-*pstep;</div><div class="line">    &#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>虽然解决了问题，但过于繁琐了。本质上，我们需要的效果是把父函数的局部变量生存期延长，至少和子函数一样长。C++11提供了mutable关键字，可以模拟这一功能：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">auto</span> Counter = [](<span class="keyword">int</span> init,<span class="keyword">int</span> step)&#123;</div><div class="line">    <span class="keyword">int</span> cur = init;</div><div class="line">    <span class="keyword">return</span> [=] () <span class="keyword">mutable</span> &#123;</div><div class="line">        cur += step;</div><div class="line">        <span class="keyword">return</span> cur-step;</div><div class="line">    &#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>加上mutable，就告诉编译器，这个变量是父子函数共享的，子函数对它的修改要反映到外部，并且它的生存期要和子函数一样长！</p>
+<p>这里可能有点绕，函数哪来的生存期？注意这里“子函数”并不是真正的函数，只是一个lambda类型的变量，只是有函数的行为，一样有生存期。</p>
+<p>闭包最大的用处在于写回调函数，比如事件响应。当初学Java的时候，Swing里用户界面各种内部类，感觉很烦。现在Java终于也有闭包了（Java8）~（语言都是相通的嘛）</p>
+<hr>
+<h3 id="模板参数"><a href="#模板参数" class="headerlink" title="模板参数"></a>模板参数</h3><p>在C++98中，局部类和未命名类不能作为模板参数，这或许是一个负担，C++11则放宽了这方面的限制：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="built_in">vector</span>&lt;X&gt;&amp; v)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">struct</span> Less &#123;</div><div class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> X&amp; a, <span class="keyword">const</span> X&amp; b)</span></span></div><div class="line">        &#123; <span class="keyword">return</span> a.v&lt;b.v; &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// C++98: 错误: Less是局部类</span></div><div class="line">        <span class="comment">// C++11: 正确</span></div><div class="line">        sort(v.begin(), v.end(), Less());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当然除了这里的局部类之外，在C++11中，我们还可以采用Lambda表达式来做同样的事情：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="built_in">vector</span>&lt;X&gt;&amp; v)</span></span></div><div class="line">&#123;</div><div class="line">    sort(v.begin(), v.end(),</div><div class="line">        [] (<span class="keyword">const</span> X&amp; a, <span class="keyword">const</span> X&amp; b) &#123; <span class="keyword">return</span> a.v&lt;b.v; &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="窄转换"><a href="#窄转换" class="headerlink" title="窄转换"></a>窄转换</h3><p>(窄转换已经不被允许了，忘了在哪看到的了）<br>窄转换——使用初始化列表进行初始化可以防止发生窄转换（即从高等级类型下降到低等级类型，当然如果可以无损转换，则不存在）</p>
+<h3 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a>nullptr</h3><p>超级无敌的——nullptr<br>NULL可以认为是一个常数0的宏，nullptr是一个关键字，内建标识符，可以认为是(char *)</p>
+<h3 id="override-final"><a href="#override-final" class="headerlink" title="override,final"></a>override,final</h3><p>override表示必须被重载<br>final表示阻止继续重写<br>我们在后面还会看到这点</p>
+<hr>
+<h3 id="本期结语"><a href="#本期结语" class="headerlink" title="本期结语"></a>本期结语</h3><p>别放弃(。<br>其实多看几遍感觉还都能记住…?<br>很多地方加了太多的扩展，就是为了能理解的更好，印象更深刻一点。<br>后面还有很多，加油、</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+            <a href="/tags/c-11/" rel="tag"># c++11</a>
+          
+            <a href="/tags/company/" rel="tag"># company</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/13/lua笔记整理/sol2笔记/" rel="next" title="sol2笔记">
+                <i class="fa fa-chevron-left"></i> sol2笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/14/cpp-11-14-17笔记/cpp-11笔记-2/" rel="prev" title="cpp-11笔记_2">
+                cpp-11笔记_2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/01/13/cpp-11-14-17笔记/cpp-11笔记-1/"
+           data-title="cpp-11笔记_1" data-url="http://oodtoodt.github.io/2020/01/13/cpp-11-14-17笔记/cpp-11笔记-1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#c-11"><span class="nav-number">1.</span> <span class="nav-text">c++11</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#先放一个小故事"><span class="nav-number">1.1.</span> <span class="nav-text">先放一个小故事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cpp-11-faq阅读笔记"><span class="nav-number">1.2.</span> <span class="nav-text">cpp 11 faq阅读笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#auto血强。"><span class="nav-number">1.2.1.</span> <span class="nav-text">auto血强。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attributes（属性）"><span class="nav-number">1.2.2.</span> <span class="nav-text">Attributes（属性）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#enum"><span class="nav-number">1.2.3.</span> <span class="nav-text">enum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constexpr"><span class="nav-number">1.2.4.</span> <span class="nav-text">constexpr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decltype"><span class="nav-number">1.2.5.</span> <span class="nav-text">decltype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delete-default"><span class="nav-number">1.2.6.</span> <span class="nav-text">delete/default</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托构造函数"><span class="nav-number">1.2.7.</span> <span class="nav-text">委托构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欠着"><span class="nav-number">1.2.8.</span> <span class="nav-text">欠着</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#noexcept"><span class="nav-number">1.2.9.</span> <span class="nav-text">noexcept</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以下情形鼓励使用noexcept："><span class="nav-number">1.2.9.1.</span> <span class="nav-text">以下情形鼓励使用noexcept：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explicit"><span class="nav-number">1.2.10.</span> <span class="nav-text">explicit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先来历史，c-98："><span class="nav-number">1.2.10.1.</span> <span class="nav-text">先来历史，c++98：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-11中的explicit"><span class="nav-number">1.2.10.2.</span> <span class="nav-text">c++11中的explicit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展整型"><span class="nav-number">1.2.11.</span> <span class="nav-text">扩展整型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部模板"><span class="nav-number">1.2.12.</span> <span class="nav-text">外部模板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先来历史"><span class="nav-number">1.2.12.1.</span> <span class="nav-text">先来历史</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要显式实例化？"><span class="nav-number">1.2.12.2.</span> <span class="nav-text">为什么要显式实例化？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#铺垫结束，c-11："><span class="nav-number">1.2.12.3.</span> <span class="nav-text">铺垫结束，c++11：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列for！"><span class="nav-number">1.2.13.</span> <span class="nav-text">序列for！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值类型后置："><span class="nav-number">1.2.14.</span> <span class="nav-text">返回值类型后置：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类成员的内部初始化"><span class="nav-number">1.2.15.</span> <span class="nav-text">类成员的内部初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承的构造函数"><span class="nav-number">1.2.16.</span> <span class="nav-text">继承的构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原来在c-98中"><span class="nav-number">1.2.16.1.</span> <span class="nav-text">原来在c++98中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#现在在c-11中"><span class="nav-number">1.2.16.2.</span> <span class="nav-text">现在在c++11中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化列表"><span class="nav-number">1.2.17.</span> <span class="nav-text">初始化列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联命名空间"><span class="nav-number">1.2.18.</span> <span class="nav-text">内联命名空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda表达式"><span class="nav-number">1.2.19.</span> <span class="nav-text">Lambda表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是lambda"><span class="nav-number">1.2.19.1.</span> <span class="nav-text">什么是lambda</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#捕捉列表"><span class="nav-number">1.2.19.2.</span> <span class="nav-text">捕捉列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一小段自己的总结"><span class="nav-number">1.2.19.3.</span> <span class="nav-text">一小段自己的总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本形式"><span class="nav-number">1.2.19.4.</span> <span class="nav-text">基本形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于lambda与闭包"><span class="nav-number">1.2.19.5.</span> <span class="nav-text">关于lambda与闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#历史"><span class="nav-number">1.2.19.5.1.</span> <span class="nav-text">历史</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#总结"><span class="nav-number">1.2.19.5.2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#概念"><span class="nav-number">1.2.19.5.3.</span> <span class="nav-text">概念</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子拉满"><span class="nav-number">1.2.19.6.</span> <span class="nav-text">例子拉满</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#匿名函数：lambda表达式"><span class="nav-number">1.2.19.6.1.</span> <span class="nav-text">匿名函数：lambda表达式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#闭包closure"><span class="nav-number">1.2.19.6.2.</span> <span class="nav-text">闭包closure</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#词法域"><span class="nav-number">1.2.19.6.3.</span> <span class="nav-text">词法域</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板参数"><span class="nav-number">1.2.20.</span> <span class="nav-text">模板参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#窄转换"><span class="nav-number">1.2.21.</span> <span class="nav-text">窄转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nullptr"><span class="nav-number">1.2.22.</span> <span class="nav-text">nullptr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#override-final"><span class="nav-number">1.2.23.</span> <span class="nav-text">override,final</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本期结语"><span class="nav-number">1.2.24.</span> <span class="nav-text">本期结语</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

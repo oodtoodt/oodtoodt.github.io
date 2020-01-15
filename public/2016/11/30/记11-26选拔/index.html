@@ -1,0 +1,914 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="game," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon(1).ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="虽然题都很水，但是毕竟第一次现场做，出了许多差错……还在一个概率题上死脑筋的卡了1.5h……最后笔记本还没电了……万幸的是大家都放水，算是过了。这里对照题解，记一下这些有趣的题。">
+<meta name="keywords" content="game">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记11.26选拔">
+<meta property="og:url" content="http://oodtoodt.github.io/2016/11/30/记11-26选拔/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="虽然题都很水，但是毕竟第一次现场做，出了许多差错……还在一个概率题上死脑筋的卡了1.5h……最后笔记本还没电了……万幸的是大家都放水，算是过了。这里对照题解，记一下这些有趣的题。">
+<meta property="og:updated_time" content="2017-07-10T04:56:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记11.26选拔">
+<meta name="twitter:description" content="虽然题都很水，但是毕竟第一次现场做，出了许多差错……还在一个概率题上死脑筋的卡了1.5h……最后笔记本还没电了……万幸的是大家都放水，算是过了。这里对照题解，记一下这些有趣的题。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2016/11/30/记11-26选拔/"/>
+
+
+
+
+
+  <title>记11.26选拔 | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2016/11/30/记11-26选拔/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">记11.26选拔</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-30T13:20:00+08:00">
+                2016-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/acm/" itemprop="url" rel="index">
+                    <span itemprop="name">acm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/11/30/记11-26选拔/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/30/记11-26选拔/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/11/30/记11-26选拔/" class="leancloud_visitors" data-flag-title="记11.26选拔">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>虽然题都很水，但是毕竟第一次现场做，出了许多差错……还在一个概率题上死脑筋的卡了1.5h……最后笔记本还没电了……万幸的是大家都放水，算是过了。<br>这里对照题解，记一下这些有趣的题。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h4 id="A-简单求和-poj1844"><a href="#A-简单求和-poj1844" class="headerlink" title="A.简单求和 poj1844"></a>A.简单求和 poj1844</h4><h5 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h5><p>找出最小的n，对于给定的数列S，使得<br>$$<br>S=k_1 \cdot 1 + k_2 \cdot 2 + … + k_n \cdot n \ \ (k_i = 1, -1)<br>$$</p>
+<h5 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h5><p>显然在$k_i$只能取得1和-1的情况下区分的差是偶数。</p>
+<p>欲凑出S，可使$k_i$都取1</p>
+<p>显然有 $\sum_{i=0}^n i \geq S $。</p>
+<p>若 $S_n$ %2==0 显然对于 0~$S_n$之间的偶数都成立。</p>
+<p>对于奇数，则取$S_{n+1}$至S为奇数即可。</p>
+<h5 id="题后感"><a href="#题后感" class="headerlink" title="题后感"></a>题后感</h5><p>日，解题用了10m，思路写了1h……真的落实下来是件很复杂的事情，我决定很水的题就不怎么写了……<br>mathjax出了一些不可描述的错误，总之这一段排版不好……</p>
+<hr>
+<h4 id="B-悉宇大大的问题-CodeForces707c"><a href="#B-悉宇大大的问题-CodeForces707c" class="headerlink" title="B.悉宇大大的问题  CodeForces707c"></a>B.悉宇大大的问题  CodeForces707c</h4><h5 id="题目大意-1"><a href="#题目大意-1" class="headerlink" title="题目大意"></a>题目大意</h5><p>对于给定的数$n$($ 1\leq n\leq10^9$)，请给出相应的一组勾股数</p>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>硬推就行，对于1，2无解，之后的奇数偶数分别可求得公式<br>(强行用3，4，5，奇数偶数做也行=。=)</p>
+<hr>
+<h4 id="C-老陶的幸福生活-HDU1273"><a href="#C-老陶的幸福生活-HDU1273" class="headerlink" title="C.老陶的幸福生活  HDU1273"></a>C.老陶的幸福生活  HDU1273</h4><h5 id="题目大意-2"><a href="#题目大意-2" class="headerlink" title="题目大意"></a>题目大意</h5><p>给出多边形的边n，将每个顶点与其他所有顶点连线，问有多少种不重复线路走过所有顶点的方式？</p>
+<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h5><p>……奇怪的水题。每个顶点有n-1条边，每次走少2条边，就完了。</p>
+<hr>
+<h4 id="D-小朋友吃汉堡-uva557"><a href="#D-小朋友吃汉堡-uva557" class="headerlink" title="D.小朋友吃汉堡  uva557"></a>D.小朋友吃汉堡  uva557</h4><h5 id="题目大意-3"><a href="#题目大意-3" class="headerlink" title="题目大意"></a>题目大意</h5><p>抛硬币决定n个鸡肉堡与n个牛肉堡的归属，小本和比尔最后拿，请计算小本和比尔拿到相同品种汉堡的概率。(最后只剩下一种汉堡时就不用挑了)</p>
+<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h5><p>倒着想！<br>正着计算(我就没想明白正着怎么算)会非常复杂，因为在最后剩下一种的情况会有所变化……这时候就该像高中一样倒着想啊(TAT卡了1.5h，就是一半的时间啊！跟个智障一样)<br>即是说小本和别拿到不同汉堡的概率。因为这样就不会出现最后只剩一种的情况，从而能够简单的计算概率 $P[n]=\frac{C_{2n-2}^{n-1} } {2^{2n-2}}$</p>
+<p>重点！！<br><strong>直接计算会超出范围，且计算组合数的时间复杂度过大，所以将前后概率相除化为递推式</strong></p>
+<p>$P[n+1]=P[n] \cdot (1- \frac {1} {2n})$<br>然后打表就好了……</p>
+<hr>
+<h4 id="E-水题"><a href="#E-水题" class="headerlink" title="E.水题"></a>E.水题</h4><hr>
+<h4 id="F-Boss买披萨"><a href="#F-Boss买披萨" class="headerlink" title="F.Boss买披萨"></a>F.Boss买披萨</h4><h5 id="题目大意-4"><a href="#题目大意-4" class="headerlink" title="题目大意"></a>题目大意</h5><p>有一个长度为$n$ ($ 1\leq n\leq2 \times 10^5$)的数组$a_i$($ 0\leq {a_i} \leq 10^4$)，问能否对数组经过如下处理后，使整个数组的数都化为0<br>1.a[i]减去任意偶数个数<br>2.a[i] - - 且a[i+1] - -<br>(这是已经读懂了题之后翻译过来的，我当时读完题就没做……)</p>
+<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h5><p>此题需要注意的是除了暴力之外还可以用空间复杂度O(1)的方法。<br>布尔变量owned表示上一个数是否为奇数。初始化为false。读入数据，若a[i]=0且owned=true，直接输出跳出。否则，若owned=true a[i]–,考察此时奇偶性设置owned。<br>简单地说判断与之前没什么不同，大概就是把1附在owned上，但是不需要开数组是非常好的。这种方法还是有必要记的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/game/" rel="tag"># game</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/22/11-22/" rel="next" title="11.22">
+                <i class="fa fa-chevron-left"></i> 11.22
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/30/11-28-30-vijos/" rel="prev" title="11.28-30_vijos">
+                11.28-30_vijos <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/30/记11-26选拔/"
+           data-title="记11.26选拔" data-url="http://oodtoodt.github.io/2016/11/30/记11-26选拔/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-简单求和-poj1844"><span class="nav-number">1.0.1.</span> <span class="nav-text">A.简单求和 poj1844</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解题思路"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#题后感"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">题后感</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-悉宇大大的问题-CodeForces707c"><span class="nav-number">1.0.2.</span> <span class="nav-text">B.悉宇大大的问题  CodeForces707c</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-1"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-老陶的幸福生活-HDU1273"><span class="nav-number">1.0.3.</span> <span class="nav-text">C.老陶的幸福生活  HDU1273</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-2"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-小朋友吃汉堡-uva557"><span class="nav-number">1.0.4.</span> <span class="nav-text">D.小朋友吃汉堡  uva557</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-3"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-2"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-水题"><span class="nav-number">1.0.5.</span> <span class="nav-text">E.水题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#F-Boss买披萨"><span class="nav-number">1.0.6.</span> <span class="nav-text">F.Boss买披萨</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意-4"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-3"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">思路</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

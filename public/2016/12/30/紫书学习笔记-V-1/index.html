@@ -1,0 +1,911 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="zishu," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon(1).ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="ID分配法   优先队列   substr的灵活运用，map，set……balabala……好吧map什么的慢慢来   结构体种种：初始化，定义“&amp;lt;”号等。">
+<meta name="keywords" content="zishu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="紫书学习笔记_V_1">
+<meta property="og:url" content="http://oodtoodt.github.io/2016/12/30/紫书学习笔记-V-1/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="ID分配法   优先队列   substr的灵活运用，map，set……balabala……好吧map什么的慢慢来   结构体种种：初始化，定义“&amp;lt;”号等。">
+<meta property="og:updated_time" content="2017-07-13T09:18:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="紫书学习笔记_V_1">
+<meta name="twitter:description" content="ID分配法   优先队列   substr的灵活运用，map，set……balabala……好吧map什么的慢慢来   结构体种种：初始化，定义“&amp;lt;”号等。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2016/12/30/紫书学习笔记-V-1/"/>
+
+
+
+
+
+  <title>紫书学习笔记_V_1 | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2016/12/30/紫书学习笔记-V-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">紫书学习笔记_V_1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-30T13:11:00+08:00">
+                2016-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/acm/" itemprop="url" rel="index">
+                    <span itemprop="name">acm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/12/30/紫书学习笔记-V-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/30/紫书学习笔记-V-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/12/30/紫书学习笔记-V-1/" class="leancloud_visitors" data-flag-title="紫书学习笔记_V_1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>ID分配法<br>   优先队列<br>   substr的灵活运用，map，set……balabala……好吧map什么的慢慢来<br>   结构体种种：初始化，定义“&lt;”号等。<br><a id="more"></a></p>
+</blockquote>
+<hr>
+<h4 id="5-7-打印队列uva12100"><a href="#5-7-打印队列uva12100" class="headerlink" title="5-7  打印队列uva12100"></a>5-7  打印队列uva12100</h4><h5 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h5><p>有一些打印任务，按队列顺序排好了队(队首位置为0)，每个任务有一个1-9的优先级，若队伍中有优先级大于队首的任务，则队首任务排到尾部，否则打印该任务。<br>输入各优先级，及关注的任务在队列中的位置，输出被关注任务的</p>
+<h5 id="吐槽-amp-思路"><a href="#吐槽-amp-思路" class="headerlink" title="吐槽&amp;思路"></a>吐槽&amp;思路</h5><p>这个题我的直接做法是好的，但是智商有限，没有想到比较好的处理标号的问题。因为标号绑定一个项目，项目又会在队列里变来变去，用map就会非常的僵硬(想都没去想)。<br>然后去看了题解……其实很简单……然而……蠢蠢的我一开始没有看懂。。。<br>整数记录。在pop出列的过程中使x++，遇到m，使x为0，m设为queue.size()-1（之所以-1就是因为每次循环一次的过程中会出列一个front）</p>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sstream"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sstream"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"vector"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"set"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"map"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"queue"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstdio"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cmath"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstring"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"algorithm"</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> book &#123;</div><div class="line">    <span class="built_in">string</span> writer,title;</div><div class="line">    <span class="keyword">bool</span> borrowed,returned;</div><div class="line">    book(<span class="built_in">string</span> a,<span class="built_in">string</span> b)</div><div class="line">    &#123;</div><div class="line">        title=a;</div><div class="line">        writer=b;</div><div class="line">        borrowed=returned=<span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(book a,book b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(a.writer!=b.writer)</div><div class="line">        <span class="keyword">return</span> a.writer&lt;b.writer;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> a.title&lt;b.title;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"input.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line"><span class="comment">//    freopen("output.txt","w",stdout);</span></div><div class="line">    <span class="built_in">string</span> ss;</div><div class="line">    <span class="built_in">vector</span>&lt;book&gt; allbook;</div><div class="line">    <span class="keyword">int</span> num_1=<span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(getline(<span class="built_in">cin</span>,ss)&amp;&amp;ss!=<span class="string">"END"</span>)</div><div class="line">    &#123;</div><div class="line">        num_1++;</div><div class="line">        allbook.push_back(book(ss.substr(<span class="number">0</span>,ss.find(<span class="string">"\" by"</span>)+<span class="number">1</span>),ss.substr(ss.find(<span class="string">"\" by"</span>)+<span class="number">1</span>)));</div><div class="line">    &#125;</div><div class="line">    stable_sort(allbook.begin(),allbook.end(),cmp);</div><div class="line"> <span class="comment">//   for(int i=0;i&lt;allbook.size();i++)</span></div><div class="line">    &#123;</div><div class="line"> <span class="comment">//       cout&lt;&lt;allbook[i].title&lt;&lt;endl;</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>(getline(<span class="built_in">cin</span>,ss)&amp;&amp;ss!=<span class="string">"END"</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">string</span> a,b;</div><div class="line">        a=ss.substr(<span class="number">0</span>,ss.find_first_of(<span class="string">"\""</span>));</div><div class="line">        <span class="keyword">if</span>(a[<span class="number">0</span>]!=<span class="string">'S'</span>)</div><div class="line">        &#123;</div><div class="line">            b=ss.substr(ss.find_first_of(<span class="string">"\""</span>));</div><div class="line">          <span class="comment">//  cout&lt;&lt;a&lt;&lt;endl&lt;&lt;b&lt;&lt;endl&lt;&lt;endl;</span></div><div class="line">            <span class="keyword">if</span>(a[<span class="number">0</span>]==<span class="string">'B'</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;allbook.size();i++)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">if</span>(allbook[i].title==b)</div><div class="line">                    &#123;</div><div class="line">                        <span class="comment">//printf("ok");</span></div><div class="line">                        allbook[i].borrowed=<span class="literal">true</span>;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(a[<span class="number">0</span>]==<span class="string">'R'</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;allbook.size();i++)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">if</span>(allbook[i].title==b)</div><div class="line">                    &#123;</div><div class="line">                        allbook[i].returned=<span class="literal">true</span>;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;allbook.size();i++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(allbook[i].borrowed==<span class="literal">true</span>&amp;&amp;allbook[i].returned==<span class="literal">true</span>)</div><div class="line">                &#123;</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"Put "</span>);</div><div class="line">                    <span class="built_in">cout</span>&lt;&lt;allbook[i].title;</div><div class="line">                    <span class="keyword">int</span> j;</div><div class="line">                    <span class="keyword">for</span>(j=i;j&gt;=<span class="number">0</span>;j--)</div><div class="line">                    &#123;</div><div class="line">                        <span class="keyword">if</span>(allbook[j].borrowed == <span class="literal">false</span>)</div><div class="line">                            <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">if</span>(j==<span class="number">-1</span>)</div><div class="line">                        <span class="built_in">printf</span>(<span class="string">" first\n"</span>);</div><div class="line">                    <span class="keyword">else</span></div><div class="line">                    &#123;</div><div class="line">                        <span class="built_in">printf</span>(<span class="string">" after "</span>);</div><div class="line">                        <span class="built_in">cout</span>&lt;&lt;allbook[j].title&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">                    &#125;</div><div class="line">                    allbook[i].borrowed=<span class="literal">false</span>;</div><div class="line">                    allbook[i].returned=<span class="literal">false</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"END\n"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="5-8-图书管理系统uva230"><a href="#5-8-图书管理系统uva230" class="headerlink" title="5-8 图书管理系统uva230"></a>5-8 图书管理系统uva230</h4><h5 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h5><p>模拟一个图书管理系统。首先输入若干图书的标题和作者，然后是若干指令，borrow是借书，return是还书，shelve是把已归还但还未上架的图书排序后依次插入书架并输出标题和插入位置(可能是第一本书或某本书的后面)<br>每次插入图书应当排序<br>保证输入合法</p>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>每本书用一个结构体记录，结构体包含borrow和return两个bool。<br>首先用substr截取处理输入<br>borrow和return只需要修改bool就好了。<br>shelve时判断bool输出就可以了<br>剩下的全是细节问题：判断是第一个还是后面？应该把全部结构体记录在什么地方？然而就是这简单的细节卡了我好久好久……</p>
+<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sstream"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sstream"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"vector"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"set"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"map"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"queue"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstdio"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cmath"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstring"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"algorithm"</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> book &#123;</div><div class="line">    <span class="built_in">string</span> writer,title;</div><div class="line">    <span class="keyword">bool</span> borrowed,returned;</div><div class="line">    book(<span class="built_in">string</span> a,<span class="built_in">string</span> b)</div><div class="line">    &#123;</div><div class="line">        title=a;</div><div class="line">        writer=b;</div><div class="line">        borrowed=returned=<span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(book a,book b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(a.writer!=b.writer)</div><div class="line">        <span class="keyword">return</span> a.writer&lt;b.writer;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> a.title&lt;b.title;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"input.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line"><span class="comment">//    freopen("output.txt","w",stdout);</span></div><div class="line">    <span class="built_in">string</span> ss;</div><div class="line">    <span class="built_in">vector</span>&lt;book&gt; allbook;</div><div class="line">    <span class="keyword">int</span> num_1=<span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(getline(<span class="built_in">cin</span>,ss)&amp;&amp;ss!=<span class="string">"END"</span>)</div><div class="line">    &#123;</div><div class="line">        num_1++;</div><div class="line">        allbook.push_back(book(ss.substr(<span class="number">0</span>,ss.find(<span class="string">"\" by"</span>)+<span class="number">1</span>),ss.substr(ss.find(<span class="string">"\" by"</span>)+<span class="number">1</span>)));</div><div class="line">    &#125;</div><div class="line">    stable_sort(allbook.begin(),allbook.end(),cmp);</div><div class="line"> <span class="comment">//   for(int i=0;i&lt;allbook.size();i++)</span></div><div class="line">    &#123;</div><div class="line"> <span class="comment">//       cout&lt;&lt;allbook[i].title&lt;&lt;endl;</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>(getline(<span class="built_in">cin</span>,ss)&amp;&amp;ss!=<span class="string">"END"</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">string</span> a,b;</div><div class="line">        a=ss.substr(<span class="number">0</span>,ss.find_first_of(<span class="string">"\""</span>));</div><div class="line">        <span class="keyword">if</span>(a[<span class="number">0</span>]!=<span class="string">'S'</span>)</div><div class="line">        &#123;</div><div class="line">            b=ss.substr(ss.find_first_of(<span class="string">"\""</span>));</div><div class="line">          <span class="comment">//  cout&lt;&lt;a&lt;&lt;endl&lt;&lt;b&lt;&lt;endl&lt;&lt;endl;</span></div><div class="line">            <span class="keyword">if</span>(a[<span class="number">0</span>]==<span class="string">'B'</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;allbook.size();i++)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">if</span>(allbook[i].title==b)</div><div class="line">                    &#123;</div><div class="line">                        <span class="comment">//printf("ok");</span></div><div class="line">                        allbook[i].borrowed=<span class="literal">true</span>;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(a[<span class="number">0</span>]==<span class="string">'R'</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;allbook.size();i++)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">if</span>(allbook[i].title==b)</div><div class="line">                    &#123;</div><div class="line">                        allbook[i].returned=<span class="literal">true</span>;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;allbook.size();i++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(allbook[i].borrowed==<span class="literal">true</span>&amp;&amp;allbook[i].returned==<span class="literal">true</span>)</div><div class="line">                &#123;</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"Put "</span>);</div><div class="line">                    <span class="built_in">cout</span>&lt;&lt;allbook[i].title;</div><div class="line">                    <span class="keyword">int</span> j;</div><div class="line">                    <span class="keyword">for</span>(j=i;j&gt;=<span class="number">0</span>;j--)</div><div class="line">                    &#123;</div><div class="line">                        <span class="keyword">if</span>(allbook[j].borrowed == <span class="literal">false</span>)</div><div class="line">                            <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">if</span>(j==<span class="number">-1</span>)</div><div class="line">                        <span class="built_in">printf</span>(<span class="string">" first\n"</span>);</div><div class="line">                    <span class="keyword">else</span></div><div class="line">                    &#123;</div><div class="line">                        <span class="built_in">printf</span>(<span class="string">" after "</span>);</div><div class="line">                        <span class="built_in">cout</span>&lt;&lt;allbook[j].title&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">                    &#125;</div><div class="line">                    allbook[i].borrowed=<span class="literal">false</span>;</div><div class="line">                    allbook[i].returned=<span class="literal">false</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"END\n"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>####eg5-9数据库uva1592</p>
+<p>#####题意<br>输入一个n行m列的数据库（1&lt;=n&lt;=10000,1&lt;=m&lt;=10)，是否存在两个不同的行r1,r2和两个不同的列c1,c2，使得r1,c1和r2,c1相同，r1,c2和r2,c2相同。</p>
+<p>#####思路<br>直接枚举会超时<br>只枚举列（两层循环遍历两列的所有组合）组成map，然后加入map之前.count判断一下就行<br>可以用ID分配简化操作。</p>
+<p>有一个小插曲：我在.count 为0的map[n]之前调用了map[n]一次，然后.count居然判断它&gt;0！然后我就傻傻的一点一点查错，搞得像个智障。</p>
+<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sstream"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"vector"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"set"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"map"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"queue"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstdio"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cmath"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cstring"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"algorithm"</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> ROW=<span class="number">10005</span>;</div><div class="line"><span class="comment">//typedef set&lt;int &gt;Set;</span></div><div class="line"><span class="keyword">struct</span> Node&#123;</div><div class="line">    <span class="keyword">int</span> a,b;</div><div class="line">    Node(<span class="keyword">int</span> a=<span class="number">0</span>,<span class="keyword">int</span> b=<span class="number">0</span>):a(a),b(b)&#123;&#125;</div><div class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Node&amp; r)<span class="keyword">const</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> a&lt;r.a||a==r.a&amp;&amp;b&lt;r.b;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span> ,<span class="keyword">int</span> &gt;IDcache;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span> &gt;strcache;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span> &gt;Text[ROW];</div><div class="line"><span class="built_in">map</span>&lt;Node, <span class="keyword">int</span> &gt; data;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">id_alloc</span><span class="params">(<span class="built_in">string</span> x)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(IDcache.count(x))<span class="keyword">return</span> IDcache[x];</div><div class="line">    strcache.push_back(x);</div><div class="line">    <span class="keyword">return</span> IDcache[x]=strcache.size()<span class="number">-1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m)</span></span></div><div class="line">&#123;</div><div class="line">    getchar();</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> hang=<span class="number">0</span>;hang&lt;n;hang++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">string</span> s,sline,ss;</div><div class="line">        getline(<span class="built_in">cin</span>,sline);</div><div class="line">        <span class="keyword">int</span> t1=<span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> t2=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> lie=<span class="number">0</span>;lie&lt;m;lie++)</div><div class="line">        &#123;</div><div class="line">            t2=sline.find(<span class="string">","</span>,t1);</div><div class="line">            s=sline.substr(t1,t2-t1);</div><div class="line">           <span class="comment">// cout&lt;&lt;s&lt;&lt;" "&lt;&lt;t1&lt;&lt;" "&lt;&lt;t2&lt;&lt;" "&lt;&lt;endl;</span></div><div class="line">            t1=t2+<span class="number">1</span>;</div><div class="line">            Text[hang].push_back(id_alloc(s));</div><div class="line">           <span class="comment">// cout&lt;&lt;id_alloc(s)&lt;&lt;endl;</span></div><div class="line">        &#125;</div><div class="line">        <span class="comment">//cout&lt;&lt;endl;</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=j+<span class="number">1</span>;k&lt;m;k++)</div><div class="line">        &#123;</div><div class="line">            data.clear();</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">            &#123;</div><div class="line">                <span class="function">Node <span class="title">p</span><span class="params">(Text[i][j],Text[i][k])</span></span>;</div><div class="line">                <span class="keyword">if</span>(data.count(p))</div><div class="line">                &#123;</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,data[p]+<span class="number">1</span>,i+<span class="number">1</span>);</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,j+<span class="number">1</span>,k+<span class="number">1</span>);</div><div class="line">                    <span class="keyword">return</span> ;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                &#123;</div><div class="line">                    data.insert(make_pair(p,i));</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"input.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">int</span> n,m;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m)==<span class="number">2</span>)</div><div class="line">    &#123;</div><div class="line">        read(n,m);</div><div class="line">        solve(n,m);</div><div class="line">        data.clear();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> t=<span class="number">0</span>;t&lt;n;t++)</div><div class="line">            Text[t].clear();</div><div class="line">        IDcache.clear();</div><div class="line">        strcache.clear();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p><em>每篇容量应当缩减一点……嗯……</em></p>
+<p><em>但总感觉一周做三道题实在是……sweeeeeeeeeeeeeeeeeeeet</em></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zishu/" rel="tag"># zishu</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/紫书学习笔记-V-2/" rel="next" title="紫书学习笔记_V_2//uva1596">
+                <i class="fa fa-chevron-left"></i> 紫书学习笔记_V_2//uva1596
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/09/test-for-mac/" rel="prev" title="test_for_mac">
+                test_for_mac <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/30/紫书学习笔记-V-1/"
+           data-title="紫书学习笔记_V_1" data-url="http://oodtoodt.github.io/2016/12/30/紫书学习笔记-V-1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-7-打印队列uva12100"><span class="nav-number">1.</span> <span class="nav-text">5-7  打印队列uva12100</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题意"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#吐槽-amp-思路"><span class="nav-number">1.2.</span> <span class="nav-text">吐槽&思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8-图书管理系统uva230"><span class="nav-number">2.</span> <span class="nav-text">5-8 图书管理系统uva230</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题意-1"><span class="nav-number">2.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">2.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-1"><span class="nav-number">2.3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-2"><span class="nav-number">2.4.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
