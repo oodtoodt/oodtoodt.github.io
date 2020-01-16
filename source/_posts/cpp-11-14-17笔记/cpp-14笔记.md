@@ -46,6 +46,11 @@ decltype(auto) i1 = a;
 decltype(auto) i2 = std::move(a);
 ```
 
+与auto一起做返回值的区别：
+如果不推导出 void 返回类型的话，auto （可有 cv 限定符）一定会推导出返回类型为对象类型。并且应用数组到指针、函数到指针隐式转换。
+auto 加上 & 或 && （可有 cv 限定符）一定会推导出返回类型为引用类型。
+decltype(auto) 可以推导出对象类型，也可以推导出引用类型。具体取决于 decltype 应用到 return 语句中表达式的结果。
+
 ### 函数返回类型
 使得没有return expression的函数也可以使用返回类型推导
 如果你对之前的某篇文章很有印象的话，会记得有
