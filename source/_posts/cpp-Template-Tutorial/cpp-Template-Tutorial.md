@@ -378,4 +378,213 @@ void foo(){
 
 A和B都与模板实参无法匹配，所以使用原型，调用CustomDiv
 
-## 后悔药——
+## 后悔药——SFINAE
+
+### 先来看看cppreference是怎么说的
+(我全贴过来了，但你不必全看。)
+“替换失败不是错误” (Substitution Failure Is Not An Error)
+
+在函数模板的重载决议中应用此规则：当将模板形参替换为显式指定的类型或推导的类型失败时，从重载集中丢弃这个特化，而非导致编译失败。
+
+此特性被用于模板元编程。
+
+对函数模板形参进行两次替换（由模板实参所替代）：
+
++ 显式指定的模板实参在模板实参推导之前替换
++ 推导的实参和从默认项获得的实参在模板实参推导之后替换
+替换发生于
+
+函数类型中使用的所有类型（包含返回类型和所有形参的类型）
++ 各个模板形参声明中使用的所有类型
++ 函数类型中使用的所有表达式
++ 各个模板形参声明中使用的所有表达式(C++11 起)
++ explicit 说明符中使用的所有表达式(C++20 起)
+
+当任何替换使用所替换的实参写出而造成以上类型或表达式非良构（并带有必要的诊断）时，它是一次替换失败。
+
+唯有函数类型或其模板形参类型或其 explicit 说明符 (C++20 起)的立即语境中的类型与表达式中的失败是 SFINAE 错误。若对替换后的类型/表达式的求值导致副作用，例如实例化某模板特化、生成某隐式定义的成员函数等，则这些副作用中的错误被当做硬错误。
+lambda 表达式不被当作是立即语境的一部分。 (C++20 起)
+
+>本节未完成
+>原因：这有影响的小示例(c++20的sao东西)
+
+替换以词法序进行，并在遇到失败时终止。
+```c++
+template <typename A>
+struct B { typedef typename A::type type; };
+ 
+template <
+  class T,
+  class   = typename T::type,      // 若 T 无成员 type 则为 SFINAE 失败
+  class U = typename B<T>::type    // 若 T 无成员 type 则为硬错误
+                                   // （C++14 起保证不出现）
+> void foo (int);
+```
+如果多个声明具有不同的词法顺序（例如，某个函数模板声明为具有尾随返回类型，它在某个形参之后替换，然后被重声明为具有常规返回类型，它则在该形参之前替换），则程序非良构；无须诊断。(C++14 起)
+#### 类型 SFINAE
+下列类型错误是 SFINAE 错误：
+
++ 试图实例化含有多个不同长度的包的包展开(C++11 起)
+
++ 试图创建 void 的数组，引用的数组，函数的数组，负大小的数组，非整型大小的数组，或者零大小的数组。
+```c++
+template <int I> void div(char(*)[I % 2 == 0] = 0) {
+    // 当 I 为偶数时选择这个重载
+}
+template <int I> void div(char(*)[I % 2 == 1] = 0) {
+    // 当 I 为奇数时选择这个重载
+}
+```
++ 试图在作用域解析运算符 :: 左侧使用并非类或非枚举的类型
+```c++
+template <class T> int f(typename T::B*);
+template <class T> int f(T);
+int i = f<int>(0); // 使用第二重载
+```
++ 试图使用类型的成员，其中
+   + 类型不含指定成员
+   + 在要求类型处，指定成员不是类型
+   + 在要求模板处，指定成员不是模板
+   + 在要求非类型处，指定成员不是非类型
+   ```c++
+    template <int I> struct X { };
+    template <template <class T> class> struct Z { };
+    template <class T> void f(typename T::Y*){}
+    template <class T> void g(X<T::N>*){}
+    template <class T> void h(Z<T::template TT>*){}
+    struct A {};
+    struct B { int Y; };
+    struct C { typedef int N; };
+    struct D { typedef int TT; };
+    struct B1 { typedef int Y; };
+    struct C1 { static const int N = 0; };
+    struct D1 { 
+        template <typename T>
+        struct TT
+        {    
+        }; 
+    };
+    int main() {
+        // 下列各个情况推导失败：
+        f<A>(0); // 不含成员 Y
+        f<B>(0); // B 的 Y 成员不是类型
+        g<C>(0); // C 的 N 成员不是非类型
+        h<D>(0); // D 的 TT 成员不是模板
+    
+        // 下列各个情况推导成功：
+        f<B1>(0); 
+        g<C1>(0); 
+        h<D1>(0);
+    }
+    // 未完成：需要演示重载决议，而不只是失败
+    ```
++ 试图创建指向引用的指针
++ 试图创建到 void 的引用
++ 试图创建指向 T 成员的指针，其中 T 不是类类型
+```c++
+template<typename T>
+class is_class {
+    typedef char yes[1];
+    typedef char no [2];
+    template<typename C> static yes& test(int C::*); // 若 C 是类类型则得到选择
+    template<typename C> static no&  test(...);      // 否则选择它
+  public:
+    static bool const value = sizeof(test<T>(0)) == sizeof(yes);
+};
+```
++ 试图将非法类型给予非类型模板形参
+```c++
+template <class T, T> struct S {};
+template <class T> int f(S<T, T()>*);
+struct X {};
+int i0 = f<X>(0);
+// 未完成：需要演示重载决议，而非仅是失败
+```
++ 试图在以下语境中进行非法转换
+   + 模板实参表达式
+   + 函数声明中使用的表达式
+   ```c++
+   template <class T, T*> int f(int);
+   int i2 = f<int,1>(0); // 不能将 1 转换为 int*
+   // 未完成：需要演示重载决议，而非仅是失败
+   ```
++ 试图创建形参类型为 void 的函数类型
++ 试图创建返回数组类型或函数类型的函数类型
++ 试图创建 cv 限定的函数类型(C++11 前)
++ 试图创建形参类型或返回类型为抽象类的函数类型。(C++11 起)
+
+#### 表达式 SFINAE
+下列表达式错误是 SFINAE 错误
+
+模板形参类型中使用的非良构表达式
+函数类型中使用的非良构表达式
+```c++
+struct X {};
+struct Y { Y(X){} }; // X 可转换为 Y
+ 
+template <class T>
+auto f(T t1, T t2) -> decltype(t1 + t2); // 重载 #1
+ 
+X f(Y, Y);  // 重载 #2
+ 
+X x1, x2;
+X x3 = f(x1, x2);  // 推导在 #1 上失败（表达式 x1+x2 非良构）
+                   // 仅 #2 在重载集中，并得到调用
+//(C++11 起)
+```
+C++11 前，只有类型中使用的常量表达式（例如数组边界）才要求被当做 SFINAE（而非硬错误）。
+
+#### 库支持
+标准库组件 std::enable_if 允许创建替换失败，以基于某个在编译时求值的条件来启用或禁用特定的重载。
+
+标准库组件 std::void_t 是另一个简化 SFINAE 的应用的工具元函数。
+
+另外，许多类型特性都是用 SFINAE 实现的。
+
+#### 替代方案
+只要适用，标签派发，static_assert，以及（如果可用）概念，通常都比直接使用 SFINAE 更受偏好。
+
+#### 示例
+一种常见手法，是在返回类型上使用表达式 SFINAE，其中表达式使用逗号运算符，其左子表达式是所检验的（转型到 void 以确保不会选择返回类型上的用户定义逗号运算符），而右子表达式具有期望函数返回的类型。
+```c++
+#include <iostream>
+ 
+// 此重载始终在重载集中
+// 省略号形参对于重载决议具有最低等级
+void test(...)
+{
+    std::cout << "Catch-all overload called\n";
+}
+ 
+// 若 C 是类的引用类型且 F 是指向 C 的成员函数的指针
+// 则这个重载被添加到重载集，
+template <class C, class F>
+auto test(C c, F f) -> decltype((void)(c.*f)(), void())
+{
+    std::cout << "Reference overload called\n";
+}
+ 
+// 若 C 是类的指针类型且 F 是指向 C 的成员函数的指针
+// 则这个重载被添加到重载集，
+template <class C, class F>
+auto test(C c, F f) -> decltype((void)((c->*f)()), void())
+{
+    std::cout << "Pointer overload called\n";
+}
+ 
+struct X { void f() {} };
+ 
+int main(){
+  X x;
+  test( x, &X::f);
+  test(&x, &X::f);
+  test(42, 1337);
+}
+```
+输出：
+
+Reference overload called
+Pointer overload called
+Catch-all overload called
+
+---
