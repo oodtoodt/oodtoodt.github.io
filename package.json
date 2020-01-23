@@ -6,7 +6,6 @@
     "version": "3.3.7"
   },
   "dependencies": {
-    "hexo": "^3.3.7",
     "hexo-admin": "^2.2.1",
     "hexo-blog-encrypt": "1.1.*",
     "hexo-deployer-git": "^0.2.0",

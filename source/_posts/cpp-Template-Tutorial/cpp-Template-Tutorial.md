@@ -10,6 +10,11 @@ categories:
 - c++
 ---
 
+这里是膜拜空祖和催更的分界线
+<!--more-->
+
+---
+
 #
 归根结底，模板无外乎两点：
 + 函数或者类里面，有一些类型我们希望它能变化一下，我们用标识符来代替它，这就是“模板参数”；
@@ -392,11 +397,11 @@ A和B都与模板实参无法匹配，所以使用原型，调用CustomDiv
 
 + 显式指定的模板实参在模板实参推导之前替换
 + 推导的实参和从默认项获得的实参在模板实参推导之后替换
-替换发生于
 
-函数类型中使用的所有类型（包含返回类型和所有形参的类型）
+替换发生于
++ 函数类型中使用的所有类型（包含返回类型和所有形参的类型）
 + 各个模板形参声明中使用的所有类型
-+ 函数类型中使用的所有表达式
++ 函数类型中使用的所有表达式(C++11 起)
 + 各个模板形参声明中使用的所有表达式(C++11 起)
 + explicit 说明符中使用的所有表达式(C++20 起)
 
@@ -582,9 +587,286 @@ int main(){
 }
 ```
 输出：
-
+```
 Reference overload called
 Pointer overload called
 Catch-all overload called
-
+```
 ---
+
+### 回到我们的文档中来。
+如果你感觉读上面的内容有一些困难，或者是障碍，不要担心，这很正常。不如先来读了我们的教程之后再去参阅标准的内容。
+
+>SFINAE可以说是C++模板进阶的门槛之一，如果选择一个论题来测试对C++模板机制的熟悉程度，那么在我这里，首选就应当是SFINAE机制。我们不用纠结这个词的发音，它来自于 Substitution failure is not an error 的首字母缩写。这一句之乎者也般难懂的话，由之乎者 —— 啊，不，Substitution，Failure和Error三个词构成
+
+考虑我们有这么个函数签名：
+```c++
+template <
+  typename T0, 
+  // 一大坨其他模板参数
+  typename U = /* 和前面T有关的一大坨 */
+>
+RType /* 和模板参数有关的一大坨 */
+functionName (
+   PType0 /* PType0 是和模板参数有关的一大坨 */,
+   PType1 /* PType1 是和模板参数有关的一大坨 */,
+   // ... 其他参数
+) {
+  // 实现，和模板参数有关的一大坨
+}
+```
+
+那么，在这个函数模板被实例化的时候，所有函数签名上的“和模板参数有关的一大坨”被推导出具体类型的过程，就是替换。一个更具体的例子来解释上面的“一大坨”：
+```c++
+template <
+  typename T, 
+  typenname U = typename vector<T>::iterator // 1
+>
+typename vector<T>::value_type  // 1
+  foo( 
+      T*, // 1
+      T&, // 1
+      typename T::internal_type, // 1
+      typename add_reference<T>::type, // 1
+      int // 这里都不需要 substitution
+  )
+{
+   // 整个实现部分，都没有 substitution。这个很关键。
+}
+```
+所有标记为 1 的部分，都是需要替换的部分，而它们在替换过程中的失败（failure），就称之为替换失败（substitution failure）。
+
+下面的代码是提供了一些替换成功和替换失败的示例：
+```c++
+struct X {
+  typedef int type;
+};
+
+struct Y {
+  typedef int type2;
+};
+
+template <typename T> void foo(typename T::type);    // Foo0
+template <typename T> void foo(typename T::type2);   // Foo1
+template <typename T> void foo(T);                   // Foo2
+
+void callFoo() {
+   foo<X>(5);    // Foo0: Succeed, Foo1: Failed,  Foo2: Failed
+   foo<Y>(10);   // Foo0: Failed,  Foo1: Succeed, Foo2: Failed
+   foo<int>(15); // Foo0: Failed,  Foo1: Failed,  Foo2: Succeed
+}
+```
+在这个例子中，当我们指定` foo<Y> `的时候，substitution就开始工作了，而且会同时工作在三个不同的 foo 签名上。如果我们仅仅因为 Y 没有 type，匹配 Foo0 失败了，就宣布代码有错，中止编译，那显然是武断的。因为 Foo1 是可以被正确替换的，我们也希望 Foo1 成为 `foo<Y> `的原型。
+
+std/boost库中的 enable_if 是 SFINAE 最直接也是最主要的应用。所以我们通过下面 enable_if 的例子，来深入理解一下 SFINAE 在模板编程中的作用。
+
+假设我们有两个不同类型的计数器（counter），一种是普通的整数类型，另外一种是一个复杂对象，它从接口 ICounter 继承，这个接口有一个成员叫做increase实现计数功能。现在，我们想把这两种类型的counter封装一个统一的调用：inc_counter。那么，我们直觉会简单粗暴的写出下面的代码：
+```c++
+struct ICounter {
+  virtual void increase() = 0;
+  virtual ~ICounter() {}
+};
+
+struct Counter: public ICounter {
+   void increase() override {
+      // Implements
+   }
+};
+
+template <typename T>
+void inc_counter(T& counterObj) {
+  counterObj.increase();
+}
+
+template <typename T>
+void inc_counter(T& intTypeCounter){
+  ++intTypeCounter;
+}
+
+void doSomething() {
+  Counter cntObj;
+  uint32_t cntUI32;
+
+  // blah blah blah
+  inc_counter(cntObj);
+  inc_counter(cntUI32);
+}
+```
+我们非常希望它展现出预期的行为。因为其实我们是知道对于任何一个调用，两个 inc_counter 只有一个是能够编译正确的。“有且唯一”，我们理应当期望编译器能够挑出那个唯一来。
+
+可惜编译器做不到这一点。首先，它就告诉我们，这两个签名
+```c++
+template <typename T> void inc_counter(T& counterObj);
+template <typename T> void inc_counter(T& intTypeCounter);
+```
+其实是一模一样的。我们遇到了 redefinition。
+
+我们看看 enable_if 是怎么解决这个问题的。我们通过 enable_if 这个 T 对于不同的实例做个限定：
+```c++
+template <typename T> void inc_counter(
+  T& counterObj, 
+  typename std::enable_if<
+    std::is_base_of<ICounter, T>::value
+  >::type* = nullptr );
+
+template <typename T> void inc_counter(
+  T& counterInt,
+  typename std::enable_if<
+    std::is_integral<T>::value
+  >::type* = nullptr );
+```
+然后我们解释一下，这个 enable_if 是怎么工作的，语法为什么这么丑：
+
+首先，替换（substitution）只有在推断函数类型的时候，才会起作用。推断函数类型需要参数的类型，所以，` typename std::enable_if<std::is_integral<T>::value>::type `这么一长串代码，就是为了让 enable_if 参与到函数类型中；
+
+其次，` is_integral<T>::value` 返回一个布尔类型的编译器常数，告诉我们它是或者不是一个 integral type，`enable_if<C> `的作用就是，如果这个 C 值为 True，那么 `enable_if<C>::type `就会被推断成一个 void 或者是别的什么类型，让整个函数匹配后的类型变成 `void inc_counter<int>(int & counterInt, void* dummy = nullptr); `如果这个值为 False ，那么 `enable_if<false> `这个特化形式中，压根就没有这个 ::type，于是替换就失败了。和我们之前的例子中一样，这个函数原型就不会被产生出来。
+
+所以我们能保证，无论对于 int 还是 counter 类型的实例，我们都只有一个函数原型通过了substitution —— 这样就保证了它的“有且唯一”，编译器也不会因为你某个替换失败而无视成功的那个实例。
+
+这个例子说到了这里，熟悉C++的你，一定会站出来说我们只要把第一个签名改成：
+```c++
+void inc_counter(ICounter& counterObj);
+```
+
+就能完美解决这个问题了，根本不需要这么复杂的编译器机制。
+
+嗯，你说的没错，在这里这个特性一点都没用。
+
+这也提醒我们，当你觉得需要写 enable_if 的时候，首先要考虑到以下可能性：
+
++ 重载（对模板函数）
+
++ 偏特化（对模板类而言）
+
++ 虚函数
+
+但是问题到了这里并没有结束。因为 increase 毕竟是个虚函数。假如 Counter 需要调用的地方实在是太多了，这个时候我们会非常期望 increase 不再是个虚函数以提高性能。此时我们会调整继承层级：
+```c++
+struct ICounter {};
+struct Counter: public ICounter {
+  void increase() {
+    // impl
+  }
+};
+```
+那么原有的 void inc_counter(ICounter& counterObj) 就无法再执行下去了。这个时候你可能会考虑一些变通的办法：
+```c++
+template <typename T>
+void inc_counter(ICounter& c) {};
+
+template <typename T>
+void inc_counter(T& c) { ++c; };
+
+void doSomething() {
+  Counter cntObj;
+  uint32_t cntUI32;
+
+  // blah blah blah
+  inc_counter(cntObj); // 1
+  inc_counter(static_cast<ICounter&>(cntObj)); // 2
+  inc_counter(cntUI32); // 3
+}
+```
+对于调用 1，因为 cntObj 到 ICounter 是需要类型转换的，所以比` void inc_counter(T&) [T = Counter] `要更差一些。然后它会直接实例化后者，结果实现变成了 ++cntObj，BOOM！(编译器还真是方便ww)
+
+那么我们做 2 试试看？嗯，工作的很好。但是等等，我们的初衷是什么来着？不就是让 inc_counter 对不同的计数器类型透明吗？这不是又一夜回到解放前了？
+
+所以这个时候，就能看到 enable_if 是如何通过 SFINAE 发挥威力的了：
+```c++
+#include <type_traits>
+#include <utility>
+#include <cstdint>
+
+struct ICounter {};
+struct Counter: public ICounter {
+  void increase() {
+    // impl
+  }
+};
+
+template <typename T> void inc_counter(
+  T& counterObj, 
+  typename std::enable_if<
+    std::is_base_of<ICounter, T>::value
+  >::type* = nullptr ){
+  counterObj.increase();  
+}
+
+template <typename T> void inc_counter(
+  T& counterInt,
+  typename std::enable_if<
+    std::is_integral<T>::value
+  >::type* = nullptr ){
+  ++counterInt;
+}
+  
+void doSomething() {
+  Counter cntObj;
+  uint32_t cntUI32;
+
+  // blah blah blah
+  inc_counter(cntObj); // OK!
+  inc_counter(cntUI32); // OK!
+}
+```
+这个代码是不是看起来有点脏脏的。眼尖的你定睛一瞧，咦， ICounter 不是已经空了吗，为什么我们还要用它作为基类呢？
+
+这是个好问题。在本例中，我们用它来区分一个counter是不是继承自ICounter。最终目的，是希望知道 counter 有没有 increase 这个函数。
+
+所以 ICounter 只是相当于一个标签。而于情于理这个标签都是个累赘。但是在C++11之前，我们并没有办法去写类似于：
+```c++
+template <typename T> void foo(T& c, decltype(c.increase())* = nullptr);
+```
+这样的函数签名，因为假如 T 是 int，那么 c.increase() 这个函数调用就不存在。但它又不属于Type Failure，而是一个Expression Failure，在C++11之前它会直接导致编译器出错，这并不是我们所期望的。所以我们才退而求其次，用一个类似于标签的形式来提供我们所需要的类型信息。以后的章节，后面我们会说到，这种和类型有关的信息我们可以称之为 type traits。
+
+到了C++11，它正式提供了 Expression SFINAE，这时我们就能抛开 ICounter 这个无用的Tag，直接写出我们要写的东西：
+```c++
+struct Counter {
+   void increase() {
+      // Implements
+   }
+};
+
+template <typename T>
+void inc_counter(T& intTypeCounter, std::decay_t<decltype(++intTypeCounter)>* = nullptr) {
+  ++intTypeCounter;
+}
+
+template <typename T>
+void inc_counter(T& counterObj, std::decay_t<decltype(counterObj.increase())>* = nullptr) {
+  counterObj.increase();
+}
+
+void doSomething() {
+  Counter cntObj;
+  uint32_t cntUI32;
+
+  // blah blah blah
+  inc_counter(cntObj);
+  inc_counter(cntUI32);
+}
+```
+此外，还有一种情况只能使用 SFINAE，而无法使用包括继承、重载在内的任何方法，这就是Universal Reference。比如，
+```c++
+// 这里的a是个通用引用，可以准确的处理左右值引用的问题。
+template <typename ArgT> void foo(ArgT&& a);
+```
+假如我们要限定ArgT只能是 float 的衍生类型，那么写成下面这个样子是不对的，它实际上只能接受 float 的右值引用。
+```c++
+void foo(float&& a);
+```
+此时的唯一选择，就是使用Universal Reference，并增加 enable_if 限定类型，如下面这样：
+```c++
+template <typename ArgT>
+void foo(
+  ArgT&& a, 
+  typename std::enabled_if<
+    std::is_same<std::decay_t<ArgT>, float>::value
+  >::type* = nullptr
+);
+```
+从上面这些例子可以看到，SFINAE最主要的作用，是保证编译器在泛型函数、偏特化、及一般重载函数中遴选函数原型的候选列表时不被打断。除此之外，它还有一个很重要的元编程作用就是实现部分的编译期自省和反射。
+
+虽然它写起来并不直观，但是对于既没有编译器自省、也没有Concept的C++1y来说，已经是最好的选择了。
+
+（补充例子：构造函数上的enable_if）
