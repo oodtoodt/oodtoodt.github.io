@@ -33,4 +33,6 @@ read《From Apprentice To Artisan》
 https://stackoverflow.com/questions/219425/interface-contract-class-object
 
 
-##
+## SFINAE
+
+## 
