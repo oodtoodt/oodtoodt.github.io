@@ -36,9 +36,11 @@ inline是宏的范畴，前二者用于常量。
 using好像不太符合这几个的内容（指#define优化）
 
 ## 03:尽可能的使用const
+尤其是禁止如(a * b) = c这种操作：返回const
 然而提到了const的各种问题：
-+ 常量性不同可以被重载
++ 常量性不同可以被重载(这不是问题，是要注意的点)
 + bitwise constness（无一可变）与logical constness（一定范围可变，客户端侦测不出）——引出了mutable，可以在const中修改的变量
+注意很多成员函数不具备const性质却能通过bitwise测试，比如const函数返回reference指向对象内部。
 mutable我第一次还是在lambda里见到的...可以对照。
 + 令non-const调用const避免大量重复内容
 以下是一个关于const与non-const的例子。
@@ -57,10 +59,15 @@ public:
                     [position]
             };
     }
-}
+};
 ```
 但是
 这个两次转型(casting)总是看着非常别扭，不知道后面有没有更优雅的实现？
+
+这里提一嘴关于const和volatile
+“const”含义是“请做为常量使用”，而并非“放心吧，那肯定是个常量”。
+
+“volatile”的含义是“请不要做没谱的优化，这个值可能变掉的”，而并非“你可以修改这个值”。
 
 ## 04:确定对象使用前已被初始化
 ### 总是初始化。
@@ -104,7 +111,7 @@ public:
 private:
     std::string nameValue;
     T objectValue;
-}
+};
 NameObject<int> no1("Smallset Prime Number",2);
 NameObject<int> no2(no1);
 ```
@@ -226,7 +233,7 @@ public:
 private:
     DBConnection db;
     bool closed;
-}
+};
 ```
 
 ## 09:绝不在构造和析构过程中调用virtual函数

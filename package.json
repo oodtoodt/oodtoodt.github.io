@@ -6,6 +6,7 @@
     "version": "4.2.0"
   },
   "dependencies": {
+    "dtrace-provider": "^0.8.8",
     "hexo": "^4.2.0",
     "hexo-admin": "^2.2.1",
     "hexo-blog-encrypt": "1.1.*",

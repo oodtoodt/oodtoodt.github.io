@@ -870,3 +870,14 @@ void foo(
 虽然它写起来并不直观，但是对于既没有编译器自省、也没有Concept的C++1y来说，已经是最好的选择了。
 
 （补充例子：构造函数上的enable_if）
+
+（补一个轮子哥的典例，没地方放了w）
+```c++
+//轮子哥例
+template<typename T> using Const = const T;
+template<typename T> using Ptr = T*;
+//然后
+const int *** const shit = nullptr;
+//要怎么看呢？很简单，不要用const和*，用Const和Ptr来表达，马上明白：
+Const<Ptr<Ptr<Ptr<Const<int>>>>> shit = nullptr;
+```
