@@ -239,6 +239,12 @@ int n = list.get(i);
 
 枚举类，和c++差不多。
 
+反射机制可以用来：
++ 在运行时分析类的能力
++ 在运行时查看对象
++ 实现通用的数组操作代码
++ 利用Method对象，这个对象很像c++中的函数指针
+
 -----------------------------------
 在 Java 程序设计语言中， 接口不是类，而是对类的一组需求描述，这些类要遵从接口描述的统一格式进行定义。
 比如
@@ -438,6 +444,13 @@ Runnable在java中很常用
 代理
 newProxyInstance(类加载器（null就是默认），一个class对象数组，一个调用处理器)
 代理类一定是public和final。
+对于InvocationHandler接口的类对象（这个接口只有一个方法：
+```java
+Object invoke(Object proxy, Method method, Object[] args)
+```
+无论何时调用代理对象的方法，调用处理器的invoke方法都会被调用，并向其传递Method对象和原始的调用参数。
+注意到下面的代码中，所有的代理操作其实都是在二分那一行代码里出现的。即操作的时候调用了invoke方法，并且用invoke方法输出了当前执行到这个代理上的操作的名字，实在是挺nb的。
+
 ```java
 
 import java.lang.reflect.*;
@@ -491,7 +504,46 @@ class TraceHandler implements InvocationHandler
         return m.invoke(target,args);
     }
 }
+/*
+500.compareTo(386)
+250.compareTo(386)
+375.compareTo(386)
+437.compareTo(386)
+406.compareTo(386)
+390.compareTo(386)
+382.compareTo(386)
+386.compareTo(386)
+386.toString()
+386
+*/
 ```
+代理的意义
+>我们为什么要引入java的代理，除了当前类能够提供的功能外，我们还需要补充一些其他功能。
+最容易想到的情况就是权限过滤，我有一个类做某项业务，但是由于安全原因只有某些用户才可以调用这个类，此时我们就可以做一个该类的代理类，要求所有请求必须通过该代理类，由该代理类做权限判断，如果安全则调用实际类的业务开始处理。
+可能有人说为什么我要多加个代理类？我只需要在原来类的方法里面加上权限过滤不就完了吗？
+在程序设计中有一个类的单一性原则问题，这个原则很简单，就是每个类的功能尽可能单一。为什么要单一，因为只有功能单一这个类被改动的可能性才会最小。
+如果你将权限判断放在当前类里面，当前这个类就既要负责自己本身业务逻辑、又要负责权限判断，那么就有两个导致该类变化的原因，现在如果权限规则一旦变化，这个类就必需得改，显然这不是一个好的设计。
+
+
+如果将控制器定义一个接口，然后飞船直接实现这个接口，那跟之前飞船直接继承自控制器没有本质的区别，之所以不这样做正是如楼主所说的，控制器是飞船的一部分，不能说飞船是一个控制器，因此这里用继承不合适，用接口的话语义上可能更合适一点，但是接口的名字应该改成Controllable(可控制的)更符合语义。说白了就是你可以实现接口，这是你设计上的自由。但是这里可能用组合的方式更好。即有一个类SpaceShip（飞船），它包含一个成员SpaceShipController（控制器），然后飞船能做的控制上的事情就都可以通过这个控制器来做。
+这里说的代理可以实现部分接口是根据具体场景来的，比如说现在你有一个控制器SpaceShipController，这个控制器提供了很多的功能，但实际你的SpaceShip可能并不需要这么多功能，如果你用SpaceShipController作为你飞船的成员变量的话，你的飞船里面就很有可能会去用到那些本来不需要的功能，由于你在SpaceShip里面确实能通过SpaceShipController去访问到那些功能，这可能不是一个好的设计原则，你实际上并不需要对飞船暴露那么多功能，这里你就可以使用一个代理SpaceShipControllerDelegation,用来代理那个SpaceShipController,然后在代理中只提供你需要的一些方法，最后在SpaceShip中不要用SpaceShipController作为成员变量，而是直接用那个代理作为成员变量，这样的话你的SpaceShip里面就访问不到SpaceShipController中的一些方法了。之所以说代理类能有更多的控制能力是说你代理类中调用方法的时候目前是用
+```java
+public void down(int velocity) {
+        controls.down(velocity);
+}
+```
+你可以在该方法实现的前后加上一些逻辑，这样就提供了更多的控制能力。比如改成：
+```java
+public void down(int velocity) {
+        if(velocity < 10) {
+        controls.down(velocity);
+        }
+}
+```
+这样即代表velocity<10的时候才能执行down的操作，这就是所谓的代理可以增加更多的控制能力
+
+这里说的代理应当是代理的...另一种分支的应用，看一下就好。总得说，就是为其他对象提供一种代理以控制对这个对象的访问。
+即静态代理。上面的newProxyInstance则是动态代理。
 
 --------------------------------------------------------------
 异常
@@ -519,3 +571,417 @@ class TraceHandler implements InvocationHandler
 + 试图根据给定的字符串查找Class对象，而字符串表示的类并不存在
 
 -------------------------
+在遇到下述4种情况应该抛出异常：
+1. 调用一个抛出受查异常的方法，即方法本身已经throw了。
+2. 运行过程中发生错误，利用throw抛出一个受查
+3. 程序出现错误
+4. 虚拟机和库出现的内部错误
+前两种则必须告诉调用该方法的程序员可能会抛出异常。
+即我们只关心受查异常，人家就应该被查，非受查请你更多的应该修正你的程序。
+非受查要么不可控(Error)，要么应该避免。
+
+>如果超类方法没有抛出异常，子类也不能。子类的受查异常不能比超类更通用。
+
+java中的没有throws说明符的方法将不能抛出任何受查异常。
+然而c++中的throw被抛弃了，换成了noexcept，即不抛出任何异常
+
+-------------------
+创建异常类是很正常的事情，派生于Exception（或者其子类）的类，应当有两个构造器，一个是默认的，一个带有详细描述信息
+
+抛出很容易，因为抛出之后就不用了管了，捕获就会更复杂。
+try-catch
+如果try语句块中的任何代码抛出了一个catch子句中说明的异常类，那么跳过try，执行catch。无异常跳过catch。
+那么，什么时候该抛出，什么时候该捕获呢？
+应该捕获那些知道如何处理的异常，将不知道怎么处理的继续传递。
+
+可以抛出异常链，指的是捕获一个异常，然后用原始异常设置为新异常的原因，而且还能回到原始异常，这是一种包装技术，可以让用户抛出子系统的高级异常。
+比如如果在一个方法中发生了一个受查异常，而不允许抛出它，包装技术就很有用。
+
+抛出异常时会有关于方法之前一些资源的问题，这时候就需要使用finally子句。
+不管是否有异常被捕获，finally子句中的代码都会被执行。
+```java
+InpuStream in = new FileInputStream(...);
+try
+{
+    //1
+    code..might throw exceptions
+    //2
+}
+catch
+{
+    //3
+    show error message
+    //4
+}
+finally
+{
+    //5
+    in.close();
+}
+//6
+```
+1. 代码无异常，1,2,5,6
+2. 抛出一个在catch中捕获的异常。1)如果catch子句没有抛出异常，将执行1,3,4,5,6；2)如果catch抛出了异常，则为1,3,5
+3. 代码抛出了异常，却不是catch捕获的，这时是1,5
+try可以无catch，只有finally
+
+**强烈建议解耦合try/catch 和try/finally 语句块**，可以提高代码清晰度。
+```java
+InpuStream in = ...;
+try
+{
+    try
+    {
+        code that might throw exceptions
+    }
+    finally
+    {
+        in.close();
+    }
+}
+catch(IOException e)
+{
+    show error message
+}
+```
+内部try就是确保关闭输入流，外部try就是报告错误。
+当finally中包含了return语句时，会有意想不到的结果
+```java
+public static int f(int n)
+{
+    try
+    {
+        int r = n * n;
+        return r;
+    }
+    finally
+    {
+        if(n == 2) return 0;
+    }
+}
+```
+如果调用f(2)，那么try语句块的结果是r = 4.然而在真正返回前还要执行finally，0覆盖了4
+
+但是finally可能会在里面继续抛出异常，这个时候事情就麻烦了起来。
+于是有了带资源的try。
+```java
+try(Scanner in = new Scanner(new FileInputStream("/usr/sharedict/words"),"UTF-8");
+    PrintWriter out = new PrintWriter("out.txt"))
+{
+    while(in.hasNext())
+        out.println(in.next().toUpperCase());
+}
+```
+
+分析堆栈轨迹元素
+```java
+Throwable t = new Throwable();
+StackTraceElement[] frames = t.getStackTrace();
+for(StackTraceElement f : frames)
+    System.out.println(f);
+```
+关于异常，你应该知道...
+1. 异常不能代替简单的测试，效率天差地别（也就100倍起步吧，我也不知道这个是常数级别的大还是复杂度上的大，应该是都大）
+基本规则是，只在异常的时候使用异常机制。
+2. 不要过分细化异常。
+把每一条语句分装在独立的try语句块之中会使得代码量急剧膨胀。
+3. 利用异常层次结构
+不要只抛出RuntimeException异常，寻找更加适当的子类或者创建自己的异常类。
+不要只捕获Thowable异常，否则，会使程序代码更难读、更难维护。
+考虑受查和非受查异常的区别。
+将一种异常转换为另一种更适合的异常时不要犹豫。
+4. 不要压制异常
+在Java中，往往强烈地倾向关闭异常。即在catch中什么也不做。
+5. 苛刻比放任更好
+6. 不要羞于传递异常（5、6可以归纳为早抛出，晚捕获。）
+
+-----------------------
+使用断言。
+断言机制允许在测试期间向代码中插入一些检查语句。当代码发布时，这些插入的检测会被自动的移走。
+（就是说可以随时启用关闭，只需要编译指令即可。注意，这不需要重新编译，而是类加载器的功能。
+c语言的assert宏将断言中的条件转换成一个字符串，失败时这个字符串就会被打印出来，java中条件不会自动成为错误报告，必须用assert 条件:表达式;后面的表达式来产生消息字符串。
+
+什么时候使用断言？
++ 断言失败是致命的，不可恢复的错误
++ 断言检查只用于开发和测阶段（「在靠近海岸时穿上救生衣，但在海中央时就把救生衣丢掉吧」）
+
+断言是一种测试和调试阶段所使用的战术性工具; 而日志记录是一种在程序的整个生命周期都可
+以使用的策略性工具
+
+------------------------------
+日志就是为了解决在有问题的代码中插入一些System.out.println方法调用来观察程序运行的麻烦问题而生的。日志有这些好处：
++ 可以很容易的取消或不取消日志
++ 可以简单的禁止日志记录的输出
++ 可以被定向到不同处理器
++ 日志记录可以采用不同的方式格式化
++ 日志记录器和处理器可以对记录过滤
++ 可以使用多个日志记录器
+
+
+不得不说终于有一个这种东西了。我其实一直...需要一个这种东西的，不知道能让我以前打acm省下多少时间啊哎，那就该早学java的。嘤嘤嘤。c++的日志不是标准库的，但是也有不少好用的，应该是区别于不同应用平台需求之类的。主要是这样一个思想。
+
+未被任何变量引用的日志记录器可能会被垃圾回收。建议用一个静态变量存储日志记录器的一个引用。
+
+记录日志的常见用途是记录那些不可预料的异常，典型的是
+```java
+//void throwing(String className, String methodName, Throwable t)
+//void log(Level l, String message, Throwable t)
+if(...)
+{
+    IOException exception = new IOException("...");
+    logger.throwing("com.mycompany.mylib.Reader","read",exception);
+    throw exception;
+}
+//还有
+try
+{...}
+catch(IOException e)
+{
+    Logger.getLogger("com.mycompany.myapp").log(Level.WARNING, "Reading image", e);
+}//里面这个com.mycompany.mylib就是个具有层次结构的名字而已。
+```
+
+剩下的具体细化的可以先查了吧。比如如何过滤，如果配置，如何格式化，我们总结一下：
+1. 为一个简单的应用程序，选择一个日志记录器，并把日志记录器命名为与主应用程序包一样的名字，例如，com.mycompany.myprog，可以调用这样的方法得到日志记录器
+```java
+private static final Logger looger = Logger.getLogger("com.mycompany.myprog");
+```
+2. 在应用程序中安装一个更适合的默认的日志配置。
+```java
+if(System.getProperty("java.util.logging.config.class") == null
+    && System.getProperty("java.util.logging.config.file") == null)
+{
+    try
+    {
+        Logger.getLogger("").setLevel(Level.ALL);
+        final int LOG_ROTATION_COUNT = 10;
+        Handler handler = new FileHandler("%h/myapp.log", 0, LOG_ROTATION_COUNT);
+        // Looger.getLogger("").addHandler(handler)
+    }
+    cathc(IOException e)
+    {
+        logger.log(Level.SEVERE, "Can't create log file handler", e);
+    }
+}
+```
+
+3. 牢记INFO、WARNING、SEVERE的消息将显示到控制台上，程序员想要的日志记录可以设定为FINE。
+
+-------------------
+调试的方法：
+1. 自定义类应当覆盖toString方法，以提供有用的类信息。（指Logger.getGlobal().info或者System.out.println)
+2. 每个类中单独放置一个单独的main方法，对每个类进行单元测试
+3. JUnit
+4. 日志代理 如果Random类的nextDouble方法出了问题，可以以匿名子类的实例形式创建一个代理对象。
+```java
+Random generator = new
+    Random()
+    {
+        public double nextDouble()
+        {
+            double result = super.nextDouble();
+            Logger.getGlobal().info("nextDouble: " + result);
+            return result;
+        }
+    };
+```
+当调用nextDouble()方法时，就会产生一个日志信息。
+5. 利用Throwable类提供的printStackTrace方法，获得异常对象中的堆栈情况
+```java
+try
+{
+    ...
+}
+catch(Throwable t)
+{
+    t.printStackTrace();
+    throw t;
+}
+//也可以插入下面这句来获得堆栈轨迹
+Thread.dumpStack();
+```
+6. 堆栈情况可以发送到文件中(`printStackTrace(PrintWriter s)`)
+7. 将错误信息保存在文件中(`java MyProgram 2>errors.txt`)
+8. 让非捕获异常的堆栈轨迹出现在System.err中并不理想。比较好的方法可以调用静态的Thread.setDefalutUncaughtExceptionHandler方法
+```java
+Thread.setDefaultUncaughtExceptionHandler(
+    new Thread.UncaughtExceptionHandler()
+    {
+        public void uncaughtException(Thread t, Throwable e)
+        {
+            save information in logfile
+        }
+    });
+```
+9. 用-verbose标志启动虚拟器来观察类的加载过程
+10. -Xlint选项可以告诉编译器对一些普遍容易出现的代码问题进行检查
+11. 可以找出虚拟机的操作系统进程ID，运行jconsole程序
+12. 用jmap实用工具获得堆的转储
+13. -Xprof运行虚拟机
+
+（-X选项是没有正式支持的选项。
+
+-------------------------------------
+泛型
+
+```c++
+g(f<a,b>(c))
+```
+如果c++将类型参数放在方法名的后面，有可能导致语法分析的歧义，比如这里可以理解成两个布尔值调用g或者是f的结果调用g。
+那么java呢？java会放到前面，所以根本不这么写，而是
+```java
+g(<a,b>f(c));
+```
+但是大部分泛型方法的类型引用没有问题，所以编译器有足够的信息可以推断出调用的方法，所以一般这就省略了。
+
+限定类型用&分割，类型变量用逗号分割
+
+限定可以多借口，但是最多一个类。类限定必须是列表中的第一个
+
+在虚拟机中，用参数类型和返回类型来确定方法签名，因此，编译器可以产生两个仅返回类型不同的方法字节码，虚拟机能正确处理这种情况。
+说这个干什么呢，是因为有个神奇的东西叫桥类型。
+泛型方法和多态冲突的情况会被编译器自动生成桥类型来纠正。
+而且桥方法还可以在一个方法覆盖另一个方法时指定一个更严格的返回类型（因为这个例子短，所以放这个例子了，想不通泛型的话自己查或者多想一下）
+```java
+public class Employee implements Cloneable
+{
+    public Employee clone() throws CloneNotSupportedException{...}
+}
+```
+实际上，Employee类有两个克隆方法
+```java
+Employee clone()//define above;
+Object clone()//synthesized bridge method,overrides Object.clone
+```
+下面就是桥了，调用了新定义的方法。
+
++ 虚拟机中无泛型，只有普通的类和方法（他们被擦除了，只是最后会做强转而已）
++ 所有类型参数用限定类型体寒
++ 桥方法被合成来保持多态
++ 保持类型安全，必要时插入强制类型转换
+
+    有句话是这么说的：Object变量只能用于作为各种值的通用持有者。。。
+    经过了一套实验，我发现数据是不会丢的，方法却是不会有的。
+    和我的记忆一样，但我还真就找不到那句话了。
+    所以强转不会丢数据(精度除外)
+这样的话很多东西都解释的通了，同时，类型擦除的特性导致出了各种限制:
++ 不能用基本类型实例化类型参数
+很显然，基本类型没有Object这样的祖宗。
++ 运行时类型查询只适用于原始类型
+很显然，每个对象总有一个特定的非泛型类型。
++ 不能创建参数化类型的数组
+指的是
+```java
+Pair<String>[] table = new Pair<String>[10];//Error
+```
+主要是擦除之后table是`Pair[]`类型，可以把它转换为`Object[]`,数组会记住它的元素类型，如果试图存其他的元素（指String），就会出现异常。更绝的是如果你放泛型进去是会被擦除拯救，通过数组存储检查，但仍会在其他地方导致类型错误。当然，声明`Pair<String>[]`的变量是合法的，不能用`new Pair<String>[10]`去初始化它就是了
+如果你一定要这种东西...使用`ArrayList:ArrayList<Pair<String>>`
+
++ Varargs警告
+向可变参数的方法传递一个泛型类型...会得到一个警告（但是没有问题的，只要你写的是对的...）
+
++ 不能实例化类型变量
+即
+```java
+new T(...),new T[...] or T.class这样表达式中的类型变量
+public Pair() {first = new T(); second = new T();}//Error！
+```
+这意味着new Object()
+最好的解决办法是让调用者提供一个构造器表达式
+```java
+Pair<String> p = Pair.makePair(String::new);
+```
+makePair方法接受一个`Supplier<T>`，这是一个函数式接口，表示一个无参数且返回类型为T的函数
+```java
+public static <T> Pair<T> makePair(Supplier<T> constr)
+{
+    return new Pair<>(constr.get(), constr().get());
+}
+```
++ 不能构造泛型数组
+```java
+public static <T extends Comparable> T[] minmax(T[] a) {T[] mm = new T[2]; ...};//ERROR!
+```
+类型擦除会让这个方法永远构造`Comparable[2]`数组
+如果数组仅仅作为一个类的私有实例域，就可以先声明为`Object[]`,，然后在获取元素时进行类型转换
+```java
+public class ArrayList<E>
+{
+    private Object[] elements;
+    ...
+    @SuppressWarnings("unchecked") public E get(int n) {return (E) elements[n]; }
+    public void set(int n,E e) { elements[n] = e; }//no cast needed
+}
+```
+强制类型转换`E[]`是个假象，而类型擦除使其无法察觉。
+由于minmax返回`T[]`数组，使这一技术无法施展。
+最好让用户提供一个数组构造器表达式
+```java
+public static <T extends Comparable> T[] minmax(IntFunction<T[]> constr,T...a)
+{
+    T[] mm = constr.apply(2);
+}
+String[] ss = ArrayAlg.minmax(String[]::new,"Tom","Dick","Harry");
+```
++ 泛型类的静态上下文中类型变量无效
+不能在静态域或方法中引用类型变量（T）
++ 不能抛出或捕获泛型类的实例
+甚至扩展Throwable都是不合法的。
+不过异常规范里是可以使用类型变量的
+```java
+public static <T extends Throwable> void doWork(T t) throws T //ok
+{
+    try
+    {
+
+    }
+    catch(Throwable realCause)
+    {
+        t.initCause(realCause);
+        throw t;
+    }
+}
+```
++ 消除对受查异常的检查
+```java
+//就用上面那个
+Block.<RuntimeException> throwAs(t);
+```
+编译器就会认为t是一个非受查异常。这有什么意义呢？正常情况下，你必须捕获线程某方法中的所有受查异常，把他们包装到非受查异常中，因为该方法声明为不任何受查异常
+通过泛型类、擦除和@SuppressWarnings注解，就能消除Java类型系统中的部分基本限制。
++ 注意擦除后的冲突
+简单的冲突就
+```java
+public class Pair<T>
+{
+    public boolean equals(T value) { return first.equals(value) && second.equals(value);}
+}
+```
+因为把string擦了之后就是object了，然后就是一模一样的equals冲突。重命名就完事了。
+复杂的则牵扯到一个原则：需要强行限制一个类或类型变量不能同时成为两个接口类型的子类，而这两个接口是同一接口的不同参数化。
+```java
+class Employee implements Comparable<Employee> { ... }
+class Manager extends Employee implements Comparable<Manager> { ... } //Error!
+```
+Manager会实现`Comparable<Employee> 和 Comparable<Manager>`，这是同一接口的不同参数化。
+
+------------
+泛型的继承
+无论S和T有什么关系，通常`Pair<S>和Pair<T>`没有什么联系。
+简单的例子，给Manager的Pair强转之后加一个Employee，这一对就很怪异了（当然是不可以的）
+虽然数组可以这么做(指强转过去)，但是数组会在存储的时候抛出异常（指数组有特别的保护)
+泛型可以扩展，扩展就可以转换，但是只能是`A<M>到B<M>`，而不能是`A<M>到A<E> or B<E>`。
+可以将参数化类型转化为一个原始类型，之后会正常产生类型错误。
+
+-----------------------------
+通配符类型
+固定的泛型类型使用起来并没有那么令人愉悦。于是java的设计者发明了一种巧妙的东西。
+```java
+Pair<? extends Employee>
+```
+表示任何泛型Pair类型，它的类型参数是Employee的子类，如`Pair<Manager>`，但不是`Pair<String>`
+假设现在用Manager初始化一个pair，然后赋给这个东西,再setFirst,会有问题嘛?
+你会发现出现了Compile-time Error.
+于是你惊讶的发现setFirst不行,getFirst却可以,神奇的产生了分离.
+
+通配符限定还可以值顶超类型限定,即? super Manager.这个通配符限制为Manager的所有超类型.
