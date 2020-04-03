@@ -117,6 +117,7 @@ public void giveGoldStar(){
 静态方法是没有this参数的方法，这也和c++相同
 但是语法书写上略有不同。在c++中，使用::操作符访问自身作用域之外的静态域和静态方法，如Math::PI。其实等到第三次c++重用static关键字，含义与之前完全不同，解释为属于类且不属于类对象的变量和函数，就和java相同了。
 静态方法有一种常见的用途，静态工厂方法构造对象。
+静态方法不能向对象实施。
 
 -------------------------
 每一个类可以有一个main方法。
@@ -134,6 +135,8 @@ Java总是采用按值调用，方法不能修改传递给它的任何参数变�
 c++和java一样可以直接初始化实例域（成员变量）
 
 c++和java一样可以在一个构造器里调用另一个构造器了，不过可能需要一些using和初始化列表的配合，语法不太一样。java是this(...)。
+
+java还可以有初始化块，可以有多个块，注意如果加static的话，那么它就会在类加载的时候调用，并只初始化这一次。先调用父类的static{}再是子类。构造方法就是这样的（。
 
 -------------------
 调用构造器的具体处理步骤：
@@ -434,7 +437,7 @@ Runnable在java中很常用
 简单地说，static内部类（没有这种指针）与c++的嵌套类很类似。
 
 内部类既可以访问自身的数据域，也可以访问创建它的外围类对象的数据域
-使用外围类引用的正规语法是*OuterClass*.this
+使用外围类引用的正规语法是*OuterClass*.this.xxx方法
 内部类中声明的所有静态域都必须是final。内部类不能有static方法。
 
 内部类的语法非常复杂，甚至还有匿名内部类。
@@ -984,4 +987,251 @@ Pair<? extends Employee>
 你会发现出现了Compile-time Error.
 于是你惊讶的发现setFirst不行,getFirst却可以,神奇的产生了分离.
 
-通配符限定还可以值顶超类型限定,即? super Manager.这个通配符限制为Manager的所有超类型.
+通配符限定还可以值顶超类型限定,即? super Manager.这个通配符限制为Manager的所有超类型.注意带超类型限定的通配符不能使用返回值，可以为方法提供参数
+一个例子：经理数组，想把奖金最低的和最高的经理放在一个Pair对象中，Pair的类型是什么？Employee是合理的，Object也是合理的。
+```java
+public static void minmaxBonus(Manager[] a,Pair<? super Manager> result)
+{
+    if(a.length == 0) return;
+    Manager min = a[0];
+    Manger max = a[0];
+    for(int i = 1; i < a.length; i++)
+    {
+        if(min.getBonus() > a[i].getBonus()) min = a[i];
+        if(max.getBonus() < a[i]Bonus()) max = a[i];
+    }
+    result.setFirst(min);
+    result.setSecond(max);
+}
+```
+
+```java
+public static <T extends Comparable<T>> T min(T[] a)
+//显然存在一种
+public static <T extends Comparable<? super T>> T min(T[] a)
+```
+子类型限定的另一种常见用法是作为一个函数式接口的参数类型，比如Collection接口有一个方法，可以删除所有给定谓词条件的元素
+```java
+defalut boolean removeIf(Predicate<? super E> filter)
+ArrayList<Employee> staff = ...;
+Predicate<Object> oddHashCode = obj ->obj.hashCode() % 2 != 0;
+staff.removeIf(oddHashCode);
+```
+可以看到，传入的是`Predicate<Object>`
+
+无限定通配符，例如`Pair<?>`，它和Pair本质不同在于：*可以用任意Object对象调用原始Pair类的setObject方法*。这种类型对于许多简单的操作非常有用，比如测试一个pair是否包含一个null引用
+```java
+public static boolean hasNulls(Pair<?> p)
+{
+    return p.getFirst() == null || p.getSecond() == null;
+}
+//可以看成是下面的语法糖
+public static <T> boolean hasNulls(Pair<T> p)
+{
+    ...
+}
+```
+通配符捕获就是通过某种方式使得`?`的类型被确定的方法。比如如果写一个`public static void swap(Pair<?> p)`，不能`? t`，所以需要写一个`public static<T> void swapHelper(Pair<T> p)`来捕获这个通配符。这个例子的通配符不是必要的，但有时候，通配符捕获是不可避免的：
+```java
+public static void maxminBonus(Manager[] a, Pair<? super Manager> result)
+{
+    minmaxBonus(a,result);
+    PairAlg.swap(result);//ok--swaphelper captures wildcard type
+}
+```
+注意通配符捕获有很多的限制才会合法，编译器必须确信通配符表达的是单个、确定的类型。
+
+------------------------------
+循环的多种方式：
+```java
+Iterator<String> iter = c.iterator();
+while(iter.hasNext()) {String element = iter.next();}
+//对于所有实现了public interface Iterable<E>接口的对象
+iterator.forEachRemaining(element -> do something with element);
+for(String element:t){}
+```
+
+java集合类库中的迭代器和其他类库中的迭代器在概念上有着重要的区别。c++的stl中，迭代器是根据数组索引建模的，可以直接查看指定位置上的元素，不需要查找元素就可以将迭代器向前移动一个位置。但是Java迭代器不是。它的查找和位置变更时相连的。**可以将java迭代器认为是位于两个元素之间**。
+remove可以删除上次next方法返回的元素。（没有之前next的remove是不合法的）
+
+集合类的基本借口是Collection接口，里面其实有很多的方法。
+实际上有两种有序集合，数组支持的有序集合可以快速随机访问，适合用list并提供一个整数索引来访问。链表尽管也有序，但是随机访问很慢，应使用迭代器遍历。（可以用instanceof RandomAccess是否true测试是否支持高校访问）
+java和c的list含义完全不一样有点难过吧
+java              c++
+ArrayList -- vector(是真的，是数组实现的)
+LinkedList -- 双向链表
+ArrayDeque -- 双向队列(Deque)
+HashSet -- hash_set
+TreeSet -- set
+TreeMap -- map(都是红黑树)
+HashMap -- hash_map
+EnumSet 
+LinkedHashMap -- Hashmap+双向链表，可以维护插入顺序
+WeakHashMap -- key引用对象可能被回收，回收后即删除该键值对
+IdentityHashMap -- 严格相等(==而非equals)
+PriorityQueue -- 、
+
+为了避免发生并发修改的异常，请遵循简单规则：可以给句需要给容器附加许多的迭代器，但是只读。单独附加一个既读又写的迭代器。
+集合可以跟踪改写操作次数，每个迭代器可以维护一个独立的计数值，不一致抛出异常。（这个跟踪不会算set方法。）
+使用链表的唯一理由是尽可能减少列表中插入删除的代价（废话
+不需要同步时用ArrayList，Vector是同步的，
+```java
+Set<K> keySet();
+Collection<V> values()
+Set<Map.Entry<K,V>> entrySet();
+```
+注意Entry是个接口，不能像c++那样实例化
+所以说还是Pair好用？
+
+-------------------------------------------------------
+视图与包装器
+视图是这样一种集合：keySet方法返回一个实现Set接口的类对象，这个类的方法对原映射进行操作。
+将集合类对象中的数据重新映射到一个数据集合中，但是这个集合不是以物理上存在的对象实体，而是再映射，物理地址不变，访问数据的接口变了。
+Arrays类的静态方法asList将返回一个包装了普通java数组的List包装器，这样就可以将数组直接传递给列表或集合参数的方法了。
+注意返回的对象不是ArrayList。而是一个带有访问底层数组get和set方法的视图对象。
+通常，视图有一些局限性，即只可以读、无法改变大小、支持删除而不支持插入。
+返回空类型有的时候很有用。`Set<String> deepThought = Collections.emptySet()`
+不可修改视图、同步视图、受查视图。
+
+----------------------------
+反射
++ 在运行时分析类的能力
++ 在运行时查看对象，例如编写一个toString方法供所有类使用
++ 实现通用的数组操作代码
++ 利用Method对象，这个对象很像C++中的函数指针
+
+有一个专门的Java类访问java为所有对象维护的信息，他就是Class
+最常用的方法就是getName，会返回累的名字
+静态方法forName获得类名对应的Class对象，注意提供异常的情况
+如果T是java类型，T.class代表匹配的类对象
+一个Class对象实际上表示的是一个类型，而这个类型未必是一种类，T.class的类型其实就是`Class<T>`
+`class.getDeclaredConstructor().newInstance()`可以用来动态的创建一个类的实例，调用默认的构造器
+
+Field,Method,Constructor用于描述类的域、方法和构造器。其中，Modifier类可以分析getModifier方法返回的值以描述public和static这样的修饰符情况
+注意，get和getDeclare前缀是不同的，比如geteDeclareMethods返回Class对象表示的类和接口的所有已声明的方法数组，不包括父类继承和接口实现的方法。getMethods返回当前Class对象表示的类或接口的所有公有成员方法对象数组，包括已声明的和从父类继承或实现接口的方法。
+
+如果一个java没有受到安全管理器的控制，就可以覆盖访问控制，setAccessible可以做到。
+我们在这里提供一个通用的toString方法，可供任意类使用的通用toString方法。
+
+```java
+//import...
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Field;
+import java.lang.reflect.Array;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+
+public class t8
+{
+    public static void main(String[] args)
+    {
+        ArrayList<Integer> squares = new ArrayList<>();
+        for(int i = 1; i <= 5; i++){squares.add(i * i);}
+        System.out.println(new ObjectAnalyzer().toString(squares));
+    }
+    static class ObjectAnalyzer
+    {
+        private ArrayList<Object> visited = new ArrayList<>();
+        /**
+         * Converts an object to a string representation that lists all fields
+         * @param obj an object
+         * @return a string with the object's class name and all field names and
+         * values
+         */
+        public String toString(Object obj)
+        {
+            if(obj == null) return "null";
+            if(visited.contains(obj)) return "...";
+            visited.add(obj);
+            Class cl = obj.getClass();
+            if(cl == String.class) return (String) obj;
+            if(cl.isArray())
+            {
+                String r = cl.getComponentType() + "[]{";
+                for(int i = 0; i < Array.getLength(obj); i++)
+                {
+                    if (i > 0) r += ",\n";
+                    Object val = Array.get(obj,i);
+                    if(cl.getComponentType().isPrimitive()) r += val;
+                    else r += toString(val);
+                }
+                return r + "}";
+            }
+
+            String r = cl.getName();
+            //
+            do
+            {
+                r += "[";
+                r += cl.getName() + " . ";
+                Field[] fields = cl.getDeclaredFields();
+                AccessibleObject.setAccessible(fields, true);
+                //get the names and values
+                for(Field f : fields)
+                {
+                    if(!Modifier.isStatic(f.getModifiers()))
+                    {
+                        if(!r.endsWith("[")) r += ",";
+                        r += f.getName() + "=";
+                        try
+                        {
+                            Class t = f.getType();
+                            Object val = f.get(obj);
+                            if(t.isPrimitive()) r += val;
+                            else r += toString(val);
+                        }
+                        catch(Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                r += "]";
+                cl = cl.getSuperclass();
+            }
+            while(cl != null);
+            return r;
+        }
+    }   
+}
+/**java.uti1.ArrayList[elementData=class java.1ang.Object[] {java.1ang.Integer[value=1][][],
+ * java.1ang.Integer[value=4][][],java.1ang.Integer[value=9][][],java.1ang.Integer[value=16][][],
+ * java.1ang.Integer[value=25][][],null,null,null,null.null},size=5][modCount=5][][]
+ * /
+```
+不要对那些`[][]`感到惊奇。Integer的超类是Number，Number的超类是Object。最后那里则是`[AbstractCollection][Object]`
+
+如果我们想实现泛型数组，我们也需要反射（不用泛型的话）。如果你这么写：
+```java
+public static Object[] badCopyOf(Object[] a, int newLength)//not useful
+{
+    Object[] new Array = new Object[newLength];
+    Sstem.arraycopy(a,0,newArray,0,Math.min(a.length, newLength));
+    return newArray;
+}
+```
+然而这个代码在使用返回的数组时会遇到一个问题：它返回的是`(Object[])`，而且是创建的时候就是Object的数组，那么它无法转换成其它任何的数组。永远记住，一个其他类型数组临时转成`Object[]`，然后再转回来是可以的，但一个从开始就是`Object[]`就很糟糕了。为此需要java.lang.reflect包中Array类中的一些方法，比如newInstance。
+```java
+public static Object goodCopyof(Object a, int newLength)
+{
+    Class cl = a.getClass();
+    if(!cl.isArray()) return null;
+    Class componentType = cl.getComponentType();
+    int length = Array.getLength(a);
+    Object newArray = Array.newInstance(componentType, newLength);
+    System.arraycopy(a, 0, newArray, 0, Math.min(length, newLength));
+    return newArray;
+}
+//
+String[] b = {"1","2","3"};
+b = (String[]) goodCopyof(b,10);
+```
+建议有必要才使用Method对象，最好使用接口以及lambda。因为编译器对于invoke等等方法的检查非常弱，而且他们非常慢。
+继承的设计技巧：
+1. 将公共操作和域放在超类
+2. 不要使用受保护的域
+3. 用继承实现is-a关系
+4. 除非所有继承的方法都有意义，否则不要使用继承
+5. 在覆盖方法时，不要改变预期的行为
+6. 使用多胎，而非类型信息
+7. 不要过多地使用反射
