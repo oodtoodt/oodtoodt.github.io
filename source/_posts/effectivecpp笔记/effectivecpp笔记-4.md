@@ -7,6 +7,7 @@ tags:
 
 categories:
 - c++
+- book_notes
 
 ---
 

@@ -8,6 +8,8 @@ tags:
 
 categories:
 - c++
+- book_notes
+
 ---
 
 这里是膜拜空祖和催更的分界线

@@ -204,7 +204,8 @@ A situation that is volatile is likely to change suddenly and unexpectedly.
 + 于序列上在另一个对volatile对象访问之前
 （这里其实很像原子操作的某些规则，但是volatile访问的序列性是在单线程执行的前提）
 ##### 常见的错解
-错解：用volatile修饰while的退出flag。应该用atomic
+错解：用volatile修饰while的退出flag。
+应该用atomic
 volatile 本质是让编译器在每次遇到被它修饰的变量时，不能根据代码上下文假设它的状态。注意是「让『编译器』」。所以编译器不会对它做某些类型的优化，也不会交换两个 volatile 访问的顺序。但是这不保证 CPU 执行时不会交换顺序。
 但是还是要结合一下cpu的情况，根据具体环境给一个可用不可用的范围约束。
 

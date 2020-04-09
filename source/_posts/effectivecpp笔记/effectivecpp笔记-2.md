@@ -7,6 +7,8 @@ tags:
 
 categories:
 - c++
+- book_notes
+
 ---
 
 写着写着就成了摘抄了，这书确实...内容充实

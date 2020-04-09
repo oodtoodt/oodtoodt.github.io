@@ -7,6 +7,8 @@ tags:
 
 categories:
 - lua
+- book_notes
+
 ---
 
 整理一下关于lua的笔记

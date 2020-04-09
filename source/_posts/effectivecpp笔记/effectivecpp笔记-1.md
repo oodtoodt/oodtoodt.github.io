@@ -7,6 +7,8 @@ tags:
 
 categories:
 - c++
+- book_notes
+
 ---
 
 这书确实好,这里是第一、二章，从法则01至12
