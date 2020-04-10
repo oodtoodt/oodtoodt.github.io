@@ -4,6 +4,12 @@ date: 2020-04-08 11:04:37
 tags:
 ---
 
+我放眼望去，满眼都是Auto几个大字。
+大抵就是用的时候查一下，还不会就Stack Overflow请。
+<!--more-->
+
+---
+
 [安装Spring Boot]<-安装maven<-安装choco
 准确的说只需要jdk和maven就行了
 写一份奇怪的pom.xml(Project Object Model),maven开始疯跑，最后success

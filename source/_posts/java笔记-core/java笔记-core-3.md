@@ -707,9 +707,357 @@ signalAll转换为signal最终会死锁。signal仅对一个线程解锁，如�
 你必须确保程序保证没有死锁。
 
 #### 线程局部变量
-#### 锁测试和超时
-#### 读写锁
-#### 为什么弃用stop和suspend
-### 阻塞队列
+在使用线程不安全的类时，结果可能会很混乱，可以使用同步或者在需要时构造一个局部SimpleDateFormat对象，不过这很浪费或开销很大。
+要为每个线程构造实例，可以使用：
+```java
+public static final ThreadLocal<SimpleDateFormat> dateFormat = 
+    ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
+```
 
+#### 锁测试和超时
+tryLock方法试图申请一个锁，成功获得锁就返回true，否则返回false，而且线程可以立即离开去做其他事情。
+if(mylock.tryLock(100,TimeUnit.MILLISECONDS))...
+lock方法不能被中断，如果一个线程在等待锁时被中断，中断线程在获得锁时一直被阻塞。如果死锁，那么lock方法就无法终止
+然而如果使用带超时参数的tryLock，那么线程如果在等待期间被中断，将抛出InterruptedException异常，这是非常有用的特性，允许程序打破死锁
+
+#### 读写锁
+如果很多线程从一个数据结构读取数据而很少修改其中的数据的话，ReentrantReadWriteLock类是非常有用的。允许读者线程共享访问是合适的。当然，写者线程必须是互斥访问的。
+```java
+private ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+private Lock readLock = rwl.readLock();
+private Lock writeLock = rwl.writeLock();
+
+public double getTotalBalance()
+{
+    readLock.lock();
+    try{...}
+    finally{ readLock.unlock(); }
+}
+
+public void transfer(...)
+{
+    writeLock.lock();
+    try{...}
+    finally{writeLock.unlock();}
+}
+```
+#### 为什么弃用stop和suspend
+初始的Java版本定义了一个stop方法用来终止一个线程，以及一个suspend方法用来阻塞一个线程直至另一个线程调用resume。stop和suspend方法有一些共同点：都试图控制一个给定线程的行为
+stop终止所有未结束的方法，包括run方法。当线程被终止，立即释放被他锁住所有对象的锁，这会导致对象处于不一致的状态。比如，TransferThread在从一个账户向另一个账户转账的过程中被终止，钱款已经转出却还没有转入目标账户。
+当线程要终止另一个线程时，无法知道什么时候调用stop方法是安全的，什么时候导致对象被破坏。
+
+如果用suspend方法挂起一个持有一个锁的线程，那么，该锁在恢复之前是不可用的。如果调用suspend方法的线程试图获得同一个锁，那么程序死锁：被挂起的等恢复，将其挂起的在等待获得（自己搞自己）。
+图形界面常常会出现这种情况。
+
+安全地挂起线程，引入变量suspendRequested并在run方法的某个安全的地方测试它。
+### 阻塞队列
+事实上，实际编程来说应尽可能远离底层结构。
+对于许多线程问题，可以通过一个或多个队列优雅且安全的方式将其形式化。生产者线程向队列插入元素，消费者线程则取出它们。
+当试图向队列添加元素而队列已满或是想从队列里移出元素而队列为空的时候，阻塞队列导致线程阻塞。在协调多个线程之间的合作时，阻塞队列是一个有用的工具。
+
+```java
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.*;
+
+//this is a concurrent java app which can print the keyword you want to search in multiple files.
+public class t9 {
+    private static final int FILE_QUEUE_SIZE = 10;
+    private static final int SEARCH_THREADS = 100;
+    private static final File DUMMY = new File("");
+    private static BlockingQueue<File> queue = new ArrayBlockingQueue<>(FILE_QUEUE_SIZE);
+    public static void main(String[] args)
+    {
+        try(Scanner in = new Scanner(System.in))
+        {
+            System.out.print("Enter bas dircetory (e.g. /opt/jdk1.8.0/src):");
+            String directory = in.nextLine();
+            System.out.print("Enter keyword(e.g. volatile) ");
+            String keyword = in.nextLine();
+
+            Runnable enumerator = () -> {
+                try{
+                    enumerate(new File(directory));
+                    queue.put(DUMMY);
+                }
+                catch(InterruptedException e)
+                {
+                }
+            };
+
+            new Thread(enumerator).start();
+            for(int i = 1; i <= SEARCH_THREADS; i++){
+                Runnable searcher = () -> {
+                    try
+                    {
+                        boolean done = false;
+                        while(!done)
+                        {
+                            File file = queue.take();
+                            if(file == DUMMY)
+                            {
+                                queue.put(file);
+                                done = true;
+                            }
+                            else search(file, keyword);
+                        }
+                    }
+                    catch(IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    catch(InterruptedException e)
+                    {
+                    }
+                };
+                new Thread(searcher).start();
+            }
+        }
+    }
+    
+    /**
+     * Recursively enumerates all files in a given directory and its subdirectories.
+     * @param directory the directory in which to start
+     */
+    public static void enumerate(File directory) throws InterruptedException
+    {
+        File[] files = directory.listFiles();
+        for(File file :files)
+        {
+            if(file.isDirectory()) enumerate(file);
+            else queue.put(file);
+        }
+    }
+
+    /**
+     * Searches a file for a given keyword and prints all matching lines;
+     * @param flie the file to search
+     * @param keyword the keyword search for
+     */
+    public static void search(File file, String keyword) throws IOException
+    {
+        try (Scanner in = new Scanner(file, "UTF-8"))
+        {
+            int lineNumber = 0;
+            while (in.hasNextLine())
+            {
+                lineNumber++;
+                String line = in.nextLine();
+                if(line.contains(keyword))
+                System.out.printf("%s:%d:%s%n",file.getPath(),lineNumber,line);
+            }
+        }
+    }
+}
+
+```
+枚举所有文件放到一个阻塞队列中，这个操作很快，如果没有上限的话很快就包含了所有找到的文件。
+我们启动了大量搜索线程。每个搜索线程从队列中取出一个文件，打开并打印带关键字的行。然后取下一个。
+我们用一个虚拟对象来终止。
+注意不需要显式的线程同步，队列数据结构就是我们的同步机制。
 ### 线程安全的集合
+【这里你可以熟悉这些集合，最重要的是熟悉函数式接口，熟悉lambda。
+这比学习并发集合本身的意义大得多
+#### 高效的映射、集合队列
+用Concurrent前缀修饰的HashMap、SkipListMap、SkipListSet和LinkedQueue
+集合返回弱一致性的迭代器。即迭代器不一定能反映出它们被构造之后的所有的修改，但他们不会将同一个值返回两次。
+#### 映射条目的原子更新
+注意到线程安全的数据结构会允许非线程安全的操作。但注意，像get之后put这种操作中，数据结构不会被破坏，但操作序列不是原子的，所以结果不可预知。
+```java
+do
+{
+    oldValue = map.get(word);
+    newValue = oldValue == null ? 1 :oldValue +1;
+} while (!map.replace(word, oldValue, newValue));
+//---------------------
+map.putIfAbsent(word,new LongAdder());
+map.get(word).increment();
+//---------------------
+map.putIfAbsent(word,new LongAdder()).increment();
+//-----------------------
+map.compute(word, (k,v) -> v == null ? 1 : v + 1);
+//-----------------------
+map.merge(word, 1L, (eV, nV) -> eV +nV)//existingValue newValue
+//-----------------------
+map.merge(word, 1L, Long::sum);
+//merge就是Java8提供的函数式接口
+```
+#### 对并发散列映射的批操作
+批操作无须冻结当前映射的快照，使用时需要将结果看作映射状态的一个近似
++ 搜索(search)为每个键或值提供一个函数，直到生成一个非null的结果
++ 规约(reduce)组合所有键或值
++ forEach
+每个操作都有4个版本：处理键(Keys)、处理值(Values)、处理键和值、处理Map.Entry对象(Entries)
+search的四个版本
+```java
+U searchKeys(long threshold, BitFunction<? super K, ? extends U> f)
+U searchValues(long threshold, BitFunction<? super K, ? extends U> f)
+U search(long threshold, BitFunction<? super K,? super V, ? extends U> f)
+U searchEntries(long threshold, BitFunction<Map.Entry<K,V>, ? extends U> f)
+```
+假设我们想找第一个出现次数超过1000次的单词，需要搜索键和值：
+```java
+String result = map.search(threshold, (k, v) -> v > 1000 ? k : null);
+```
+forEach方法有两种形式：第一个只为各个映射条目提供一个消费者函数，如：
+```java
+map.forEach(threshold,
+    (k, v) -> System.out.println(k + "->" + v));
+```
+第二种还有一个转换器函数，这个函数要先提供
+```java
+map.forEach(threshold,
+    (k, v) -> k + "->" + v,
+    System.out::println);
+```
+转换器可以作为一个过滤器，转换器返回null的就会被跳过了，例如只打印有大值的条目：
+```java
+map.forEach(threshold,
+    (k, v) -> v > 1000 ? k + " -> " + v : null,
+    System.out::println);
+```
+reduce操作用一个累加函数组合其输入，例如可以如下计算所有值的和：
+```java
+Long sum = map.reduceValues(threshold, Long::sum);
+```
+提供转换器也是可以的，可以如下计算最长的键的长度
+```java
+Integer maxlength = map.reduceKeys(threshold,
+    String::length,
+    Integer::max);
+```
+#### 并发集视图
+没有提供对应的HashSet，你应当用HashMap的newKeySet方法生成一个`Set<K>`,或者用包含默认值的keySet方法，这样新的集也可以增加元素
+
+#### 写数组的拷贝
+CopyOnWriteArrayList是线程安全的集合
+
+#### 并行数组操作
+Arrays类提供了大量并行化的操作，比如parallelSort排序、parallelSetAll方法用函数计算的值填充数组（接收元素索引）
+parallelPrefix，会用对应一个给定结合操作的前缀的累加结果替换各个元素，比如
+```java
+//[1,2,3,4....] 和 X
+Arrays.parallelPrefix(values,(x,y) -> x*y)
+//[1,1X2,1X2X3,1X2X3X4],注意每次左边的x都是新的前面的值
+```
+#### 较早的线程安全集合
+Vector和Hahstable，已经不用了。
+注意任何集合类都可以通过同步包装器变成线程安全的，但最好是使用concurrent包中定义的集合而不是同步包装器中的。
+
+### Callable和Future
+Runnable封装一个异步运行的任务，可以把它想象成一个没有参数和返回值的异步方法。
+Callable与Runnable类似，但是有返回值，Callable接口是参数化的类型，只有一个方法call
+```java
+public interface Callable<V>
+{
+    V call() throws Exception;
+}
+```
+Future保存异步计算的结果，可以启动一个计算将Future对象交给某个线程，然后忘掉他。Future对象的所有者可以在结果计算好之前就获得它。（人如其名
+```java
+public interface Future<V>
+{
+    V get() throws ...;
+    V get(long timeout, TimeUnit unit) throws ...;
+    void cancel (boolean mayInterrupt);
+    boolean isCancelled();
+    boolean isDone();
+}
+```
+第一个get调用被阻塞直到计算完成，如果在计算完成之前第二个方法的调用超时，抛出TimeoutException异常，如果运行该计算的线程被中断，两个方法都将抛出InterruptedException。如果计算已经完成，那么get方法立刻返回
+FutureTask 包装器是一种非常便利的机制， 可将 Callable转换成 Future 和 Runnable, 它同时实现二者的接口。
+```java
+Callable<Integer> myComputation = . . .;
+FutureTask<Integer> task = new FutureTask<Integer>(myComputation);
+Thread t = new Thread(task); // it's a Runnable
+t.start()；
+Integer result = task.get()；// it's a Future
+```
+程序清单 14-10 中的程序使用了这些概念。这个程序与前面那个寻找包含指定关键字的文件的例子相似。然而，现在我们仅仅计算匹配的文件数目。因此，我们有了一个需要长时间运行的任务，它产生一个整数值，一个` Callable<Integer> `的例子。
+```java
+class MatchCounter implements Callable<Integer〉
+{
+    public MatchCounter(File directory, String keyword) { ... }
+    public Integer call() { . . . } // returns the number of matching files
+}
+```
+然后我们利用 MatchCounter 创建一个 FutureTask 对象， 并用来启动一个线程。
+```java
+MatchCounter counter = new MatchCounter(new File(directory), keyword);
+FutureTask<Integer> task = new FutureTask<Integer>(counter);
+Thread t = new Thread(task);
+t.start();
+```
+最后，我们打印结果。
+```java
+System.out.println(task.get() + " matching files.") ;
+```
+当然， 对 get 的调用会发生阻塞， 直到有可获得的结果为止。
+在 call 方法内部， 使用相同的递归机制。 对于每一个子目录， 我们产生一个新的MatchCounter 并为它启动一个线程。此外， 把 FutureTask 对象隐藏在`ArrayList<Future<Integer>>`中。最后， 把所有结果加起来：
+```java
+for (Future<Integer> result : results)
+    count += result.get();
+```
+每一次对 get 的调用都会发生阻塞直到结果可获得为止。 当然，线程是并行运行的， 因此， 很可能在大致相同的时刻所有的结果都可获得
+
+```java
+//--这里欠一代码
+```
+
+### 执行器
+构建一个新的线程是有一定代价的，因为涉及和操作系统的交互。如果需要创建大量生命期很短的线程，应该使用线程池(thread pool)。一个线程池中包含许多准备运行的空闲线程。将Runnable对象交给线程池，就会有一个线程调用run方法，run方法退出时线程不会死亡而是继续在池中准备为下一个请求提供服务。
+另一个使用线程池的理由是减少并发线程的数目。创建大量线程会大大降低性能甚至使虚拟机崩溃。
+执行器(Executor)类有许多静态工厂方法用来构建线程池
+#### 线程池
+newCachedThreadPool必要时创建新线程，空闲线程保留60s
+newFixedThreadPool是固定大小的线程池，空闲线程保留
+newSingleThreadExecutor是一个退化了的大小为1的线程池，顺序执行每一个提交的任务
+可用下面的方法之一将一个Runnable对象或Callable对象提交给ExecutorService：
+```java
+Future<?> submit(Runnable task)
+Future<T> submit(Runnable task,T result)
+Future<T> submit(Callable<T> task)
+```
+1. 调用Executors类中静态的方法newCachedThreadPool或newFixedThreadPool
+2. 调用submit提交Runnable或Callable对象
+3. 想要取消一个任务或如果提交Callable对象，那就要保存好返回的Future对象
+4. 不再提交任何任务时，调用shutdown
+```java
+//这里有个线程程序
+```
+
+#### 预定执行
+ScheduledExecutorService接口具有为预定执行或重复执行任务而设计的方法。它是一种允许使用线程池机制的java.util.Timer的泛化。
+具体见文档
+#### 控制任务组
+使用执行器有更实际的原因，控制一组相关任务。例如，可以在执行器中使用shutdownNow方法取消所有的任务
+invokeAny方法提交所有对象到一个Callable对象的集合中，并返回某个已经完成了的任务的结果。无法知道返回的究竟是哪个任务的结果。比如你要解决RSA密码，只要一个答案就可以了。
+invokeAll方法提交所有对象到一个Callable对象的集合中，并返回一个Future对象的列表，代表所有任务的解决方案。当结构可获得时，可以像下面这样对结果进行处理
+```java
+List<Callable<T>> tasks = ...;
+List<Future<T>> results = executor.invokeAll(tasks);
+for (Future<T> result :results)
+    processFurther(result.get());
+```
+这个方法的缺点是如果第一个任务恰巧花去了很多时间，则可能不得不进行等待。可以用ExecutorCompletionService进行排列。
+```java
+ExecutorCompletionService<T> service = new ExecutorCompletionService<>(executor);
+for (Callable<T> task : tasks) service.submit(task);
+```
+
+#### Fork-Join 框架
+有些应用使用了大量线程，但其中大多数都是空闲的。比如一个Web服务器可能会为每个连接分别使用一个线程。另外一些应用可能对每个处理器内核分别使用一个线程，来完成计算密集型任务，如图像或视频处理。fork-join框架专门用来支持这类应用。
+```java
+
+```
+invokeAll方法接收到很多任务并阻塞，直到所有这些任务都已经完成。join方法将生成结果
+在后台，fork-join给出一种叫工作密取(work stealing)的方法来平衡可用线程的工作负载，每个工作线程都有一个Deque(双向队列)来完成任务。
+
+#### 可完成Future
+### 同步器
+#### 信号量
+#### 倒计时门栓
+#### 障栅
+#### 交换器
+#### 同步队列
+### 线程与Swing
