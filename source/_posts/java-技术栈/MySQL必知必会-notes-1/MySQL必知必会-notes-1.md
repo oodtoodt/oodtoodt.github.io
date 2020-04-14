@@ -20,4 +20,17 @@ tags:
 结构化查询语言（Structured Query Language）
 注意SQL不一定完全可移植
 
-    # 使用MYSQL
+## 检索
+help show...show可以帮助你做一些事。
+### 检索列
+select ... from ...
+>SQL语句一般返回原始的、无格式的数据。数据的格式化是一个表示问题，而不是一个检索问题
+其中，前面的...可以填单个列，可以填多个列(用逗号隔开)，可以填星号(`*`)通配符匹配所有列
+
+### 检索不同的行
+```java
+SELECT DISTINCT vend_id FROM products
+```
+注意不能部分使用DISTINCT
+
+### 

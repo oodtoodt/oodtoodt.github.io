@@ -288,6 +288,9 @@ int n = list.get(i);
 一个Class对象实际上表示的是一个类型，而这个类型未必是一种类，T.class的类型其实就是`Class<T>`
 `class.getDeclaredConstructor().newInstance()`可以用来动态的创建一个类的实例，调用默认的构造器
 
+getClass方法，有多态能力，运行时可以返回子类的类型信息，
+.class是没有多态的，是静态解析的，编译时可以确定类型信息，虚拟机为每个类型管理一个.class对象
+
 Field,Method,Constructor用于描述类的域、方法和构造器。其中，Modifier类可以分析getModifier方法返回的值以描述public和static这样的修饰符情况
 注意，get和getDeclare前缀是不同的，比如geteDeclareMethods返回Class对象表示的类和接口的所有已声明的方法数组，不包括父类继承和接口实现的方法。getMethods返回当前Class对象表示的类或接口的所有公有成员方法对象数组，包括已声明的和从父类继承或实现接口的方法。
 

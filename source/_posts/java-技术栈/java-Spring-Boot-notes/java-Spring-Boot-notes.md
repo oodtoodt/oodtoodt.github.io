@@ -36,6 +36,14 @@ scope=import可以使得依赖不再单一继承
 
 <plugins>标签可以打包项目为一个可执行的jar
 
+`
+mvn spring-boot:run
+`
+`
+mvn package
+//完全自包含可执行的jar
+`
+
 ### 结构化代码
 如果一个class没有在一个package里声明，它就应当在default package里。default package通常不鼓励使用。
 
