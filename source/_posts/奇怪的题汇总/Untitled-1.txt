@@ -1,3 +1,3 @@
 https://segmentfault.com/q/1010000006169708?_ea=1036478 //C++居然能用父类指针(里面存的也是父类)调用子类(子类独有的)函数?
 https://zhuanlan.zhihu.com/p/60884042 //AQS
-https://zhuanlan.zhihu.com/p/94388794 //condition
+s //condition
