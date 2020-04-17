@@ -4,6 +4,10 @@ date: 2020-04-14 15:48:47
 tags:
 ---
 
+http://logging.apache.org/log4j/2.x/manual/appenders.html
+http://www.slf4j.org/manual.html
+https://maven.apache.org/pom.html#Properties
+
 <!--more-->
 
 ## 知识点
@@ -11,6 +15,9 @@ log4j2有一套寻找配置文件的流程。
 
 ### 节点分析
 根节点Configuration有两个属性:status和monitorinterval,有两个子节点:Appenders和Loggers
++ Appender定义了输出的格式
++ 这些logger通过name进行区分，来对不同的logger配置不同的输出
+
 status指定log4j本身的打印日志的级别
 monitorinterval指定log4j自动重新配置的检测间隔时间
 
@@ -165,6 +172,13 @@ includeStacktrace - 如果为“true”，则包括生成的 JSON 中任何Throw
 slf4j = Simple Logging Facade for Java
 就是做在日志上层的抽象类，底层具体用什么日志工具不用关心，用一个适配层把api转换成具体工具的接口，这样就可以移植了。
 
+**slf4j只是一个日志标准，并不是日志系统的具体实现**。理解这句话非常重要，slf4j只做两件事情：
+
++ 提供日志接口
++ 提供获取具体日志对象的方法
+
+slf4j的作用：只要所有代码都使用门面对象slf4j，我们就不需要关心其具体实现，最终所有地方使用一种具体实现即可，更换、维护都非常方便。
+
 ```java
 import java.io.IOException;
 import org.slf4j.Logger;
@@ -204,3 +218,63 @@ public class LogTest {
 throwable 异常信息单独作为一个参数输入，因此，如果把异常信息作为{}占位符中的字符串，则会调用其对应toString方法，而无法打印异常堆栈信息。
 
 atTrace(), atDebug(), atInfo(), atWarn() and atError() methods是快速的Logging API
+
+## log4j2的官方文档体系
+### usage
+最好声明为静态
+关于name...
+in the cloud
+### Using Log4j 2 in Web Applications
+You must take particular care when using Log4j or any other logging framework within a Java EE web application
+
+### Lookups
+查找系统提供了一种在任意位置向Log4j配置添加值的方法。 
+#### Context Map Lookup
+
+#### Date Lookup
+这就是最常见的SimpleDateFormat的问题了，会查找这东西的，指匹配日期等
+
+#### 环境查找
+#### java查找
+#### ...
+还有很多查找。当你看到不认识的XX:`${XX:..}`，不要犹豫，先来查文档吧。
+
+### Appenders
+Appender负责将LogEvents传递到其目的地。
+
+### Layouts
+将logEvent格式化来满足日志事件的需求，比如json
+### Filters
+对日志事件评估，以确定是否或如何发布它们
+
+### Asynchronous Loggers for Low-Latency Logging
+低延迟日志记录的异步记录器
+### Garbage-free Steady State Logging
+无垃圾稳态记录
+
+### 最后
+我觉得没什么用，串个大概到时候查吧。
+主要是太多了，而且很多都是空白的知识领域
+
+## maven-POM.Reference.basics
+### Maven Coordinates
+
+### Relationships
+#### dependecies
+#### Inheritance
+#### Aggregation
+### properites
+属性是了解POM基础知识的最后一个要素。Maven属性是值占位符，如Ant中的属性。它们的值可以通过使用符号${X}在POM中的任何位置访问，其中X是属性。
+
+
+1. env.X：使用“env”来定义变量。将返回shell的环境变量。例如，${env.PATH}包含PATH环境变量。
+
+注意：虽然环境变量本身在Windows上不区分大小写，但查找属性区分大小写。换句话说，虽然Windows shell为`％PATH％`和`％Path％`返回相同的值，但Maven区分`${env.PATH}`和`${env.Path}`。对于Maven 2.1.0，为了可靠性，环境变量的名称被归一化为所有大写。
+
+2. `project.x：POM`中的点（.）记号路径将包含相应元素的值。例如：可以通过`${project.version}`访问`<project><version>1.0</version></project>`。
+
+3. `settings.x：settings.xml`中的点（.）标注路径将包含相应的元素的值。例如：`<settings><offline>false</offline></ settings>`可通过`${settings.offline}`访问。
+
+4. Java系统属性：可通过java.lang.System.getProperties()访问的所有属性都可用作POM属性，如${java.home}。
+
+5. x：在POM中的`<properties />`元素中设置。`<properties><someVar>value</someVar></properties>`的值可以用作`${someVar}`。

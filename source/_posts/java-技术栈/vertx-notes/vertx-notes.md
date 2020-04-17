@@ -10,130 +10,6 @@ https://vertxchina.github.io/vertx-translation-chinese/core/Core.html
 https://vertx.io/docs/vertx-core/java/#_buffers
 <!--more-->
 
-<!-- TOC -->
-
-- [Are you fluent](#are-you-fluent)
-- [Don't call us, we'll call you](#dont-call-us-well-call-you)
-- [Don't block me!](#dont-block-me)
-- [Reactor and Multi-Reactor](#reactor-and-multi-reactor)
-- [The Golden Rule - Don't Block the Event Loop](#the-golden-rule---dont-block-the-event-loop)
-- [Running blocking code](#running-blocking-code)
-- [Async coordination（异步协调）](#async-coordination%E5%BC%82%E6%AD%A5%E5%8D%8F%E8%B0%83)
-    - [Concurrent composition(并发组成[合并?])](#concurrent-composition%E5%B9%B6%E5%8F%91%E7%BB%84%E6%88%90%E5%90%88%E5%B9%B6)
-    - [Sequential composition（顺序合并）](#sequential-composition%E9%A1%BA%E5%BA%8F%E5%90%88%E5%B9%B6)
-- [Verticles](#verticles)
-    - [Writing Verticle](#writing-verticle)
-    - [Asynchronous Verticle start and stop(异步启动和终止)](#asynchronous-verticle-start-and-stop%E5%BC%82%E6%AD%A5%E5%90%AF%E5%8A%A8%E5%92%8C%E7%BB%88%E6%AD%A2)
-    - [Verticle types](#verticle-types)
-        - [Standard Verticle](#standard-verticle)
-        - [worker Verticle](#worker-verticle)
-        - [Deploying verticles programmatically](#deploying-verticles-programmatically)
-        - [Rules for mapping a verticle name to a verticle factory(Verticle名称到Factory的映射规则)](#rules-for-mapping-a-verticle-name-to-a-verticle-factoryverticle%E5%90%8D%E7%A7%B0%E5%88%B0factory%E7%9A%84%E6%98%A0%E5%B0%84%E8%A7%84%E5%88%99)
-        - [How are Verticle Factories located?](#how-are-verticle-factories-located)
-        - [Waiting for deployment to complete](#waiting-for-deployment-to-complete)
-        - [Undeploying verticle deployments](#undeploying-verticle-deployments)
-        - [Specifying number of veritcle instances(设置 Verticle 实例数)](#specifying-number-of-veritcle-instances%E8%AE%BE%E7%BD%AE-verticle-%E5%AE%9E%E4%BE%8B%E6%95%B0)
-        - [Passing configuration to a verticle](#passing-configuration-to-a-verticle)
-        - [Accessing environment variables in a Verticle(在 Verticle 中访问环境变量)](#accessing-environment-variables-in-a-verticle%E5%9C%A8-verticle-%E4%B8%AD%E8%AE%BF%E9%97%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F)
-        - [Verticle Isolation Groups](#verticle-isolation-groups)
-        - [High Availability](#high-availability)
-        - [Running Verticles from the command line](#running-verticles-from-the-command-line)
-        - [Causing Vert.x to exit](#causing-vertx-to-exit)
-        - [The Context object](#the-context-object)
-        - [Executing periodic and delayed actions(执行周期性/延迟性操作)](#executing-periodic-and-delayed-actions%E6%89%A7%E8%A1%8C%E5%91%A8%E6%9C%9F%E6%80%A7%E5%BB%B6%E8%BF%9F%E6%80%A7%E6%93%8D%E4%BD%9C)
-            - [one-shot Timers](#one-shot-timers)
-            - [Periodic Timers](#periodic-timers)
-            - [取消、清除](#%E5%8F%96%E6%B6%88%E6%B8%85%E9%99%A4)
-        - [Verticle worker pool](#verticle-worker-pool)
-    - [The Event Bus](#the-event-bus)
-        - [The Theory](#the-theory)
-            - [Addressing](#addressing)
-            - [Handlers](#handlers)
-            - [publish/subscribe messaging](#publishsubscribe-messaging)
-            - [Point-to-point and Request-Response messaging](#point-to-point-and-request-response-messaging)
-            - [Best-effort delivery](#best-effort-delivery)
-            - [Types of messages](#types-of-messages)
-        - [The Event Bus API](#the-event-bus-api)
-            - [Getting the event bus](#getting-the-event-bus)
-            - [Registering Handlers](#registering-handlers)
-            - [Un-registering Handlers](#un-registering-handlers)
-            - [Publishing messages](#publishing-messages)
-            - [Sending messages](#sending-messages)
-            - [Setting headers on messages](#setting-headers-on-messages)
-            - [Message ordering](#message-ordering)
-            - [The Message object](#the-message-object)
-            - [Acknowledging messages / sending replies](#acknowledging-messages--sending-replies)
-            - [Sending with timeouts](#sending-with-timeouts)
-            - [Send Failures](#send-failures)
-            - [Message Codecs](#message-codecs)
-            - [Clustered Event Bus](#clustered-event-bus)
-            - [Clustering programmatically](#clustering-programmatically)
-            - [Clustering on the command line](#clustering-on-the-command-line)
-        - [Automatic clean-up in verticles](#automatic-clean-up-in-verticles)
-- [Configuring the event bus](#configuring-the-event-bus)
-- [JSON](#json)
-    - [JSON object](#json-object)
-            - [Creating JSON objects 创建 JSON 对象](#creating-json-objects-%E5%88%9B%E5%BB%BA-json-%E5%AF%B9%E8%B1%A1)
-            - [Putting entries into a JSON object 将键值对放入 JSON 对象](#putting-entries-into-a-json-object-%E5%B0%86%E9%94%AE%E5%80%BC%E5%AF%B9%E6%94%BE%E5%85%A5-json-%E5%AF%B9%E8%B1%A1)
-            - [Getting values from a JSON object 从 JSON 对象获取值](#getting-values-from-a-json-object-%E4%BB%8E-json-%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E5%80%BC)
-            - [Mapping between JSON objects and Java objects JSON 对象和 Java 对象间的映射](#mapping-between-json-objects-and-java-objects-json-%E5%AF%B9%E8%B1%A1%E5%92%8C-java-%E5%AF%B9%E8%B1%A1%E9%97%B4%E7%9A%84%E6%98%A0%E5%B0%84)
-            - [Encoding a JSON object to a String 将 JSON 对象编码成字符串](#encoding-a-json-object-to-a-string-%E5%B0%86-json-%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A0%81%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2)
-    - [JSON arrays JSON 数组](#json-arrays-json-%E6%95%B0%E7%BB%84)
-            - [Creating JSON arrays 创建 JSON 数组](#creating-json-arrays-%E5%88%9B%E5%BB%BA-json-%E6%95%B0%E7%BB%84)
-            - [Adding entries into a JSON array 将数组项添加到JSON数组](#adding-entries-into-a-json-array-%E5%B0%86%E6%95%B0%E7%BB%84%E9%A1%B9%E6%B7%BB%E5%8A%A0%E5%88%B0json%E6%95%B0%E7%BB%84)
-            - [Getting values from a JSON array](#getting-values-from-a-json-array)
-            - [Encoding a JSON array to a String](#encoding-a-json-array-to-a-string)
-            - [Creating arbitrary JSON](#creating-arbitrary-json)
-- [Json Pointers](#json-pointers)
-- [Buffers](#buffers)
-    - [Creating buffers](#creating-buffers)
-    - [Writing to a Buffer](#writing-to-a-buffer)
-        - [Appending to a Buffer](#appending-to-a-buffer)
-        - [Random access buffer writes](#random-access-buffer-writes)
-    - [Reading from a Buffer](#reading-from-a-buffer)
-    - [Working with unsigned numbers](#working-with-unsigned-numbers)
-    - [Buffer length](#buffer-length)
-    - [Copying buffers](#copying-buffers)
-    - [Slicing buffers](#slicing-buffers)
-    - [Buffer re-use](#buffer-re-use)
-- [Writing TCP servers and clients](#writing-tcp-servers-and-clients)
-    - [Creating a TCP server](#creating-a-tcp-server)
-    - [Configuring a TCP server](#configuring-a-tcp-server)
-    - [Start the Server Listening](#start-the-server-listening)
-    - [Listening on a random port](#listening-on-a-random-port)
-    - [Getting notified of incoming connections](#getting-notified-of-incoming-connections)
-    - [Reading data from the socket](#reading-data-from-the-socket)
-    - [Writing data to a socket](#writing-data-to-a-socket)
-    - [Closed handler](#closed-handler)
-    - [Handling exceptions](#handling-exceptions)
-    - [Event bus write handler](#event-bus-write-handler)
-    - [Local and remote addresses](#local-and-remote-addresses)
-    - [Sending files or resources from the classpath](#sending-files-or-resources-from-the-classpath)
-    - [Streaming sockets](#streaming-sockets)
-    - [Upgrading connections to SSL/TLS](#upgrading-connections-to-ssltls)
-    - [Closing a TCP Server](#closing-a-tcp-server)
-    - [Automatic clean-up in verticles](#automatic-clean-up-in-verticles)
-    - [Scaling - sharing TCP servers](#scaling---sharing-tcp-servers)
-    - [Creating a TCP client](#creating-a-tcp-client)
-    - [Configuring a TCP client](#configuring-a-tcp-client)
-        - [Enabling SSL/TLS on the server](#enabling-ssltls-on-the-server)
-        - [Specifying key/certificate for the server](#specifying-keycertificate-for-the-server)
-        - [Specifying trust for the server](#specifying-trust-for-the-server)
-        - [Enabling SSL/TLS on the client](#enabling-ssltls-on-the-client)
-        - [Client trust configuration](#client-trust-configuration)
-        - [Specifying key/certificate for the client](#specifying-keycertificate-for-the-client)
-        - [Self-signed certificates for testing and development purposes](#self-signed-certificates-for-testing-and-development-purposes)
-        - [Revoking certificate authorities](#revoking-certificate-authorities)
-        - [Configuring the Cipher suite](#configuring-the-cipher-suite)
-        - [Configuring TLS protocol versions](#configuring-tls-protocol-versions)
-        - [SSL engine](#ssl-engine)
-        - [Server Name Indication (SNI)](#server-name-indication-sni)
-        - [Application-Layer Protocol Negotiation (ALPN)](#application-layer-protocol-negotiation-alpn)
-            - [OpenSSL ALPN support](#openssl-alpn-support)
-            - [Jetty-ALPN support](#jetty-alpn-support)
-- [Using a proxy for client connections](#using-a-proxy-for-client-connections)
-
-<!-- /TOC -->
 
 
 ## Are you fluent
@@ -151,9 +27,20 @@ response.end();
 Vert.x APIs主要是事件驱动的。意味着如果Vert.x中发生的事情你感兴趣，Vert.x会通过事件的方法调用你
 
 >Handler主要用于异步消息的处理（是一套Android提供的消息处理机制）：当发出一个消息之后，首先进入一个消息队列，发送消息的函数即刻返回，而另外一个部分在消息队列中逐一将消息取出，然后对消息进行处理，也就是发送消息和接收消息不是同步的处理。 这种机制通常用来处理相对耗时比较长的操作。
-（无视就好
+（无视就好，和这个什么关系都没有
 
-你通过提供handlers（应该和上面那个没什么关系）来handle事件，比如如果你要收到一个时间事件你应该：
+这里的Lambda/匿名函数/req->{//blablabla}就是一个处理器（Handler），在随后的例子中，我们用1stHandler以及2ndHandler来指代具体的匿名函数，让代码更加清晰明了，放在Verticle中类似：
+
+```java
+public class MyVerticle extends AbstractVerticle {
+    public void start() throws Exception {
+        vertx.createHttpServer().requestHandler(1stHandler).listen(8080);
+    vertx.createHttpServer().requestHandler(2ndHandler).listen(8081);
+    }
+}
+```hexo n
+
+你通过提供handlers来handle事件，比如如果你要收到一个时间事件你应该：
 ```java
 vertx.setPeriodic(1000, id -> { // This handler will get called every second System.out.println("timer fired!");
 });
@@ -847,7 +734,7 @@ Vertx.clusteredVertx(options, res -> {
 #### Automatic clean-up in verticles
 若您在 Verticle 中注册了 Event Bus 的处理器，那么这些处理器在 Verticle 被撤销的时候会自动被注销。
 
-## Configuring the event bus
+#### Configuring the event bus
 Event Bus 是可以配置的，这对于以集群模式运行的 Event Bus 是非常有用的。Event Bus 使用 TCP 连接发送和接收消息，因此可以通过`EventBusOptions`对TCP连接进行全面的配置。由于 Event Bus 同时用作客户端和服务器，因此这些配置近似于`NetClientOptions`和`NetServerOptions`。
 ```java
 VertxOptions options = new VertxOptions()
@@ -906,7 +793,7 @@ JsonObject 类用来描述JSON对象。
 
 JSON 对象也支持 null 值。
 
-##### Creating JSON objects 创建 JSON 对象
+#### Creating JSON objects 创建 JSON 对象
 可以使用默认构造函数创建空的JSON对象。
 
 您可以通过一个 JSON 格式的字符串创建JSON对象：
@@ -922,7 +809,7 @@ map.put("xyz", 3);
 JsonObject object = new JsonObject(map);
 ```
 
-##### Putting entries into a JSON object 将键值对放入 JSON 对象
+#### Putting entries into a JSON object 将键值对放入 JSON 对象
 使用put 方法可以将值放入到JSON对象里。
 
 这个API是流式的，因此这个方法可以被链式地调用。
@@ -931,14 +818,14 @@ JsonObject object = new JsonObject();
 object.put("foo", "bar").put("num", 123).put("mybool", true);
 ```
 
-##### Getting values from a JSON object 从 JSON 对象获取值
+#### Getting values from a JSON object 从 JSON 对象获取值
 您可使用 getXXX 方法从JSON对象中获取值。例如：
 ```java
 String val = jsonObject.getString("some-key");
 int intVal = jsonObject.getInteger("some-other-key");
 ```
 
-##### Mapping between JSON objects and Java objects JSON 对象和 Java 对象间的映射
+#### Mapping between JSON objects and Java objects JSON 对象和 Java 对象间的映射
 您可以从 Java 对象的字段创建一个JSON 对象，如下所示：
 
 你可以通过一个JSON 对象来实例化一个Java 对象并填充字段值。如下所示：
@@ -952,7 +839,7 @@ request.bodyHandler(buff -> {
 
 只要不存在对象的循环引用，嵌套的 Java 对象可以被序列化/反序列化为嵌套的JSON对象。
 
-##### Encoding a JSON object to a String 将 JSON 对象编码成字符串
+#### Encoding a JSON object to a String 将 JSON 对象编码成字符串
 您可使用 encode 方法将一个对象编码成字符串格式。
 
 如要得到更优美、格式化的字符串，可以使用 encodePrettily 方法。
@@ -964,7 +851,7 @@ JsonArray 类用来描述 JSON数组。
 
 JSON 数组同样可以包含 null 值。
 
-##### Creating JSON arrays 创建 JSON 数组
+#### Creating JSON arrays 创建 JSON 数组
 可以使用默认构造函数创建空的JSON数组。
 
 您可以从JSON格式的字符串创建一个JSON数组：
@@ -973,10 +860,10 @@ String jsonString = "[\"foo\",\"bar\"]";
 JsonArray array = new JsonArray(jsonString);
 ```
 
-##### Adding entries into a JSON array 将数组项添加到JSON数组
+#### Adding entries into a JSON array 将数组项添加到JSON数组
 您可以使用 add 方法添加数组项到JSON数组中：
 
-##### Getting values from a JSON array
+#### Getting values from a JSON array
 您可使用 getXXX 方法从JSON 数组中获取值。例如：
 ```java
 String val = array.getString(0);
@@ -984,10 +871,10 @@ Integer intVal = array.getInteger(1);
 Boolean boolVal = array.getBoolean(2);
 ```
 
-##### Encoding a JSON array to a String
+#### Encoding a JSON array to a String
 您可使用 encode 将一个 JsonArray 编码成字符串格式。
 
-##### Creating arbitrary JSON
+#### Creating arbitrary JSON
 这里一直假设您在使用有效的表示形式
 如果你不确定，你应该用Json.decodeValue
 ```java

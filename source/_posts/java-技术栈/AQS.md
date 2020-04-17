@@ -1,3 +1,15 @@
+---
+title: java-AQS
+date: 2020-04-16 13:36:01
+tags:
+---
+
+ongoing。
+
+<!--more-->
+
+---
+
 condition是要和lock配合使用的（它们是绑定的），lock的实现原理依赖于AQS，而ConditionObject则是AQS的内部类。
 ##### AQS(https://segmentfault.com/a/1190000017372067)
 了解J.U.C的关键就是AQS.J.U.C，是JDK中提供的并发工具包, java.util.concurrent
