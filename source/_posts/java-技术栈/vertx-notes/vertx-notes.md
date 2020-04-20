@@ -38,7 +38,7 @@ public class MyVerticle extends AbstractVerticle {
     vertx.createHttpServer().requestHandler(2ndHandler).listen(8081);
     }
 }
-```hexo n
+```
 
 你通过提供handlers来handle事件，比如如果你要收到一个时间事件你应该：
 ```java

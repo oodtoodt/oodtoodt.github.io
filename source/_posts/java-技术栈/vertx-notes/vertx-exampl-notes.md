@@ -117,4 +117,99 @@ vertx.createHttpServer().requestHander(req->{
 成了，解决了。怪不得没有，原来注册编解码器的所有都是自己写的——这个CustomMessage根本就是在目录下的一个java文件而已
 那这么说这个例子还挺有借鉴价值的
 + 编解码器要怎么写：实现哪些方法，哪些是固定格式，比如怎么出json
-+ 
++ 整个流程
+以下是胡比比：
+sender先计时器用eventbus每秒向cluster receiver发一个自定义消息，等待reply
+还部署了一个local receiver用的verticle实例，每两秒向local receiver发送消息并等待回复。
+
+这里面的local receiver是自己写的，里面就是一个叫`local-message-receiver`的eventbus用来接收消息，可以认为是用verticle deploy了实例之后他就接进来了。
+不不不。我觉得只是随便开了一个verticle，为了辨认起了local receiver的class的名字，目的就是异步，就是说我不在同一个eventloop里面搞多个事件。
+我又变卦了。我现在觉得是前者。原因是创建verticle必然会把它分配给一个eventloop，并在里面执行它的start（极大可能是在当前eventloop里执行）
+这里我理解就是，不需要你自己开这边这个了，另一个clusterreceiver还是需要自己开。local会自己开，甚至存在非常奇怪的继承
+
+注意到在sender里面刚开始就注册了codec，后面就不用了。即便是在sender里面deploy的localreceiver内部的start，也不注册了。
+这个继承关系让我摸不到头脑。
+你要说这不是继承，那这是什么呢
+某种神奇的注册机制，相当于把代码提上来？
+反射？
+
+经过半小时的纠缠，我现在看法又改变了。
+我现在觉得是一个依赖线程或者说是eventloop的context在搞鬼。比如我们的context信息如果是相同的，草，我要做实验
+
+实验做完了，debug一点一点看的。
+首先，这个事就是个全局环境。两者的vertx是相同的——vertx是什么？vertx就是个全局的超级对象，是vert.x框架下的核心。而只要vertx相同，那么eventbus就相同。
+而我是通过deploy的方式在当前的vertx里新建了verticle，所以我们的vertx是相同的，甚至上下文context也有非常多相同的：owner(就是vertx本尊了)，tccl（我们暂且认为是上下文装载器，某种filter），workerpoll和internal版本，orderedtasks和internal版本。
+而如果！我新跑一个ClusterReceiver，那么这个vertx将和之前不同。这一不同几乎就是完！全！不！同！基本上找不到相同的数据了。
+
+其他的没啥。基本上的逻辑就这样了。codec的内容我们以后再看...下一个下一个
+
+### SSL
+嗯so easy，就跟net的时候。。。
+等等？这也太干脆了，就直接在点对点的基础上在调用时候使用
+```java
+Runner.runClusteredExample(Sender.class,
+        new VertxOptions().setEventBusOptions(new EventBusOptions()
+            .setSsl(true)
+            .setKeyStoreOptions(new JksOptions().setPath("keystore.jks").setPassword("wibble"))
+            .setTrustStoreOptions(new JksOptions().setPath("keystore.jks").setPassword("wibble"))
+        )
+    );
+```
+下面的start一模一样！！作者应该也是就这么复制的hhh
+
+## Future
+这东西是用来做异步结果协调的。主要的问题是，文档里没得解释...只能自己看了
+教你写future/promise
+>promise表示可能已经或可能尚未发生的动作的可写面(writable side)。可以用future（）方法返回与承诺相关联的Future，future可用于获取承诺完成的通知并检索其值。
+>future表示可能已经或可能尚未发生的操作的结果(result)。
+
+里面也写了mimic，即模拟一个消耗时间的操作和另一个消耗时间的操作异步顺序链接（依次执行异步调用）
+
+
+## verticle
+### deploy
+这个结果太绝了
+```
+Main verticle has started, let's deploy some others...
+In OtherVerticle.start
+In OtherVerticle.start
+In OtherVerticle.start
+In OtherVerticle.start
+In OtherVerticle.start
+In OtherVerticle.start
+Config is {}
+Config is {}
+Config is {}
+Config is {}
+Config is {}
+Config is {"foo":"bar"}
+Other verticle deployed ok, deploymentID = 58929df6-6dd1-4972-82e2-9be041e6c313
+In OtherVerticle.stop
+Undeployed ok!
+```
+嗯。那么首先start和config只是分了两个system.out.println而已，然后被deploy直接就分离了。
+还有other...那个就是deploy的第二个参数而已，也接到非常神奇的后面了。
+最后unploy倒是没什么问题，算是顺序的了。
+值得一提的是带config的跑到最后了，估计就是谁跑得快谁开吧。
+我们看下文档：（按顺序）
+
+    + Deploying without waiting for it to deploy
+    + Deploying and waiting for it to deploy(指要传参给res)
+    + Passing configuration to another verticle during deploy(最慢)
+    + Deploying more than one instance
+    + Deploying as a worker verticle
+    + Undeploying a verticle deployment explicitly
+
+### 异步启动和终止
+这里的参数就是`Future<Void> starFuture`了，见具体章节。
+即需要时间来启动或者清理的时候，我们需要用这种启动来避免阻塞
+不是问题
+
+### worker verticle实例
+```java
+vertx.eventBus().<String>consumer(...)
+```
+太绝了，吓坏孩子了。
+反正就是定义这个eventbus里面的`messageconsumer<T>`都是string了(T直接就是string了)
+重点不在这！
+

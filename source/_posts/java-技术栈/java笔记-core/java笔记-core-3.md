@@ -249,7 +249,33 @@ for(String element:t){}
 java集合类库中的迭代器和其他类库中的迭代器在概念上有着重要的区别。c++的stl中，迭代器是根据数组索引建模的，可以直接查看指定位置上的元素，不需要查找元素就可以将迭代器向前移动一个位置。但是Java迭代器不是。它的查找和位置变更时相连的。**可以将java迭代器认为是位于两个元素之间**。
 remove可以删除上次next方法返回的元素。（没有之前next的remove是不合法的）
 
-集合类的基本借口是Collection接口，里面其实有很多的方法。
+集合类的基本接口是Collection接口，里面其实有很多的方法。
+```java
+public interface Collection<E>
+{
+    boolean add(E element);
+    Iterator<E> iterator();
+    /**
+     * iterator包含4种方法：
+     * E next();
+       boolean hasNextO;
+       void remove0;
+       default void forEachRemaining(Consumer<? super E> action);
+     */
+    int size()
+    boolean isEmpty()
+    boolean contains (Object obj)
+    boolean containsAl1 (Col1ection<?> c)
+    boolean equals (Object other)
+    boolean addAll (Collection<? extends E> from)
+    boolean remove(Object obj)
+    boolean removeAl1 (Col1ection<?> c)
+    void clear()
+    boolean retainAll (Col1ection<?> c)
+    Object[] toArray()
+    <T> T[] toArray(T[] arrayToFill)
+}
+```
 实际上有两种有序集合，数组支持的有序集合可以快速随机访问，适合用list并提供一个整数索引来访问。链表尽管也有序，但是随机访问很慢，应使用迭代器遍历。（可以用instanceof RandomAccess是否true测试是否支持高校访问）
 java和c的list含义完全不一样有点难过吧
 java              c++
