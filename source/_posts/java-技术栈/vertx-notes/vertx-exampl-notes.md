@@ -156,6 +156,7 @@ Runner.runClusteredExample(Sender.class,
     );
 ```
 下面的start一模一样！！作者应该也是就这么复制的hhh
++ 如何传递ssl的eventbus,这里建议去看runner源码，下面会有解析
 
 ## Future
 这东西是用来做异步结果协调的。主要的问题是，文档里没得解释...只能自己看了
@@ -164,7 +165,7 @@ Runner.runClusteredExample(Sender.class,
 >future表示可能已经或可能尚未发生的操作的结果(result)。
 
 里面也写了mimic，即模拟一个消耗时间的操作和另一个消耗时间的操作异步顺序链接（依次执行异步调用）
-
++ 如何异步协调
 
 ## verticle
 ### deploy
@@ -200,16 +201,66 @@ Undeployed ok!
     + Deploying as a worker verticle
     + Undeploying a verticle deployment explicitly
 
++ deploy的顺序
++ 理解异步
 ### 异步启动和终止
 这里的参数就是`Future<Void> starFuture`了，见具体章节。
 即需要时间来启动或者清理的时候，我们需要用这种启动来避免阻塞
 不是问题
++ 异步启动
 
 ### worker verticle实例
 ```java
 vertx.eventBus().<String>consumer(...)
 ```
 太绝了，吓坏孩子了。
-反正就是定义这个eventbus里面的`messageconsumer<T>`都是string了(T直接就是string了)
+反正就是定义这个eventbus里面的`public <T>messageconsumer<T>`都是string了(T直接就是string了)
 重点不在这！
+重点在这里向我们展示了如何使用worker verticle，虽然只是配置了一下options，但是你会发现，虽然你开的worker是在0里开始的，但是！它consume eventbus的时候就是从worker-thread-1开始干的了
+！！！
+注意！你开的worker是从worker-0开始的，你的主verticle是从eventloop-thread-0开始的！！
+我日，我改了半天想探究一下为啥俩0一个1，原来如此。
+然后我还搞明白了一件事
+这是异步！！！
+我往**deploy的res里面**向外部的arraylist或者数组加东西，然后从**外面**undeploy这个获取到的id。我为啥反应这么慢呢，是因为我确实对java不熟，不能确认lambda里能否对外面的值进行改动（可以的）
+想清楚了来龙去脉随便设计个timer就懂了。在外面println的时候a[0]依然是null或是原设值，在timer里等1ms(最低了，0都不让设的)就已经是改过的值了。(吹一波自己！periodic用timer解可还行，不过还是依赖了lambda传effective final的特性)
+时刻记住这里到处都是异步。可能有些东西就想通了。
+要是昨天先看这个例子我估计我就搞明白昨天那个sender里面开verticle是怎么回事了。
++ 理解异步
++ 如何用worker-verticle写多线程
 
+## execblocking
+指以不阻塞事件循环的方式来包含阻塞与非阻塞代码。
+对runner产生了一点小小的想法。一会解析一下runner
+这里又出现了`vertx.<String>executeBlocking`，但是你会发现，如果删去对于promise(第一个函参)是没影响的，但是对第二个函参res就有影响了，`res.result`变成了object编译错误。回过头看刚才那个例子，明白是影响到了后面的函参提供的构造(body())。
+好，不扯闲篇，
+
++ 如何用executeblocking API来执行阻塞代码并获得阻塞代码执行后的异步回调的结果
+
+这个结果看不太出什么，我们如果让他sleep5s，然后我们打开localhost8080的时候会被疯狂警告：
+```
+4月 21, 2020 2:16:29 下午 io.vertx.core.impl.BlockedThreadChecker
+警告: Thread Thread[dedicated-pool-0,5,main]=Thread[dedicated-pool-0,5,main] has been blocked for 4887 ms, time limit is 0 ms
+```
+每秒一次。代表警告这个线程被阻塞的时间太久。
+其他没啥说的，executeBlocking两个函参，第一个是要阻塞的代码是什么，第二个是异步回调执行结果
+
+## HA
+这里是展示高可用性的，当原始节点死亡时，会将顶点重新部署到另一个节点
+不清楚ide里能不能模拟集群环境
+初步失败了，感觉不知道怎么杀了这个进程，kill找不到progress，wsl又蠢得一比
+
+
+## JavaScript Verticle and NPM
+没啥关系不看了。
+
+## json
++ 如何用流json来解析包含许多小对象的大数组。
++ mapTo的Json器怎么写
+唔，依赖com.fasterxml.jackson这个东西。pom有点问题，一层层找上去发现是依赖崩了。亏我还去查了半天的文档。接受教训，先看依赖，再找文档
+
+是在用ReadStream的接口，用AsyncFile来读写实现这个接口的。
+注意到Http|C/S|Request、MessageConsumer、Net/Web|Socket都实现了这个接口的
+流(完全)到达时调用endHandler。
+handler：设置一个处理器，它将从ReadStream读取项
+没什么好看的了

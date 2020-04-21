@@ -88,3 +88,13 @@ vertx.eventBus().<String>consumer(...)
 public <T> MessageConsumer<T> consumer(String address)
 ```
 见识到了吗？我是一个泛型方法。我的泛型是用来给这个泛型类型用的！
+
+
+### 20.4.21
+我这一早上...
+先搞了半天vm配置失败，最后重装一次java就完事了
+然后搞明白了这个异步，甚至沾沾自喜
+我吐了，捣鼓了半个小时的ha，感觉就是不支持吧。我kill不掉这个进程id，sb wsl里面还找不到java，应该是不能调用外部的环境，怎么说呢，挺烦。
+passpass
+
+
