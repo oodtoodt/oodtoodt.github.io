@@ -8,7 +8,7 @@ tags:
 
 categories:
 - java
-- book-notes
+- book_notes
 
 ---
 

@@ -8,6 +8,7 @@ tags:
 
 categories:
 - c++
+- template
 - book_notes
 
 ---

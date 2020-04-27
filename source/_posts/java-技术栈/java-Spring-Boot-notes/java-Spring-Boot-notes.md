@@ -2,6 +2,16 @@
 title: java-Spring-Boot-notes
 date: 2020-04-08 11:04:37
 tags:
+- java
+- company
+
+categories:
+- java
+- frame
+- spring boot
+
+
+
 ---
 
 我放眼望去，满眼都是Auto几个大字。

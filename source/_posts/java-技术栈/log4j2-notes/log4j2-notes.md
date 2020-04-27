@@ -2,6 +2,14 @@
 title: log4j2-notes
 date: 2020-04-14 15:48:47
 tags:
+- java
+- company
+
+categories:
+- java
+- APIs
+- log4j2
+
 ---
 
 http://logging.apache.org/log4j/2.x/manual/appenders.html

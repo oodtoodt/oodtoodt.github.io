@@ -2,6 +2,15 @@
 title: Redis-quick-start-notes
 date: 2020-04-10 16:35:10
 tags:
+- DB
+- Redis
+- company
+
+categories:
+- DB
+- Redis
+- documentation
+
 ---
 
 。

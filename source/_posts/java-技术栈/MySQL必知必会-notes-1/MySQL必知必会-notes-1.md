@@ -2,6 +2,15 @@
 title: MySQL必知必会-notes-1
 date: 2020-04-13 17:01:36
 tags:
+- DB
+- mysql
+- company
+
+categories:
+- DB
+- mysql
+- book_notes
+
 ---
 
 ongoing。
@@ -10,7 +19,11 @@ ongoing。
 <!-- TOC -->
 
 - [主键](#%E4%B8%BB%E9%94%AE)
-- [什么SQL](#%E4%BB%80%E4%B9%88sql)
+- [什么是SQL](#%E4%BB%80%E4%B9%88%E6%98%AFsql)
+- [注意](#%E6%B3%A8%E6%84%8F)
+    - [注释](#%E6%B3%A8%E9%87%8A)
+    - [删除](#%E5%88%A0%E9%99%A4)
+    - [大小写](#%E5%A4%A7%E5%B0%8F%E5%86%99)
 - [检索](#%E6%A3%80%E7%B4%A2)
     - [检索列](#%E6%A3%80%E7%B4%A2%E5%88%97)
     - [检索不同的行](#%E6%A3%80%E7%B4%A2%E4%B8%8D%E5%90%8C%E7%9A%84%E8%A1%8C)
@@ -85,6 +98,13 @@ ongoing。
     - [使用参数](#%E4%BD%BF%E7%94%A8%E5%8F%82%E6%95%B0)
     - [智能存储过程](#%E6%99%BA%E8%83%BD%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B)
 - [游标](#%E6%B8%B8%E6%A0%87)
+    - [创建、打开、关闭、使用](#%E5%88%9B%E5%BB%BA%E6%89%93%E5%BC%80%E5%85%B3%E9%97%AD%E4%BD%BF%E7%94%A8)
+- [触发器](#%E8%A7%A6%E5%8F%91%E5%99%A8)
+- [事务处理](#%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86)
+    - [ROLLBACK](#rollback)
+    - [COMMIT](#commit)
+- [全球化和本地化](#%E5%85%A8%E7%90%83%E5%8C%96%E5%92%8C%E6%9C%AC%E5%9C%B0%E5%8C%96)
+- [安全管理](#%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86)
 
 <!-- /TOC -->
 
@@ -99,9 +119,33 @@ ongoing。
     不重用它
     不再主键列使用可能会更改的值
 
-## 什么SQL
+## 什么是SQL
 结构化查询语言（Structured Query Language）
 注意SQL不一定完全可移植
+
+## 注意
+
+### 注释
+用杠杠的时候给爷tmd加上空格！不加不认识！
+
+### 删除
++ drop主要用于删除结构
+例如删除数据库：drop database XX，删除表 drop table XX。字段也是结构的一种，也可以使用drop了？对的，但是我们改变了表结构要先alter方法。例如，我们要删除student表上的age字段的信息，可以这样写：alter table student drop age
+
++ delete主要用于删除数据
+举个例子，要删除 student表上名字为‘张三’的所有信息：delete from student where name=‘张三’。这种情况下用delete，由此可见delete常用于删除数据。
+
+### 大小写
+注意在linux下会有大小写的区分
+windows下全部不区分大小写
+
+查询字符串对大小写不敏感
+
+关键字和函数名不区分大小写
+存储函数、存储过程、事件的名字不区分大小写，触发器区分
+数据列和索引的名字不区分
+
+不能完全保证，仅供参考
 
 ## 检索
 help show...show可以帮助你做一些事。
@@ -674,9 +718,9 @@ select @pricehigh, @pricelow, @priceaverage;
 
 ### 智能存储过程
 ```sql
---创建存储过程
+-- 创建存储过程
 delimiter $$
---//使用$$作为存储过程的分隔符
+-- //使用$$作为存储过程的分隔符
 create procedure ordertotal(
     in onumber int,
     in taxable boolean,
@@ -685,7 +729,7 @@ create procedure ordertotal(
 begin 
     declare total decimal(8,2);
     -- declare variable for total
-    declare taxrate int default 6;  --声明存储过程中的变量
+    declare taxrate int default 6;  -- 声明存储过程中的变量
 
     select sum(item_price*quantity) 
     from orderitems
@@ -695,15 +739,15 @@ begin
     if taxable then
         select total+(total/100*taxrate) into total;
     end if;
-    --and finally save to out variable
+    -- and finally save to out variable
     select total into ototal;
 end;$$
 delimiter ;
---调用存储过程
+-- 调用存储过程
 call ordertotal(20005,1,@total);
---显示结果
+-- 显示结果
 select @total;
---删除存储过程
+-- 删除存储过程
 drop procedure ordertotal;
 ```
 这里我抄的网上的代码，他这个分隔符看的我心惊胆战的(被我改了)
@@ -717,3 +761,134 @@ show procedure status like 'ordertotal';
 ## 游标
 游标主要用于交互式应用，其中用户需要滚动屏幕上的数据，并对数据进行浏览或更改。
 mysql游标只能用于存储过程(和函数)。
++ 使用前必须定义它
++ 声明后必须*打开*以供使用
++ 对填有数据的游标，根需取行
++ 结束使用必须关闭
+
+### 创建、打开、关闭、使用
+```sql
+delimiter #
+CREATE procedure processorders()
+begin
+
+    -- Declare local variables
+    DECLARE done BOOLEAN default 0;
+    DECLARE o INT;
+    DECLARE t DECIMAL(8,2);
+
+    -- Declare the cursor
+    DECLARE ordernumbers CURSOR
+    FOR
+    SELECT order_num FROM orders;
+
+    -- Declare continue handler
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
+
+    -- Create a table to store the results
+    CREATE TABLE IF NOT EXISTS ordertotals
+        (order_num INT, total DECIMAL(8,2));
+
+    -- Open the cursor
+    OPEN ordernumbers;
+
+    -- Loop through all rows
+    REPEAT
+        
+        -- Get order number
+        FETCH ordernumbers INTO o;
+        
+        -- Get the total for this order
+        -- 就是上一章的函数
+        CALL ordertotal(o,1,t);
+
+        -- Insert order and total into ordertotals
+        Insert into ordertotals(order_num, total)
+        VALUES(o,t);
+
+    -- End of loop
+    UNTIL done END REPEAT;
+
+    -- Close the cursor
+    CLOSE ordernumbers;
+    
+END;#
+
+delimiter ;
+
+```
+此存储过程不返回数据，但它能够创建和填充另一个表。用CALL执行了另一个存储过程来计算并用Insert存储下来。
+坑：拼写，`--`后面跟空格，错误会显示出来，就在里面之中。
+
+## 触发器
+如果你想要某条语句在事件发生时自动执行，就需要触发器
++ 唯一的触发器名
++ 触发器关联的表
++ 触发器相应的活动（delete、insert、update）
++ 触发器何时执行
+
+```sql
+CREATE TRIGGER neworder AFTER INSERT ON orders
+FOR EACH ROW SELECT NEW.order_num into @ee;
+```
+**不推荐使用**
+
+## 事务处理
+MySQL 事务主要用于处理操作量大，复杂度高的数据。比如说，在人员管理系统中，你删除一个人员，你即需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务！
+1. 在MySQL 中只有使用了Innodb数据库引擎的数据库或表才支持事务
+2. 事务处理可以用来维护数据库的完整性，保证成批的SQL 语句要么全部执行，要么全部不执行
+3. 事务用来管理 insert,update,delete 语句
+
+### ROLLBACK
+```sql
+SELECT * FROM customers;# 先检索一下当前表中的数据
+
+# 以下三行选中一块执行
+START TRANSACTION;#开始执行一个事务
+DELETE FROM customers;#删除表中数据，需要注意的是，如果要删除表中的数据，这个表和其他表不要有关联关系，否则报错，这里删除customers表就报错，换成一个单独的表，可以正常执行
+SELECT * FROM customers;#检查一下表中的数据是否被删除，正常是被清空的
+
+ROLLBACK;回退到START TRANSACTION之前的情形
+SELECT * FROM customers;#再次检查发现表中又有数据了
+```
+
+### COMMIT
+
+```sql
+# 从系统完全删除订单20010，因为涉及到删除两个数据表中的内容，所以使用事务块处理来保证订单不被部分删除，
+START TRANSACTION;
+DELETE FROM orderitems WHERE order_num=20010;
+DELETE FROM orders WHERE order_num=20010;
+COMMIT;#最后commit语句只在不出错的情况下提交更改，事务块中的任何一个语句错误，都不会做出更改
+```
+使用ROLLBACK和COMMIT就可以写入或撤销整个事务处理，但是只能对简单的事务处理才能这么做，更复杂的事务处理可能需要部分提交或回退。
+
+savepoint 是在数据库事务处理中实现“子事务”（subtransaction），也称为嵌套事务的方法。事务可以回滚到 savepoint 而不影响 savepoint 创建前的变化, 不需要放弃整个事务。
+```sql
+SAVEPOINT point1;    // 声明一个savepoint
+
+ROLLBACK TO point1;  // 回滚到point1
+```
+
+## 全球化和本地化
++ 字符集为字母和符号的集合
+```sql
+show character set;-- 字符集
+show collation;-- 校对
+show variables like 'collation%';
+-- 分割线
+create table mytable
+(...)defalut character set hebrew
+collate hebrew_general_ci;
+
+```
+编码为某个字符集成员的内部表示
+校对为规定字符如何比较的指令
+
+
+## 安全管理
+```sql
+creater user ben identified by 'p@$$wOrd';
+```
+设置权限使用GRANT语句，其反操作为REVOKE。
+可以做关于未来的授权

@@ -7,7 +7,7 @@ tags:
 
 categories:
 - lua
-- book-notes
+- book_notes
 
 ---
 

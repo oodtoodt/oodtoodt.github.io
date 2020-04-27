@@ -1,7 +1,16 @@
 ---
-title: vert.x-exampl-notes
+title: vert.x-example-notes
 date: 2020-04-17 11:06:55
 tags:
+- java
+- example
+- company
+
+categories:
+- java
+- frame
+- vert.x
+
 ---
 
 
@@ -223,7 +232,7 @@ vertx.eventBus().<String>consumer(...)
 然后我还搞明白了一件事
 这是异步！！！
 我往**deploy的res里面**向外部的arraylist或者数组加东西，然后从**外面**undeploy这个获取到的id。我为啥反应这么慢呢，是因为我确实对java不熟，不能确认lambda里能否对外面的值进行改动（可以的）
-想清楚了来龙去脉随便设计个timer就懂了。在外面println的时候a[0]依然是null或是原设值，在timer里等1ms(最低了，0都不让设的)就已经是改过的值了。(吹一波自己！periodic用timer解可还行，不过还是依赖了lambda传effective final的特性)
+想清楚了来龙去脉随便设计个timer就懂了。在外面println的时候`a[0]`依然是null或是原设值，在timer里等1ms(最低了，0都不让设的)就已经是改过的值了。(吹一波自己！periodic用timer解可还行，不过还是依赖了lambda传effective final的特性)
 时刻记住这里到处都是异步。可能有些东西就想通了。
 要是昨天先看这个例子我估计我就搞明白昨天那个sender里面开verticle是怎么回事了。
 + 理解异步

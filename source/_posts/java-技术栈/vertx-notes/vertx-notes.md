@@ -2,6 +2,15 @@
 title: vert.x-notes
 date: 2020-04-15 10:29:43
 tags:
+- java
+- company
+
+categories:
+- java
+- frame
+- vert.x
+- documentation
+
 ---
 
 我...我把整篇文章搬过来了！

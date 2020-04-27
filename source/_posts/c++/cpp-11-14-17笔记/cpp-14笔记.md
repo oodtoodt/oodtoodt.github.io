@@ -8,6 +8,7 @@ tags:
 
 categories:
 - c++
+- c++14
 
 ---
 
