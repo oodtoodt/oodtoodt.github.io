@@ -38,13 +38,13 @@ categories:
 （Maven）
 默认继承defaults from Spring Boot
 
-<properties>可以覆写需要的依赖
+`<properties>`可以覆写需要的依赖
 
-<dependencyMangement>是管理器，如果dependencies里的dependency自己没有声明version元素，那么maven就会到dependencyManagement里面去找有没有对该artifactId和groupId进行过版本声明，如果有，就继承它，没有报错。如果自己声明了那就无视这个管理器
+`<dependencyMangement>`是管理器，如果dependencies里的dependency自己没有声明version元素，那么maven就会到dependencyManagement里面去找有没有对该artifactId和groupId进行过版本声明，如果有，就继承它，没有报错。如果自己声明了那就无视这个管理器
 scope=import可以使得依赖不再单一继承
 但这样就不能覆写属性了，你需要在管理器里，spring-boot-dependecies entry之前添加你需要的属性作为dependency
 
-<plugins>标签可以打包项目为一个可执行的jar
+`<plugins>`标签可以打包项目为一个可执行的jar
 
 `
 mvn spring-boot:run

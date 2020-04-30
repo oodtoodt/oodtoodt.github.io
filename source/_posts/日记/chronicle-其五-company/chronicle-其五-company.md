@@ -133,3 +133,28 @@ RPC、RFC、并发/并行
 
 捏妈的，这本7周7并行真就一周换一门语言在这整活。我想直接看actor章节的自习了。什么语言不太想管了。好烦。
 问题是这本看完了我该干啥呢..
+
+## 20.4.28
+在看vertx-blueprint-todolist
+伊始便是下马威：「我们利用Vert.x Codegen来自动生成JSON转换类，本质是个注解器工具，需要配置apt」
+经历了一番波折，我找到了javadoc，总算弄得明白了一点。确实就是这么个东西，具体看看文档拉倒了，package-info里面的`@ModuleGen`依然不很清楚其中的意思，应该是指示生成代码的，不知道为什么要整成这样。意思是其他的都配置好了也不能生成？
+好，不给的话会告诉我必须要用ModuleGen生成。简单的理解就是`@DataObject(generateConverter = true)`必须绑定那个东西。而且看起来就是专门用来跟json对齐的
+~~todo~ 自己更新这个redis到新的vertx支持的版本
+了解cors
+把日志系统整合进去。
+现在不显示，那么之后看一看
+
+
+## 20.4.29
+这rxjava把我整疯了。。。
+乍一看逻辑通顺，细看起来一窍不通，啥也不懂。
+```java
+public Maybe<Todo> update(String todoId, Todo newTodo) {
+        return getCertain(todoId)
+            .map(old -> old.merge(newTodo))
+            .flatMap(e -> insert(e)
+                .flatMapMaybe(r -> Maybe.just(e))
+            );
+    }
+```
+这几行（一行）代码让我啃一个小时的。
