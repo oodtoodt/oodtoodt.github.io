@@ -135,7 +135,7 @@ lua["f"] = [](int a,int b,sol::object c){
 ```
 
 ### c++类中的类
-所有不是原始类、string类、函数类、指定的sol类: sol::table,sol::thread,sol::error,sol::object，透明参数类型:sol::varidic_arg,sol::this_state,sol::this_environment，usertype<T>类: sol::usertype
+所有不是原始类、string类、函数类、指定的sol类: sol::table,sol::thread,sol::error,sol::object，透明参数类型:sol::varidic_arg,sol::this_state,sol::this_environment，`usertype<T>`类: sol::usertype
 的都被设置为userdata+usertype
 
 来了来了，移动语义、浅拷贝（其实不是浅拷贝，只是说是被lua拥有了，然后会被lua的虚拟机在垃圾回收的时候删掉），正常的等号都会拷贝
