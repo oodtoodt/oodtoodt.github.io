@@ -1,0 +1,1025 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="company,java,example," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在把文档全部复制粘贴了之后，我意识到这根本没啥用。或者说用途有限，留下一个初步印象。来读example代码，写点东西记一记 ongoing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vert.x-example-notes">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/04/17/java-%E6%8A%80%E6%9C%AF%E6%A0%88/vertx-notes/vertx-example-notes/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="在把文档全部复制粘贴了之后，我意识到这根本没啥用。或者说用途有限，留下一个初步印象。来读example代码，写点东西记一记 ongoing">
+<meta property="article:published_time" content="2020-04-17T03:06:55.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:03:37.000Z">
+<meta property="article:author" content="eco_oodt">
+<meta property="article:tag" content="company">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="example">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/04/17/java-技术栈/vertx-notes/vertx-example-notes/"/>
+
+
+
+
+
+  <title>vert.x-example-notes | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/04/17/java-%E6%8A%80%E6%9C%AF%E6%A0%88/vertx-notes/vertx-example-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vert.x-example-notes</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-17T11:06:55+08:00">
+                2020-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/frame/" itemprop="url" rel="index">
+                    <span itemprop="name">frame</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/frame/vert-x/" itemprop="url" rel="index">
+                    <span itemprop="name">vert.x</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/17/java-%E6%8A%80%E6%9C%AF%E6%A0%88/vertx-notes/vertx-example-notes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/17/java-技术栈/vertx-notes/vertx-example-notes/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/04/17/java-%E6%8A%80%E6%9C%AF%E6%A0%88/vertx-notes/vertx-example-notes/" class="leancloud_visitors" data-flag-title="vert.x-example-notes">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在把文档全部复制粘贴了之后，我意识到这根本没啥用。或者说用途有限，留下一个初步印象。<br>来读example代码，写点东西记一记</p>
+<p>ongoing</p>
+<a id="more"></a>
+
+<h3 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h3><p>会经常性的抽风</p>
+<h2 id="Net-Http"><a href="#Net-Http" class="headerlink" title="Net/Http"></a>Net/Http</h2><h3 id="net-和-http"><a href="#net-和-http" class="headerlink" title="net 和 http"></a>net 和 http</h3><p>NetServer、NetClient<br>HttpServer、HttpClient<br>服务器方面<br>net用到了Pump.pump(sock,sock).start()，http用的是req.response().putheader().end();<br>net是connectHandler ，http是requestHandler</p>
+<p>客户端<br>net是connect，socket = res.result();,然后用socket操作,socket.handler<br>http直接是getNow,resp就可以操作了，.</p>
+<p>当然，echo的功能是回声，而http-simple的功能就只是显示hello world<br>所以pump(rs,ws)，基本就是读取然后回复了</p>
+<h3 id="ssl（https）"><a href="#ssl（https）" class="headerlink" title="ssl（https）"></a>ssl（https）</h3><p>两种ssl在根本上差不多，XXClientOptions().setSsl().setTrustAll()，当然这种不安全，应当配置turst store和包含该客户端信任的服务器证书</p>
+<h3 id="proxy"><a href="#proxy" class="headerlink" title="proxy"></a>proxy</h3><p>这就真的…套了好多层了，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vertx.createHttpServer().requestHander(req-&gt;&#123;</span><br><span class="line">    ...</span><br><span class="line">    HttpClientRequest c_req = client.request(req.method(),<span class="number">8282</span>,<span class="string">"localhost"</span>,req.uri(),c_res-&gt;&#123;</span><br><span class="line">        ...</span><br><span class="line">        c_res.handler(data-&gt;&#123;</span><br><span class="line">            ...</span><br><span class="line">            req.response().write(data);</span><br><span class="line">        &#125;);</span><br><span class="line">        c_res.endHandler((v) -&gt; req.response().end());</span><br><span class="line">    &#125;);</span><br><span class="line">    c_req.setChunked();</span><br><span class="line">    c_req.headers().setAll(req.headers());</span><br><span class="line">    req.handler(data-&gt;&#123;</span><br><span class="line">        ...</span><br><span class="line">        c_req.write(data);</span><br><span class="line">    &#125;);</span><br><span class="line">    req.endHandler((v) -&gt; c_req.end());</span><br><span class="line">&#125;).lesten(<span class="number">8080</span>);</span><br></pre></td></tr></table></figure>
+<p>还分了两种，一种是用了ProxyOptions,用套接字连接端点服务器然后传递其他事件的，一种看起来简单一些，就是个代理接受请求。</p>
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><p>老实说这个例子挺失败的…说是双工但是怎么看都接受不到东西，我也不知道是html写的有问题还是这里的vertx写的有问题，总之，我没成功。那也没啥好探究了的（</p>
+<h3 id="本地文件"><a href="#本地文件" class="headerlink" title="本地文件"></a>本地文件</h3><ul>
+<li>如何用本地html<br>这个简单</li>
+</ul>
+<h3 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h3><ul>
+<li>如何处理HTML form<br>虽然很简单，但是顺序很奇怪，像是被sort过，也有可能是异步的原因（但是每次都一样的，2143</li>
+</ul>
+<h3 id="SimpleFormUploadServer-java"><a href="#SimpleFormUploadServer-java" class="headerlink" title="SimpleFormUploadServer.java"></a>SimpleFormUploadServer.java</h3><ul>
+<li>如何处理form upload<br>这不就是我们那个10.xx里面有个奇怪文件夹嘛，一模一样的</li>
+</ul>
+<h3 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h3><p>这个是告诉你怎么直接泵送的，上下各写了一个Pump。<br>但我还是不怎么明白：这东西有什么用？对大文件直接落到本地的.uploaded文件，然后呢？</p>
+<h3 id="sharing"><a href="#sharing" class="headerlink" title="sharing"></a>sharing</h3><ul>
+<li>如何sharing 让多台服务器在同一主机和端口上侦听。尝试部署一个以上的实例。<br>是关于怎么跑很多核的，无非就是set了一下Instances，然后这里是用轮询的方式分发给任意一个处理的（传入新连接的时候）</li>
+</ul>
+<h3 id="HTTP2-s1mple"><a href="#HTTP2-s1mple" class="headerlink" title="HTTP2 s1mple"></a>HTTP2 s1mple</h3><p>和ssl差不太多，但如果你记得h2和h2c的话，你就会知道这个.setUseAlpn的含义了。</p>
+<blockquote>
+<p>ALPN是一个TLS的扩展，它在客户端和服务器开始交换数据之前协商协议。不支持ALPN的客户端仍然可以执行经典的SSL握手。通常情况，ALPN会对 h2 协议达成一致，尽管服务器或客户端决定了仍然使用 HTTP/1.1 协议。<br>要处理 h2c 请求，TLS必须被禁用，服务器将升级到 HTTP/2 以满足任何希望升级到 HTTP/2 的 HTTP/1.1 请求。它还将接受以 <code>PRI*HTTP/2.0\r\nSM\r\n</code>开始的h2c直接连接。</p>
+</blockquote>
+<h3 id="HTTP2-push"><a href="#HTTP2-push" class="headerlink" title="HTTP2 push"></a>HTTP2 push</h3><p>服务器推送(Server Push)是 HTTP/2 支持的一个新功能，可以为单个客户端请求并行发送多个响应。<br>写到这我发现我真正应该该笔记的是啥<br>不过之前的价值也不太大吧。</p>
+<ul>
+<li>如何用本地jspush</li>
+<li>如何用本地的index.html（首次是用sendfile那里，很简单，但是组合可能就成为障碍</li>
+<li>稍加比对会发现有get和getnow两种，前者是<strong>创造</strong>一个HTTP GET,虽然大部分都被Deprecated(指在4中就会发生变化推荐使用WebClient)，返回一个Request，后者返回的是Client</li>
+</ul>
+<h3 id="h2c"><a href="#h2c" class="headerlink" title="h2c"></a>h2c</h3><p>用h2c而不是tls<br>但是很奇怪的在网上显示的version是http1.1，而用客户端收到的就是2.0.【行吧客户端自己设了一下才收的数据，还说是不适用于不支持h2c的浏览器..嗯行吧，而且这应该就是正统h2c的用法了。</p>
+<h3 id="custom-frame"><a href="#custom-frame" class="headerlink" title="custom frame"></a>custom frame</h3><p>还以为frame是框架啥的。。发现就是帧，3个参数8bit的type，8bit的flags，后面就是payload</p>
+<h2 id="Event-Bus"><a href="#Event-Bus" class="headerlink" title="Event Bus"></a>Event Bus</h2><h3 id="点对点"><a href="#点对点" class="headerlink" title="点对点"></a>点对点</h3><p>两边都注册个函数，收发就行了。</p>
+<ul>
+<li>这里是用的一致名称来搜索地址的</li>
+</ul>
+<h3 id="发布-订阅"><a href="#发布-订阅" class="headerlink" title="发布/订阅"></a>发布/订阅</h3><p>区别太细微以至于我一开始没看到。。。</p>
+<ul>
+<li>发布是publish，意味着都能收到。</li>
+<li>点对点是send，即便同地址有许多，也只会用不严格的轮询算法选择其中一个。</li>
+</ul>
+<h3 id="成了，Codecs"><a href="#成了，Codecs" class="headerlink" title="成了，Codecs"></a>成了，Codecs</h3><p>为了支持发送所有对象，你要为对象类型注册一个编解码器<br>问题是，API里找不到这个编解码器<br>当我想自行解决问题的时候，问题就变得无法解决了起来<br>成了，解决了。怪不得没有，原来注册编解码器的所有都是自己写的——这个CustomMessage根本就是在目录下的一个java文件而已<br>那这么说这个例子还挺有借鉴价值的</p>
+<ul>
+<li>编解码器要怎么写：实现哪些方法，哪些是固定格式，比如怎么出json</li>
+<li>整个流程<br>以下是胡比比：<br>sender先计时器用eventbus每秒向cluster receiver发一个自定义消息，等待reply<br>还部署了一个local receiver用的verticle实例，每两秒向local receiver发送消息并等待回复。</li>
+</ul>
+<p>这里面的local receiver是自己写的，里面就是一个叫<code>local-message-receiver</code>的eventbus用来接收消息，可以认为是用verticle deploy了实例之后他就接进来了。<br>不不不。我觉得只是随便开了一个verticle，为了辨认起了local receiver的class的名字，目的就是异步，就是说我不在同一个eventloop里面搞多个事件。<br>我又变卦了。我现在觉得是前者。原因是创建verticle必然会把它分配给一个eventloop，并在里面执行它的start（极大可能是在当前eventloop里执行）<br>这里我理解就是，不需要你自己开这边这个了，另一个clusterreceiver还是需要自己开。local会自己开，甚至存在非常奇怪的继承</p>
+<p>注意到在sender里面刚开始就注册了codec，后面就不用了。即便是在sender里面deploy的localreceiver内部的start，也不注册了。<br>这个继承关系让我摸不到头脑。<br>你要说这不是继承，那这是什么呢<br>某种神奇的注册机制，相当于把代码提上来？<br>反射？</p>
+<p>经过半小时的纠缠，我现在看法又改变了。<br>我现在觉得是一个依赖线程或者说是eventloop的context在搞鬼。比如我们的context信息如果是相同的，草，我要做实验</p>
+<p>实验做完了，debug一点一点看的。<br>首先，这个事就是个全局环境。两者的vertx是相同的——vertx是什么？vertx就是个全局的超级对象，是vert.x框架下的核心。而只要vertx相同，那么eventbus就相同。<br>而我是通过deploy的方式在当前的vertx里新建了verticle，所以我们的vertx是相同的，甚至上下文context也有非常多相同的：owner(就是vertx本尊了)，tccl（我们暂且认为是上下文装载器，某种filter），workerpoll和internal版本，orderedtasks和internal版本。<br>而如果！我新跑一个ClusterReceiver，那么这个vertx将和之前不同。这一不同几乎就是完！全！不！同！基本上找不到相同的数据了。</p>
+<p>其他的没啥。基本上的逻辑就这样了。codec的内容我们以后再看…下一个下一个</p>
+<h3 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h3><p>嗯so easy，就跟net的时候。。。<br>等等？这也太干脆了，就直接在点对点的基础上在调用时候使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Runner.runClusteredExample(Sender<span class="class">.<span class="keyword">class</span>,</span></span><br><span class="line"><span class="class">        <span class="title">new</span> <span class="title">VertxOptions</span>().<span class="title">setEventBusOptions</span>(<span class="title">new</span> <span class="title">EventBusOptions</span>()</span></span><br><span class="line"><span class="class">            .<span class="title">setSsl</span>(<span class="title">true</span>)</span></span><br><span class="line">            .setKeyStoreOptions(new JksOptions().setPath("keystore.jks").setPassword("wibble"))</span><br><span class="line">            .setTrustStoreOptions(<span class="keyword">new</span> JksOptions().setPath(<span class="string">"keystore.jks"</span>).setPassword(<span class="string">"wibble"</span>))</span><br><span class="line">        )</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+<p>下面的start一模一样！！作者应该也是就这么复制的hhh</p>
+<ul>
+<li>如何传递ssl的eventbus,这里建议去看runner源码，下面会有解析</li>
+</ul>
+<h2 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h2><p>这东西是用来做异步结果协调的。主要的问题是，文档里没得解释…只能自己看了<br>教你写future/promise</p>
+<blockquote>
+<p>promise表示可能已经或可能尚未发生的动作的可写面(writable side)。可以用future（）方法返回与承诺相关联的Future，future可用于获取承诺完成的通知并检索其值。<br>future表示可能已经或可能尚未发生的操作的结果(result)。</p>
+</blockquote>
+<p>里面也写了mimic，即模拟一个消耗时间的操作和另一个消耗时间的操作异步顺序链接（依次执行异步调用）</p>
+<ul>
+<li>如何异步协调</li>
+</ul>
+<h2 id="verticle"><a href="#verticle" class="headerlink" title="verticle"></a>verticle</h2><h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h3><p>这个结果太绝了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Main verticle has started, let&#39;s deploy some others...</span><br><span class="line">In OtherVerticle.start</span><br><span class="line">In OtherVerticle.start</span><br><span class="line">In OtherVerticle.start</span><br><span class="line">In OtherVerticle.start</span><br><span class="line">In OtherVerticle.start</span><br><span class="line">In OtherVerticle.start</span><br><span class="line">Config is &#123;&#125;</span><br><span class="line">Config is &#123;&#125;</span><br><span class="line">Config is &#123;&#125;</span><br><span class="line">Config is &#123;&#125;</span><br><span class="line">Config is &#123;&#125;</span><br><span class="line">Config is &#123;&quot;foo&quot;:&quot;bar&quot;&#125;</span><br><span class="line">Other verticle deployed ok, deploymentID &#x3D; 58929df6-6dd1-4972-82e2-9be041e6c313</span><br><span class="line">In OtherVerticle.stop</span><br><span class="line">Undeployed ok!</span><br></pre></td></tr></table></figure>
+<p>嗯。那么首先start和config只是分了两个system.out.println而已，然后被deploy直接就分离了。<br>还有other…那个就是deploy的第二个参数而已，也接到非常神奇的后面了。<br>最后unploy倒是没什么问题，算是顺序的了。<br>值得一提的是带config的跑到最后了，估计就是谁跑得快谁开吧。<br>我们看下文档：（按顺序）</p>
+<pre><code>+ Deploying without waiting for it to deploy
++ Deploying and waiting for it to deploy(指要传参给res)
++ Passing configuration to another verticle during deploy(最慢)
++ Deploying more than one instance
++ Deploying as a worker verticle
++ Undeploying a verticle deployment explicitly</code></pre><ul>
+<li>deploy的顺序</li>
+<li>理解异步<h3 id="异步启动和终止"><a href="#异步启动和终止" class="headerlink" title="异步启动和终止"></a>异步启动和终止</h3>这里的参数就是<code>Future&lt;Void&gt; starFuture</code>了，见具体章节。<br>即需要时间来启动或者清理的时候，我们需要用这种启动来避免阻塞<br>不是问题</li>
+<li>异步启动</li>
+</ul>
+<h3 id="worker-verticle实例"><a href="#worker-verticle实例" class="headerlink" title="worker verticle实例"></a>worker verticle实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vertx.eventBus().&lt;String&gt;consumer(...)</span><br></pre></td></tr></table></figure>
+<p>太绝了，吓坏孩子了。<br>反正就是定义这个eventbus里面的<code>public &lt;T&gt;messageconsumer&lt;T&gt;</code>都是string了(T直接就是string了)<br>重点不在这！<br>重点在这里向我们展示了如何使用worker verticle，虽然只是配置了一下options，但是你会发现，虽然你开的worker是在0里开始的，但是！它consume eventbus的时候就是从worker-thread-1开始干的了<br>！！！<br>注意！你开的worker是从worker-0开始的，你的主verticle是从eventloop-thread-0开始的！！<br>我日，我改了半天想探究一下为啥俩0一个1，原来如此。<br>然后我还搞明白了一件事<br>这是异步！！！<br>我往<strong>deploy的res里面</strong>向外部的arraylist或者数组加东西，然后从<strong>外面</strong>undeploy这个获取到的id。我为啥反应这么慢呢，是因为我确实对java不熟，不能确认lambda里能否对外面的值进行改动（可以的）<br>想清楚了来龙去脉随便设计个timer就懂了。在外面println的时候<code>a[0]</code>依然是null或是原设值，在timer里等1ms(最低了，0都不让设的)就已经是改过的值了。(吹一波自己！periodic用timer解可还行，不过还是依赖了lambda传effective final的特性)<br>时刻记住这里到处都是异步。可能有些东西就想通了。<br>要是昨天先看这个例子我估计我就搞明白昨天那个sender里面开verticle是怎么回事了。</p>
+<ul>
+<li>理解异步</li>
+<li>如何用worker-verticle写多线程</li>
+</ul>
+<h2 id="execblocking"><a href="#execblocking" class="headerlink" title="execblocking"></a>execblocking</h2><p>指以不阻塞事件循环的方式来包含阻塞与非阻塞代码。<br>对runner产生了一点小小的想法。一会解析一下runner<br>这里又出现了<code>vertx.&lt;String&gt;executeBlocking</code>，但是你会发现，如果删去对于promise(第一个函参)是没影响的，但是对第二个函参res就有影响了，<code>res.result</code>变成了object编译错误。回过头看刚才那个例子，明白是影响到了后面的函参提供的构造(body())。<br>好，不扯闲篇，</p>
+<ul>
+<li>如何用executeblocking API来执行阻塞代码并获得阻塞代码执行后的异步回调的结果</li>
+</ul>
+<p>这个结果看不太出什么，我们如果让他sleep5s，然后我们打开localhost8080的时候会被疯狂警告：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4月 21, 2020 2:16:29 下午 io.vertx.core.impl.BlockedThreadChecker</span><br><span class="line">警告: Thread Thread[dedicated-pool-0,5,main]&#x3D;Thread[dedicated-pool-0,5,main] has been blocked for 4887 ms, time limit is 0 ms</span><br></pre></td></tr></table></figure>
+<p>每秒一次。代表警告这个线程被阻塞的时间太久。<br>其他没啥说的，executeBlocking两个函参，第一个是要阻塞的代码是什么，第二个是异步回调执行结果</p>
+<h2 id="HA"><a href="#HA" class="headerlink" title="HA"></a>HA</h2><p>这里是展示高可用性的，当原始节点死亡时，会将顶点重新部署到另一个节点<br>不清楚ide里能不能模拟集群环境<br>初步失败了，感觉不知道怎么杀了这个进程，kill找不到progress，wsl又蠢得一比</p>
+<h2 id="JavaScript-Verticle-and-NPM"><a href="#JavaScript-Verticle-and-NPM" class="headerlink" title="JavaScript Verticle and NPM"></a>JavaScript Verticle and NPM</h2><p>没啥关系不看了。</p>
+<h2 id="json"><a href="#json" class="headerlink" title="json"></a>json</h2><ul>
+<li>如何用流json来解析包含许多小对象的大数组。</li>
+<li>mapTo的Json器怎么写<br>唔，依赖com.fasterxml.jackson这个东西。pom有点问题，一层层找上去发现是依赖崩了。亏我还去查了半天的文档。接受教训，先看依赖，再找文档</li>
+</ul>
+<p>是在用ReadStream的接口，用AsyncFile来读写实现这个接口的。<br>注意到Http|C/S|Request、MessageConsumer、Net/Web|Socket都实现了这个接口的<br>流(完全)到达时调用endHandler。<br>handler：设置一个处理器，它将从ReadStream读取项<br>没什么好看的了</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/company/" rel="tag"># company</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/example/" rel="tag"># example</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/16/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A-1/" rel="next" title="名词解释-1">
+                <i class="fa fa-chevron-left"></i> 名词解释-1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/24/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="prev" title="java多线程">
+                java多线程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/04/17/java-技术栈/vertx-notes/vertx-example-notes/"
+           data-title="vert.x-example-notes" data-url="http://oodtoodt.github.io/2020/04/17/java-%E6%8A%80%E6%9C%AF%E6%A0%88/vertx-notes/vertx-example-notes/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#idea"><span class="nav-number">1.</span> <span class="nav-text">idea</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Net-Http"><span class="nav-number"></span> <span class="nav-text">Net&#x2F;Http</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#net-和-http"><span class="nav-number">1.</span> <span class="nav-text">net 和 http</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssl（https）"><span class="nav-number">2.</span> <span class="nav-text">ssl（https）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy"><span class="nav-number">3.</span> <span class="nav-text">proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket"><span class="nav-number">4.</span> <span class="nav-text">WebSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地文件"><span class="nav-number">5.</span> <span class="nav-text">本地文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表单"><span class="nav-number">6.</span> <span class="nav-text">表单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SimpleFormUploadServer-java"><span class="nav-number">7.</span> <span class="nav-text">SimpleFormUploadServer.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upload"><span class="nav-number">8.</span> <span class="nav-text">upload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sharing"><span class="nav-number">9.</span> <span class="nav-text">sharing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP2-s1mple"><span class="nav-number">10.</span> <span class="nav-text">HTTP2 s1mple</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP2-push"><span class="nav-number">11.</span> <span class="nav-text">HTTP2 push</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h2c"><span class="nav-number">12.</span> <span class="nav-text">h2c</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#custom-frame"><span class="nav-number">13.</span> <span class="nav-text">custom frame</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-Bus"><span class="nav-number"></span> <span class="nav-text">Event Bus</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#点对点"><span class="nav-number">1.</span> <span class="nav-text">点对点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布-订阅"><span class="nav-number">2.</span> <span class="nav-text">发布&#x2F;订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成了，Codecs"><span class="nav-number">3.</span> <span class="nav-text">成了，Codecs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL"><span class="nav-number">4.</span> <span class="nav-text">SSL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Future"><span class="nav-number"></span> <span class="nav-text">Future</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#verticle"><span class="nav-number"></span> <span class="nav-text">verticle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy"><span class="nav-number">1.</span> <span class="nav-text">deploy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步启动和终止"><span class="nav-number">2.</span> <span class="nav-text">异步启动和终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#worker-verticle实例"><span class="nav-number">3.</span> <span class="nav-text">worker verticle实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#execblocking"><span class="nav-number"></span> <span class="nav-text">execblocking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HA"><span class="nav-number"></span> <span class="nav-text">HA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-Verticle-and-NPM"><span class="nav-number"></span> <span class="nav-text">JavaScript Verticle and NPM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json"><span class="nav-number"></span> <span class="nav-text">json</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

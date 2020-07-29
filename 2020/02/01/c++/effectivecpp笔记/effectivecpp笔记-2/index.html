@@ -1,0 +1,1096 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="old c++,home," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="写着写着就成了摘抄了，这书确实…内容充实资源管理与设计、声明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="effectivecpp笔记-2">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/02/01/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-2/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="写着写着就成了摘抄了，这书确实…内容充实资源管理与设计、声明">
+<meta property="article:published_time" content="2020-02-01T04:32:59.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:03:37.000Z">
+<meta property="article:author" content="eco_oodt">
+<meta property="article:tag" content="old c++">
+<meta property="article:tag" content="home">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/02/01/c++/effectivecpp笔记/effectivecpp笔记-2/"/>
+
+
+
+
+
+  <title>effectivecpp笔记-2 | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/02/01/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">effectivecpp笔记-2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-01T12:32:59+08:00">
+                2020-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/book-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">book_notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/02/01/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/02/01/c++/effectivecpp笔记/effectivecpp笔记-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/02/01/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-2/" class="leancloud_visitors" data-flag-title="effectivecpp笔记-2">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>写着写着就成了摘抄了，这书确实…内容充实<br>资源管理与设计、声明</p>
+<a id="more"></a>
+
+<hr>
+<h1 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a>资源管理</h1><p>所谓资源就是，一旦用了就必须归还给系统之物。<br>内存只是众多资源之一，他们还有：文件描述符(finle descriptors)、互斥锁、图形界面中的某些东西、数据库连接、网络sockets。</p>
+<h2 id="13-以对象管理资源"><a href="#13-以对象管理资源" class="headerlink" title="13:以对象管理资源"></a>13:以对象管理资源</h2><ul>
+<li>依赖「某函数总是会执行其delete语句」是行不通的</li>
+</ul>
+<h3 id="RAII"><a href="#RAII" class="headerlink" title="RAII"></a>RAII</h3><blockquote>
+<p>Resource Acquisition Is Initialization</p>
+</blockquote>
+<ul>
+<li><p>获得资源后立刻放进管理对象内。<br>以对象管理资源的思想经常被称为「资源取得的时机便是初始化时机」(RAII)，因为我们几乎总是在获得一笔资源后于同一语句内以它初始化某个管理对象。</p>
+</li>
+<li><p>管理对象运用析构函数确保资源被释放</p>
+</li>
+</ul>
+<p>这里提了一些auto_ptr的某些使用问题，不过因为被废弃了所以尽量少用吧</p>
+<p>【？96年居然就有shared_ptr了，不愧是TR1】</p>
+<ul>
+<li>auto_ptr和tr1::shared_ptr在析构函数里做delete而不是delete[]，所以在动态array中不要用智能指针。</li>
+</ul>
+<h2 id="14-在资源管理类中小心copying行为"><a href="#14-在资源管理类中小心copying行为" class="headerlink" title="14:在资源管理类中小心copying行为"></a>14:在资源管理类中小心copying行为</h2><ul>
+<li><p>复制RAII对象必须一并复制它所管理的资源</p>
+</li>
+<li><p>普遍而常见的RAII class copying行为是：一致copying、施行引用计数法。<br>在引用计数法中作者举例需要指定shared_ptr以防止对象在计数为0时不要被删掉：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lock</span><span class="params">(Mutex* pm)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unlock</span><span class="params">(Mutex* pm)</span></span>;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lock</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Lock</span><span class="params">(Mutex* pm)</span>:<span class="title">mutexPtr</span><span class="params">(pm,unlock)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        lock(mutexPtr.<span class="built_in">get</span>());</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">std</span>::tr1::<span class="built_in">shared_ptr</span>&lt;Mutex&gt; mutexPtr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>深拷贝</p>
+</li>
+<li><p>转移底部资源的拥有权问题。</p>
+</li>
+</ul>
+<h2 id="15-在资源管理类中提供对原始资源的访问"><a href="#15-在资源管理类中提供对原始资源的访问" class="headerlink" title="15:在资源管理类中提供对原始资源的访问"></a>15:在资源管理类中提供对原始资源的访问</h2><p>关于tr1::shared_ptr的显式和隐式转换</p>
+<ul>
+<li><p>.get()是显式转换（返回原始指针的复件）</p>
+</li>
+<li><p>重载了指针取值操作符，以方便隐式转换至底部原始指针。</p>
+</li>
+</ul>
+<p>问题在于APIs往往要求访问Raw resources（原始资源），所以每一个RAII class应该提供相应方法：</p>
+<h3 id="关于RAII-class"><a href="#关于RAII-class" class="headerlink" title="关于RAII class"></a>关于RAII class</h3><p>对于必须取得RAII对象内原始资源，提供隐式转换函数时可能出现的问题：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FontHandle <span class="title">getFont</span><span class="params">()</span></span>;<span class="comment">//     C API，简化掉参数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">releaseFont</span><span class="params">(FontHandle fh)</span><span class="comment">//    同一组C API</span></span></span><br><span class="line"><span class="function">class Font</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Font</span><span class="params">(FontHandle fh)</span>:<span class="title">f</span><span class="params">(fh)</span></span></span><br><span class="line"><span class="function">    </span>&#123;&#125;<span class="comment">//     采用pass-by-value，因为C API 这样做。</span></span><br><span class="line">    <span class="function">FontHandle <span class="title">get</span><span class="params">()</span> <span class="keyword">const</span></span>&#123; <span class="keyword">return</span> f; &#125;<span class="comment">//显式</span></span><br><span class="line">    <span class="comment">//为防止大量想使用api就必须调用get，提供隐式</span></span><br><span class="line">    <span class="comment">//如：</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    void changeFontSize(FontHandle f,int newSize);//C API</span></span><br><span class="line"><span class="comment">    Font f(getFont());</span></span><br><span class="line"><span class="comment">    int newFontSize();</span></span><br><span class="line"><span class="comment">    changeFontSize(f.get(),newFontSize);</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">operator</span> <span class="title">FontHandle</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> f; &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    Font f(getFont());</span></span><br><span class="line"><span class="comment">    int newFontSize();</span></span><br><span class="line"><span class="comment">    changeFontSize(f,newFontSize);</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    FontHandle f;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>问题是客户可能会在需要Font时意外创建一个FontHandle：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Font <span class="title">f1</span><span class="params">(getFont())</span></span>;</span><br><span class="line">FontHandle f2 = f1; <span class="comment">//原意是拷贝一个Font对象</span></span><br><span class="line">                    <span class="comment">//却反而将f1隐式转换为底部的</span></span><br><span class="line">                    <span class="comment">//FontHandle然后才复制它</span></span><br></pre></td></tr></table></figure>
+<p>即FontHandle由Font对象f1管理，但FontHandley也可以通过直接使用f2取得。那几乎不会有好下场。例如f1销毁，Font释放，但f2此时却是dangle（悬挂、虚吊）的</p>
+<h2 id="16-成对使用new和delete时要采取相同形式"><a href="#16-成对使用new和delete时要采取相同形式" class="headerlink" title="16:成对使用new和delete时要采取相同形式"></a>16:成对使用new和delete时要采取相同形式</h2><h3 id="请看错例"><a href="#请看错例" class="headerlink" title="请看错例"></a>请看错例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span>* stringArray = <span class="keyword">new</span> <span class="built_in">std</span>::<span class="built_in">string</span>[<span class="number">100</span>];</span><br><span class="line">...</span><br><span class="line"><span class="keyword">delete</span> stringArray;</span><br></pre></td></tr></table></figure>
+<p>行为不明确：100个对象中的99个不太可能被适当删除。</p>
+<p>当你使用new/delete时会发生什么</p>
+<ol>
+<li><p>内存被分配出来</p>
+</li>
+<li><p>针对此内存会有一个（或更多）构造函数被调用</p>
+</li>
+<li><p>针对此内存会有一个（或更多）析构函数被调用</p>
+</li>
+<li><p>释放内存。</p>
+</li>
+</ol>
+<p>问题在于：即将被删除的内存内究竟有多少对象？</p>
+<p>这个问题指向的是「 删除的指针所指是数组吗 」</p>
+<p>这里对于typedef和using等动作尤为重要。</p>
+<h2 id="17-以独立语句将新建的对象置入对象指针"><a href="#17-以独立语句将新建的对象置入对象指针" class="headerlink" title="17:以独立语句将新建的对象置入对象指针"></a>17:以独立语句将新建的对象置入对象指针</h2><p>考虑如下语句：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">priority</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processWidget</span><span class="params">(<span class="built_in">std</span>::tr1::<span class="built_in">shared_ptr</span>&lt;Widget&gt; pw,<span class="keyword">int</span> priority)</span></span>;</span><br><span class="line">processWidget(<span class="built_in">std</span>::tr1::<span class="built_in">shared_ptr</span>&lt;Widget&gt;(<span class="keyword">new</span> Widget),priority())</span><br></pre></td></tr></table></figure>
+<p>c++神奇的地方又出现了：<br>无有定义的编译器优化顺序：即有可能会是这样的：</p>
+<ol>
+<li>执行new Widget</li>
+<li>调用priority()</li>
+<li>调用tr1::shared_ptr构造函数<br>真如此，那么一旦在priority调用时导致异常，遗失了Widget返回的指针，会怎样？（为什么会遗漏？）<br>内存泄漏。使得，因为在资源被创建和资源被转化为资源管理对象两个时间点之间可能发生异常干扰<br>避免的方法很简单，把两个语句分开。</li>
+</ol>
+<p><em>注意c++17关于优化表达式顺序只是禁止交织，但是并未定义参数函数的调用顺序，他们依然是不确定的</em></p>
+<h1 id="设计与声明"><a href="#设计与声明" class="headerlink" title="设计与声明"></a>设计与声明</h1><p>关于如何设计和声明一个优秀的接口。<br>关于最频繁出现的几个问题。</p>
+<h2 id="18-让接口很容易被正确的使用，很难被错误的使用。"><a href="#18-让接口很容易被正确的使用，很难被错误的使用。" class="headerlink" title="18:让接口很容易被正确的使用，很难被错误的使用。"></a>18:让接口很容易被正确的使用，很难被错误的使用。</h2><p>一个准则：尽量使你的type的行为与内置type一致。</p>
+<p>任何接口如果要求客户必须记得做某些事情，就有着「不正确使用」的倾向。<br>阻止这种误用倾向的办法有：建立新类型、限制类型上的操作、束缚对象值、消除客户的资源管理责任。</p>
+<p>shared_ptr是如此好用，以致于我们必须考虑它的成本：比原始指针大且慢、使用辅助动态内存、并在多线程时受线程同步化的额外开销。<br>优势却非常多：消除「cross-DLL problem」的问题；带有删除器，避免各种资源泄漏，并在接口设计上非常优秀。</p>
+<h2 id="19-设计class犹如设计type"><a href="#19-设计class犹如设计type" class="headerlink" title="19:设计class犹如设计type"></a>19:设计class犹如设计type</h2><p>其实上条基本上提到了这点，但是我们要强调这种相似性，以致于为了设计高效的class，你的回答影响到设计规范的倾斜：</p>
+<ol>
+<li>新type的对象如何创建销毁？</li>
+<li>对象的初始化和对象的赋值该有什么样的区别？<br>构造函数和赋值操作符的行为和差异</li>
+<li>对象若被passed by value，意味着什么？<br>拷贝构造函数。</li>
+<li>什么是新type的合法值？<br>约束条件及成员函数（特别是构造函数、赋值操作符、所谓的setter函数）必须错误检查、抛出异常、函数异常说明(specifications)</li>
+<li>type需要配合继承图系吗？<br>受父类的设计的束缚，尤其是virtual或non-virtual的影响<br>允许其他class继承，会影响到声明到函数（尤其是析构）是否为虚</li>
+<li>新的type需要什么样的转换？</li>
+<li>什么操作符对新type是合理的？</li>
+<li>什么样的默认函数应该驳回？<br>必须声明为private的，指</li>
+<li>谁该用新type成员？<br>关于成员public、protected、private的选择。<br>关于函数、类是否是friend以及嵌套的问题。</li>
+<li>什么是新type的「未声明接口」<br>指我们的type对效率、异常安全性以及资源运用提供何种保证？这些保证将加上相应的约束条件</li>
+<li>新type有多么一般化？<br>是否需要直接用template？</li>
+<li>你真的需要这个新type吗？</li>
+</ol>
+<h2 id="20-宁以pass-by-reference-to-const替换pass-by-value"><a href="#20-宁以pass-by-reference-to-const替换pass-by-value" class="headerlink" title="20:宁以pass-by-reference-to-const替换pass-by-value"></a>20:宁以pass-by-reference-to-const替换pass-by-value</h2><p>我们这里避开移动构造函数也许是比较好的选择。<br>因为这里作者罗列的问题都被完美转发右值引用解决了。我们应该去看看在mordenc++里他有什么新的见解。这里我们单纯的来看这个const T&amp;的神奇之处。</p>
+<ul>
+<li>效率高：无复制存在，回避了构造和析构</li>
+<li>保护好：是const，无法被更改。</li>
+<li>避免slicing（对象切割）问题<br>指继承类对象以传值方式传递并被视为一个基类，基类的拷贝构造函数被调用此时使之行为像继承类对象的特质就全被切割掉了。<br>还是看代码：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Window</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WindowWithScrollBars</span>:</span> <span class="keyword">public</span> Window&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printNameAAndDisplay</span><span class="params">(Window w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt; w.name();</span><br><span class="line">    w.<span class="built_in">display</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这里的w会被构造成一个Window对象——就算传进去的是WindowWithScrollBars。<br>如果是个<code>const Window&amp; w</code>就会表现出传进去的类型。</li>
+</ul>
+<p>窥视c++编译器的底层，会发现references往往以指针实现出来。所以如果可以选择pass-by-value——尤其是哪些内置类型、stl、函数对象——就尽量使用pass-by-value</p>
+<h2 id="21-必须返回对象时，不要尝试返回一个reference"><a href="#21-必须返回对象时，不要尝试返回一个reference" class="headerlink" title="21:必须返回对象时，不要尝试返回一个reference"></a>21:必须返回对象时，不要尝试返回一个reference</h2><blockquote>
+<p>一旦程序员领悟了pass-by-value的效率牵涉，往往进化为十字军战士，一心一意根除pass-by-value带来的种种邪恶。在追求reference的纯度中，他们一定会犯下一个致命错误：开始传递一些reference指向并不存在的对象。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Rational(<span class="keyword">int</span> numerator = <span class="number">0</span>,<span class="keyword">int</span> denominator = <span class="number">1</span>);<span class="comment">//在24中说明不声明explicit的原因</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> n,d;<span class="comment">//分子、分母</span></span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">const</span> Rational <span class="keyword">operator</span>* (<span class="keyword">const</span> Rational&amp; lhs,<span class="keyword">const</span> Rational&amp; rhs);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>你发现你传了值，于是想改成引用，但是你不能凭空变出对象，于是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Rational&amp; <span class="keyword">operator</span>* (<span class="keyword">const</span> Rational&amp; lhs,<span class="keyword">const</span> Rational&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">    Rational result（lhs.n * rhs.n,lhs.d * rhs.d）;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>emmm，用现在的话来说：你返回的这个值是将亡值。问题是你返回了一个引用。<br>成了，未定义。所有指向局部对象的引用下场都不会太好。<br>于是你想了想，考虑在heap里构造对象。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Rational&amp; <span class="keyword">operator</span>* (<span class="keyword">const</span> Rational&amp; lhs,<span class="keyword">const</span> Rational&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">    Rational* result = <span class="keyword">new</span> Ratiol(lhs.n * rhs.n, lhs.d * rhs.d);</span><br><span class="line">    <span class="keyword">return</span> *result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你还是用了一个构造函数的调用。然后你发现了新的问题：谁该为你new的对象进行delete？<br>而且你发现这种delete是困难的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Rational w,x,y,z;</span><br><span class="line">w = x * y * z;</span><br><span class="line"><span class="comment">//operator*(operator*(x, y), z)</span></span><br></pre></td></tr></table></figure>
+<p>连续调用了两次operator*，两次new，你需要两个delete。但是这时候你已经没有合理的办法取得operator*返回的reference背后隐藏的那个指针了。</p>
+<p>你想起我们最初的目标是避免构造函数的多余消耗，你又有了主意。<br>还有办法可以避免构造函数:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Rational&amp; opertator* (<span class="keyword">const</span> Rational&amp; lhs,<span class="keyword">const</span> Rationaal* rhs)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">static</span> Rational result;</span><br><span class="line">    result = ... ;<span class="comment">//lhs * rhs，存进去。</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>就像所有static的设计一样，我们会立刻产生对多线程安全性的疑虑。<br>更深层的瑕疵如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> Rational&amp; lhs,</span><br><span class="line">                <span class="keyword">const</span> Rational&amp; rhs);</span><br><span class="line">Rational a,b,c,d;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">if</span>((a * b) == (c * d)) &#123;</span><br><span class="line">    <span class="comment">//相等动作</span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//不等动作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不用想了，if永为真。<br>因为他其实是这样的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">operator</span>==(<span class="keyword">operator</span>*(a, b), <span class="keyword">operator</span>*(c, d)))</span><br></pre></td></tr></table></figure>
+<p>于是你又想到static array<br>行了别想了。array需要一个n，n要定义多大？还需要将值放进array内，赋值需要成本难道不高吗？</p>
+<p><strong>当你必须在「返回一个reference和返回一个object中进行抉择时，选择正确的那个」</strong></p>
+<p>让编译器厂商鞠躬尽瘁去吧。</p>
+<h2 id="22-将成员变量声明为private"><a href="#22-将成员变量声明为private" class="headerlink" title="22:将成员变量声明为private"></a>22:将成员变量声明为private</h2><h3 id="不是public的原因"><a href="#不是public的原因" class="headerlink" title="不是public的原因"></a>不是public的原因</h3><ul>
+<li>语法一致性<br>不用记是用<code>.a</code>还是<code>.a()</code></li>
+<li>用函数可以对变量又更精确的控制<br>不准、只读、读写甚至只写访问的控制<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AccessLevels</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getReadOnly</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> readOnly; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setReadWrite</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123; readWrite = value; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getReadWrite</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> readWrite; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setWriteOnly</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123; writeOnly = value;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> noAAccess;</span><br><span class="line">    <span class="keyword">int</span> readOnly;</span><br><span class="line">    <span class="keyword">int</span> readWrite;</span><br><span class="line">    <span class="keyword">int</span> writeOnly;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>封装<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpeedDateCollection</span> &#123;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addValue</span><span class="params">(<span class="keyword">int</span> speed)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">averageSoFar</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+考虑averageSoFar的实现。一种做法是在class内设计一个成员变量，记录至今以来的速度平均值，每次调用只需返回就好。另一种做法是每次调用时重新计算，此时有权调取每一个速度值。</li>
+</ul>
+<p>第一种会使得每一个对象变大，因为你必须为用来存放平均值、累计总量、数据点数…的每个成员分配空间，然而函数却非常高效。后者则相反。<br>但我们但重点是，你封装了它，你可以替换不同的实现方式，客户最多只需重新编译（甚至不需）</p>
+<h3 id="一个准则"><a href="#一个准则" class="headerlink" title="一个准则"></a>一个准则</h3><p>成员变量的封装性与「成员变量的内容改变时所破坏的代码数量」成反比。<br>是的，protected不比public好到哪去，所有使用它的derived class都会被破坏。<br>所以只有private（封装）和其他（不封装）。</p>
+<h2 id="23-宁以non-member、non-friend替换member函数"><a href="#23-宁以non-member、non-friend替换member函数" class="headerlink" title="23:宁以non-member、non-friend替换member函数"></a>23:宁以non-member、non-friend替换member函数</h2><h3 id="直接来例子"><a href="#直接来例子" class="headerlink" title="直接来例子"></a>直接来例子</h3><p>想象有个class用来表示网页浏览器。这样的class可能提供的众多函数中，有一些用来清除下载元素高速缓存区、请出访问过的URLs的历史记录、以及移除系统中的所有cookies：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebBrowser</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clearCache</span><span class="params">( )</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clearHistory</span><span class="params">( )</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">removeCookies</span><span class="params">( )</span></span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//许多用户想一起执行他们，于是有：</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebBrowser</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clearEverything</span><span class="params">( )</span></span>;<span class="comment">//调用上面那仨</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>当然，也可以由一个由non-member函数调用适当的member函数而提供出来：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearBrowser</span><span class="params">(WebBrowser&amp; wb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    wb.clearCache();</span><br><span class="line">    wb.clearHistory();</span><br><span class="line">    wb.removeCookies( );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来我们讨论哪一个比较好。</p>
+<h3 id="一个直观的误解"><a href="#一个直观的误解" class="headerlink" title="一个直观的误解"></a>一个直观的误解</h3><p>面向对象的守则要求，数据以及操作数据的那些函数应该被捆绑在一块，这意味着member函数更好。不幸的是这个建议不正确。<br>与直观相反，成员函数clearEverything带来的封装性比clearBroser低。</p>
+<h3 id="关于封装："><a href="#关于封装：" class="headerlink" title="关于封装："></a>关于封装：</h3><p>如果某些东西被封装，那它就不再可见。愈多东西被封装，愈少的人看到，我们就有愈大的弹性去变化他。这就是我们推崇封装的原因：它使我们能够改变事物而只影响有限客户。</p>
+<h3 id="铺垫结束"><a href="#铺垫结束" class="headerlink" title="铺垫结束"></a>铺垫结束</h3><p>能够访问private成员变量的函数只有class的member函数加上friend函数。<br>回过头来再看，如果一个non-member、non-friend函数和member函数提供相同机能，答案就很明显了，后者是输家。<br>有两点事值得注意：</p>
+<ul>
+<li>这个论述只适用于non-member、non-friend函数</li>
+<li>只因在意封装性而让函数「成为类的非成员」并不意味它「不可以是另一个类的成员」</li>
+</ul>
+<h3 id="关于…namespace"><a href="#关于…namespace" class="headerlink" title="关于…namespace"></a>关于…namespace</h3><p>c++中，比较自然的做法是成为non-member并且要位于同一个namespace内。</p>
+<p>一个像WebBrowser这样的class可能有大量的便利函数，通常客户只对其中一些感兴趣。分离的最直接办法是将书签相关的函数声明于一个头文件，将cookie相关函数声明与另一个头文件。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//头文件webbrower.h</span></span><br><span class="line"><span class="keyword">namespace</span> WebBrowserStuff&#123;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebBrowser</span> &#123;</span> ... &#125;;</span><br><span class="line">    ...<span class="comment">//核心机能，例如所有客户都需要的non-member函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//头文件 webbrowserbookmarks.h</span></span><br><span class="line"><span class="keyword">namespace</span> WebBrowserStuff&#123;</span><br><span class="line">    ...<span class="comment">//与书签相关的便利函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//头文件 webbrowsercookies.h</span></span><br><span class="line"><span class="keyword">namespace</span> WebBrowserStuff&#123;</span><br><span class="line">    ...<span class="comment">//与cookies相关的便利函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另一个non-member non-friend函数的好处体现了出来：所有便利函数在多个头文件中却隶属同一命名空间，客户想用什么就声明什么头，同样也更方便扩展——只需添加更多函数到此命名空间即可（在新建的头文件里）</p>
+<p>class可以派生，但问题在于派生类无法访问基类中被封装的成员，是一种…次级的身份。另外不是所有类都适合做基类。</p>
+<h2 id="24-如果所有参数都需要类型转换，声明non-member函数"><a href="#24-如果所有参数都需要类型转换，声明non-member函数" class="headerlink" title="24:如果所有参数都需要类型转换，声明non-member函数"></a>24:如果所有参数都需要类型转换，声明non-member函数</h2><p>这条有点长，我们一点一点来看怎么回事。</p>
+<blockquote>
+<p>令class支持隐式类型转换是个坏主意。</p>
+</blockquote>
+<p>当然这条规则有其例外，最常见的例外是在建立数值类型时。假设你设计一个类用来表现有理数，那么允许整数隐式转换为有理数似乎非常合理。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Rational(<span class="keyword">int</span> numberator = <span class="number">0</span>,<span class="keyword">int</span> denominator = <span class="number">1</span>);<span class="comment">//构造函数刻意不为explicit，允许int-to-Rational隐式转换</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numerator</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">denominator</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">    <span class="comment">//你想做乘法，于是你写了个成员函数</span></span><br><span class="line">    <span class="keyword">const</span> Rational <span class="keyword">operator</span>* (<span class="keyword">const</span> Rational&amp; rhs) <span class="keyword">const</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>虽然正常运作没有问题，但是混合运算还是不太好：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = oneHalf * <span class="number">2</span>;<span class="comment">//ok</span></span><br><span class="line">result = <span class="number">2</span> * oneHalf;<span class="comment">//wrong!</span></span><br><span class="line">result = <span class="number">2.</span><span class="keyword">operator</span>*(oneHalf);<span class="comment">//一目了然了。</span></span><br></pre></td></tr></table></figure>
+<p>当然，编译器也会尝试寻找可被以下这般调用的<code>non-member operator*</code>(在命名空间内)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="keyword">operator</span>*(<span class="number">2</span>,one);</span><br></pre></td></tr></table></figure>
+<p>为什么交换过来就会出现问题？</p>
+<h3 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h3><p>编译器知道你在传递一个int，而函数需要一个Rational，于是它就真的这么做了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> Rational <span class="title">temp</span><span class="params">(<span class="number">2</span>)</span></span>;</span><br><span class="line">result = oneHalf * temp;</span><br></pre></td></tr></table></figure>
+<p>所以一旦Rational的构造函数为explicit，上面那个ok也会不ok起来。<br>结论是：只有当参数被列于参数列时，这个参数才是隐式类型转换的合格参与者。<br>有点像…Haskell的函数调用法，前面的是第一个参数，后面的是第二个参数。这里是第一个是对象本身（this），后面的是参数。</p>
+<h3 id="non-member函数"><a href="#non-member函数" class="headerlink" title="non-member函数"></a>non-member函数</h3><p>所以真正的实现应该是</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span> &#123;</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> Rational <span class="keyword">operator</span>*(<span class="keyword">const</span> Rational&amp; lhs,<span class="keyword">const</span> Rational&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> Rational(lhs.numerator() * rhs.numerator(),</span><br><span class="line">                    lhs.denominator() * rhs.denominator());</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">Rational <span class="title">oneFourth</span><span class="params">(<span class="number">1</span>, <span class="number">4</span>)</span></span>;</span><br><span class="line">Rational result;</span><br><span class="line">result = oneFourth * <span class="number">2</span>;<span class="comment">//ok</span></span><br><span class="line">result = <span class="number">2</span> * oneFourth;<span class="comment">//ok</span></span><br></pre></td></tr></table></figure>
+<p>剩下需要关心的就只是关于<code>operator*</code>是否应该是friend呢？</p>
+<p>然而本法则中的真理在Template C++中并让Rational成为class template时，又有了新的争议解法和惊人的设计牵连，我们以后再谈。</p>
+<h2 id="25-考虑写出不抛出异常的swap函数"><a href="#25-考虑写出不抛出异常的swap函数" class="headerlink" title="25:考虑写出不抛出异常的swap函数"></a>25:考虑写出不抛出异常的swap函数</h2><h3 id="default-swap"><a href="#default-swap" class="headerlink" title="default swap"></a>default swap</h3><p>swap实现如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T&amp; a, T&amp; b)</span></span>&#123;</span><br><span class="line">    <span class="function">T <span class="title">temp</span><span class="params">(a)</span></span>;<span class="comment">//好像实际用的赋值运算符，不过应该各种版本都有</span></span><br><span class="line">    a = b;</span><br><span class="line">    b = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="member-swap"><a href="#member-swap" class="headerlink" title="member swap"></a>member swap</h3><p>但是如果你需要一个只交换指针的swap，你需要自己写：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WidgetImpl</span> &#123;</span><span class="comment">//针对Widget设计的class</span></span><br><span class="line"><span class="keyword">public</span>:           <span class="comment">//细节不重要</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> a,b,c;<span class="comment">//may be many</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; v;<span class="comment">//意思是复制时间很长</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Widget(<span class="keyword">const</span> Widget&amp; rhs);</span><br><span class="line">    Widget&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Widget&amp; rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">        *pImpl = *(rhs.pImpl);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    WidgetImpl* pImpl;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line">    <span class="keyword">template</span>&lt;&gt;</span><br><span class="line">    <span class="keyword">void</span> swap&lt;Widget&gt;( Widget&amp; a,Widget&amp; b)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(a.pImpl, b.pImpl);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="non-member-swap"><a href="#non-member-swap" class="headerlink" title="non-member swap"></a>non-member swap</h3><p>很遗憾，这个函数不能通过编译：因为pImpl指针是private。<br>我们可以将这个特化版本声明为friend，但和平时不太一样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(Widget&amp; other)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="built_in">std</span>::swap;</span><br><span class="line">        swap(pImpl, other.pImpl);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line">    <span class="keyword">template</span>&lt;&gt;</span><br><span class="line">    <span class="keyword">void</span> swap&lt;Widget&gt; (Widget&amp; a, Widget&amp; b)</span><br><span class="line">    &#123;</span><br><span class="line">        a.swap(b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就好啦。还和STL容器有一致性，因为stl也是这样做的。<br>然而如果Widget和WidgetImpl都是class template的话…</p>
+<h3 id="std-swap的特化"><a href="#std-swap的特化" class="headerlink" title="std::swap的特化"></a>std::swap的特化</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">claass WidgetImpl &#123; ... &#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span> &#123;</span> ... &#125;;</span><br><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    <span class="keyword">void</span> swap&lt; Widget&lt;T&gt; &gt; (Widget&lt;T&gt;&amp; a, Widget&lt;T&gt;&amp; b)</span><br><span class="line">    &#123; a.swap(b);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>突然不合法。c++只允许对类模板偏特化，对函数模板施行偏特化是行不通的。<br>我查了一下，这个准则现在也适用。<br>一种偏特化函数模板的做法是添加一个重载版本：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span> <span class="params">(Widget&lt;T&gt;&amp; a,Widget&lt;T&gt;&amp; b)</span><span class="comment">//wrong</span></span></span><br><span class="line"><span class="function">    </span>&#123; a.swap(b); &#125;</span><br><span class="line">&#125;</span><br><span class="line">一般而言，重载函数模板没有问题，但<span class="built_in">std</span>是个特殊的命名空间，其管理规则也比较特殊。客户可以全特化<span class="built_in">std</span>内的templates，但不可以添加新的<span class="keyword">template</span>进去。</span><br><span class="line"></span><br><span class="line">现在我们还是需要一个更高效的swap但<span class="keyword">template</span>特定版本。这时候我们的答案还是声明一个non-member swap让它调用member swap，只是不再声明为`<span class="built_in">std</span>::swap`的特化或重载版本。</span><br><span class="line">```c++</span><br><span class="line"><span class="keyword">namespace</span> WidgetStuff &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Widget</span> &#123;</span> ... &#125;;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(Widget&lt;T&gt;&amp; a,Widget&lt;T&gt;&amp; b)</span><span class="comment">//not in std</span></span></span><br><span class="line"><span class="function">    </span>&#123; a.swap(b); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>记得那个<code>using std::swap</code>吗？你明白了吗？<br>注意，如果你不特意说明，编译器会优先寻找T专属的swap，即特化过的std::swap版本。</p>
+<p>需要小心这种调用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::swap(obj1,obj2);</span><br></pre></td></tr></table></figure>
+<p>某些迷茫的程序员的确这样用了，而这就是你的类对<code>std::swap</code>进行全特化的重要原因。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><p>提供一个public swap成员函数，绝不该抛出异常</p>
+</li>
+<li><p>在class或template所在命名空间内提供一个non-member swap，令他调用上面的swap</p>
+</li>
+<li><p>为你编写的class（不是template的）特化std::swap，令他调用你的swap函数</p>
+</li>
+<li><p>如果你调用swap，确定包含一个using声明。</p>
+</li>
+<li><p>swap一般用以提供极高的异常安全性保障，但是基于一个假设——成员函数版本的swap绝不抛出异常</p>
+</li>
+</ol>
+<p>这段有点长，多读几遍。</p>
+<h1 id="本期后记"><a href="#本期后记" class="headerlink" title="本期后记"></a>本期后记</h1><p>写着写着就冗长了起来，实在是单独的文字说明没有感染力也不会让人印象深刻。好在本书的例子都足够、典型。<br>那就没什么好办法了，必须经常看才行。笔记只是提供了一个不需要再重新通读，而只需要唤醒记忆的简单途径而已。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/old-c/" rel="tag"># old c++</a>
+          
+            <a href="/tags/home/" rel="tag"># home</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/23/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-1/" rel="next" title="effectivecpp笔记-1">
+                <i class="fa fa-chevron-left"></i> effectivecpp笔记-1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/07/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-3/" rel="prev" title="effectivecpp笔记-3">
+                effectivecpp笔记-3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/02/01/c++/effectivecpp笔记/effectivecpp笔记-2/"
+           data-title="effectivecpp笔记-2" data-url="http://oodtoodt.github.io/2020/02/01/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#资源管理"><span class="nav-number">1.</span> <span class="nav-text">资源管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#13-以对象管理资源"><span class="nav-number">1.1.</span> <span class="nav-text">13:以对象管理资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RAII"><span class="nav-number">1.1.1.</span> <span class="nav-text">RAII</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-在资源管理类中小心copying行为"><span class="nav-number">1.2.</span> <span class="nav-text">14:在资源管理类中小心copying行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-在资源管理类中提供对原始资源的访问"><span class="nav-number">1.3.</span> <span class="nav-text">15:在资源管理类中提供对原始资源的访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于RAII-class"><span class="nav-number">1.3.1.</span> <span class="nav-text">关于RAII class</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-成对使用new和delete时要采取相同形式"><span class="nav-number">1.4.</span> <span class="nav-text">16:成对使用new和delete时要采取相同形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请看错例"><span class="nav-number">1.4.1.</span> <span class="nav-text">请看错例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-以独立语句将新建的对象置入对象指针"><span class="nav-number">1.5.</span> <span class="nav-text">17:以独立语句将新建的对象置入对象指针</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计与声明"><span class="nav-number">2.</span> <span class="nav-text">设计与声明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#18-让接口很容易被正确的使用，很难被错误的使用。"><span class="nav-number">2.1.</span> <span class="nav-text">18:让接口很容易被正确的使用，很难被错误的使用。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-设计class犹如设计type"><span class="nav-number">2.2.</span> <span class="nav-text">19:设计class犹如设计type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-宁以pass-by-reference-to-const替换pass-by-value"><span class="nav-number">2.3.</span> <span class="nav-text">20:宁以pass-by-reference-to-const替换pass-by-value</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-必须返回对象时，不要尝试返回一个reference"><span class="nav-number">2.4.</span> <span class="nav-text">21:必须返回对象时，不要尝试返回一个reference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-将成员变量声明为private"><span class="nav-number">2.5.</span> <span class="nav-text">22:将成员变量声明为private</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不是public的原因"><span class="nav-number">2.5.1.</span> <span class="nav-text">不是public的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个准则"><span class="nav-number">2.5.2.</span> <span class="nav-text">一个准则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-宁以non-member、non-friend替换member函数"><span class="nav-number">2.6.</span> <span class="nav-text">23:宁以non-member、non-friend替换member函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接来例子"><span class="nav-number">2.6.1.</span> <span class="nav-text">直接来例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个直观的误解"><span class="nav-number">2.6.2.</span> <span class="nav-text">一个直观的误解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于封装："><span class="nav-number">2.6.3.</span> <span class="nav-text">关于封装：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#铺垫结束"><span class="nav-number">2.6.4.</span> <span class="nav-text">铺垫结束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于…namespace"><span class="nav-number">2.6.5.</span> <span class="nav-text">关于…namespace</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-如果所有参数都需要类型转换，声明non-member函数"><span class="nav-number">2.7.</span> <span class="nav-text">24:如果所有参数都需要类型转换，声明non-member函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式类型转换"><span class="nav-number">2.7.1.</span> <span class="nav-text">隐式类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-member函数"><span class="nav-number">2.7.2.</span> <span class="nav-text">non-member函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-考虑写出不抛出异常的swap函数"><span class="nav-number">2.8.</span> <span class="nav-text">25:考虑写出不抛出异常的swap函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#default-swap"><span class="nav-number">2.8.1.</span> <span class="nav-text">default swap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#member-swap"><span class="nav-number">2.8.2.</span> <span class="nav-text">member swap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-member-swap"><span class="nav-number">2.8.3.</span> <span class="nav-text">non-member swap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-swap的特化"><span class="nav-number">2.8.4.</span> <span class="nav-text">std::swap的特化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.8.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本期后记"><span class="nav-number">3.</span> <span class="nav-text">本期后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

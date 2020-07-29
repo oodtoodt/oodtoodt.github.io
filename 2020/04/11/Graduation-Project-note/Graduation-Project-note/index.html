@@ -1,0 +1,911 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="home,GP," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="可用的技术目标跟踪目标识别关系识别 最后这点最为重要，所以我们所有的跟踪或者识别技术都是为我们关系识别服务的——需要什么样的接口完全依赖于我们的需要罢了。所以我们来看关系识别 Referring Relationships重新看了一遍，这篇老板推的关系推断对我并没有什么帮助。他的本质是把NLP或者说模式识别跟目标识别联系在一起，如果需要一个名次去指代的话，那就是visual grounding：它">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graduation-Project-note">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/04/11/Graduation-Project-note/Graduation-Project-note/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="可用的技术目标跟踪目标识别关系识别 最后这点最为重要，所以我们所有的跟踪或者识别技术都是为我们关系识别服务的——需要什么样的接口完全依赖于我们的需要罢了。所以我们来看关系识别 Referring Relationships重新看了一遍，这篇老板推的关系推断对我并没有什么帮助。他的本质是把NLP或者说模式识别跟目标识别联系在一起，如果需要一个名次去指代的话，那就是visual grounding：它">
+<meta property="article:published_time" content="2020-04-11T00:44:18.000Z">
+<meta property="article:modified_time" content="2020-07-29T02:34:48.600Z">
+<meta property="article:author" content="eco_oodt">
+<meta property="article:tag" content="home">
+<meta property="article:tag" content="GP">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/04/11/Graduation-Project-note/Graduation-Project-note/"/>
+
+
+
+
+
+  <title>Graduation-Project-note | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/04/11/Graduation-Project-note/Graduation-Project-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Graduation-Project-note</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-11T08:44:18+08:00">
+                2020-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/project-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">project_notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/11/Graduation-Project-note/Graduation-Project-note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/11/Graduation-Project-note/Graduation-Project-note/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/04/11/Graduation-Project-note/Graduation-Project-note/" class="leancloud_visitors" data-flag-title="Graduation-Project-note">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="可用的技术"><a href="#可用的技术" class="headerlink" title="可用的技术"></a>可用的技术</h2><p>目标跟踪<br>目标识别<br>关系识别</p>
+<p>最后这点最为重要，所以我们所有的跟踪或者识别技术都是为我们关系识别服务的——需要什么样的接口完全依赖于我们的需要罢了。<br>所以我们来看关系识别</p>
+<h3 id="Referring-Relationships"><a href="#Referring-Relationships" class="headerlink" title="Referring Relationships"></a>Referring Relationships</h3><p>重新看了一遍，这篇老板推的关系推断对我并没有什么帮助。他的本质是把NLP或者说模式识别跟目标识别联系在一起，如果需要一个名次去指代的话，那就是visual grounding：它需要机器在接受一张图片和一个 query（指令）之后，「指」出图片当中与这个 query 所相关的物体。<br>很有趣的一点是这里用到了心理学：「受到心理学中移动聚光灯理论（the moving spotlight theory）的启发，通过使用谓词作为从一个实体到另一个实体的视觉注意转移操作来绕过这一挑战。」</p>
+<p>有一点点稍微的借鉴意义；<br>如果我们已经固定了整个query，那么算法就退化为某种识别了。所以不是没有一点意义。</p>
+<h3 id="Relation-Extraction"><a href="#Relation-Extraction" class="headerlink" title="Relation Extraction"></a>Relation Extraction</h3><p>信息抽取在自然语言处理中是一个很重要的工作，特别在当今信息爆炸的背景下，显得格外的生重要。从海量的非结构外的文本中抽取出有用的信息，并结构化成下游工作可用的格式，这是信息抽取的存在意义。信息抽取又可分为实体抽取或称命名实体识别，关系抽取以及事件抽取等。</p>
+<h3 id="Visual-Reasoning"><a href="#Visual-Reasoning" class="headerlink" title="Visual Reasoning"></a>Visual Reasoning</h3><p>Visual reasoning是个非常重要的问题，由于ResNet等大杀器出现，visual recognition任务本身快要被解决，所以计算机视觉的研究方向逐渐往认知过程的更上游走，即逻辑推理。</p>
+<h4 id="时间关系推理（Temporal-relational-reasoning）"><a href="#时间关系推理（Temporal-relational-reasoning）" class="headerlink" title="时间关系推理（Temporal relational reasoning）"></a>时间关系推理（Temporal relational reasoning）</h4><p>是指理解物体／实体在时间域的变化关系的能力。受启发于Relation Network，本文提出了Temporal Relation Network（TRN），用于学习和推理视频帧之间的时间依赖关系。relational resaoning一直是近期研究的热点，从图1中我们可以看出对于视频来说时序关系是重要的。</p>
+<h5 id="TSN-（-Temproal-Segment-Networks）"><a href="#TSN-（-Temproal-Segment-Networks）" class="headerlink" title="TSN （ Temproal Segment Networks）"></a>TSN （ Temproal Segment Networks）</h5><p>视频里面的连续帧是存在很多冗余信息的，所以dense temporal sampling是不必要的，sparse temporal sampling比较合适。所以TSN的思想之一就是从长的视频中稀疏采样一些帧，然后再聚合起来，这样就能建模长时间域了。另外一个思想，TSN借鉴于two-stream的结构来同时建模appearance和dynamic。</p>
+<h5 id="Relation-Network"><a href="#Relation-Network" class="headerlink" title="Relation Network"></a>Relation Network</h5><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>我们需要了解visual reasoning的问题</p>
+<blockquote>
+<p>视觉推理最重要的一点就是状态的转移，这种转移往往是通过visual object之间的relation的形式，eg，被人握住的瓶子，那条狗边上的人。但现在Visual Relationship最大的问题有三：（1）现有VG数据库标记太差（2）relationship的种类数量太庞大，不像单纯的物体分类，relationship几乎很难通过标记穷尽一张图上的所有relation，理论上所有object pair有relation，尤其是空间位置关系，任何同一图上一对物体之间必定存在。尝试unsupervised方式？（3）multi-label，两两物体之间的relation不唯一，人可以同时牵着狗/在狗旁边/看着狗/。。。现在的visual relationship/scene graph框架主流还是单分类。</p>
+</blockquote>
+<blockquote>
+<p>作者：汤凯华<br>链接：<a href="https://zhuanlan.zhihu.com/p/60418025" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/60418025</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/home/" rel="tag"># home</a>
+          
+            <a href="/tags/GP/" rel="tag"># GP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/10/java-%E6%8A%80%E6%9C%AF%E6%A0%88/Redis-quick-start-notes/Redis-quick-start-notes/" rel="next" title="Redis-quick-start-notes">
+                <i class="fa fa-chevron-left"></i> Redis-quick-start-notes
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/13/%E6%97%A5%E8%AE%B0/chronicle-%E5%85%B6%E4%BA%94-company/chronicle-%E5%85%B6%E4%BA%94-company/" rel="prev" title="chronicle-其五-company">
+                chronicle-其五-company <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/04/11/Graduation-Project-note/Graduation-Project-note/"
+           data-title="Graduation-Project-note" data-url="http://oodtoodt.github.io/2020/04/11/Graduation-Project-note/Graduation-Project-note/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#可用的技术"><span class="nav-number">1.</span> <span class="nav-text">可用的技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Referring-Relationships"><span class="nav-number">1.1.</span> <span class="nav-text">Referring Relationships</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Relation-Extraction"><span class="nav-number">1.2.</span> <span class="nav-text">Relation Extraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Reasoning"><span class="nav-number">1.3.</span> <span class="nav-text">Visual Reasoning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#时间关系推理（Temporal-relational-reasoning）"><span class="nav-number">1.3.1.</span> <span class="nav-text">时间关系推理（Temporal relational reasoning）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#TSN-（-Temproal-Segment-Networks）"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">TSN （ Temproal Segment Networks）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Relation-Network"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">Relation Network</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.3.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

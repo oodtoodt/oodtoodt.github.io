@@ -1,0 +1,1099 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="company,java,concurrent," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="起初还在想这么薄的书怎么能学七周呢，原来大部分内容都隐藏在作业里自学了。第一周参上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="7周7并发模型-第一周">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/04/24/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B-1/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="起初还在想这么薄的书怎么能学七周呢，原来大部分内容都隐藏在作业里自学了。第一周参上">
+<meta property="article:published_time" content="2020-04-24T11:31:59.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:03:37.000Z">
+<meta property="article:author" content="eco_oodt">
+<meta property="article:tag" content="company">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="concurrent">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/04/24/java-技术栈/java多线程/7周7并发模型/7周7并发模型-1/"/>
+
+
+
+
+
+  <title>7周7并发模型-第一周 | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/04/24/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">7周7并发模型-第一周</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-24T19:31:59+08:00">
+                2020-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/book-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">book_notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/24/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/24/java-技术栈/java多线程/7周7并发模型/7周7并发模型-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/04/24/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B-1/" class="leancloud_visitors" data-flag-title="7周7并发模型-第一周">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>起初还在想这么薄的书怎么能学七周呢，原来大部分内容都隐藏在作业里自学了。<br>第一周参上</p>
+<a id="more"></a>
+
+<!-- TOC -->
+
+<ul>
+<li><a href="#%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%94%81">线程与锁</a><ul>
+<li><a href="#%E4%BA%92%E6%96%A5%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B">互斥与内存模型</a><ul>
+<li><a href="#%E4%BD%9C%E4%B8%9A">作业</a><ul>
+<li><a href="#%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B">内存模型</a><ul>
+<li><a href="#jsr-133">jsr 133</a></li>
+<li><a href="#%E9%87%8D%E6%8E%92%E5%BA%8F">重排序</a></li>
+<li><a href="#final">final</a></li>
+<li><a href="#volatile">volatile</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%8C%E9%87%8D%E6%A3%80%E6%9F%A5%E9%94%81">双重检查锁</a><ul>
+<li><a href="#%E5%8F%8D%E6%A8%A1%E5%BC%8F">反模式</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8">对象初始化的线程安全</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%B6%85%E8%B6%8A%E5%86%85%E7%BD%AE%E9%94%81">超越内置锁</a><ul>
+<li><a href="#reentrantlock">ReentrantLock</a></li>
+<li><a href="#%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F">条件变量</a></li>
+<li><a href="#%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F">原子变量</a></li>
+<li><a href="#%E8%87%AA%E4%B9%A0">自习</a><ul>
+<li><a href="#reentrantlock">ReentrantLock</a></li>
+<li><a href="#reentrantlock">ReentrantLock</a></li>
+<li><a href="#%E8%99%9A%E5%81%87%E5%94%A4%E9%86%92">虚假唤醒</a></li>
+<li><a href="#atomicintegerfieldupdater">AtomicIntegerFieldUpdater</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%AB%99%E5%9C%A8%E5%B7%A8%E4%BA%BA%E7%9A%84%E8%82%A9%E8%86%80%E4%B8%8A">站在巨人的肩膀上</a><ul>
+<li><a href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0">线程池</a></li>
+<li><a href="#%E5%86%99%E5%85%A5%E6%97%B6%E5%A4%8D%E5%88%B6">写入时复制</a></li>
+<li><a href="#%E4%B8%80%E4%B8%AA%E7%BB%9D%E5%A5%BD%E7%9A%84%E4%BE%8B%E5%AD%90">一个绝好的例子</a></li>
+<li><a href="#%E8%87%AA%E4%B9%A0">自习</a><ul>
+<li><a href="#forkjoinpool">forkjoinpool</a></li>
+<li><a href="#work-stealing">work-stealing</a></li>
+<li><a href="#countdownlatch%E4%B8%8Ecyclicbarrier">CountDownLatch与CyclicBarrier</a></li>
+<li><a href="#%E9%98%BF%E5%A7%86%E8%BE%BE%E5%B0%94%E5%AE%9A%E5%BE%8B">阿姆达尔定律</a></li>
+<li><a href="#%E5%8F%A4%E6%96%AF%E5%A1%94%E5%A4%AB%E6%A3%AE%E5%AE%9A%E5%BE%8B">古斯塔夫森定律</a></li>
+<li><a href="#%E6%AF%92%E4%B8%B8">毒丸</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+
+
+<h1 id="线程与锁"><a href="#线程与锁" class="headerlink" title="线程与锁"></a>线程与锁</h1><h2 id="互斥与内存模型"><a href="#互斥与内存模型" class="headerlink" title="互斥与内存模型"></a>互斥与内存模型</h2><p>多线程的主要问题的就是竞态，即代码行为取决于各操作的时序。<br>解决方案是对count进行同步(synchronize)访问。一种是使用java原生的内置锁(互斥锁mutex、管程(monitor)或临界区(critical section))来同步调用。<br><strong>乱序执行是完全有可能发生的</strong><br>不论是c还是java，编译器都有静态优化，硬件上也会有乱序执行，jvm还有动态优化。<br>原则上，如果读线程和写线程不进行同步就不保证可见性（可见性就是..某个变量在这里赋值在另一边能不能取到）<br>死锁。哲学家吃饭先左后右直到所有人都把左手筷子拿起。<br>简单的避免是给锁添加一个全局顺序，比如每个人按筷子序号拿而非先左后右的顺序，则不会出现死锁。<br>不要调用外星方法：你无从知道外星方法会不会也持有一把锁。它可能会做任何事情。<br>避免的一种方法是在遍历之前对listeners进行保护性复制，再针对副本进行遍历</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateProgress</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ArrayList&lt;ProgressListener&gt; listenersCopy;</span><br><span class="line">    <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">        listenersCopy = (ArrayList&lt;ProgressListener&gt;) listeners.clone();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(ProgressListener listener: listenersCopy)</span><br><span class="line">        listener.onProgress(n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如此一来就不会把整个方法编程synchronized，不仅在外星方法时无锁，还大大减少了代码持有锁的时间，甚至如果修复了在遍历时remove的错误。</p>
+<h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h3><ul>
+<li><del>todo</del> 自学JSR 133的FAQ</li>
+<li><del>todo</del> java内存模型如何保证对象初始化线程安全？是否必须加锁才能在线程之间安全地公开对象？</li>
+<li><del>todo</del> 双重检查锁，反模式</li>
+<li><del>todo</del> william pugh 的网站：java内存模型</li>
+</ul>
+<h4 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h4><p>在处理器级别，一个内存模型定义应该实现的充分必要条件（necessary and sufficient conditions）是其它处理器写入内存的数据对于当前处理器是可见的，当前处理器写入内存的数据对其它处理器也是可见的。如果是一个强大的内存模型（a strong memory model），那么所有处理器在任何时候读取内存中任何位置，都能得到一样的值；而对于较弱的内存模型（a weaker memory model），只有在特殊情况下，通过调用内存栅栏（where special instructions, called memory barriers）将缓存数据刷新或者失效（flush or invalidate the local processor cache），这样才能获取其它处理器处理后的数据或者让其它处理器知道当前处理器处理的数据。这些内存栅栏（memory barriers）通常在加锁和解锁操作的时候执行；它们对于高级语言（a high level language）而言是不可见的。<br>当前处理器设计的趋势是鼓励弱内存模型，因为弱内存模型对于缓存一致性（多处理器同时涉及同一主内存）的放宽使得多处理器和大内存有更大的可扩展性<br>当前线程的写操作何时对其它线程可见，这个问题因为编译器的重排序而变得复杂。比如，编译器可能会觉得往后移动一个写操作会更加有效率；只要这个代码移动不会改变程序语义，这样做没有任何问题。如果编译器推迟了一个操作，只有到程序运行完成，其它线程才能看见数据的变化，这就是缓存的作用。(由于缓存的存在，指令重排序不会马上影响到内存中数据的变化，因为操作缓存数据即可)<br>Java 内存模型描述了在多线程代码中，哪种行为是合法的，以及线程之间如何通过内存交互。它描述了程序中变量之间的关系，以及在实际计算机的内存或者寄存器中存储和检索它们的低级细节。它可以通过各种各样的硬件和各种各样的编译器优化来实现</p>
+<p>Java 内存模型是为了屏蔽不同硬件处理器架构以及指令重排序对程序的并发影响而提出的一套规范，保证正确应用这套规范的程序可以在任何硬件处理器上都能够执行正确的并发操作。</p>
+<p>资料指出，包括了缓存导致的内存可见性（线程更新对象对其他线程不可见）和重排序的可见性；指令序列的重排序；数据依赖；</p>
+<hr>
+<p>pc寄存器 java虚拟机栈 本地方法栈<br>   java堆          方法区(Runtime Constant Pool)<br>—上面是java虚拟机内的内存<br>所有线程共享的数据 各个线程共享的数据 运行时常量</p>
+<hr>
+<p>可能有点小错误，不过概念部分问题不大[<a href="https://www.jianshu.com/p/76959115d486]" target="_blank" rel="noopener">https://www.jianshu.com/p/76959115d486]</a></p>
+<ol>
+<li>pc寄存器(程序计数器)<br>(线程私有)的存在是为了线程切换可以恢复到正确执行位置</li>
+<li>java栈(虚拟机栈)<br>(线程私有)，描述的是java方法执行的内存模型。<strong>每个方法被执行的时候都会创建一个栈帧用于存储局部变量表，操作栈，动态链接，方法出口等信息。每一个方法被调用的过程就对应一个栈帧在虚拟机栈中从入栈到出栈的过程。</strong><blockquote>
+<p>栈帧: 是用来存储数据和部分过程结果的数据结构。<br>栈帧的位置:  内存 -&gt; 运行时数据区 -&gt; 某个线程对应的虚拟机栈 -&gt; ?<br>栈帧大小确定时间: 编译期确定，不受运行期数据影响。</p>
+</blockquote>
+</li>
+</ol>
+<p>平时说的栈一般指局部变量表部分<br>  是一片连续的内存空间，用来存放方法参数，以及方法内定义的局部变量，存放着编译期间已知的数据类型(八大基本类型和对象引用(reference类型),returnAddress类型(指向一条字节码指令的地址)。<br>需要注意的是，局部变量表所需要的内存空间在编译期完成分配，当进入一个方法时，这个方法在栈中需要分配多大的局部变量空间是完全确定的，在方法运行期间不会改变局部变量表大小。<br>3. 本地方法栈<br>是与虚拟机栈发挥的作用十分相似,区别是虚拟机栈执行的是Java方法(也就是字节码)服务，而本地方法栈则为虚拟机使用到的native方法服务，可能底层调用的c或者c++,我们打开jdk安装目录可以看到也有很多用c编写的文件，可能就是native方法所调用的c代码。<br>4. 堆<br>堆是java虚拟机管理内存最大的一块内存区域，因为堆存放的对象是线程共享的，所以多线程的时候也需要同步机制<br>所有对象实例及数组都要在堆上分配内存，但随着JIT编译器的发展和逃逸分析技术的成熟，这个说法也不是那么绝对，但是大多数情况都是这样的。<br>  逃逸分析:通过逃逸分析来决定某些实例或者变量是否要在堆中进行分配，如果开启了逃逸分析，即可将这些变量直接在栈上进行分配，而非堆上进行分配。这些变量的指针可以被全局所引用，或者其其它线程所引用。<br>  它是所有线程共享的，它的目的是存放对象实例。同时它也是GC所管理的主要区域，因此常被称为GC堆，又由于现在收集器常使用分代算法，Java堆中还可以细分为新生代和老年代，再细致点还有Eden(伊甸园)空间之类的不做深究。<br>5. 方法区<br>方法区同堆一样，是所有线程共享的内存区域，为了区分堆，又被称为非堆。<br>用于存储已被虚拟机加载的类信息、常量、静态变量，如static修饰的变量加载类的时候就被加载到方法区中。<br>方法区有很多实现，java8中废弃了永久代，使用了元空间。</p>
+<hr>
+<p>java线程-工作内存-（save和load）|是一体-&gt;(主)<br>java线程-工作内存-（save和load）|是一体-&gt;(内)<br>java线程-工作内存-（save和load）|是一体-&gt;(存)</p>
+<p>Java内存模型与硬件内存架构之间存在差异。硬件内存架构没有区分线程栈和堆。对于硬件，所有的线程栈和堆都分布在主内存中。部分线程栈和堆可能有时候会出现在CPU缓存中和CPU内部的寄存器中。<br>Java内存模型中的线程的工作内存（working memory）是cpu的寄存器和高速缓存的抽象描述。</p>
+<h5 id="jsr-133"><a href="#jsr-133" class="headerlink" title="jsr 133"></a>jsr 133</h5><p>JSR，Java Sepcification Requests，Java 规范提案<br>JSR 133： Java Memory Model and Thread Specification，Java 内存模型与线程规范<br>JSR 133 定义了一个新的内存模型，修复了之前内存模型的缺陷。为实现这一目的，final 和 volatile 的语义会有所变化。</p>
+<h5 id="重排序"><a href="#重排序" class="headerlink" title="重排序"></a>重排序</h5><p>重排序指的是程序在编译，加载，链接，运行的过程中，随时都有可能程序指令被重新排列，同时，这一过程也会给上层显示有一种按序执行的假象。对于单线程程序，不需要关心重排序带来的影响；对于多线程程序，如果访问同一个变量，重排序可能会影响结果的正确性，所以需要同步。</p>
+<p>新的内存模型在内存操作（写操作，读操作，加锁，解锁）和其它线程操作（start 和 join）中执行部分排序，就是说一些操作一定会在另一些操作之前，称之为 happens-before</p>
+<p>这种排序规则如下：</p>
+<p>当前线程的每一个动作都 happens-before 程序中后来的线程<br>对同一个监视器的解锁操作 happens-before 后续的加锁操作<br>对一个 volatile 变量的读操作 happens-before 后续对同一个变量的读操作<br>对一个线程的 start() 调用 happens-before 这个线程启动后的任何动作<br>当前线程的所有动作都 happens-before 其它线程（对当前线程执行 join() 操作）</p>
+<p>保证进入同步块的线程操作对于其它阻塞在同一个监视器的线程可见。</p>
+<h5 id="final"><a href="#final" class="headerlink" title="final"></a>final</h5><p>final 字段的值可以在对象构造器中设置。假设对象被“正确”的构造，那么一旦对象构造完成，这个 final 字段的值将被所有线程可见，不需要同步操作。另外，final 字段引用的其它对象或数组改变后，final 字段的值也一定会改变</p>
+<p>怎么样才是对象被正确的构造？简单的说，对象引用不应该在构造期间”泄露”。（举例：Safe construction techniques）换句话说，不应该放置构造期间的对象引用在另一个线程可能会看到它的地方；不要赋值给静态字段；不要将其注册为其它对象的监听器，等等。这些事情应该在构造完成后操作，而不是在构造期间。</p>
+<blockquote>
+<p>不要在构造器中使用 “this” 引用。如果无法避免，确保它不会对其它线程可见；<br>不要在构造器中创建非静态内部类；<br>不要再构造器中启动线程。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FinalFieldExample</span><span class="params">()</span> </span>&#123; <span class="comment">// bad!</span></span><br><span class="line">  x = <span class="number">3</span>;</span><br><span class="line">  y = <span class="number">4</span>;</span><br><span class="line">  <span class="comment">// bad construction - allowing this to escape</span></span><br><span class="line">  global.obj = <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样无法保证能够看到正确的final变量值，因为线程读取了this引用，通过指令重排序final变量就泄露了当前对象的引用。</p>
+<p>如果字段是 final 修饰的，那么能够保证构造器结束后，代码能够看到该字段所指向的对象或者数组最新的值。所以，这种情况下，不需要担心其它线程看见了这个字段引用指向的数组，但是看不到数组最新的值。再次声明，这个 “正确” 指的是 “对象构造器结束时最新的值” 而不是 “最新有效的值”</p>
+<p>正确构造后的 final 字段能够被所有线程可见，但是无法确定 final 字段引用的数组或者对象是最新的值，所以需要结合实际程序，在多线程情况下最好是执行同步操作。</p>
+<h5 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h5><p>在新内存模型中， volatile 变量仍旧无法被重排序，差异是 volatile 变量周围的正常变量也不会很容易被重排序<br>实际上，因为新的内存模型对 volatile 字段对其周围字段访问设置了更严格的约束条件，当线程 A 写入 volatile 字段 f 时，任何对线程 A 可见的变量也对写入字段 f 的线程 B 可见。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VolatileExample</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">volatile</span> <span class="keyword">boolean</span> v = <span class="keyword">false</span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    x = <span class="number">42</span>;</span><br><span class="line">    v = <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reader</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (v == <span class="keyword">true</span>) &#123;</span><br><span class="line">      <span class="comment">//uses x - guaranteed to see 42.</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>事实上，volatile 的语义基本上加强到同步的水平。对 volatile 字段的每一次读和写就像半个同步操作，即保证了可见性。</p>
+<p><strong>final 和 volatile 不能同时使用，会产生编译错误</strong></p>
+<h4 id="双重检查锁"><a href="#双重检查锁" class="headerlink" title="双重检查锁"></a>双重检查锁</h4><p>简单的说，单例模式下多线程同时可能造成多实例。所以要加锁，双重检查锁就是对单锁的优化（单锁性能开销过大了因为每次都要进synchronize方法判断）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueSingleton;<span class="comment">//!!!! must have volatile</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == uniqueSingleton) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">null</span> == uniqueSingleton) &#123;</span><br><span class="line">                    uniqueSingleton = <span class="keyword">new</span> Singleton();   <span class="comment">// error</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueSingleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>检查是否初始化，获取锁，再次检查是否初始化，这样只有在初始化的时候才会出现加锁的情况，而且避免了问题。<br>问题在于这里error的那行代码，也会有三步：分配内存空间、初始化对象、将对象指向刚分配的内存空间。这里的二三步是可能重排序的。<br>133的volatile解决了这个问题。</p>
+<h5 id="反模式"><a href="#反模式" class="headerlink" title="反模式"></a>反模式</h5><p>该模式在某些语言在某些硬件平台的实现可能是不安全的。有的时候，这一模式被看做是反模式。<br>…………我tm觉得这个百度百科给出来的就很搞笑。</p>
+<h4 id="对象初始化的线程安全"><a href="#对象初始化的线程安全" class="headerlink" title="对象初始化的线程安全"></a>对象初始化的线程安全</h4><p>初始化顺序：初始化类变量(并未赋值)，执行静态代码块和类变量定义式，初始化实例变量，执行构造代码块和实例变量定义赋值式，执行构造函数</p>
+<p>在执行类的初始化期间，JVM会去获取一个锁，会造成隐蔽的线程阻塞</p>
+<p>final可以公开对象，但正如上面所说，难以保证是最新的正确的值。</p>
+<h2 id="超越内置锁"><a href="#超越内置锁" class="headerlink" title="超越内置锁"></a>超越内置锁</h2><p>J.U.C</p>
+<h3 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h3><p>ReentrantLock可以中断，可以设置超时<br>交替锁。比如我们想要在链表中插入一个节点。我们只需要锁住链表的一部分即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcurrentSortedList</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    Node prev;</span><br><span class="line">    Node next;</span><br><span class="line">    ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    Node() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    Node(<span class="keyword">int</span> value, Node prev, Node next) &#123;</span><br><span class="line">      <span class="keyword">this</span>.value = value; <span class="keyword">this</span>.prev = prev; <span class="keyword">this</span>.next = next;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Node head;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Node tail;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ConcurrentSortedList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    head = <span class="keyword">new</span> Node(); tail = <span class="keyword">new</span> Node();</span><br><span class="line">    head.next = tail; tail.prev = head;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//insert方法是有序的 遍历列表直到找到第一个值小于等于新插入的值得节点,在这个位置插入</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    Node current = head;</span><br><span class="line">    current.lock.lock();</span><br><span class="line">    Node next = current.next;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        next.lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (next == tail || next.value &lt; value) &#123;</span><br><span class="line">            Node node = <span class="keyword">new</span> Node(value, current, next);</span><br><span class="line">            next.prev = node;</span><br><span class="line">            current.next = node;</span><br><span class="line">              <span class="comment">//!!!这里return要在两个finally都执行完后才会执行啊!!!但只是finally里的.不过要是return换成exit(0)就直接退出了</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span>; </span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123; current.lock.unlock(); &#125;</span><br><span class="line">        current = next;</span><br><span class="line">        next = current.next;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123; next.lock.unlock(); &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Node current = tail;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (current.prev != head) &#123;</span><br><span class="line">      ReentrantLock lock = current.lock;</span><br><span class="line">      lock.lock();</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        ++count;</span><br><span class="line">        current = current.prev;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123; lock.unlock(); &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSorted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Node current = head;</span><br><span class="line">    <span class="keyword">while</span> (current.next.next != tail) &#123;</span><br><span class="line">      current = current.next;</span><br><span class="line">      <span class="keyword">if</span> (current.value &lt; current.next.value)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> ConcurrentSortedList list = <span class="keyword">new</span> ConcurrentSortedList();</span><br><span class="line">    <span class="keyword">final</span> Random random = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TestThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; ++i)</span><br><span class="line">          list.insert(random.nextInt());</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">CountingThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!interrupted()) &#123;</span><br><span class="line">          System.out.print(<span class="string">"\r"</span> + list.size());</span><br><span class="line">          System.out.flush();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Thread t1 = <span class="keyword">new</span> TestThread();</span><br><span class="line">    Thread t2 = <span class="keyword">new</span> TestThread();</span><br><span class="line">    Thread t3 = <span class="keyword">new</span> CountingThread();</span><br><span class="line">    <span class="comment">//注意一下这里的用法 这里先join再interrupted的用法</span></span><br><span class="line">    t1.start(); t2.start(); t3.start();</span><br><span class="line">    t1.join(); t2.join();</span><br><span class="line">    t3.interrupt();</span><br><span class="line"> </span><br><span class="line">    System.out.println(<span class="string">"\r"</span> + list.size());</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (list.size() != <span class="number">20000</span>)</span><br><span class="line">      System.out.println(<span class="string">"*** Wrong size!"</span>);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (!list.isSorted())</span><br><span class="line">      System.out.println(<span class="string">"*** Not sorted!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很有参考价值的代码。</p>
+<h3 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h3><p>用一把锁，将竞争才能够对筷子的争夺换成对状态的判断：仅当哲学家左右邻座没有进餐时，才可以进餐。换句话说，一个哲学家饥饿时，他首先锁住餐桌。这样其他哲学家无法改变状态，然后查一下左右是否进餐，没有则自己进餐并解锁餐桌，否则调用await()以解锁餐桌。吃完了开始思考就先锁住餐桌然后通知左右餐桌可以吃了。如果左右正在等待，他们将被唤醒重新锁住餐桌判断进餐。<br>看上去复杂得多，但是并发度显著提升。几乎可以确定可以有多个哲学家在一起吃饭，而不是拿着一根筷子干等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Philosopher</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> eating;</span><br><span class="line">    <span class="keyword">private</span> Philosopher left;</span><br><span class="line">    <span class="keyword">private</span> Philosopher right;</span><br><span class="line">    <span class="keyword">private</span> ReentrantLock table;</span><br><span class="line">    <span class="keyword">private</span> Condition condition;</span><br><span class="line">    <span class="keyword">private</span> Random random;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> thinkCount;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Philosopher</span> <span class="params">( ReentrantLock table )</span> </span>&#123;</span><br><span class="line">        eating = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.table = table;</span><br><span class="line">        condition = table.newCondition();</span><br><span class="line">        random = <span class="keyword">new</span> Random();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLeft</span> <span class="params">( Philosopher left )</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.left = left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRight</span> <span class="params">( Philosopher right )</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.right = right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> ( <span class="keyword">true</span> ) &#123;</span><br><span class="line">                think();</span><br><span class="line">                eat();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> ( InterruptedException e ) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">think</span> <span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        table.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            eating = <span class="keyword">false</span>;</span><br><span class="line">            left.condition.signal();</span><br><span class="line">            right.condition.signal();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            table.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">        ++thinkCount;</span><br><span class="line">        <span class="keyword">if</span> ( thinkCount % <span class="number">10</span> == <span class="number">0</span> ) &#123;</span><br><span class="line">            System.out.println( <span class="string">"Philosopher "</span> + <span class="keyword">this</span> + <span class="string">" has thought "</span> + thinkCount + <span class="string">" times"</span> );</span><br><span class="line">        &#125;</span><br><span class="line">        Thread.sleep( <span class="number">1000</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">eat</span> <span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        table.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> ( left.eating || right.eating ) &#123;</span><br><span class="line">                condition.await();</span><br><span class="line">            &#125;</span><br><span class="line">            eating = <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            table.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">        Thread.sleep( <span class="number">1000</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="原子变量"><a href="#原子变量" class="headerlink" title="原子变量"></a>原子变量</h3><p>原子变量时<em>无锁非阻塞算法</em>的基础。可以不用锁和阻塞来达到同步的目的。无锁比有锁的代码更复杂。<br>volatile是一种低级形式的同步，它并不能解决Counter的问题(指不能保证count++的操作似乎原子的)。他保证的是变量无法被重排序，但是竞态是无法避免的，两个线程还是可能同时访问这个变量然后出现问题。现在已经有了很多低开销锁，尽量不要用volatile。</p>
+<h3 id="自习"><a href="#自习" class="headerlink" title="自习"></a>自习</h3><p>他又来了！</p>
+<ul>
+<li>ReentrantLock创建时可以设置一个描述公平性的变量。什么是公平的锁？</li>
+<li>什么是ReentrantReadWriteLock？和我们提到的那个有什么区别？</li>
+<li>什么是「虚假唤醒」？</li>
+<li>什么是AtomicIntegerFiledUpdater?</li>
+</ul>
+<h4 id="ReentrantLock-1"><a href="#ReentrantLock-1" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h4><p>fair - true if this lock should use a fair ordering policy<br>哈哈，忘了吧（。<br>公平表示所有线程会不会以fifo的顺序来获取锁。公平锁一般用来防止「饥饿」的产生。</p>
+<h4 id="ReentrantLock-2"><a href="#ReentrantLock-2" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h4><blockquote>
+<p>ReentrantReadWriteLock按照字面意思是读写锁，如果你把它理解为对IO的控制，那就大错特错了（其实大多数人的直觉是这样）。其实你只要把它理解成一个数据库的事务锁就对了。众所周知数据库事务锁的特点就是，读写分离。而ReentrantReadWriteLock是类似最高级的事务级别Serializable可串行化（严格讲比这个还更严谨）。什么意思呢，意思就是，对一条数据的更新操作只影响其它对该条数据的更新操作，而读操作是不影响的。   而并发锁Lock也好，synchronizy也好，是直接把读写都锁住的。就是说，该代码块一但锁住之后，既不能读也不能写。 但这样是有问题的，有些线程只是想读取一下数据，我又不改数据，你锁它干嘛呢？（类似事物吧） 所以ReentrantReadWriteLock把锁拆分成了读锁和写锁。  写锁之间的互斥的，但读锁不互斥（大家一起读数据么，压根就没冲突）。 但是有一点要注意。就是你想获取写锁，是除当前线程外，不能存在其它的读锁的。  好比就是说，我要改里面的数据了，那些获取了读锁的线程，必须通通退出来，否则会出现读到老数据的问题（类似事物里面的脏读） ，获取到写锁之后，其它线程也不能再获取到读锁了。</p>
+</blockquote>
+<p>升级的意思就是，读锁在获取写锁之前，一定要先释放读锁。</p>
+<h4 id="虚假唤醒"><a href="#虚假唤醒" class="headerlink" title="虚假唤醒"></a>虚假唤醒</h4><p>线程可能在没有嗲用过notify或notifyAll的情况下醒来。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyWaitNotify2</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  MonitorObject myMonitorObject = <span class="keyword">new</span> MonitorObject();</span><br><span class="line">  <span class="keyword">boolean</span> wasSignalled = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doWait</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(myMonitorObject)&#123;</span><br><span class="line">      <span class="keyword">if</span>(!wasSignalled)&#123;<span class="comment">//must be while!!!!</span></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">          myMonitorObject.wait();</span><br><span class="line">         &#125; <span class="keyword">catch</span>(InterruptedException e)&#123;...&#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//clear signal and continue running.</span></span><br><span class="line">      wasSignalled = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doNotify</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(myMonitorObject)&#123;</span><br><span class="line">      wasSignalled = <span class="keyword">true</span>;</span><br><span class="line">      myMonitorObject.notify();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Windows API和posix Thread在signal thread时，可能会一次唤醒多个thread，这种看似bug的实现，因为概率极低不影响效率演进为一种通用并发模式<br>详见effective java item69<br>即使从等待线程的角度看似已经发出了条件变量的信号之后，等待的条件仍可能为假。原因之一是虚假的唤醒。也就是说，即使没有线程向条件变量发出信号，线程也可能从等待状态中唤醒。为了正确起见，然后有必要在线程完成等待之后验证条件确实为真。由于虚假唤醒可能会重复发生，因此可以通过在条件为真时终止的循环内部等待来实现。</p>
+<h4 id="AtomicIntegerFieldUpdater"><a href="#AtomicIntegerFieldUpdater" class="headerlink" title="AtomicIntegerFieldUpdater"></a>AtomicIntegerFieldUpdater</h4><p>这个类是一个基于反射的使用的工具类，可以对指定类的指定的被volatile修饰的int型字段进行原子更新。<br>这个类设计用于同一节点的多个字段独立进行的原子更新的原子数据结构<br>类似于我不要求你这整个类操作具有原子性，我只要求你里面一个字段操作具有原子性。</p>
+<p>注意：这个类中的CAS操作弱于其他的原子类，因为没法确保这个字段的所有访问和操作都是基于原子操作的，只能提供对同一个Updater的compareAndSet和set方法的保证</p>
+<p>有些规则：字段必须是volatile类型的，在线程之间共享变量时保证立即可见等等。</p>
+<h2 id="站在巨人的肩膀上"><a href="#站在巨人的肩膀上" class="headerlink" title="站在巨人的肩膀上"></a>站在巨人的肩膀上</h2><p>J.U.C中包含了一些「通用高效bug少」的并发数据结构和工具。我们应该更多的使用他们。</p>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>如果为每个连接创建一个线程，当请求连接的速度高于处理连接的速度时，系统的线程数也会随之快速增长，服务器将停止服务甚至崩溃。这就给了拒绝服务攻击可乘之机。为每个连接都创建线程的代价也无法忽视。<br>我们可以使用线程池避免这些问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程池的大小设置为可用处理器数的2倍</span></span><br><span class="line"><span class="keyword">int</span> threadPoolSize = Runtime.getRuntime().availableProcessors() * <span class="number">2</span>;</span><br><span class="line">ExecutorService executor = Executors.newFixedThreadPool(threadPoolSize);</span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">  Socket socket = server.accept();</span><br><span class="line">  executor.execute(<span class="keyword">new</span> ConnectionHandler(socket));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="写入时复制"><a href="#写入时复制" class="headerlink" title="写入时复制"></a>写入时复制</h3><p>记得我们放过一个保护性复制吗？外星那里。java标准库提供了优雅的现成方案：CopyOnWriteArrayList</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//---皆是方法</span></span><br><span class="line"> <span class="keyword">private</span> CopyOnWriteArrayList&lt;ProgressListener&gt; listeners;         <span class="comment">//使用一个写入时拷贝对象。当原对象要发生写入的时候，对其做一份克隆，然后对克隆对象操作。</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Downloader</span><span class="params">(URL url, String outputFilename)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    in = url.openConnection().getInputStream();</span><br><span class="line">    out = <span class="keyword">new</span> FileOutputStream(outputFilename);</span><br><span class="line">    listeners = <span class="keyword">new</span> CopyOnWriteArrayList&lt;ProgressListener&gt;();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addListener</span><span class="params">(ProgressListener listener)</span> </span>&#123;</span><br><span class="line">    listeners.add(listener);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeListener</span><span class="params">(ProgressListener listener)</span> </span>&#123;</span><br><span class="line">    listeners.remove(listener);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateProgress</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (ProgressListener listener: listeners)</span><br><span class="line">      listener.onProgress(n);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//---</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="一个绝好的例子"><a href="#一个绝好的例子" class="headerlink" title="一个绝好的例子"></a>一个绝好的例子</h3><p>解决一个世纪的小问题：Wikipedia上出现频率最高的词是什么？<br>看上去似乎并不难。我们先从基本的开始：<br>一个简单的串行程序统计前100000页的词要花多久？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Iterable&lt;Page&gt; pages = <span class="keyword">new</span> Pages(<span class="number">100000</span>, <span class="string">"enwiki.xml"</span>);</span><br><span class="line">    <span class="keyword">for</span>(Page page: pages) &#123;</span><br><span class="line">        Iterable&lt;String&gt; words = <span class="keyword">new</span> Words(page.getText());</span><br><span class="line">        <span class="keyword">for</span>(String word:words)</span><br><span class="line">            countWord(word);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">countWord</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">    Integer currentCount = counts.get(word);</span><br><span class="line">    <span class="keyword">if</span>(currentCount == <span class="keyword">null</span>)</span><br><span class="line">        counts.put(word,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        counts.put(word,currentCount+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先解析并构造一个page，然后「消费」这个page，对page中的内容统计词频<br>——于是我们归结出生产者消费者模式，我们可以创建一个生产者，一个消费者。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//----生产者</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parser</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> BlockingQueue&lt;Page&gt; queue;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Parser</span><span class="params">(BlockingQueue&lt;Page&gt; queue)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.queue = queue;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      Iterable&lt;Page&gt; pages = <span class="keyword">new</span> Pages(<span class="number">100000</span>, <span class="string">"enwiki.xml"</span>);</span><br><span class="line">      <span class="keyword">for</span> (Page page: pages)</span><br><span class="line">        queue.put(page);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123; e.printStackTrace(); &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-----消费者</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> BlockingQueue&lt;Page&gt; queue;</span><br><span class="line">  <span class="keyword">private</span> Map&lt;String, Integer&gt; counts;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Counter</span><span class="params">(BlockingQueue&lt;Page&gt; queue,</span></span></span><br><span class="line"><span class="function"><span class="params">                 Map&lt;String, Integer&gt; counts)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.queue = queue;</span><br><span class="line">    <span class="keyword">this</span>.counts = counts;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">        Page page = queue.take();</span><br><span class="line">        <span class="keyword">if</span> (page.isPoisonPill())</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        Iterable&lt;String&gt; words = <span class="keyword">new</span> Words(page.getText());</span><br><span class="line">        <span class="keyword">for</span> (String word: words)</span><br><span class="line">          countWord(word);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123; e.printStackTrace(); &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">countWord</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">    Integer currentCount = counts.get(word);</span><br><span class="line">    <span class="keyword">if</span> (currentCount == <span class="keyword">null</span>)</span><br><span class="line">      counts.put(word, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      counts.put(word, currentCount + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//创建线程</span></span><br><span class="line">ArrayBlockingQueue&lt;Page&gt; queue = <span class="keyword">new</span> ArrayBlockingQueue&lt;Page&gt;(<span class="number">100</span>);</span><br><span class="line">HashMap&lt;String, Integer&gt; counts = <span class="keyword">new</span> HashMap&lt;String, Integer&gt;();</span><br><span class="line"></span><br><span class="line">Thread counter = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Counter(queue, counts));</span><br><span class="line">Thread parser = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Parser(queue));</span><br><span class="line"><span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">counter.start();</span><br><span class="line">parser.start();</span><br><span class="line">parser.join();</span><br><span class="line">queue.put(<span class="keyword">new</span> PoisonPill());</span><br><span class="line">counter.join();</span><br></pre></td></tr></table></figure>
+<p>存放网页的队列可以采用ArrayBlockingQueue。它提供了高效的并发put()和take()，这些方法会在必要时阻塞：当对一个空队列take程序会阻塞直到队列非空，put()同理。之所以采用阻塞队列，是因为如果生产者的速度比消费者快很多，很容易就占用大量内存空间(指非阻塞的ConcurrentLinkedQueue)<br>毒丸对象(PoisonPill)：　“毒丸”是指一个放在队列上的对象，其含义是：“当得到这个对象时，立即停止”。自己可以定义一个毒丸对象，用于告诉消费者可以停止了。<br>运行一下，发现变快了。生产消费者模型优势显现出来：可以并行生产消费、并可以有多个生产消费者。显然整体运行时间会降到生产和消费两者中较长的时间，统计的部分。要进一步优化，就要对统计过程进行并行化，建立多个消费者。</p>
+<p>首先我们想到由Collection包的synchronizedMap提供的<em>同步</em>的map，遗憾的是这类同步的集合并不提供原子的读-改-写的方法，所以不能使用它们，如果使用HashMap，就必须自己实现对访问的同步。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">countWord</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      Integer currentCount = counts.get(word);</span><br><span class="line">      <span class="keyword">if</span> (currentCount == <span class="keyword">null</span>)</span><br><span class="line">        counts.put(word, <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        counts.put(word, currentCount + <span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123; lock.unlock(); &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//---------启动多个消费者</span></span><br><span class="line"></span><br><span class="line">    ArrayBlockingQueue&lt;Page&gt; queue = <span class="keyword">new</span> ArrayBlockingQueue&lt;Page&gt;(<span class="number">100</span>);</span><br><span class="line">    HashMap&lt;String, Integer&gt; counts = <span class="keyword">new</span> HashMap&lt;String, Integer&gt;();</span><br><span class="line">    ExecutorService executor = Executors.newCachedThreadPool();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NUM_COUNTERS; ++i)</span><br><span class="line">      executor.execute(<span class="keyword">new</span> Counter(queue, counts));</span><br><span class="line">    Thread parser = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Parser(queue));</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    parser.start();</span><br><span class="line">    parser.join();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NUM_COUNTERS; ++i)</span><br><span class="line">      queue.put(<span class="keyword">new</span> PoisonPill());</span><br><span class="line">    executor.shutdown();</span><br><span class="line">    executor.awaitTermination(<span class="number">10L</span>, TimeUnit.MINUTES);</span><br></pre></td></tr></table></figure>
+<p>使用了线程池，方便管理多个线程。必须使用适当数量的毒丸，保证消费者的线程都可以退出。<br>结果不如人所愿，变慢了！慢了一倍之多。<br>这是因为<strong>过度竞争</strong>————过多地线程尝试同时使用一个共享资源。在我们的程序中，消费者花费大量时间等待被其他消费者锁住的counts，等待的时间比实际运算的时间还要唱，最终导致惨烈的性能下降。<br>好在无敌的J.U.C还提供了支持原子读-改-写，使用高级并发访问（锁分段，lock striping）的<code>ConcurrentHashMap</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">countWord</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">    Integer currentCount = counts.get(word);</span><br><span class="line">    <span class="keyword">if</span> (currentCount == <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (counts.putIfAbsent(word, <span class="number">1</span>) == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (counts.replace(word, currentCount, currentCount + <span class="number">1</span>)) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//------------</span></span><br><span class="line">ArrayBlockingQueue&lt;Page&gt; queue = <span class="keyword">new</span> ArrayBlockingQueue&lt;Page&gt;(<span class="number">100</span>);</span><br><span class="line">ConcurrentHashMap&lt;String, Integer&gt; counts = <span class="keyword">new</span> ConcurrentHashMap&lt;String, Integer&gt;();</span><br><span class="line">ExecutorService executor = Executors.newCachedThreadPool();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NUM_COUNTERS; ++i)</span><br><span class="line">  executor.execute(<span class="keyword">new</span> Counter(queue, counts));</span><br><span class="line">Thread parser = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Parser(queue));</span><br></pre></td></tr></table></figure>
+<p>使用了putIfAbsent()和replace()来取代原来的put()方法，可以查阅相关APIs的文档<br>再次进行消费者数量提升时的时间统计，发现没什么太大问题了——但是在4个以上的消费者时，提速开始下降了。<br>我们注意到消费者对counts有一些不必要的竞争。与其所有消费者都共享一个counts，还不如每个消费者各自维护一个计数map，再对计数map进行合并</p>
+<p>如果看的细致一点，就是1点1点的多线程计数还是count+count的多线程计数。还是共享一个counts的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">      Page page = queue.take();</span><br><span class="line">      <span class="keyword">if</span> (page.isPoisonPill())</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      Iterable&lt;String&gt; words = <span class="keyword">new</span> Words(page.getText());</span><br><span class="line">      <span class="keyword">for</span> (String word: words)</span><br><span class="line">        countWord(word);</span><br><span class="line">    &#125;</span><br><span class="line">    mergeCounts();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e) &#123; e.printStackTrace(); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">countWord</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">  Integer currentCount = localCounts.get(word);</span><br><span class="line">  <span class="keyword">if</span> (currentCount == <span class="keyword">null</span>)</span><br><span class="line">    localCounts.put(word, <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    localCounts.put(word, currentCount + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">mergeCounts</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (Map.Entry&lt;String, Integer&gt; e: localCounts.entrySet()) &#123;</span><br><span class="line">    String word = e.getKey();</span><br><span class="line">    Integer count = e.getValue();</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">      Integer currentCount = counts.get(word);</span><br><span class="line">      <span class="keyword">if</span> (currentCount == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (counts.putIfAbsent(word, count) == <span class="keyword">null</span>)</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (counts.replace(word, currentCount, currentCount + count)) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>成了</p>
+<h3 id="自习-1"><a href="#自习-1" class="headerlink" title="自习"></a>自习</h3><ul>
+<li>阅读ForkJoinPool的文档，fork/join框架与线程池有什么区别？</li>
+<li>什么是work-stealing？适用于什么场景？J.U.C提供了什么工具实现它？</li>
+<li>CountDownLatch和CyclicBarrier有什么区别？分别适用什么？</li>
+<li>什么是阿姆达尔定律？如何计算出词频统计程序的最大理论加速比？</li>
+<li>为什么毒丸方法会被广泛采用？</li>
+</ul>
+<h4 id="forkjoinpool"><a href="#forkjoinpool" class="headerlink" title="forkjoinpool"></a>forkjoinpool</h4><p>Fork/Join并行方式是获取良好的并行计算性能的一种最简单同时也是最有效的设计技术。Fork/Join并行算法是我们所熟悉的分治算法的并行版本。fork操作将会启动一个新的并行Fork/Join子任务。join操作会一直等待直到所有的子任务都结束。Fork/Join算法，如同其他分治算法一样，总是会递归的、反复的划分子任务，直到这些子任务可以用足够简单的、短小的顺序方法来执行。</p>
+<p>ForkJoinPool 的另一个特性是它使用了work-stealing（工作窃取）算法：线程池内的所有工作线程都尝试找到并执行已经提交的任务，或者是被其他活动任务创建的子任务（如果不存在就阻塞等待）。这种特性使得 ForkJoinPool 在运行多个可以产生子任务的任务，或者是提交的许多小任务时效率更高。尤其是构建异步模型的 ForkJoinPool 时，对不需要合并（join）的事件类型任务也非常适用。<br>线程池中每个工作线程（ForkJoinWorkerThread）都对应一个任务队列（WorkQueue），工作线程优先处理来自自身队列的任务（LIFO或FIFO顺序，参数 mode 决定），然后以FIFO的顺序随机窃取其他队列中的任务。在一个线程正在偷取任务时，另外一个线程是无法完成偷取操作的。大体上讲，我们起码有一定概率保证了阻塞性。如果一个偷取操作失败，偷取线程会选择另外一个随机目标继续尝试。。</p>
+<p>fork:当前线程不是个ForkJoinWorkerThread的时候，则加入到ForkJoinPool线程池(基于ExecutorService实现);<br>如果当前线程已经是个ForkJoinWorkerThread了，则把这个任务加入到当前线程的workQueue;<br>这是和普通线程池不同的地方，task并不是交给线程池中的queue，而是放到线程本地的workQueue</p>
+<p>大致上可以认为是ForkJoinPool每个线程都有自己的队列,ThreadPoolExecutor共用一个队列。</p>
+<p>ForkJoinPool最适合计算密集型任务，而且最好是非阻塞任务。<br>偷的话很简单，双向队列。cas解决竞争(最后一个或争抢)。</p>
+<h4 id="work-stealing"><a href="#work-stealing" class="headerlink" title="work-stealing"></a>work-stealing</h4><p>上面讲了，还是写下吧</p>
+<ol>
+<li>每个线程都有自己的双端队列</li>
+<li>当调用fork方法时，将任务放进队列头部，线程以LIFO顺序，使用push/pop方式处理队列中的任务</li>
+<li>如果自己队列里的任务处理完后，会从其他线程维护的队列尾部使用poll的方式窃取任务，以达到充分利用CPU资源的目的</li>
+<li>从尾部窃取可以减少同原线程的竞争</li>
+<li>当队列中剩最后一个任务时，通过cas解决原线程和窃取线程的竞争</li>
+</ol>
+<h4 id="CountDownLatch与CyclicBarrier"><a href="#CountDownLatch与CyclicBarrier" class="headerlink" title="CountDownLatch与CyclicBarrier"></a>CountDownLatch与CyclicBarrier</h4><p><a href="https://www.jianshu.com/p/bce9f156080f" target="_blank" rel="noopener">https://www.jianshu.com/p/bce9f156080f</a><br>CountDownLatch是一个同步的辅助类，允许一个或多个线程，等待其他一组线程完成操作，再继续执行。<br>CyclicBarrier是一个同步的辅助类，允许一组线程相互之间等待，达到一个共同点，再继续执行。<br>他们都是:Synchronization aid，我把它翻译成同步辅助器，既然是辅助工具，怎么使用啊？哪些场景使用啊？</p>
+<ul>
+<li>CountDownLatch是不可重置的，所以无法重用；而CyclicBarrier则没有这种限制，可以重用。</li>
+<li>CountDownLatch的基本操作组合是countDown/await。调用await的线程阻塞等待countDown足够的次数，不管你是在一个线程还是多个线程里countDown，只要次数足够即可。所以说CountDownLatch操作的是事件。</li>
+<li>CyclicBarrier的基本操作组合，则就是await。当所有的伙伴（parties）都调用了await，才会继续进行任务，并自动进行重置。注意，正常情况下，CyclicBarrier的重置都是自动发生的，如果我们调用reset方法，但还有线程在等待，就会导致等待线程被打扰，抛出BrokenBarrierException异常。CyclicBarrier侧重点是线程，而不是调用事件，它的典型应用场景是用来等待并发线程结束。</li>
+</ul>
+<p>对于CountDownLatch来说，重点是“一个线程（多个线程）等待”，而其他的N个线程在完成“某件事情”之后，可以终止，也可以等待。而对于CyclicBarrier，重点是多个线程，在任意一个线程没有完成，所有的线程都必须等待。</p>
+<p>CountDownLatch是计数器，线程完成一个记录一个，只不过计数不是递增而是递减，而CyclicBarrier更像是一个阀门，需要所有线程都到达，阀门才能打开，然后继续执行。</p>
+<h4 id="阿姆达尔定律"><a href="#阿姆达尔定律" class="headerlink" title="阿姆达尔定律"></a>阿姆达尔定律</h4><p>在启动一个并行化项目前，开发人员会希望预估他们能够实现的性能提升量（加速比）。 如果知道（或预估出)能够以并行方式执行的串行代码的百分数，那么开发人员可使用阿姆达尔定律计算应用的加速比上限，无需实际编写任何并发代码。<br>pctpar：并行执行时间<br>p：内核数<br>$$<br>speedup &lt;= \frac{1} {(1-pctpar)+\frac{pctpar}{p}}<br>$$<br>这里忽略了实际开销，例如通信、同步和其它线程管理，以及无限内核处理器的假设，阿姆达尔定律一直饱受批评。 除了没有考虑并发算法固有的开销，对阿姆达尔定律最强烈的批评之一是，随着内核数量的增加，处理的数据量也可能会增加。 阿姆达尔定律假设不论内核数量如何，数据集大小均为固定，并且整体串行执行时间保持不变。</p>
+<h4 id="古斯塔夫森定律"><a href="#古斯塔夫森定律" class="headerlink" title="古斯塔夫森定律"></a>古斯塔夫森定律</h4><p>如果使用 8 核的并行应用能够计算的数据集是原始大小的 8 倍，串行部分的执行时间会增加吗？ 即使有增加，它也并非与数据集的增加同比例增长。 实际数据显示串行执行时间几乎保持不变。斯塔夫森定律又被称为扩展的加速比(scaled speedup)，它考虑了数据大小与内核数量成比例的增加并计算应用的加速比（上限），假设大数据集能够以并行方式执行。 扩展的加速比公式如下：<br>p代表内核数量。 为简化表述，对于指定的数据集大小， s 代表并行应用中的串行执行时间的百分数。<br>$$<br>speedup &lt;= p + (1-p)s<br>$$</p>
+<h4 id="毒丸"><a href="#毒丸" class="headerlink" title="毒丸"></a>毒丸</h4><p>对不起，毒丸基本上找不到资料。找到的是另一个资料…emmm我觉得并发队列里常用的手法吧，很合理，可能也不需要这名字</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/company/" rel="tag"># company</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/concurrent/" rel="tag"># concurrent</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/24/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A-2/" rel="next" title="名词解释-2">
+                <i class="fa fa-chevron-left"></i> 名词解释-2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/27/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B-2/" rel="prev" title="7周7并发模型-2">
+                7周7并发模型-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/04/24/java-技术栈/java多线程/7周7并发模型/7周7并发模型-1/"
+           data-title="7周7并发模型-第一周" data-url="http://oodtoodt.github.io/2020/04/24/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/7%E5%91%A87%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B-1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程与锁"><span class="nav-number">1.</span> <span class="nav-text">线程与锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#互斥与内存模型"><span class="nav-number">1.1.</span> <span class="nav-text">互斥与内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作业"><span class="nav-number">1.1.1.</span> <span class="nav-text">作业</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存模型"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#jsr-133"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">jsr 133</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重排序"><span class="nav-number">1.1.1.1.2.</span> <span class="nav-text">重排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#final"><span class="nav-number">1.1.1.1.3.</span> <span class="nav-text">final</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#volatile"><span class="nav-number">1.1.1.1.4.</span> <span class="nav-text">volatile</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双重检查锁"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">双重检查锁</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#反模式"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">反模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象初始化的线程安全"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">对象初始化的线程安全</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超越内置锁"><span class="nav-number">1.2.</span> <span class="nav-text">超越内置锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ReentrantLock"><span class="nav-number">1.2.1.</span> <span class="nav-text">ReentrantLock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量"><span class="nav-number">1.2.2.</span> <span class="nav-text">条件变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子变量"><span class="nav-number">1.2.3.</span> <span class="nav-text">原子变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自习"><span class="nav-number">1.2.4.</span> <span class="nav-text">自习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ReentrantLock-1"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">ReentrantLock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ReentrantLock-2"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">ReentrantLock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚假唤醒"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">虚假唤醒</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AtomicIntegerFieldUpdater"><span class="nav-number">1.2.4.4.</span> <span class="nav-text">AtomicIntegerFieldUpdater</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#站在巨人的肩膀上"><span class="nav-number">1.3.</span> <span class="nav-text">站在巨人的肩膀上</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池"><span class="nav-number">1.3.1.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写入时复制"><span class="nav-number">1.3.2.</span> <span class="nav-text">写入时复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个绝好的例子"><span class="nav-number">1.3.3.</span> <span class="nav-text">一个绝好的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自习-1"><span class="nav-number">1.3.4.</span> <span class="nav-text">自习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#forkjoinpool"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">forkjoinpool</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#work-stealing"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">work-stealing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CountDownLatch与CyclicBarrier"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">CountDownLatch与CyclicBarrier</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#阿姆达尔定律"><span class="nav-number">1.3.4.4.</span> <span class="nav-text">阿姆达尔定律</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#古斯塔夫森定律"><span class="nav-number">1.3.4.5.</span> <span class="nav-text">古斯塔夫森定律</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#毒丸"><span class="nav-number">1.3.4.6.</span> <span class="nav-text">毒丸</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

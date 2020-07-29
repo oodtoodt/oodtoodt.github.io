@@ -1,0 +1,956 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="company,java," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="我放眼望去，满眼都是Auto几个大字。大抵就是用的时候查一下，还不会就Stack Overflow请。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-Spring-Boot-notes">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/04/08/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java-Spring-Boot-notes/java-Spring-Boot-notes/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="我放眼望去，满眼都是Auto几个大字。大抵就是用的时候查一下，还不会就Stack Overflow请。">
+<meta property="article:published_time" content="2020-04-08T03:04:37.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:03:37.000Z">
+<meta property="article:author" content="eco_oodt">
+<meta property="article:tag" content="company">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/04/08/java-技术栈/java-Spring-Boot-notes/java-Spring-Boot-notes/"/>
+
+
+
+
+
+  <title>java-Spring-Boot-notes | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/04/08/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java-Spring-Boot-notes/java-Spring-Boot-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java-Spring-Boot-notes</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-08T11:04:37+08:00">
+                2020-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/frame/" itemprop="url" rel="index">
+                    <span itemprop="name">frame</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/frame/spring-boot/" itemprop="url" rel="index">
+                    <span itemprop="name">spring boot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/08/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java-Spring-Boot-notes/java-Spring-Boot-notes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/08/java-技术栈/java-Spring-Boot-notes/java-Spring-Boot-notes/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/04/08/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java-Spring-Boot-notes/java-Spring-Boot-notes/" class="leancloud_visitors" data-flag-title="java-Spring-Boot-notes">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我放眼望去，满眼都是Auto几个大字。<br>大抵就是用的时候查一下，还不会就Stack Overflow请。</p>
+<a id="more"></a>
+
+<hr>
+<p>[安装Spring Boot]&lt;-安装maven&lt;-安装choco<br>准确的说只需要jdk和maven就行了<br>写一份奇怪的pom.xml(Project Object Model),maven开始疯跑，最后success<br>？应该有warning啊，warning呢。<br>输入了错误的指令，然后maven居然搞得跟真的一样装了一堆依赖…真吊啊<br>写了一个奇怪的java</p>
+<blockquote>
+<p>@RestController，@RequesetMapping是固定（刻板）注解，而且是mvn的，不是Spring Boot的（所以该学的还是要学的），前者便于人理解代码顺便告诉Spring是web(@Controller)，后者是提供了路径信息，告诉Spring所有带<code>(&quot;/&quot;)</code>的HTTP请求应当被map到home方法。<br>第二个类级别的注释是@EnableAutoConfiguration,让Spring Boot在基于加载的jar依赖来「猜测」你想要如何配置Spring。因为spring-boot-starter-web添加了Tomcat和SpringMVC，所以自动配置会假定你要开发一个网络应用然后套一下Spring的预设定。不仅仅是Starters里面的会被加在设定集里，其他的也可以。<br>main方法就是启动方法，和java一样。我们的java方法调用SpringApplication的run。SpringApplication会引导应用启动Spring,也就启动了自动配置的Tomcat网络服务器。我们要传一个Example.class作为run的方法来告诉SpringApplication这是主要Spring组件。args也会被传递来公开命令行参数<br>然后mvn spring-boot:run或者直接用ide的run去跑，就可以访问localhost:8080来看hello world了</p>
+</blockquote>
+<p>接下来是关于配置…<br>忘了写笔记真是误了大事。</p>
+<h3 id="构造系统"><a href="#构造系统" class="headerlink" title="构造系统"></a>构造系统</h3><p>（Maven）<br>默认继承defaults from Spring Boot</p>
+<p><code>&lt;properties&gt;</code>可以覆写需要的依赖</p>
+<p><code>&lt;dependencyMangement&gt;</code>是管理器，如果dependencies里的dependency自己没有声明version元素，那么maven就会到dependencyManagement里面去找有没有对该artifactId和groupId进行过版本声明，如果有，就继承它，没有报错。如果自己声明了那就无视这个管理器<br>scope=import可以使得依赖不再单一继承<br>但这样就不能覆写属性了，你需要在管理器里，spring-boot-dependecies entry之前添加你需要的属性作为dependency</p>
+<p><code>&lt;plugins&gt;</code>标签可以打包项目为一个可执行的jar</p>
+<p><code>mvn spring-boot:run</code><br><code>mvn package
+//完全自包含可执行的jar</code></p>
+<h3 id="结构化代码"><a href="#结构化代码" class="headerlink" title="结构化代码"></a>结构化代码</h3><p>如果一个class没有在一个package里声明，它就应当在default package里。default package通常不鼓励使用。</p>
+<p>@SpringBootApplication通常放在主类中，它隐式定义某些项目的一个基本「search package」，比如如果你写JPA应用，你应当用它来搜@Entity。<br>如果你不用它，那@EnableAutoConfiguration and @ComponentScan annotations 也可以。</p>
+<h3 id="配置类"><a href="#配置类" class="headerlink" title="配置类"></a>配置类</h3><p>更推荐用Java-based的配置而非xml的sources。我们通常推荐你的主要source是a single @Configuration class。main方法是首选的<br>搜索<code>Enable*</code>批注解决你可能的代码遗留的XML配置问题</p>
+<h4 id="Import-更多地Configuration类"><a href="#Import-更多地Configuration类" class="headerlink" title="Import 更多地Configuration类"></a>Import 更多地Configuration类</h4><p>你不需要把所有Configuration放在一个类里，@Import可以用来import更多地Configuration类，有选择的，你可以选择@ComponentScan来自动选择所有的Spring组件</p>
+<h4 id="Import-XML-配置"><a href="#Import-XML-配置" class="headerlink" title="Import XML 配置"></a>Import XML 配置</h4><p>用@Configuration，然后用@ImportResource</p>
+<h3 id="自动配置"><a href="#自动配置" class="headerlink" title="自动配置"></a>自动配置</h3><p>Spring Boot会自动根据你的依赖来配置。<br>你需要选择是否允许自动配置，使用@EnableAutoConfiguration 或者@SpringBootApplication 给你的@Configuration类（只用一个）</p>
+<h4 id="逐渐更换自动配置"><a href="#逐渐更换自动配置" class="headerlink" title="逐渐更换自动配置"></a>逐渐更换自动配置</h4><p>自动配置是非侵入的，你不需要为更改自动配置后代码会玩完而害怕。比如如果你想加入自己的DataSource bean，那么默认的嵌入式数据库就会退出。<br>如果你需要了解正在应用哪些配置和原因，可以用–debug开关启动你的应用。这样可以启动调试日志。</p>
+<h4 id="禁用特定的自动配置"><a href="#禁用特定的自动配置" class="headerlink" title="禁用特定的自动配置"></a>禁用特定的自动配置</h4><p>你可以使用@SpringBootApplication的exclude属性来禁用他们<br>@SpringBootApplication(exclude ={DataSourceAutoConfiguration.class})<br>如果该类不在类路径中，则可以用excludeName属性并指定完全限定的名称。如果你更喜欢@EnableAutoConfiguration，exclude和excludeName也可用。最后，你还可以用spring.autoconfigure.exclude属性来控制禁用列表<br>（你可以都用<br>（不建议直接使用这些自动配置类</p>
+<h3 id="Spring-Beans和Dependency-Injection-依赖注入"><a href="#Spring-Beans和Dependency-Injection-依赖注入" class="headerlink" title="Spring Beans和Dependency Injection(依赖注入)"></a>Spring Beans和Dependency Injection(依赖注入)</h3><p>如果将应用程序类放在根package中，你可以@ComponentScan而无参数，你的所有应用程序组件就会自动的注册为Spring Bean。<br>@Autowired进行构造函数注入，如果有构造函数则也可省略<br>注入，使用构造函数注入会使得构造的被标记为final，随后无法更改</p>
+<h3 id="使用-SpringBootApplication-批注"><a href="#使用-SpringBootApplication-批注" class="headerlink" title="使用 @SpringBootApplication 批注"></a>使用 @SpringBootApplication 批注</h3><p>许多Spring Boot开发人员喜欢他们的应用程序使用自动配置，组件扫描，并能够在其“应用程序类”上定义额外的配置。 单个@SpringBootApplication批注可用于启用这三个功能，即：</p>
+<ul>
+<li>@EnableAutoConfiguration：启用Spring Boot的自动配置机制</li>
+<li>@ComponentScan：在应用程序所在的软件包上启用@Component扫描（请参阅最佳实践）</li>
+<li>@Configuration：允许在上下文中注册额外的bean或导入其他配置类</li>
+</ul>
+<h3 id="跑你的程序"><a href="#跑你的程序" class="headerlink" title="跑你的程序"></a>跑你的程序</h3><p>打包成jar并使用嵌入式HTTP服务器的最大优势是可以像运行其他应用一样运行你的程序。调试也会很容易。<br>用Maven的话</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ java -jar target/myapplication<span class="number">-0.0</span><span class="number">.1</span>-SNAPSHOT.jar</span><br><span class="line"><span class="comment">--启用了远程调试支持的话</span></span><br><span class="line">$ java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=<span class="number">8000</span>,suspend=n \</span><br><span class="line">       -jar target/myapplication<span class="number">-0.0</span><span class="number">.1</span>-SNAPSHOT.jar</span><br><span class="line"><span class="comment">--最简单的的话</span></span><br><span class="line">$ mvn spring-boot:run</span><br><span class="line"><span class="comment">--MAVEN_OPT操作系统环境变量</span></span><br><span class="line">$ export MAVEN_OPTS=-Xmx1024m</span><br></pre></td></tr></table></figure>
+<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><p>spring-boot-devtools模块可以包含在任何项目中。<br>运行完全打包的程序时将自动禁用它。重新打包的存档里不包含devtool。</p>
+<h4 id="属性默认值"><a href="#属性默认值" class="headerlink" title="属性默认值"></a>属性默认值</h4><p>开发过程中的缓存可能会适得其反，所以<br>spring-boot-devtools模块自动禁用缓存选项。<br>缓存选项通常由application.properties文件中的设置配置<br>Web开发中如果你希望配置日志记录可以打开spring.http.log-request-details</p>
+<h4 id="自动重启"><a href="#自动重启" class="headerlink" title="自动重启"></a>自动重启</h4><p>每当classpath上的文件更改时，使用spring-boot-devtools的应用都会重新启动。<br>分叉…<br>LiveReload…<br>DevTools上下文的「关闭挂钩」会在重新启动期间关闭。</p>
+<p>如果发现重新启动对于您的应用程序而言不够快，或者遇到类加载问题，则可以考虑从ZeroTurnaround重新加载技术，例如JRebel。 这些方法通过在加载类时重写类来使它们更适合于重新加载。</p>
+<h5 id="条件评估的变动会被log"><a href="#条件评估的变动会被log" class="headerlink" title="条件评估的变动会被log"></a>条件评估的变动会被log</h5><h5 id="排除资源"><a href="#排除资源" class="headerlink" title="排除资源"></a>排除资源</h5><p>Thymeleaf模板可以就地编辑。默认情况下，更改<code>/ META-INF / maven，/ META-INF / resources，/ resources，/ static，/ public</code>或<code>/ templates</code>中的资源不会触发重新启动，但会触发实时重新加载。如果要自定义这些排除项，则可以使用<code>spring.devtools.restart.exclude</code>属性。例如，要仅排除<code>/ static</code>和<code>/ public</code>，可以设置以下属性：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.devtools.restart.exclude =static/ **，public/ **</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/company/" rel="tag"># company</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/07/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java-%E6%8A%80%E6%9C%AF%E6%A0%88/" rel="next" title="java-技术栈">
+                <i class="fa fa-chevron-left"></i> java-技术栈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/10/java-%E6%8A%80%E6%9C%AF%E6%A0%88/Redis-quick-start-notes/Redis-quick-start-notes/" rel="prev" title="Redis-quick-start-notes">
+                Redis-quick-start-notes <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/04/08/java-技术栈/java-Spring-Boot-notes/java-Spring-Boot-notes/"
+           data-title="java-Spring-Boot-notes" data-url="http://oodtoodt.github.io/2020/04/08/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java-Spring-Boot-notes/java-Spring-Boot-notes/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造系统"><span class="nav-number">1.</span> <span class="nav-text">构造系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构化代码"><span class="nav-number">2.</span> <span class="nav-text">结构化代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置类"><span class="nav-number">3.</span> <span class="nav-text">配置类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Import-更多地Configuration类"><span class="nav-number">3.1.</span> <span class="nav-text">Import 更多地Configuration类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Import-XML-配置"><span class="nav-number">3.2.</span> <span class="nav-text">Import XML 配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动配置"><span class="nav-number">4.</span> <span class="nav-text">自动配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#逐渐更换自动配置"><span class="nav-number">4.1.</span> <span class="nav-text">逐渐更换自动配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#禁用特定的自动配置"><span class="nav-number">4.2.</span> <span class="nav-text">禁用特定的自动配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Beans和Dependency-Injection-依赖注入"><span class="nav-number">5.</span> <span class="nav-text">Spring Beans和Dependency Injection(依赖注入)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-SpringBootApplication-批注"><span class="nav-number">6.</span> <span class="nav-text">使用 @SpringBootApplication 批注</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跑你的程序"><span class="nav-number">7.</span> <span class="nav-text">跑你的程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发工具"><span class="nav-number">8.</span> <span class="nav-text">开发工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性默认值"><span class="nav-number">8.1.</span> <span class="nav-text">属性默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动重启"><span class="nav-number">8.2.</span> <span class="nav-text">自动重启</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#条件评估的变动会被log"><span class="nav-number">8.2.1.</span> <span class="nav-text">条件评估的变动会被log</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#排除资源"><span class="nav-number">8.2.2.</span> <span class="nav-text">排除资源</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

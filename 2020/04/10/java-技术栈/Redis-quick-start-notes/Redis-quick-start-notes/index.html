@@ -1,0 +1,957 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="company,DB,Redis," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis-quick-start-notes">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/04/10/java-%E6%8A%80%E6%9C%AF%E6%A0%88/Redis-quick-start-notes/Redis-quick-start-notes/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="。">
+<meta property="article:published_time" content="2020-04-10T08:35:10.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:03:37.000Z">
+<meta property="article:author" content="eco_oodt">
+<meta property="article:tag" content="company">
+<meta property="article:tag" content="DB">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/04/10/java-技术栈/Redis-quick-start-notes/Redis-quick-start-notes/"/>
+
+
+
+
+
+  <title>Redis-quick-start-notes | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/04/10/java-%E6%8A%80%E6%9C%AF%E6%A0%88/Redis-quick-start-notes/Redis-quick-start-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis-quick-start-notes</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-10T16:35:10+08:00">
+                2020-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DB/" itemprop="url" rel="index">
+                    <span itemprop="name">DB</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DB/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DB/Redis/documentation/" itemprop="url" rel="index">
+                    <span itemprop="name">documentation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/10/java-%E6%8A%80%E6%9C%AF%E6%A0%88/Redis-quick-start-notes/Redis-quick-start-notes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/10/java-技术栈/Redis-quick-start-notes/Redis-quick-start-notes/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/04/10/java-%E6%8A%80%E6%9C%AF%E6%A0%88/Redis-quick-start-notes/Redis-quick-start-notes/" class="leancloud_visitors" data-flag-title="Redis-quick-start-notes">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>。</p>
+<a id="more"></a>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>二进制安全的字符串<br>lists<br>sets<br>sorted sets<br>hashes<br>bit arrays<br>hyperLogLogs<br>streams</p>
+<p>INCR、DECR，atomic，原子增减操作<br>get、set、getset设置并返回原值，mset设置多个值，mget亦然<br>exists、del、type</p>
+<h2 id="Redis-expires"><a href="#Redis-expires" class="headerlink" title="Redis expires"></a>Redis expires</h2><p>可以在时间到了之后删除key<br>可以用秒或者毫秒<br>解析都是1毫秒的<br>保存了过期的时间在硬盘上<br>可以以后缀的形式来在create<br>px和pttl是毫秒的形式</p>
+<h2 id="Redis-List"><a href="#Redis-List" class="headerlink" title="Redis List"></a>Redis List</h2><p>是用的Linked Lists，即链表实现的，更看重插入删除的效率。<br>如果需要大量的查询操作，你可以用另一种叫做sorted set的数据结构。<br>可以在恒定的时间内以恒定的长度获取到整个lists</p>
+<p>可以用LPUSH来向一个list的头上加元素，RPUSH相反，在尾巴上加元素</p>
+<p>LRANGE会提取整个列表（从头到尾）,需要两个参数，第一个元素和最后一个元素的位置（负数可以从最后开始）另外没有RRANGE</p>
+<p>lpop,rpop</p>
+<p>ltrim可以设定新的list的范围</p>
+<h3 id="blocking-operations"><a href="#blocking-operations" class="headerlink" title="blocking operations"></a>blocking operations</h3><p>是为了解决polling(轮询)的问题而生的，polling有这样的问题：<br>强迫Redis和客户端处理无用命令，之后面临着处理更多无用调用还是等待更长的延迟的问题。<br>BRPOP和BLPOP：如果列表为空，它们将能够阻止，仅当新元素添加到列表中或者用户指定的超时时间到达时，它们才回返回到调用方。<br>可以指定多个list，返回第一个有响应的<br>BRPOP返回值和RPOP略有不同，它是包含了两个元素的数组，超时返回null<br>客户端以有序方式提供服务，第一个block的先被served<br>有兴趣可以查询RPOPLPUSH和BRPOPLPUSH，前者是更安全的队列，后者是阻塞变体</p>
+<h3 id="自动创建和删除key"><a href="#自动创建和删除key" class="headerlink" title="自动创建和删除key"></a>自动创建和删除key</h3><p>指无需为添加删除元素之前是否有key（比如某个list）而操心。比如说c++或java，使用前要判断是否为空等等。适用于所有多个元素组成的数据类型。<br>注意，其中的唯一例外是流数据不会在删除元素时自动摧毁某个键</p>
+<p>当然，类型还是要相同的。</p>
+<h3 id="Redis-Hashes"><a href="#Redis-Hashes" class="headerlink" title="Redis Hashes"></a>Redis Hashes</h3><p>可以理解成为HashMap<br>hmset、hget、hmget(hget的array版)、hgetall、hincrby(指定增量)，hvals<br>值得注意的是，小散列（即一些具有较小值的元素）以特殊方式在内存中进行了编码，从而使它们具有很高的存储效率。</p>
+<h3 id="Redis-Sets"><a href="#Redis-Sets" class="headerlink" title="Redis Sets"></a>Redis Sets</h3><p>sadd添加<br>smembers查询，sismember<br>集合非常适合表示对象之间的关系。 例如，我们可以轻松地使用集合来实现标签。</p>
+<p>对这个问题进行建模的一种简单方法是为我们要标记的每个对象设置一个集合。 该集合包含与对象关联的标签的ID。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;sadd news:<span class="number">1000</span>:tags <span class="number">1</span> <span class="number">2</span> <span class="number">5</span> <span class="number">77</span></span><br><span class="line"><span class="comment">//逆关系：用给定标签标记所有新闻</span></span><br><span class="line">&gt;sadd tag:<span class="number">1</span>:news <span class="number">1000</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可能需要包含标签1、2、10和27的所有对象的列表(注意，必须全部包含):</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sinter tag:<span class="number">1</span>:news tag:<span class="number">2</span>:news tag:<span class="number">10</span>:news tag:<span class="number">27</span>:news</span><br><span class="line">... results here ...</span><br></pre></td></tr></table></figure>
+<p>sunionstore执行多个集合之间的联合，并将结果存储到另一个集合中<br>scard指集合的基数<br>srandmember可以不remove随机取元素（还有取重复/非重复的元素的功能[?)</p>
+<h3 id="Sorted-sets"><a href="#Sorted-sets" class="headerlink" title="Sorted sets"></a>Sorted sets</h3><p>理解为正map…就是会依照value给key排序的set<br>zadd(注意是可以更新的，返回值0更新，1新增)<br>zrange、zrevrange WITHSCCORES、zrangebyscore、zremrangebyscore(范围内有多少个)<br>sorted-sets有个次排序资格：字典序，并且可以依照字典范围操作，有</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zrangebylex h [a [b</span><br><span class="line"><span class="comment">//注意[和(的问题</span></span><br><span class="line"><span class="comment">//非常重要，因为可以用作通用索引</span></span><br></pre></td></tr></table></figure>
+<h3 id="Bitmaps"><a href="#Bitmaps" class="headerlink" title="Bitmaps"></a>Bitmaps</h3><p>不是实际的数据类型，而是在String类型上定义的一组面向位的操作。<br>位操作分为两类：固定时间的单个位操作；对位组的操作，例如计算给定范围内设置的位的数量<br>优点是存储信息时节省大量空间<br>setbit、getbit(超出范围始终视为0)<br>bitop执行按位运算<br>bitcount执行填充计数，报1的位数<br>bitpos第一个1的位置(of a string)<br>bitpos和bitcount都可以在字符串的字节范围内运行，而不是整个长度上运行</p>
+<p>bitmaps的常用情景是<br>各种实时分析<br>存储于对象ID相关的空间高效且高性能的布尔信息</p>
+<p>比如说记录网站用户每天访问。每次访问都可以按一个bitset的1，这样每个用户就都有一个字符串，bitcount就可以获得给定用户访问网站的天数，只需几个bitpos调用，或调用和分析bitmap client-side，就可以轻松计算出最长连续访问网站的人是谁。<br>【个人理解，就是循环跑bitpos计数。对于0很多的情况会很快。<br>可以用每个key存储M位的方式分割bitmap，使用bit-number MOD M即可。bit-number/M就可以访问。</p>
+<h2 id="HyperLogLogs"><a href="#HyperLogLogs" class="headerlink" title="HyperLogLogs"></a>HyperLogLogs</h2><blockquote>
+<p>本质是一种算法，引申为一种数据结构。<br>是一个<em>基数估计</em>算法，比如说一个集合｛0, 1, 3, 3, 4, 5}，其基数是5，而个数是6。因为3重复出现了两次。基数是个去重统计。通常用来统计一个集合中不重复的元素个数，例如统计某个网站的UV，或者用户搜索网站的关键词数量。数据分析、网络监控及数据库优化等领域都会涉及到基数计数的需求。<br>其空间效率非常高。</p>
+</blockquote>
+<p>HyperLogLog是一种概率数据结构，用于对唯一事物(技术上讲就是集合的基数)进行计数。它以内存为代价来交换精度。您只需要使用恒定数量的内存，使得误差小于1%。<br>尽管技术上HLL是不同的数据结构，Redis仍然视其为string，：可以用get、set等指令。<br>概念上使用HLL就像使用set。但HLL不是真正添加元素进去，因为数据结构仅含有一种不含实际元素的状态，它的API：<br>看到新元素，用PFADD加入。<br>想要检索pfadd添加过的数目的当前近似值时<br>一个例子是每天计算用户在搜索表单中执行的查询（唯一）</p>
+<h3 id="其他重要特征"><a href="#其他重要特征" class="headerlink" title="其他重要特征"></a>其他重要特征</h3><ul>
+<li>可以逐步迭代大型集合的键空间</li>
+<li>可以在服务器端运行lua脚本以改善延迟和带宽</li>
+<li>Redis也是一个Pub-Sub服务器</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/company/" rel="tag"># company</a>
+          
+            <a href="/tags/DB/" rel="tag"># DB</a>
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/08/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java-Spring-Boot-notes/java-Spring-Boot-notes/" rel="next" title="java-Spring-Boot-notes">
+                <i class="fa fa-chevron-left"></i> java-Spring-Boot-notes
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/11/Graduation-Project-note/Graduation-Project-note/" rel="prev" title="Graduation-Project-note">
+                Graduation-Project-note <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/04/10/java-技术栈/Redis-quick-start-notes/Redis-quick-start-notes/"
+           data-title="Redis-quick-start-notes" data-url="http://oodtoodt.github.io/2020/04/10/java-%E6%8A%80%E6%9C%AF%E6%A0%88/Redis-quick-start-notes/Redis-quick-start-notes/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-expires"><span class="nav-number">2.</span> <span class="nav-text">Redis expires</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-List"><span class="nav-number">3.</span> <span class="nav-text">Redis List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#blocking-operations"><span class="nav-number">3.1.</span> <span class="nav-text">blocking operations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动创建和删除key"><span class="nav-number">3.2.</span> <span class="nav-text">自动创建和删除key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-Hashes"><span class="nav-number">3.3.</span> <span class="nav-text">Redis Hashes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-Sets"><span class="nav-number">3.4.</span> <span class="nav-text">Redis Sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sorted-sets"><span class="nav-number">3.5.</span> <span class="nav-text">Sorted sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitmaps"><span class="nav-number">3.6.</span> <span class="nav-text">Bitmaps</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HyperLogLogs"><span class="nav-number">4.</span> <span class="nav-text">HyperLogLogs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#其他重要特征"><span class="nav-number">4.1.</span> <span class="nav-text">其他重要特征</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

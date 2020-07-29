@@ -1,0 +1,913 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT.Welcome to Hell" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="时隔近半年，重回sol2学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sol2笔记-2">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/05/08/lua/sol2%E7%AC%94%E8%AE%B0-2/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="时隔近半年，重回sol2学习">
+<meta property="article:published_time" content="2020-05-08T03:24:06.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:03:37.000Z">
+<meta property="article:author" content="eco_oodt">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/05/08/lua/sol2笔记-2/"/>
+
+
+
+
+
+  <title>sol2笔记-2 | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/05/08/lua/sol2%E7%AC%94%E8%AE%B0-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sol2笔记-2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-08T11:24:06+08:00">
+                2020-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/05/08/lua/sol2%E7%AC%94%E8%AE%B0-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/05/08/lua/sol2笔记-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/05/08/lua/sol2%E7%AC%94%E8%AE%B0-2/" class="leancloud_visitors" data-flag-title="sol2笔记-2">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>时隔近半年，重回sol2学习</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这次其实就是带着代码读一遍而不是简单的过一遍了。<br>主要是我能看懂这些lambda不至于慌神迷乱了。</p>
+<h2 id="getting-started"><a href="#getting-started" class="headerlink" title="getting-started"></a>getting-started</h2><p>起手<code>sol::state lua;lua.open_libraries(sol::lib::base)</code>没问题。</p>
+<h2 id="读写"><a href="#读写" class="headerlink" title="读写"></a>读写</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> is_defaulted = lua[<span class="string">".."</span>][<span class="string">".."</span>].getor(<span class="number">24</span>);</span><br><span class="line"><span class="keyword">auto</span> bark = lua[<span class="string">"config"</span>][<span class="string">"bark"</span>];</span><br><span class="line"><span class="keyword">if</span>(bark.valid()) &#123;&#125; </span><br><span class="line">sol::optional&lt;<span class="keyword">bool</span>&gt; is_a_boolean = lua[<span class="string">"config"</span>][<span class="string">"brak"</span>];</span><br><span class="line"><span class="keyword">if</span>(is_a_boolean) &#123;<span class="comment">/*the value is a boolean*/</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>写<br>写的时候注意嵌套</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">lua[<span class="string">"bark"</span>] = <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">lua[<span class="string">"some_table"</span>] = lua.create_table_with(</span><br><span class="line">    <span class="string">"key0"</span>, <span class="number">24</span>,</span><br><span class="line">    <span class="string">"key1"</span>, <span class="number">25</span>,</span><br><span class="line">    lua[<span class="string">"bark"</span>], <span class="string">"the key is 50 and this string is its value!"</span>);</span><br><span class="line">lua.script(R<span class="string">"(</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">print(some_table[50])</span></span><br><span class="line"><span class="string">print(some_table["</span>key0<span class="string">"])</span></span><br><span class="line"><span class="string">print(some_table["</span>key1<span class="string">"])</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">-- a lua comment: access a global in a lua script with the _G table</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">print(_G["</span>bark<span class="string">"])</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">)"</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">the key is 50 and this string is its value!</span></span><br><span class="line"><span class="comment">24</span></span><br><span class="line"><span class="comment">25</span></span><br><span class="line"><span class="comment">50</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>同时写的时候注意不要进行太深的写，容易造成在不存在的table里写东西，这时候可以用一些lazy读写，最后查看其valid()。<br>如果一个值为nil(sol::lua_nil)，那么<code>sol::optional&lt;int&gt;</code>将在if中变成false。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="注册函数"><a href="#注册函数" class="headerlink" title="注册函数"></a>注册函数</h3><p>三种方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">my_func</span><span class="params">(<span class="keyword">int</span> a, <span class="built_in">std</span>::<span class="built_in">string</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b + <span class="built_in">std</span>::<span class="built_in">string</span>(<span class="string">"D"</span>, a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    sol::state lua;</span><br><span class="line">    lua[<span class="string">"a"</span>] = my_func;</span><br><span class="line">    lua.<span class="built_in">set</span>(<span class="string">"b"</span>,my_func);</span><br><span class="line">    lua.set_function(<span class="string">"c"</span>,my_func);</span><br><span class="line">    lua.script(<span class="string">"some_str = a(1, 'Da')"</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> some_str = lua[<span class="string">"some_str"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_class</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">    my_class(<span class="keyword">int</span> x) : a(x) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            ++a; <span class="comment">// increment a by 1</span></span><br><span class="line">            <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">lua.set_function(<span class="string">"my_class_func"</span>, &amp;my_class::func, my_class());</span><br><span class="line">lua.set_function(<span class="string">"my_class_func_2"</span>, &amp;my_class::func);</span><br><span class="line">lua.<span class="built_in">set</span>(<span class="string">"obj"</span>, my_class(<span class="number">24</span>));</span><br><span class="line">lua.script(R<span class="string">"(</span></span><br><span class="line"><span class="string">    first_value = my_class_func()</span></span><br><span class="line"><span class="string">    second_value = my_class_func()</span></span><br><span class="line"><span class="string">)"</span>);</span><br><span class="line"><span class="comment">// first_value == 1</span></span><br><span class="line"><span class="comment">// second_value == 2</span></span><br><span class="line">lua.script(R<span class="string">"(</span></span><br><span class="line"><span class="string">    third_value = my_class_func_2(obj)</span></span><br><span class="line"><span class="string">    fourth_value = my_class_func_2(obj)</span></span><br><span class="line"><span class="string">)"</span>);</span><br><span class="line"><span class="comment">// first_value == 25</span></span><br><span class="line"><span class="comment">// second_value == 26</span></span><br></pre></td></tr></table></figure>
+<p>模板是很难注册的，因为它是编译期内容，如果你需要，指定所有的参数类型才可以绑定和使用<br>可以用sol::overload重载函数<br>lambda会有很多奇怪的问题。记住，用my_table.set_function注册所有的lambda，我相信这里set_function和所有都是关键的点。然后没有指定返回类型的lambda会衰退(decay，std::decay就是对类型退化的意思，这里应该同理，去const reference)返回值，要显式捕获或返回引用，根据需要使用decltype(auto)或直接指定返回类型<br>问题的原因也很有趣，这里不展开了。</p>
+<blockquote>
+<p>Welcome to non-static-reflection hell</p>
+</blockquote>
+<h3 id="函数与参数传递"><a href="#函数与参数传递" class="headerlink" title="函数与参数传递"></a>函数与参数传递</h3><p>这里非常的复杂，至少我大部分没有看懂。留个心眼吧。</p>
+<ul>
+<li>所有参数都会被转发。意味着不会发生复制、移动，除非明确由用户或接收函数完成。</li>
+<li>sol::table,sol::object,sol::userdata and friends(?)复制代价很低，并且简单的视为值，如果您不希望使用copy，那就要用const type&amp;或者type&amp;，注意用引用很危险，因为lua默认传引用，值很容易被更改。</li>
+<li>函数绑定到lua时，指针参数都用作<code>T*</code></li>
+<li>避免通过引用或值使用特殊的unique_usertype参数，因为许多类型只能移动，而lua没有移动的概念，通过引用是非常危险的。</li>
+<li>函数有对nil/nullptr的期望就可以用<code>T*</code>,没有就用(const T&amp;/T&amp;)【注:没看懂】</li>
+<li>尽量不要用<code>const char*</code>，除非你对Lua Stack了如指掌</li>
+</ul>
+<h3 id="从lua获取函数"><a href="#从lua获取函数" class="headerlink" title="从lua获取函数"></a>从lua获取函数</h3><p>使用sol::function或使用sol::protected_function这种更高级的包装器<br>前者很简单，如果不用的话其实auto也可以，或者干脆做右值，都行<br>后者可以绑定一个error_handler变量，捕获错误并处理他们</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        sol::state lua;</span><br><span class="line"></span><br><span class="line">        lua.script(R<span class="string">"(</span></span><br><span class="line"><span class="string">                function handler (message)</span></span><br><span class="line"><span class="string">                        return "</span>Handled <span class="keyword">this</span> message: <span class="string">" .. message</span></span><br><span class="line"><span class="string">                end</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                function f (a)</span></span><br><span class="line"><span class="string">                        if a &lt; 0 then</span></span><br><span class="line"><span class="string">                                error("</span>negative number detected<span class="string">")</span></span><br><span class="line"><span class="string">                        end</span></span><br><span class="line"><span class="string">                        return a + 5</span></span><br><span class="line"><span class="string">                end</span></span><br><span class="line"><span class="string">        )"</span>);</span><br><span class="line"></span><br><span class="line">        sol::protected_function f = lua[<span class="string">"f"</span>];</span><br><span class="line">        f.error_handler = lua[<span class="string">"handler"</span>];</span><br><span class="line"></span><br><span class="line">        sol::protected_function_result result = f(<span class="number">-500</span>);</span><br><span class="line">        <span class="keyword">if</span> (result.valid()) &#123;</span><br><span class="line">                <span class="comment">// Call succeeded</span></span><br><span class="line">                <span class="comment">// Which would be not called here</span></span><br><span class="line">                <span class="keyword">int</span> x = result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// Call failed</span></span><br><span class="line">                sol::error err = result;</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">string</span> what = err.what();</span><br><span class="line">                <span class="comment">// 'what' Should read</span></span><br><span class="line">                <span class="comment">// "Handled this message: negative number detected"</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SOL_ALL_SAFETIES_ON 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sol/sol.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"assert.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Uses some of the fancier bits of sol3, including the "transparent argument",</span></span><br><span class="line"><span class="comment">// sol::this_state, which gets the current state and does not increment</span></span><br><span class="line"><span class="comment">// function arguments</span></span><br><span class="line"><span class="function">sol::object <span class="title">fancy_func</span><span class="params">(sol::object a, sol::object b, sol::this_state s)</span> </span>&#123;</span><br><span class="line">	<span class="function">sol::state_view <span class="title">lua</span><span class="params">(s)</span></span>;</span><br><span class="line">	<span class="keyword">if</span> (a.is&lt;<span class="keyword">int</span>&gt;() &amp;&amp; b.is&lt;<span class="keyword">int</span>&gt;()) &#123;</span><br><span class="line">		<span class="keyword">return</span> sol::object(lua, sol::in_place, a.as&lt;<span class="keyword">int</span>&gt;() + b.as&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (a.is&lt;<span class="keyword">bool</span>&gt;()) &#123;</span><br><span class="line">		<span class="keyword">bool</span> do_triple = a.as&lt;<span class="keyword">bool</span>&gt;();</span><br><span class="line">		<span class="keyword">return</span> sol::object(lua, sol::in_place_type&lt;<span class="keyword">double</span>&gt;, b.as&lt;<span class="keyword">double</span>&gt;() * (do_triple ? <span class="number">3</span> : <span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// Can also use make_object</span></span><br><span class="line">	<span class="keyword">return</span> sol::make_object(lua, sol::lua_nil);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	sol::state lua;</span><br><span class="line"></span><br><span class="line">	lua[<span class="string">"f"</span>] = fancy_func;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> result = lua[<span class="string">"f"</span>](<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">	<span class="comment">// result == 3</span></span><br><span class="line">	c_assert(result == <span class="number">3</span>);</span><br><span class="line">	<span class="keyword">double</span> result2 = lua[<span class="string">"f"</span>](<span class="literal">false</span>, <span class="number">2.5</span>);</span><br><span class="line">	<span class="comment">// result2 == 2.5</span></span><br><span class="line">	c_assert(result2 == <span class="number">2.5</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// call in Lua, get result</span></span><br><span class="line">	<span class="comment">// notice we only need 2 arguments here, not 3 (sol::this_state is transparent)</span></span><br><span class="line">	lua.script(<span class="string">"result3 = f(true, 5.5)"</span>);</span><br><span class="line">	<span class="keyword">double</span> result3 = lua[<span class="string">"result3"</span>];</span><br><span class="line">	<span class="comment">// result3 == 16.5</span></span><br><span class="line">	c_assert(result3 == <span class="number">16.5</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"=== any_return ==="</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"result : "</span> &lt;&lt; result &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"result2: "</span> &lt;&lt; result2 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"result3: "</span> &lt;&lt; result3 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的sol::this_state,sol::state_view值得玩味，因为文档里没有提他们的用途（到这为止），盲猜就是绑定了环境</p>
+<h2 id="lua中的c"><a href="#lua中的c" class="headerlink" title="lua中的c++"></a>lua中的c++</h2><p>使用usertype或udt很简单。如果不调用任何成员变量和函数，直接传递即可。<br>如果要在lua的用户类型上使用变量和函数，就需要注册：可用<code>new_usertype</code>绑定方法和变量，这些方法都在table和state(_view)上，但我们只在state上使用它<br>另外new_usertype允许一些设置选项，详见文档。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (way_1) &#123;</span><br><span class="line">        lua.new_usertype&lt;ship&gt;( <span class="string">"ship"</span>, <span class="comment">// the name of the class, as you want it to be used in lua</span></span><br><span class="line">                <span class="comment">// List the member functions you wish to bind:</span></span><br><span class="line">                <span class="comment">// "name_of_item", &amp;class_name::function_or_variable</span></span><br><span class="line">                <span class="string">"shoot"</span>, &amp;ship::shoot,</span><br><span class="line">                <span class="string">"hurt"</span>, &amp;ship::hurt,</span><br><span class="line">                <span class="comment">// bind variable types, too</span></span><br><span class="line">                <span class="string">"life"</span>, &amp;ship::life,</span><br><span class="line">                <span class="comment">// names in lua don't have to be the same as C++,</span></span><br><span class="line">                <span class="comment">// but it probably helps if they're kept the same,</span></span><br><span class="line">                <span class="comment">// here we change it just to show its possible</span></span><br><span class="line">                <span class="string">"bullet_count"</span>, &amp;ship::bullets</span><br><span class="line">        );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// set usertype explicitly, with the given name</span></span><br><span class="line">        sol::usertype&lt;ship&gt; usertype_table = lua.new_usertype&lt;ship&gt;( <span class="string">"ship"</span>);</span><br><span class="line">        usertype_table[<span class="string">"shoot"</span>] = &amp;ship::shoot;</span><br><span class="line">        usertype_table[<span class="string">"hurt"</span>] = &amp;ship::hurt;</span><br><span class="line">        usertype_table[<span class="string">"life"</span>] = &amp;ship::life;</span><br><span class="line">        usertype_table[<span class="string">"bullet_count"</span>] = &amp;ship::bullets;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="所有权"><a href="#所有权" class="headerlink" title="所有权"></a>所有权</h2><p>在销毁sol::state之前，必须销毁所有对象，否则悬挂引用Lua State会造成可怕的爆炸<br>在这里，sol::object在状态超出范围前，必须清除所有源自sol::reference和sol::object的类型<br>这段代码很熟悉，但是不记得是在哪看过了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">sol::state lua;</span><br><span class="line">	lua.open_libraries(sol::lib::base);</span><br><span class="line"></span><br><span class="line">	lua.script(R<span class="string">"(</span></span><br><span class="line"><span class="string">	obj = "</span>please don<span class="number">'</span>t let me die<span class="string">";</span></span><br><span class="line"><span class="string">	)"</span>);</span><br><span class="line"></span><br><span class="line">	sol::object keep_alive = lua[<span class="string">"obj"</span>];</span><br><span class="line">	lua.script(R<span class="string">"(</span></span><br><span class="line"><span class="string">	obj = nil;</span></span><br><span class="line"><span class="string">	function say(msg)</span></span><br><span class="line"><span class="string">		print(msg)</span></span><br><span class="line"><span class="string">	end</span></span><br><span class="line"><span class="string">	)"</span>);</span><br><span class="line"></span><br><span class="line">	lua.collect_garbage();</span><br><span class="line"></span><br><span class="line">	lua[<span class="string">"say"</span>](lua[<span class="string">"obj"</span>]);</span><br><span class="line">	<span class="comment">// still accessible here and still alive in Lua</span></span><br><span class="line">	<span class="comment">// even though the name was cleared</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> message = keep_alive.as&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;();</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; message &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><blockquote>
+<p>sol不会拥有原始指针的所有权：原始指针不拥有任何东西。sol不会删除原始指针，因为它们不（也不应该拥有）任何东西：</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SOL_ALL_SAFETIES_ON 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sol/sol.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_type</span> &#123;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">stuff</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	sol::state lua;</span><br><span class="line">	<span class="comment">// AAAHHH BAD</span></span><br><span class="line">	<span class="comment">// dangling pointer!</span></span><br><span class="line">	lua[<span class="string">"my_func"</span>] = []() -&gt; my_type* &#123; <span class="keyword">return</span> <span class="keyword">new</span> my_type(); &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// AAAHHH!</span></span><br><span class="line">	lua.<span class="built_in">set</span>(<span class="string">"something"</span>, <span class="keyword">new</span> my_type());</span><br><span class="line"></span><br><span class="line">	<span class="comment">// AAAAAAHHH!!!</span></span><br><span class="line">	lua[<span class="string">"something_else"</span>] = <span class="keyword">new</span> my_type();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里就是之前提到过的，lambda一定要指定返回值，其他的同理：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SOL_ALL_SAFETIES_ON 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sol/sol.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_type</span> &#123;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">stuff</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	sol::state lua;</span><br><span class="line">	<span class="comment">// :ok:</span></span><br><span class="line">	lua[<span class="string">"my_func0"</span>] = []() -&gt; <span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;my_type&gt; &#123; <span class="keyword">return</span> <span class="built_in">std</span>::make_unique&lt;my_type&gt;(); &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// :ok:</span></span><br><span class="line">	lua[<span class="string">"my_func1"</span>] = []() -&gt; <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;my_type&gt; &#123; <span class="keyword">return</span> <span class="built_in">std</span>::make_shared&lt;my_type&gt;(); &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// :ok:</span></span><br><span class="line">	lua[<span class="string">"my_func2"</span>] = []() -&gt; my_type &#123; <span class="keyword">return</span> my_type(); &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// :ok:</span></span><br><span class="line">	lua.<span class="built_in">set</span>(<span class="string">"something"</span>, <span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;my_type&gt;(<span class="keyword">new</span> my_type()));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;my_type&gt; my_shared = <span class="built_in">std</span>::make_shared&lt;my_type&gt;();</span><br><span class="line">	<span class="comment">// :ok:</span></span><br><span class="line">	lua.<span class="built_in">set</span>(<span class="string">"something_else"</span>, my_shared);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// :ok:</span></span><br><span class="line">	<span class="keyword">auto</span> my_unique = <span class="built_in">std</span>::make_unique&lt;my_type&gt;();</span><br><span class="line">	lua[<span class="string">"other_thing"</span>] = <span class="built_in">std</span>::<span class="built_in">move</span>(my_unique);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>尽量使用std::nullptr_t或sol::lua_nil</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SOL_ALL_SAFETIES_ON 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sol/sol.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_type</span> &#123;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">stuff</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	sol::state lua;</span><br><span class="line">	<span class="comment">// THIS IS STILL BAD DON'T DO IT AAAHHH BAD</span></span><br><span class="line">	<span class="comment">// return a unique_ptr that's empty instead</span></span><br><span class="line">	<span class="comment">// or be explicit!</span></span><br><span class="line">	lua[<span class="string">"my_func6"</span>] = []() -&gt; my_type* &#123; <span class="keyword">return</span> <span class="literal">nullptr</span>; &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// :ok:</span></span><br><span class="line">	lua[<span class="string">"my_func7"</span>] = []() -&gt; <span class="built_in">std</span>::<span class="keyword">nullptr_t</span> &#123; <span class="keyword">return</span> <span class="literal">nullptr</span>; &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// :ok:</span></span><br><span class="line">	lua[<span class="string">"my_func8"</span>] = []() -&gt; <span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;my_type&gt; &#123;</span><br><span class="line">		<span class="comment">// default-constructs as a nullptr,</span></span><br><span class="line">		<span class="comment">// gets pushed as nil to Lua</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;my_type&gt;();</span><br><span class="line">		<span class="comment">// same happens for std::shared_ptr</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Acceptable, it will set 'something' to nil</span></span><br><span class="line">	<span class="comment">// (and delete it on next GC if there's no more references)</span></span><br><span class="line">	lua.<span class="built_in">set</span>(<span class="string">"something"</span>, <span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Also fine</span></span><br><span class="line">	lua[<span class="string">"something_else"</span>] = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用（protected_）function_result，load_result（尤其是多个加载/函数会导致一个C ++函数），stack_reference和类似基于堆栈的事物时，请务必小心，以他们为返回值前三思。<br>proxy依赖于Lua堆栈，从c++函数中返回它们完全不安全，而且没有什么好的解决办法。</p>
+<h3 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SOL_ALL_SAFETIES_ON 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sol/sol.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"assert.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">auto</span>&amp; code = R<span class="string">"(</span></span><br><span class="line"><span class="string">	bark = &#123; </span></span><br><span class="line"><span class="string">		woof = &#123;</span></span><br><span class="line"><span class="string">			[2] = "</span>arf!<span class="string">" </span></span><br><span class="line"><span class="string">		&#125; </span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string">	)"</span>;</span><br><span class="line"></span><br><span class="line">	sol::state lua;</span><br><span class="line">	lua.open_libraries(sol::lib::base);</span><br><span class="line">	lua.script(code);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// produces table_proxy, implicitly converts to std::string, quietly destroys table_proxy</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> arf_string = lua[<span class="string">"bark"</span>][<span class="string">"woof"</span>][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">	<span class="comment">// lazy-evaluation of tables</span></span><br><span class="line">	<span class="keyword">auto</span> x = lua[<span class="string">"bark"</span>];</span><br><span class="line">	<span class="keyword">auto</span> y = x[<span class="string">"woof"</span>];</span><br><span class="line">	<span class="keyword">auto</span> z = y[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">	<span class="comment">// retrivies value inside of lua table above</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> value = z;</span><br><span class="line">	c_assert(value == <span class="string">"arf!"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Can change the value later...</span></span><br><span class="line">	z = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Yay, lazy-evaluation!</span></span><br><span class="line">	<span class="keyword">int</span> changed_value = z; <span class="comment">// now it's 20!</span></span><br><span class="line">	c_assert(changed_value == <span class="number">20</span>);</span><br><span class="line">	lua.script(<span class="string">"assert(bark.woof[2] == 20)"</span>);</span><br><span class="line"></span><br><span class="line">	lua[<span class="string">"a_new_value"</span>] = <span class="number">24</span>;</span><br><span class="line">	lua[<span class="string">"chase_tail"</span>] = [](<span class="keyword">int</span> chasing) &#123; </span><br><span class="line">		<span class="keyword">int</span> r = <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chasing; ++i) &#123;</span><br><span class="line">			r *= r;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> r;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	lua.script(<span class="string">"assert(a_new_value == 24)"</span>);</span><br><span class="line">	lua.script(<span class="string">"assert(chase_tail(2) == 16)"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看起来没有proxy的内容，其实auto的xyz都是<code>sol::table_proxy&lt;...&gt;</code>代理类。它们惰性求值，并且被当做引用来使用。当然我们不建议使用proxy在类和类之间或函数和函数之间用惰性求值<br>更深的东西请查阅文档和api，这里不展开。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/07/c++/EffectiveModernCpp-note/EffectiveModernCpp-note/" rel="next" title="EffectiveModernCpp-note">
+                <i class="fa fa-chevron-left"></i> EffectiveModernCpp-note
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/20/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" rel="prev" title="代码相关">
+                代码相关 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/05/08/lua/sol2笔记-2/"
+           data-title="sol2笔记-2" data-url="http://oodtoodt.github.io/2020/05/08/lua/sol2%E7%AC%94%E8%AE%B0-2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getting-started"><span class="nav-number">2.</span> <span class="nav-text">getting-started</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读写"><span class="nav-number">3.</span> <span class="nav-text">读写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">4.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册函数"><span class="nav-number">4.1.</span> <span class="nav-text">注册函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数与参数传递"><span class="nav-number">4.2.</span> <span class="nav-text">函数与参数传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从lua获取函数"><span class="nav-number">4.3.</span> <span class="nav-text">从lua获取函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lua中的c"><span class="nav-number">5.</span> <span class="nav-text">lua中的c++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#所有权"><span class="nav-number">6.</span> <span class="nav-text">所有权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">6.1.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理"><span class="nav-number">6.2.</span> <span class="nav-text">代理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

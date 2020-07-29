@@ -1,0 +1,1102 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="company,java,java-core," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="接口、lambda、代理、异常从善如流，没有看内部类（手动扇子）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java笔记-core-2">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/04/07/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E7%AC%94%E8%AE%B0-core/java%E7%AC%94%E8%AE%B0-core-2/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="接口、lambda、代理、异常从善如流，没有看内部类（手动扇子）">
+<meta property="article:published_time" content="2020-04-07T01:54:19.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:03:37.000Z">
+<meta property="article:author" content="eco_oodt">
+<meta property="article:tag" content="company">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="java-core">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/04/07/java-技术栈/java笔记-core/java笔记-core-2/"/>
+
+
+
+
+
+  <title>java笔记-core-2 | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/04/07/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E7%AC%94%E8%AE%B0-core/java%E7%AC%94%E8%AE%B0-core-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java笔记-core-2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-07T09:54:19+08:00">
+                2020-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/book-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">book_notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/07/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E7%AC%94%E8%AE%B0-core/java%E7%AC%94%E8%AE%B0-core-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/07/java-技术栈/java笔记-core/java笔记-core-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/04/07/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E7%AC%94%E8%AE%B0-core/java%E7%AC%94%E8%AE%B0-core-2/" class="leancloud_visitors" data-flag-title="java笔记-core-2">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>接口、lambda、代理、异常<br>从善如流，没有看内部类（手动扇子）</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>在 Java 程序设计语言中， 接口不是类，而是对类的一组需求描述，这些类要遵从接口描述的统一格式进行定义。<br>所有的类都是默认实现了Object接口。</p>
+<pre><code>有句话是这么说的：Object变量只能用于作为各种值的通用持有者。。。
+经过了一套实验，我发现数据是不会丢的，方法却是不会有的。
+和我的记忆一样，但我还真就找不到那句话了。
+所以强转不会丢数据(精度除外)</code></pre><p>比如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object other)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这就是说， 任何实现 Comparable 接口的类都需要包含 compareTo 方法，并且这个方法的参数必须是一个 Object 对象， 返回一个整型数值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span>&lt;<span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(T other)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从这开始java就和c++偏离的很远了，比如你可以看到java会大肆使用各种静态方法(不过c++中真的不会这样做吗？)但在现在的我看来这确实是很不一样的一点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Comparable&lt;T&gt;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(T other)</span></span></span><br><span class="line"><span class="function">java.util.Arrays</span></span><br><span class="line"><span class="function">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Object[] a)</span></span></span><br><span class="line"><span class="function">java.lang.Integer</span></span><br><span class="line"><span class="function">    <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br></pre></td></tr></table></figure>
+<p>接口不是类，尤其不能使用new运算符实例化一个接口。<br>但是却能声明接口的变量<br>接口变量必须引用实现了接口的类对象。<br>instance也可以检查对象是否实现了某个接口<br>接口也可以被扩展（继承）<br>注意，接口中的域被自动设为<em>public static final</em></p>
+<p>这个时候你会觉得interface特别像抽象类，但其实更抽象:比如不能有实现，不能构造，一个子类只能继承一个抽象类却能有多个接口，逗号隔开即可。</p>
+<p>成了，这里还讲了为什么既然有了抽象类还要有接口：主要就是扩展只能一个。这里的主要问题是c++支持多重继承，而Java不支持。多继承会让语言本身变得非常复杂，比如c++的虚基类、控制规则和横向指针类型转换等复杂特性。</p>
+<hr>
+<h3 id="关于工厂"><a href="#关于工厂" class="headerlink" title="关于工厂"></a>关于工厂</h3><p>工厂函数看上去有点像函数，实质上他们是类，当你调用它们时，实际上是生成了该类型的一个实例，就像工厂生产货物一样.</p>
+<p>工厂方法<br>定义：定义一个创建对象的接口，但让实现这个接口的类决定实例化哪个类，工厂方法让类的实例化推迟到子类中进行。</p>
+<hr>
+<h3 id="默认方法"><a href="#默认方法" class="headerlink" title="默认方法"></a>默认方法</h3><p>接口方法可以提供默认实现。<br>简单说，默认方法就是接口可以有实现方法，而且不需要实现类去实现其方法。<br>我们只需在方法名前面加个 default 关键字即可实现默认方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">t2</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">      Vehicle vehicle = <span class="keyword">new</span> Car();</span><br><span class="line">      vehicle.print();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Vehicle</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"我是一辆车!"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">    </span><br><span class="line">   <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">blowHorn</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"按喇叭!!!"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">FourWheeler</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"我是一辆四轮车!"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> <span class="keyword">implements</span> <span class="title">Vehicle</span>, <span class="title">FourWheeler</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">      Vehicle.<span class="keyword">super</span>.print();</span><br><span class="line">      FourWheeler.<span class="keyword">super</span>.print();</span><br><span class="line">      Vehicle.blowHorn();</span><br><span class="line">      System.out.println(<span class="string">"我是一辆汽车!"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子非常有趣。</p>
+<p>默认方法是重要用法是「接口演化」。指在接口中新增方法时保证源代码兼容（可以让类在不添加方法的情况下调用该新方法而不会出错。</p>
+<p>解决默认方法冲突在java里很简单：首先超类优先，其次接口冲突。如果两个接口冲突就必须覆盖这个方法来解决冲突，（两个接口没有为共享方法提供默认实现，则无冲突）实现上可以选择一个。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Person</span>, <span class="title">Named</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> Person.<span class="keyword">super</span>.getName(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意实现类不必实现所有的接口，那么它此时就是抽象类。</p>
+<p>如果超类和接口继承了相同的方法，只会考虑超类方法，接口的所有默认方法都会被忽略。</p>
+<hr>
+<h3 id="关于拷贝"><a href="#关于拷贝" class="headerlink" title="关于拷贝"></a>关于拷贝</h3><p>clone 是Object的一个protected方法。这意味着你只能通过对象来clone对象。注意，clone是浅拷贝。<br>对于需要深拷贝的，我们的类必须实现Cloneable接口或者重新定义clone方法。<br>Cloneable接口是Java提供的一组标记接口之一。标记接口不包含任何方法，唯一作用就是允许在类型查询中使用instanceof。<br>建议自己的程序中不要使用标记接口</p>
+<p>即如果你在一个对象上调用clone，但这个对象的类并没有实现Cloneable接口，Object类的clone方法就会抛出一个异常。</p>
+<p>数组有public的clone。<br>有些人认为应该完全避免使用clone。毕竟，标准库只有5%的类实现了clone</p>
+<hr>
+<h2 id="lambda"><a href="#lambda" class="headerlink" title="lambda"></a>lambda</h2><p>lambda</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java: () -&gt; &#123;&#125;</span><br><span class="line">c++:[]()mutable()constexpr exception attribute -&gt; ret&#123;&#125;;[]()&#123;&#125;;[]&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>java中，如果只有一个参数且类型可推导，则可以省略小括号</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ActionListener listener = event -&gt;</span><br><span class="line">    System.out.println(<span class="string">"The time is "</span> + <span class="keyword">new</span> Date()<span class="string">");</span></span><br><span class="line"><span class="string">    //Instead of (event) -&gt; ... or (ActionEvent event) -&gt; ...</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 不需要参数,返回值为 5  </span></span><br><span class="line">() -&gt; <span class="number">5</span>  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 2. 接收一个参数(数字类型),返回其2倍的值  </span></span><br><span class="line">x -&gt; <span class="number">2</span> * x  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 3. 接受2个参数(数字),并返回他们的差值  </span></span><br><span class="line">(x, y) -&gt; x – y  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 4. 接收2个int型整数,返回他们的和  </span></span><br><span class="line">(<span class="keyword">int</span> x, <span class="keyword">int</span> y) -&gt; x + y  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 5. 接受一个 string 对象,并在控制台打印,不返回任何值(看起来像是返回void)  </span></span><br><span class="line">(String s) -&gt; System.out.print(s)</span><br></pre></td></tr></table></figure>
+<p>lambda在某些分支返回一个值，在另一些分支不返回值，是不合法的。<br>试了试，c++也不合法。而且这个例子也和c++差不多</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(planets,(first,second) -&gt; first.length() - second.length());</span><br><span class="line">Timer t = <span class="keyword">new</span> Timer(<span class="number">1000</span>,event -&gt; System.out.println(<span class="string">"the time is "</span> + <span class="keyword">new</span> Date()));</span><br></pre></td></tr></table></figure>
+
+
+<p>接口可以声明非抽象方法。同时，如果接口重新声明Object类的方法，如toString或clone，这些声明可能让方法不再是抽象的。</p>
+<p>对于只有一个抽象方法的接口，需要这种接口的对象时，就可以提供一个lambda表达式（），这种接口称为函数式接口。<br>lambda可以转换为接口，这一点让lambda表达式很有吸引力</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Timer t = <span class="keyword">new</span> Timer(<span class="number">1000</span>, event -&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"At the tone, the time is "</span> + <span class="keyword">new</span> Date());</span><br><span class="line">        Toolkit.getDefaultToolkit().beep();</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>java.util.function包中定义了很多通用的函数式接口，但是很多都没有什么帮助（。<br>这里提了一嘴Predicate，也不说干啥用的。</p>
+<h3 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Timer t = <span class="keyword">new</span> Timer(<span class="number">1000</span>,event -&gt; System.out.println(event));</span><br><span class="line"><span class="comment">//可以直接</span></span><br><span class="line">Timer t = <span class="keyword">new</span> Timer(<span class="number">1000</span>,System.out::println);</span><br><span class="line"></span><br><span class="line">System.out::println</span><br><span class="line"><span class="comment">//等价于</span></span><br><span class="line">x -&gt; System.out.println(x);</span><br></pre></td></tr></table></figure>
+<p>::操作符分隔方法名与对象或类名，有3种情况<br>object::instanceMethod<br>Class::staticMethod<br>Class::instanceMethod<br>前面2种，方法引用等价于提供方法参数的lambda表达式如上，对于第三种情况，第1个参数会成为方法的目标，<code>String::compareToTgnoreCase</code>等同于<code>(x,y) -&gt; x.compareToIgnoreCase(y)</code></p>
+<p>如果有多个同名的重载方法，编译器就会尝试从上下文中找出那个方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>::equals </span><br><span class="line">x -&gt; <span class="keyword">this</span>.equals(x);</span><br></pre></td></tr></table></figure>
+<p>同理super也是可以的。</p>
+<hr>
+<p>构造器也可以引用，方法名就是new。<br>可以用数组类型建立构造器引用，比如<code>int[]::new</code>等价于<code>x-&gt;new int[x]</code><br>数组构造器对于克服 不能构造泛型类型T的数组 很有用。<br>假设我们需要一个Person对象数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object[] people = stream.toArray();<span class="comment">//stream接口有一个toArray方法可以返回Object数组</span></span><br><span class="line"><span class="comment">//但是用户希望得到一个Person引用数组，于是可以</span></span><br><span class="line">Person[] people = stream.toArray(Person[]::<span class="keyword">new</span>);</span><br></pre></td></tr></table></figure>
+<p>toArray方法调用这个构造器来得到一个正确类型的数组，然后填充这个数组并返回。</p>
+<hr>
+<h4 id="lambda作用域"><a href="#lambda作用域" class="headerlink" title="lambda作用域"></a>lambda作用域</h4><p>下面讨论lambda作用域的问题。<br>java的lambda是可以捕捉外围作用域中变量的值。是的，java也有闭包。同时，java的引用值不可以改变，内外改变都不合法。规则就是lambda中捕获的变量必须实际上是最终变量。<br>在lambda表达式中似乎用this关键字时，是指创建这个lambda表达式的方法的this参数</p>
+<p>Runnable在java中很常用</p>
+<p>补充：java se 7中编译器对于内部类中封闭环境的本地变量引用的检查是非常严格的：如果捕获变量没有声明为final，我们将会得到一个异常。<br>现在我们放松了这种限制：对于lambda和内部类，允许捕获有效的final本地变量。<br>通俗地讲，如果一个本地变量的初始值没有改变，我们便称之为有效的final变量。换句话说，声明为final不会导致编译失败。</p>
+<p>补充，想像c++那样传引用参不现实，但是可以改变对象的域，改变泛型，改变数组。</p>
+<hr>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>下面讲内部类<br>嵌套是一种类之间的关系，而不是对象之间的关系。嵌套类有两个好处，命名控制和访问控制。在java中前者并不重要，因为这是包管理的内容，后者确实只能靠内部类。<br>然而内部类还有另一个功能，使得它比c++的嵌套类更加丰富，用途更加广泛。内部类的对象有一个隐式引用，它引用了实例化该内部对象的外围类对象。通过这个指针，可以访问外围类对象的全部状态。<br>简单地说，static内部类（没有这种指针）与c++的嵌套类很类似。</p>
+<p>内部类既可以访问自身的数据域，也可以访问创建它的外围类对象的数据域<br>使用外围类引用的正规语法是<em>OuterClass</em>.this.xxx方法<br>内部类中声明的所有静态域都必须是final。内部类不能有static方法。</p>
+<p>内部类的语法非常复杂，甚至还有匿名内部类。<br>内部类是一种编译器现象，与虚拟机无关。</p>
+<hr>
+<h3 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h3><p>newProxyInstance(类加载器（null就是默认），一个class对象数组，一个调用处理器)<br>代理类一定是public和final。<br>对于InvocationHandler接口的类对象（这个接口只有一个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></span><br></pre></td></tr></table></figure>
+<p>无论何时调用代理对象的方法，调用处理器的invoke方法都会被调用，并向其传递Method对象和原始的调用参数。<br>注意到下面的代码中，所有的代理操作其实都是在二分那一行代码里出现的。即操作的时候调用了invoke方法，并且用invoke方法输出了当前执行到这个代理上的操作的名字，实在是挺nb的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">t4</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Object[] elements = <span class="keyword">new</span> Object[<span class="number">1000</span>];</span><br><span class="line">        <span class="comment">//fill elements with proxies for the integers 1 ... 1000</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; elements.length; i ++)</span><br><span class="line">        &#123;</span><br><span class="line">            Integer value = i + <span class="number">1</span>;</span><br><span class="line">            InvocationHandler handler = <span class="keyword">new</span> TraceHandler(value);</span><br><span class="line">            Object proxy = Proxy.newProxyInstance(<span class="keyword">null</span>, <span class="keyword">new</span> Class[] &#123; Comparable<span class="class">.<span class="keyword">class</span> &#125;, <span class="title">handler</span>)</span>;</span><br><span class="line">            elements[i] = proxy;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//construct a random integer</span></span><br><span class="line">        Integer key = <span class="keyword">new</span> Random().nextInt(elements.length) + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//search for the key</span></span><br><span class="line">        <span class="keyword">int</span> result = Arrays.binarySearch(elements, key);</span><br><span class="line">        <span class="comment">//print match if found</span></span><br><span class="line">        <span class="keyword">if</span>(result &gt;= <span class="number">0</span>) System.out.println(elements[result]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TraceHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TraceHandler</span><span class="params">(Object t)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        target = t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method m,Object[] args)</span> <span class="keyword">throws</span> Throwable</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//print implicit argument</span></span><br><span class="line">        System.out.print(target);</span><br><span class="line">        <span class="comment">//print method name</span></span><br><span class="line">        System.out.print(<span class="string">"."</span> + m.getName() + <span class="string">"("</span>);</span><br><span class="line">        <span class="comment">//print explicit arguments</span></span><br><span class="line">        <span class="keyword">if</span>(args != <span class="keyword">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; args.length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.print(args[i]);</span><br><span class="line">                <span class="keyword">if</span>(i &lt; args.length - <span class="number">1</span>) System.out.print(<span class="string">","</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">")"</span>);</span><br><span class="line">        <span class="comment">//invoke actual method</span></span><br><span class="line">        <span class="keyword">return</span> m.invoke(target,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">500.compareTo(386)</span></span><br><span class="line"><span class="comment">250.compareTo(386)</span></span><br><span class="line"><span class="comment">375.compareTo(386)</span></span><br><span class="line"><span class="comment">437.compareTo(386)</span></span><br><span class="line"><span class="comment">406.compareTo(386)</span></span><br><span class="line"><span class="comment">390.compareTo(386)</span></span><br><span class="line"><span class="comment">382.compareTo(386)</span></span><br><span class="line"><span class="comment">386.compareTo(386)</span></span><br><span class="line"><span class="comment">386.toString()</span></span><br><span class="line"><span class="comment">386</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="代理的意义"><a href="#代理的意义" class="headerlink" title="代理的意义"></a>代理的意义</h4><blockquote>
+<p>我们为什么要引入java的代理，除了当前类能够提供的功能外，我们还需要补充一些其他功能。<br>最容易想到的情况就是权限过滤，我有一个类做某项业务，但是由于安全原因只有某些用户才可以调用这个类，此时我们就可以做一个该类的代理类，要求所有请求必须通过该代理类，由该代理类做权限判断，如果安全则调用实际类的业务开始处理。<br>可能有人说为什么我要多加个代理类？我只需要在原来类的方法里面加上权限过滤不就完了吗？<br>在程序设计中有一个类的单一性原则问题，这个原则很简单，就是每个类的功能尽可能单一。为什么要单一，因为只有功能单一这个类被改动的可能性才会最小。<br>如果你将权限判断放在当前类里面，当前这个类就既要负责自己本身业务逻辑、又要负责权限判断，那么就有两个导致该类变化的原因，现在如果权限规则一旦变化，这个类就必需得改，显然这不是一个好的设计。</p>
+</blockquote>
+<p>如果将控制器定义一个接口，然后飞船直接实现这个接口，那跟之前飞船直接继承自控制器没有本质的区别，之所以不这样做正是如楼主所说的，控制器是飞船的一部分，不能说飞船是一个控制器，因此这里用继承不合适，用接口的话语义上可能更合适一点，但是接口的名字应该改成Controllable(可控制的)更符合语义。说白了就是你可以实现接口，这是你设计上的自由。但是这里可能用组合的方式更好。即有一个类SpaceShip（飞船），它包含一个成员SpaceShipController（控制器），然后飞船能做的控制上的事情就都可以通过这个控制器来做。<br>这里说的代理可以实现部分接口是根据具体场景来的，比如说现在你有一个控制器SpaceShipController，这个控制器提供了很多的功能，但实际你的SpaceShip可能并不需要这么多功能，如果你用SpaceShipController作为你飞船的成员变量的话，你的飞船里面就很有可能会去用到那些本来不需要的功能，由于你在SpaceShip里面确实能通过SpaceShipController去访问到那些功能，这可能不是一个好的设计原则，你实际上并不需要对飞船暴露那么多功能，这里你就可以使用一个代理SpaceShipControllerDelegation,用来代理那个SpaceShipController,然后在代理中只提供你需要的一些方法，最后在SpaceShip中不要用SpaceShipController作为成员变量，而是直接用那个代理作为成员变量，这样的话你的SpaceShip里面就访问不到SpaceShipController中的一些方法了。之所以说代理类能有更多的控制能力是说你代理类中调用方法的时候目前是用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">down</span><span class="params">(<span class="keyword">int</span> velocity)</span> </span>&#123;</span><br><span class="line">        controls.down(velocity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以在该方法实现的前后加上一些逻辑，这样就提供了更多的控制能力。比如改成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">down</span><span class="params">(<span class="keyword">int</span> velocity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(velocity &lt; <span class="number">10</span>) &#123;</span><br><span class="line">        controls.down(velocity);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样即代表velocity&lt;10的时候才能执行down的操作，这就是所谓的代理可以增加更多的控制能力</p>
+<p>这里说的代理应当是代理的…另一种分支的应用，看一下就好。总得说，就是为其他对象提供一种代理以控制对这个对象的访问。<br>即静态代理。上面的newProxyInstance则是动态代理。</p>
+<hr>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>如果出现错误，程序应该</p>
+<ul>
+<li>返回到一种安全状态，并能让用户执行一些其他的命令；或者</li>
+<li>允许用户保存所有操作的结果，并以妥善的方式终止程序<br>有这些问题值得注意：</li>
+</ul>
+<p>1.用户输入错误<br>2.设备错误<br>3.物理限制<br>4.代码错误</p>
+<p>所有异常对象都是派生于Throwable类的一个实例。即都是从此继承而来，下一层立即分解为Error和Exception，Exception派生于RuntimeException，另一支包含其他异常（以I/O错误为代表）<br>如果出现「RuntimeException异常，那么就一定是你的问题」是一条相当有道理的规则。</p>
+<ul>
+<li>错误的类型转换</li>
+<li>数组访问越界</li>
+<li>访问null指针</li>
+</ul>
+<p>以下则不是非受查（unchecked）异常，属于受查异常。</p>
+<ul>
+<li>试图在文件尾部后面读取数据</li>
+<li>试图打开一个不存在的文件</li>
+<li>试图根据给定的字符串查找Class对象，而字符串表示的类并不存在</li>
+</ul>
+<hr>
+<p>在遇到下述4种情况应该抛出异常：</p>
+<ol>
+<li>调用一个抛出受查异常的方法，即方法本身已经throw了。</li>
+<li>运行过程中发生错误，利用throw抛出一个受查</li>
+<li>程序出现错误</li>
+<li>虚拟机和库出现的内部错误<br>前两种则必须告诉调用该方法的程序员可能会抛出异常。<br>即我们只关心受查异常，人家就应该被查，非受查请你更多的应该修正你的程序。<br>非受查要么不可控(Error)，要么应该避免。</li>
+</ol>
+<blockquote>
+<p>如果超类方法没有抛出异常，子类也不能。子类的受查异常不能比超类更通用。</p>
+</blockquote>
+<p>java中的没有throws说明符的方法将不能抛出任何受查异常。<br>然而c++中的throw被抛弃了，换成了noexcept，即不抛出任何异常</p>
+<hr>
+<p>创建异常类是很正常的事情，派生于Exception（或者其子类）的类，应当有两个构造器，一个是默认的，一个带有详细描述信息</p>
+<p>抛出很容易，因为抛出之后就不用了管了，捕获就会更复杂。</p>
+<h3 id="try-catch"><a href="#try-catch" class="headerlink" title="try-catch"></a>try-catch</h3><p>如果try语句块中的任何代码抛出了一个catch子句中说明的异常类，那么跳过try，执行catch。无异常跳过catch。<br>那么，什么时候该抛出，什么时候该捕获呢？<br>应该捕获那些知道如何处理的异常，将不知道怎么处理的继续传递。</p>
+<p>可以抛出异常链，指的是捕获一个异常，然后用原始异常设置为新异常的原因，而且还能回到原始异常，这是一种包装技术，可以让用户抛出子系统的高级异常。<br>比如如果在一个方法中发生了一个受查异常，而不允许抛出它，包装技术就很有用。</p>
+<p>抛出异常时会有关于方法之前一些资源的问题，这时候就需要使用finally子句。<br>不管是否有异常被捕获，finally子句中的代码都会被执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">InpuStream in = <span class="keyword">new</span> FileInputStream(...);</span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//1</span></span><br><span class="line">    code..might <span class="keyword">throw</span> exceptions</span><br><span class="line">    <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//3</span></span><br><span class="line">    show error message</span><br><span class="line">    <span class="comment">//4</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//5</span></span><br><span class="line">    in.close();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//6</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>代码无异常，1,2,5,6</li>
+<li>抛出一个在catch中捕获的异常。1)如果catch子句没有抛出异常，将执行1,3,4,5,6；2)如果catch抛出了异常，则为1,3,5</li>
+<li>代码抛出了异常，却不是catch捕获的，这时是1,5<br>try可以无catch，只有finally</li>
+</ol>
+<p><strong>强烈建议解耦合try/catch 和try/finally 语句块</strong>，可以提高代码清晰度。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">InpuStream in = ...;</span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        code that might <span class="keyword">throw</span> exceptions</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">finally</span></span><br><span class="line">    &#123;</span><br><span class="line">        in.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(IOException e)</span><br><span class="line">&#123;</span><br><span class="line">    show error message</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>内部try就是确保关闭输入流，外部try就是报告错误。<br>当finally中包含了return语句时，会有意想不到的结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> r = n * n;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">finally</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果调用f(2)，那么try语句块的结果是r = 4.然而在真正返回前还要执行finally，0覆盖了4</p>
+<p>但是finally可能会在里面继续抛出异常，这个时候事情就麻烦了起来。<br>于是有了带资源的try。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>(Scanner in = <span class="keyword">new</span> Scanner(<span class="keyword">new</span> FileInputStream(<span class="string">"/usr/sharedict/words"</span>),<span class="string">"UTF-8"</span>);</span><br><span class="line">    PrintWriter out = <span class="keyword">new</span> PrintWriter(<span class="string">"out.txt"</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(in.hasNext())</span><br><span class="line">        out.println(in.next().toUpperCase());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="分析堆栈轨迹元素"><a href="#分析堆栈轨迹元素" class="headerlink" title="分析堆栈轨迹元素"></a>分析堆栈轨迹元素</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Throwable t = <span class="keyword">new</span> Throwable();</span><br><span class="line">StackTraceElement[] frames = t.getStackTrace();</span><br><span class="line"><span class="keyword">for</span>(StackTraceElement f : frames)</span><br><span class="line">    System.out.println(f);</span><br></pre></td></tr></table></figure>
+<h3 id="关于异常，你应该知道…"><a href="#关于异常，你应该知道…" class="headerlink" title="关于异常，你应该知道…"></a>关于异常，你应该知道…</h3><ol>
+<li>异常不能代替简单的测试，效率天差地别（也就100倍起步吧，我也不知道这个是常数级别的大还是复杂度上的大，应该是都大）<br>基本规则是，只在异常的时候使用异常机制。</li>
+<li>不要过分细化异常。<br>把每一条语句分装在独立的try语句块之中会使得代码量急剧膨胀。</li>
+<li>利用异常层次结构<br>不要只抛出RuntimeException异常，寻找更加适当的子类或者创建自己的异常类。<br>不要只捕获Thowable异常，否则，会使程序代码更难读、更难维护。<br>考虑受查和非受查异常的区别。<br>将一种异常转换为另一种更适合的异常时不要犹豫。</li>
+<li>不要压制异常<br>在Java中，往往强烈地倾向关闭异常。即在catch中什么也不做。</li>
+<li>苛刻比放任更好</li>
+<li>不要羞于传递异常（5、6可以归纳为早抛出，晚捕获。）</li>
+</ol>
+<hr>
+<h3 id="使用断言。"><a href="#使用断言。" class="headerlink" title="使用断言。"></a>使用断言。</h3><p>断言机制允许在测试期间向代码中插入一些检查语句。当代码发布时，这些插入的检测会被自动的移走。<br>（就是说可以随时启用关闭，只需要编译指令即可。注意，这不需要重新编译，而是类加载器的功能。<br>c语言的assert宏将断言中的条件转换成一个字符串，失败时这个字符串就会被打印出来，java中条件不会自动成为错误报告，必须用assert 条件:表达式;后面的表达式来产生消息字符串。</p>
+<p>什么时候使用断言？</p>
+<ul>
+<li>断言失败是致命的，不可恢复的错误</li>
+<li>断言检查只用于开发和测阶段（「在靠近海岸时穿上救生衣，但在海中央时就把救生衣丢掉吧」）</li>
+</ul>
+<p>断言是一种测试和调试阶段所使用的战术性工具; 而日志记录是一种在程序的整个生命周期都可<br>以使用的策略性工具</p>
+<hr>
+<h3 id="使用日志"><a href="#使用日志" class="headerlink" title="使用日志"></a>使用日志</h3><p>日志就是为了解决在有问题的代码中插入一些System.out.println方法调用来观察程序运行的麻烦问题而生的。日志有这些好处：</p>
+<ul>
+<li>可以很容易的取消或不取消日志</li>
+<li>可以简单的禁止日志记录的输出</li>
+<li>可以被定向到不同处理器</li>
+<li>日志记录可以采用不同的方式格式化</li>
+<li>日志记录器和处理器可以对记录过滤</li>
+<li>可以使用多个日志记录器</li>
+</ul>
+<p>不得不说终于有一个这种东西了。我其实一直…需要一个这种东西的，不知道能让我以前打acm省下多少时间啊哎，那就该早学java的。嘤嘤嘤。c++的日志不是标准库的，但是也有不少好用的，应该是区别于不同应用平台需求之类的。主要是这样一个思想。</p>
+<p>未被任何变量引用的日志记录器可能会被垃圾回收。建议用一个静态变量存储日志记录器的一个引用。</p>
+<p>记录日志的常见用途是记录那些不可预料的异常，典型的是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//void throwing(String className, String methodName, Throwable t)</span></span><br><span class="line"><span class="comment">//void log(Level l, String message, Throwable t)</span></span><br><span class="line"><span class="keyword">if</span>(...)</span><br><span class="line">&#123;</span><br><span class="line">    IOException exception = <span class="keyword">new</span> IOException(<span class="string">"..."</span>);</span><br><span class="line">    logger.throwing(<span class="string">"com.mycompany.mylib.Reader"</span>,<span class="string">"read"</span>,exception);</span><br><span class="line">    <span class="keyword">throw</span> exception;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//还有</span></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;...&#125;</span><br><span class="line"><span class="keyword">catch</span>(IOException e)</span><br><span class="line">&#123;</span><br><span class="line">    Logger.getLogger(<span class="string">"com.mycompany.myapp"</span>).log(Level.WARNING, <span class="string">"Reading image"</span>, e);</span><br><span class="line">&#125;<span class="comment">//里面这个com.mycompany.mylib就是个具有层次结构的名字而已。</span></span><br></pre></td></tr></table></figure>
+
+<p>剩下的具体细化的可以先查了吧。比如如何过滤，如果配置，如何格式化，我们总结一下日志的使用：</p>
+<ol>
+<li><p>为一个简单的应用程序，选择一个日志记录器，并把日志记录器命名为与主应用程序包一样的名字，例如，com.mycompany.myprog，可以调用这样的方法得到日志记录器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger looger = Logger.getLogger(<span class="string">"com.mycompany.myprog"</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>在应用程序中安装一个更适合的默认的日志配置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(System.getProperty(<span class="string">"java.util.logging.config.class"</span>) == <span class="keyword">null</span></span><br><span class="line">    &amp;&amp; System.getProperty(<span class="string">"java.util.logging.config.file"</span>) == <span class="keyword">null</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        Logger.getLogger(<span class="string">""</span>).setLevel(Level.ALL);</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> LOG_ROTATION_COUNT = <span class="number">10</span>;</span><br><span class="line">        Handler handler = <span class="keyword">new</span> FileHandler(<span class="string">"%h/myapp.log"</span>, <span class="number">0</span>, LOG_ROTATION_COUNT);</span><br><span class="line">        <span class="comment">// Looger.getLogger("").addHandler(handler)</span></span><br><span class="line">    &#125;</span><br><span class="line">    cathc(IOException e)</span><br><span class="line">    &#123;</span><br><span class="line">        logger.log(Level.SEVERE, <span class="string">"Can't create log file handler"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>牢记INFO、WARNING、SEVERE的消息将显示到控制台上，程序员想要的日志记录可以设定为FINE。</p>
+</li>
+</ol>
+<hr>
+<h3 id="稍微总结"><a href="#稍微总结" class="headerlink" title="稍微总结"></a>稍微总结</h3><p>调试的方法：</p>
+<ol>
+<li>自定义类应当覆盖toString方法，以提供有用的类信息。（指Logger.getGlobal().info或者System.out.println)</li>
+<li>每个类中单独放置一个单独的main方法，对每个类进行单元测试</li>
+<li>JUnit</li>
+<li>日志代理 如果Random类的nextDouble方法出了问题，可以以匿名子类的实例形式创建一个代理对象。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Random generator = <span class="keyword">new</span></span><br><span class="line">    Random()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">nextDouble</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">double</span> result = <span class="keyword">super</span>.nextDouble();</span><br><span class="line">            Logger.getGlobal().info(<span class="string">"nextDouble: "</span> + result);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+当调用nextDouble()方法时，就会产生一个日志信息。</li>
+<li>利用Throwable类提供的printStackTrace方法，获得异常对象中的堆栈情况<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(Throwable t)</span><br><span class="line">&#123;</span><br><span class="line">    t.printStackTrace();</span><br><span class="line">    <span class="keyword">throw</span> t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//也可以插入下面这句来获得堆栈轨迹</span></span><br><span class="line">Thread.dumpStack();</span><br></pre></td></tr></table></figure></li>
+<li>堆栈情况可以发送到文件中(<code>printStackTrace(PrintWriter s)</code>)</li>
+<li>将错误信息保存在文件中(<code>java MyProgram 2&gt;errors.txt</code>)</li>
+<li>让非捕获异常的堆栈轨迹出现在System.err中并不理想。比较好的方法可以调用静态的Thread.setDefalutUncaughtExceptionHandler方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Thread.setDefaultUncaughtExceptionHandler(</span><br><span class="line">    <span class="keyword">new</span> Thread.UncaughtExceptionHandler()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            save information in logfile</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></li>
+<li>用-verbose标志启动虚拟器来观察类的加载过程</li>
+<li>-Xlint选项可以告诉编译器对一些普遍容易出现的代码问题进行检查</li>
+<li>可以找出虚拟机的操作系统进程ID，运行jconsole程序</li>
+<li>用jmap实用工具获得堆的转储</li>
+<li>-Xprof运行虚拟机</li>
+</ol>
+<p>（-X选项是没有正式支持的选项。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/company/" rel="tag"># company</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/java-core/" rel="tag"># java-core</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/01/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E7%AC%94%E8%AE%B0-core/java%E7%AC%94%E8%AE%B0-core-1/" rel="next" title="java笔记-core-1">
+                <i class="fa fa-chevron-left"></i> java笔记-core-1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/07/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E7%AC%94%E8%AE%B0-core/java%E7%AC%94%E8%AE%B0-core-3/" rel="prev" title="java笔记-core-3">
+                java笔记-core-3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/04/07/java-技术栈/java笔记-core/java笔记-core-2/"
+           data-title="java笔记-core-2" data-url="http://oodtoodt.github.io/2020/04/07/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E7%AC%94%E8%AE%B0-core/java%E7%AC%94%E8%AE%B0-core-2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-number">1.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于工厂"><span class="nav-number">1.1.</span> <span class="nav-text">关于工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认方法"><span class="nav-number">1.2.</span> <span class="nav-text">默认方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于拷贝"><span class="nav-number">1.3.</span> <span class="nav-text">关于拷贝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda"><span class="nav-number">2.</span> <span class="nav-text">lambda</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法引用"><span class="nav-number">2.1.</span> <span class="nav-text">方法引用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda作用域"><span class="nav-number">2.1.1.</span> <span class="nav-text">lambda作用域</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部类"><span class="nav-number">3.</span> <span class="nav-text">内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代理"><span class="nav-number">3.1.</span> <span class="nav-text">代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代理的意义"><span class="nav-number">3.1.1.</span> <span class="nav-text">代理的意义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">4.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#try-catch"><span class="nav-number">4.1.</span> <span class="nav-text">try-catch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分析堆栈轨迹元素"><span class="nav-number">4.1.1.</span> <span class="nav-text">分析堆栈轨迹元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于异常，你应该知道…"><span class="nav-number">4.2.</span> <span class="nav-text">关于异常，你应该知道…</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用断言。"><span class="nav-number">4.3.</span> <span class="nav-text">使用断言。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用日志"><span class="nav-number">4.4.</span> <span class="nav-text">使用日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#稍微总结"><span class="nav-number">4.5.</span> <span class="nav-text">稍微总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

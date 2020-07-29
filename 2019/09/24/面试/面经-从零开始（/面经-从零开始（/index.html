@@ -1,0 +1,972 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="我可能就是所谓的鼠目寸光、井底之蛙吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面经-从零开始（">
+<meta property="og:url" content="http://oodtoodt.github.io/2019/09/24/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E7%BB%8F-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%88/%E9%9D%A2%E7%BB%8F-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%88/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="我可能就是所谓的鼠目寸光、井底之蛙吧">
+<meta property="article:published_time" content="2019-09-24T13:06:49.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:03:37.000Z">
+<meta property="article:author" content="eco_oodt">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2019/09/24/面试/面经-从零开始（/面经-从零开始（/"/>
+
+
+
+
+
+  <title>面经-从零开始（ | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2019/09/24/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E7%BB%8F-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%88/%E9%9D%A2%E7%BB%8F-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面经-从零开始（</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-24T21:06:49+08:00">
+                2019-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/24/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E7%BB%8F-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%88/%E9%9D%A2%E7%BB%8F-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%88/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/09/24/面试/面经-从零开始（/面经-从零开始（/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/09/24/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E7%BB%8F-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%88/%E9%9D%A2%E7%BB%8F-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%88/" class="leancloud_visitors" data-flag-title="面经-从零开始（">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我可能就是所谓的鼠目寸光、井底之蛙吧</p>
+<hr>
+<a id="more"></a>
+
+<h2 id="58"><a href="#58" class="headerlink" title="58"></a>58</h2><p>直接去世</p>
+<h3 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h3><p>强行问了问项目，本来就没什么，问计算器实现，怎么处理表达式，然后问了点算法，图上的最短路和迷宫的最短路，问一些点怎么都扩起来。有些紧张，没把东西表达好。<br>然后就是令人窒息的计网和操作系统，问完了我基本上就死亡了</p>
+<h4 id="怎么把一些点括起来"><a href="#怎么把一些点括起来" class="headerlink" title="怎么把一些点括起来"></a>怎么把一些点括起来</h4><p>凸包呗。凸包可想象为一条刚好包著所有点的橡皮圈。用不严谨的话来讲，给定二维平面上的点集，凸包就是将最外层的点连接起来构成的凸多边型，它能包含点集中所有的点。<br>Graham扫描法<br>就用个栈，不断判断栈顶的两个点连的线与下一个点在左右，右说明栈顶不是凸包的点，左继续进栈<br>判断c是否在直线ab的两侧（一个大矩阵）[[x1,x2,x3],[y1,y2,y3],[1,1,1]]<br>若上式为正，在左侧，为负在右侧，0则在直线上</p>
+<h4 id="为什么数据库选择b-b树而不是红黑树"><a href="#为什么数据库选择b-b树而不是红黑树" class="headerlink" title="为什么数据库选择b+/b树而不是红黑树"></a>为什么数据库选择b+/b树而不是红黑树</h4><p>B树查找平均<br>B树高度小 磁盘io小（树的深度过大会造成磁盘IO频繁读写）【存储在内存中才会使用的数据结构】<br>局部性原理<br>B+树所有的Data域在叶子节点，一般来说都会进行一个优化，就是将所有的叶子节点用指针串起来</p>
+<h4 id="tcp如何保证传输有序"><a href="#tcp如何保证传输有序" class="headerlink" title="tcp如何保证传输有序"></a>tcp如何保证传输有序</h4><p>TCP就给每个数据包分配一个序列号并且在一个特定的时间内等待接收主机对分配的这个序列号进行确认，如果发送主机在一个特定时间内没有收到接收主机的确认，则发送主机会重传此数据包。接收主机利用序列号对接收的数据进行确认，以便检测对方发送的数据是否有丢失或者乱序等<br>其实就是如果来了乱序的就排个序</p>
+<h4 id="c-在openfile的时候，文件指针指的是什么"><a href="#c-在openfile的时候，文件指针指的是什么" class="headerlink" title="c++在openfile的时候，文件指针指的是什么"></a>c++在openfile的时候，文件指针指的是什么</h4><p>文件指针指向的是一个结构体的地址。<br>在上述结构体中，有个叫_fileno的核心成员，该成员就是由open()获得的文件描述符（它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。打开文件时系统向进程返回的一个文件描述符）<br>标准IO函数fopen()本质上也是对系统IO的封装</p>
+<h4 id="多线程有了解吗"><a href="#多线程有了解吗" class="headerlink" title="多线程有了解吗"></a>多线程有了解吗</h4><p>不了解。<br>见另一篇。</p>
+<h4 id="数组为什么比链表快"><a href="#数组为什么比链表快" class="headerlink" title="数组为什么比链表快"></a>数组为什么比链表快</h4><p>首先数组是连续的，CPU缓存会把一片连续的内存空间读入， 因为数组结构是连续的内存地址，所以数组全部或者部分元素被连续存在CPU缓存里面， 平均读取每个元素的时间只要3个CPU时钟周期。 而链表的节点是分散在堆空间里面的</p>
+<h2 id="盛趣"><a href="#盛趣" class="headerlink" title="盛趣"></a>盛趣</h2><p>盛趣就很神秘了。且不谈为什么只有一面+hr面，我一面的时候基本上都在附和，在被动的接受和被引导，莫名其妙的就进了人生第一次hr面，也许是自己是比较早的，占了一个先机？不过机会不大。<br>哦，一面的问题也很神秘。</p>
+<h3 id="一面-1"><a href="#一面-1" class="headerlink" title="一面"></a>一面</h3><p>就特别神秘。<br>数组的复杂度？vector的复杂度？</p>
+<h4 id="vector有一个容量，每次超过了都会翻倍容量复制一遍对吧，那么我当前有N个数和一个空的vector，你要复制多少次呢"><a href="#vector有一个容量，每次超过了都会翻倍容量复制一遍对吧，那么我当前有N个数和一个空的vector，你要复制多少次呢" class="headerlink" title="vector有一个容量，每次超过了都会翻倍容量复制一遍对吧，那么我当前有N个数和一个空的vector，你要复制多少次呢"></a>vector有一个容量，每次超过了都会翻倍容量复制一遍对吧，那么我当前有N个数和一个空的vector，你要复制多少次呢</h4><p>正着推了一个2^n-1，给了些提示，后来看我思路实在不对，就问你猜一个，盲猜2n，就明着来了。说每次其实都是由上一次的一半构成，那么你这么一算n/2+n/4…+n/2^n那么其实=2^n-1/2^n=1对吧</p>
+<h4 id="一个非常神秘的点集问题"><a href="#一个非常神秘的点集问题" class="headerlink" title="一个非常神秘的点集问题"></a>一个非常神秘的点集问题</h4><h5 id="给你一些一维的点，如何求-a-b-闭集上的点有哪些-有序怎么做-无序怎么做"><a href="#给你一些一维的点，如何求-a-b-闭集上的点有哪些-有序怎么做-无序怎么做" class="headerlink" title="给你一些一维的点，如何求[a,b)闭集上的点有哪些 有序怎么做 无序怎么做"></a>给你一些一维的点，如何求[a,b)闭集上的点有哪些 有序怎么做 无序怎么做</h5><p>我当时直接说的二分，其实大概是直接找就行的吧</p>
+<h5 id="如果变成二维呢"><a href="#如果变成二维呢" class="headerlink" title="如果变成二维呢"></a>如果变成二维呢</h5><p>先说按这个正方形左下角建一个坐标系然后挨个点查，然后提示下又滚回刚才二分的操作。</p>
+<h5 id="那么这是一个近似的解对吧，我们如何优化这些近似，或者说有O-1-的算法吗"><a href="#那么这是一个近似的解对吧，我们如何优化这些近似，或者说有O-1-的算法吗" class="headerlink" title="那么这是一个近似的解对吧，我们如何优化这些近似，或者说有O(1)的算法吗"></a>那么这是一个近似的解对吧，我们如何优化这些近似，或者说有O(1)的算法吗</h5><p>这里的O(1)很可能是指我二分的logn而言的，其实大概一个是O(n)一个是O(nlogn)？可惜我当时听了之后直接人都傻了。<br>直接遍历点刨除某些点就行？<br>不懂——到现在都觉得特别迷。</p>
+<h4 id="迭代器失效的本质是什么"><a href="#迭代器失效的本质是什么" class="headerlink" title="迭代器失效的本质是什么"></a>迭代器失效的本质是什么</h4><p>当时答，erase就会失效。面试官非常婉转的告诉我，如果有一个指针，new了一个对象，然后delete掉了，那么会不会失效？会的。为什么还需要迭代器来模仿一个本来就存在的事件？（意思就是你说的是对的，但是是p话）</p>
+<p>向容器中添加或者删除元素的操作可能使指向容器的指针、引用、迭代器失效。一个失效的指针、引用、迭代器将不再表示任何元素。</p>
+<p>在向容器添加元素后，如果储存空间未重新分配，指向插入位置之前的元素的迭代器、指针、引用有效，但指向插入位置之后的将会失效。<br>在从容器删除元素之后，指向被删元素之前元素的迭代器、引用、指针仍有效。尾后迭代器也就失效。<br>所以对容器进行操作之后，对迭代器需要更新。</p>
+<h5 id="或者这个问题是-迭代器的本质是什么"><a href="#或者这个问题是-迭代器的本质是什么" class="headerlink" title="或者这个问题是 迭代器的本质是什么"></a>或者这个问题是 迭代器的本质是什么</h5><p>把标志控制的循环和计数控制的循环统一为一种控制，即迭代器控制，每一次迭代操作中对迭代器的修改就等价于修改标志或计数器<br>容器迭代器：类似于数据库中的游标（cursor）,屏蔽了底层存储空间的不连续性，在上层使容器元素维持一种“逻辑连续”的假象。</p>
+<h4 id="有序数组，分析一下快排的复杂度？"><a href="#有序数组，分析一下快排的复杂度？" class="headerlink" title="有序数组，分析一下快排的复杂度？"></a>有序数组，分析一下快排的复杂度？</h4><p>一通操作啥都没分析出来，当时对partition真的是思路不清了，就应和着下去了。（越说越觉得凉）<br>N^2，因为变成了一条链，深度是N而不是logN了。</p>
+<h5 id="如何变快？就如何优化掉这个N？"><a href="#如何变快？就如何优化掉这个N？" class="headerlink" title="如何变快？就如何优化掉这个N？"></a>如何变快？就如何优化掉这个N？</h5><p>小数组切成插入排序（我只记得这个了<br>随机化快排（从中间开始）<br>三数取中（类似中位数的思想）<br>三向切分（针对大量重复元素数组而言）<br>优化递归（并不是重点）</p>
+<h4 id="TopK怎么解？"><a href="#TopK怎么解？" class="headerlink" title="TopK怎么解？"></a>TopK怎么解？</h4><p>堆 更好的呢？ partition</p>
+<h5 id="那么这个partition的复杂度怎么样？"><a href="#那么这个partition的复杂度怎么样？" class="headerlink" title="那么这个partition的复杂度怎么样？"></a>那么这个partition的复杂度怎么样？</h5><p>首先了解partition的原理<br>取 a[l] 作为切分元素，然后从数组的左端向右扫描直到找到第一个大于等于它的元素，再从数组的右端向左扫描找到第一个小于它的元素，交换这两个元素。不断进行这个过程，就可以保证左指针 i 的左侧元素都不大于切分元素，右指针 j 的右侧元素都不小于切分元素。当两个指针相遇时，将切分元素 a[l] 和 a[j] 交换位置。<br>假设每次都会是二分，则是n/2+n/4+n/8+…不超过2n和vector那个一样。</p>
+<h4 id="蚂蚁对爬问题"><a href="#蚂蚁对爬问题" class="headerlink" title="蚂蚁对爬问题"></a>蚂蚁对爬问题</h4><h5 id="撞到就回头，最后掉下去，问你都掉下去，要撞多少次？"><a href="#撞到就回头，最后掉下去，问你都掉下去，要撞多少次？" class="headerlink" title="撞到就回头，最后掉下去，问你都掉下去，要撞多少次？"></a>撞到就回头，最后掉下去，问你都掉下去，要撞多少次？</h5><p>答不出，苦思</p>
+<h5 id="各种提示，问题最开始要先想什么？"><a href="#各种提示，问题最开始要先想什么？" class="headerlink" title="各种提示，问题最开始要先想什么？"></a>各种提示，问题最开始要先想什么？</h5><p>答简化问题，化成小问题<br>实则是先从最简单的情况想一想，找一找规律</p>
+<h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><p>对爬问题的关键在于分析出撞到和没撞实际上是一样的。想到了就是海阔天空。但是我当时却是在面试官的引导下找规律推出来的….<br>哎</p>
+<h3 id="hr面"><a href="#hr面" class="headerlink" title="hr面"></a>hr面</h3><p>瞎聊。不过表达上还是有很多东西没表达出来。我还是更适合酝酿酝酿，事后尤其是自己本来就蛮有发言权／蛮有话说的那种话题我能想到不少可以说的，可惜当时没讲。<br>然后就是我太紧张，声音都变了，而且越说越嗡鸣。<br>重点大概还是你有什么经历，投了什么岗位，更在乎什么，加班的看法，对矛盾的处理之类的吧。</p>
+<h2 id="网易"><a href="#网易" class="headerlink" title="网易"></a>网易</h2><p>同样有些神秘的体验。<br>先把我们聚集到一个小会议室里，以为要群面结果是各自写个二分的代码，分别去寻各自的面试官。<br>面试官都在各自的房间里，房间十分敞亮，外面是开阔的视野，正值3点的天明媚而有些刺眼。与面试官面对面相坐，那桌子是完全透明的，我没有仔细的观察他的房间，就投入了各种解决不出的问题之中。<br>四个问题就答出一个，第一个支支吾吾瞎jb扯，后面两个透露出对操作系统的不熟、对面向对象编程的不熟等等。<br>面试官还不错，就是我有点紧张。<br>hr面就那样，瞎聊。</p>
+<h3 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h3><h4 id="迷宫问题"><a href="#迷宫问题" class="headerlink" title="迷宫问题"></a>迷宫问题</h4><p>迷宫问题有啥，不就是bfs吗？</p>
+<h5 id="进阶优化"><a href="#进阶优化" class="headerlink" title="进阶优化"></a>进阶优化</h5><p>如果这个地图很大，有什么办法对bfs优化吗？其实58问过，我当时没放在心上还以为答得不错。</p>
+<pre><code>双向bfs
+
+
+A * 算法（以及迭代加深的ida * ）</code></pre><p>A * 算法的关键在于启发函数，启发函数的优劣直接影响A * 算法的效率。          f(n)=g(n)+h(n);<br>一般的（简单的），我们选用曼哈顿距离作为启发函数。</p>
+<h5 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h5><p>如果当前的地图非常巨大，但是可以允许预处理的操作，要怎么做？</p>
+<blockquote>
+<p>影响计算寻路路径的不是时间，而是计算路径所需的上百个单元格所占的空间。寻路是需要内存来运行寻路算法，还需要额外内存来存储寻到的路径。运行寻路算法（A*,开集或闭集）所需的临时空间经常会比存储这些寻到的路径所需的空间更大。通过在同一时间内只进行一条路径计算来限制游戏中的计算量，可以将你需要的临时空间降到最少。</p>
+</blockquote>
+<pre><code>所以普遍的折中做法是服务器端只做近距离的寻路，或通过导航站点缩短A * 的范围。
+
+
+更优的算法：B * 算法</code></pre><p>Bstart 算法原理： 一般寻路的方向 上、下、左、右<br>1、根据开始和结束2个点确定移动的方向<br>2、每走一步都需要确定一下方向<br>3、如果中途遇到有障碍物，根据当前位置和终点的位置，确定移动方向，变成2条线路<br>4、这2 条线交替向终点方向移动<br>5、如果中途又碰见障碍物了，继续分2个线，此时四条线交替移动<br>6、最先到终点的就是最终的路线；</p>
+<p>几个比较模糊的思路：</p>
+<pre><code>缩点</code></pre><p>1）预处理：将地图按N * N大小划分区块，其中N为阻挡格数。找出每个区块与周围四个区块在边界上的互通点，然后在区块内使用Normal A * 对找出的点做连通性测试并将结果保存下来；</p>
+<p>2）层次A * ：如果我们将预处理步骤中的区块作为Normal A * 算法中搜索的一个阻挡格，那么4096 * 4096大小的地图，当N=32时的搜索域将会降到128 * 128。在客户端执行寻路请求时，寻路线程使用预处理得到的数据，在区块一级做一次A * 找出路径经过的区块互通点，再在每个区块内使用Normal A * 得到互通点之间的路径，最终得到完整路径。</p>
+<pre><code>优化A * </code></pre><p>JPS，事先处理出不能经过的（障碍）四周的点，联通成图后不断A * </p>
+<p>如此我们甚至可以步入更古怪的世界：路经压缩</p>
+<p>总之更多的就不多再提了，已经蛮深的了，先这样吧（</p>
+<h4 id="一个类扫描线问题…"><a href="#一个类扫描线问题…" class="headerlink" title="一个类扫描线问题…"></a>一个类扫描线问题…</h4><p>给出多个玩家上线时间和下线时间（固定），他只能在这个区间里做任务，问，现在要查询某一个时刻有哪些玩家可以做任务，你来设计一下<br>说下我的设计，我就上线一个map，下线一个map，然后靠map会排序的特性瞎搞nlogn</p>
+<h5 id="如果当前的这个时间无比精确，你有更好的想法嘛"><a href="#如果当前的这个时间无比精确，你有更好的想法嘛" class="headerlink" title="如果当前的这个时间无比精确，你有更好的想法嘛"></a>如果当前的这个时间无比精确，你有更好的想法嘛</h5><h5 id="如果我这个时间非常长，几天几周，你有更好的办法吗"><a href="#如果我这个时间非常长，几天几周，你有更好的办法吗" class="headerlink" title="如果我这个时间非常长，几天几周，你有更好的办法吗"></a>如果我这个时间非常长，几天几周，你有更好的办法吗</h5><p>感觉面试官变来变去其实是想说不让用扫描时间的方式（不让用map的方式hhh）<br>这个我没怎么好好想就被面试官跳过去问下一个问题了。。。</p>
+<h4 id="cache的实现"><a href="#cache的实现" class="headerlink" title="cache的实现"></a>cache的实现</h4><p>只需要写需要什么函数就可以了。（那需要什么呢？）</p>
+<p>cache是什么？是缓存。缓存是干什么用的？是用来使得重复访问不会每次都重查，那么这东西像什么？页面置换</p>
+<p>LRU什么的搞一下啊。好歹有个这个思想吧。没有。知识并没有在这里串联起来。哭了。</p>
+<h4 id="智能指针的实现"><a href="#智能指针的实现" class="headerlink" title="智能指针的实现"></a>智能指针的实现</h4><p>首先了解智能指针是什么，在非常清晰的理解了之后才好写出代码。</p>
+<p>首先要实现引用计数类，然后实现指针类<br>放在一个里应该也可以</p>
+<p>就是构造的时候初始化1，拷贝就++，赋值的时候左边–，右边++，析构的时候—，特判0时候删除域</p>
+<h5 id="各种函数"><a href="#各种函数" class="headerlink" title="各种函数"></a>各种函数</h5><p>当时脑子一壶就不记得拷贝构造函数怎么写了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">temp</span>&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">//数据成员</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//成员函数</span></span><br><span class="line">    temp(T *p)&#123;&#125;</span><br><span class="line">    temp(<span class="keyword">const</span> temp &amp;other)&#123;&#125;<span class="comment">//拷贝构造</span></span><br><span class="line">    temp &amp;<span class="keyword">operator</span>=(<span class="keyword">const</span> temp &amp;rhs)&#123;&#125;<span class="comment">//重载运算符</span></span><br><span class="line">    </span><br><span class="line">    temp(temp &amp;&amp;t)&#123;&#125;<span class="comment">//移动构造函数</span></span><br><span class="line">    temp &amp;<span class="keyword">operator</span>=(temp &amp;&amp;test)<span class="comment">//移动赋值</span></span><br><span class="line">        </span><br><span class="line">    T &amp;<span class="keyword">operator</span>*()&#123;&#125;<span class="comment">//解引用重载</span></span><br><span class="line">    </span><br><span class="line">    ~temp()&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="hr面-1"><a href="#hr面-1" class="headerlink" title="hr面"></a>hr面</h3><p>印象比较深刻的就是会问你对游戏行业的理解，结果我说了我对游戏这个时长的理解，总有些答非所问。<br>我提问也是问的游戏行业的理解，人家就答的很在点子上。<br>别的基本上没啥，薪资啊，地点啊，处理矛盾啊，项目经验啊，未来规划啊，投过什么公司啊，之前的一些经历啊，就还有个比较扎心的如果把你安排到初级开发工程师你会怎么样的问题……</p>
+<h2 id="百度"><a href="#百度" class="headerlink" title="百度"></a>百度</h2><p>直接去世呢<br>面试官人特好。无论从哪个方面来说都特好。<br>只是就我个人而言面试官说准备的不够充分，还指出了种种不足，我觉得都说的蛮对，以致于我最后没什么问题可问。</p>
+<h3 id="一面-2"><a href="#一面-2" class="headerlink" title="一面"></a>一面</h3><p>「你精通c++啊，那么来问几个问题」</p>
+<h4 id="说一下static的作用"><a href="#说一下static的作用" class="headerlink" title="说一下static的作用"></a>说一下static的作用</h4><p>全局静态变量在声明他的文件之外是不可见的<br>但是当局部静态变量离开作用域后，并没有销毁，而是仍然驻留在内存当中，只不过我们不能再对它进行访问，直到该函数再次被调用，并且值不变。<br>那么这个函数只可在本cpp内使用<br>对于被static修饰的类成员变量和成员函数，它们是属于类的，而不是某个对象，所有对象共享一个静态成员。静态成员通过&lt;类名&gt;::&lt;静态成员&gt;来使用。</p>
+<h5 id="刷刷刷"><a href="#刷刷刷" class="headerlink" title="刷刷刷"></a>刷刷刷</h5><p>写下一个没看懂也没记住的东西，问这是什么。不知道。<br>大概印象里应该是写了个函数指针？不过怎么跟static扯上关系的呢。</p>
+<h5 id="嗯，那我这个东西要怎么赋值呢"><a href="#嗯，那我这个东西要怎么赋值呢" class="headerlink" title="嗯，那我这个东西要怎么赋值呢"></a>嗯，那我这个东西要怎么赋值呢</h5><p>画画画。一个静态类成员。</p>
+<p>瞎答，死！</p>
+<h4 id="那换一个，说下const的作用"><a href="#那换一个，说下const的作用" class="headerlink" title="那换一个，说下const的作用"></a>那换一个，说下const的作用</h4><p>（1）欲阻止一个变量被改变，可以使用const关键字。在定义该const变量时，通常需要对它进行初始化，因为以后就没有机会再去改变它了；<br>（2）对指针来说，可以指定指针本身为const，也可以指定指针所指的数据为const，或二者同时指定为const；<br>char * const p p指针不可更改<br>const char * p p内容不可更改<br>char const * p p内容不可更改<br>只修饰左边的，<br>（3）在一个函数声明中，const可以修饰形参，表明它是一个输入参数，在函数内部不能改变其值；<br>（4）对于类的成员函数，若指定其为const类型，则表明其是一个常函数，不能修改类的 成员变量；  （最后 () const{}这种)<br>（5）对于类的成员函数，有时候必须指定其返回值为const类型，以使得其返回值不为“左值”。</p>
+<p>差不多其实就行了，这个好像没啥</p>
+<h4 id="实现一个智能指针"><a href="#实现一个智能指针" class="headerlink" title="实现一个智能指针"></a>实现一个智能指针</h4><p>只写一下几个函数的实现就行了</p>
+<p>思路理清楚：</p>
+<p>构造为1，拷贝构造++，赋值的时候左边–，右边++，析构的时候—，特判0时候删除域</p>
+<p>我tm再重复一遍，拷贝构造++。我要被蠢死了。当时脑子里是浆糊吗。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">shared_ptr</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	T* m_ptr;</span><br><span class="line">	<span class="keyword">size_t</span>* ref_count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">	<span class="built_in">shared_ptr</span>(T* ptr = <span class="literal">nullptr</span>);</span><br><span class="line">	~<span class="built_in">shared_ptr</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">shared_ptr</span>(<span class="keyword">const</span> <span class="built_in">shared_ptr</span>&amp; other);</span><br><span class="line">	<span class="built_in">shared_ptr</span>&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="built_in">shared_ptr</span>&amp; other);</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">size_t</span> <span class="title">GetCount</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	T&amp; <span class="keyword">operator</span>*();</span><br><span class="line">	T* <span class="keyword">operator</span>-&gt;();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;T&gt;::<span class="built_in">shared_ptr</span>(T ptr)</span><br><span class="line">	:m_ptr(<span class="keyword">new</span> T(ptr)),ref_count(<span class="keyword">new</span> <span class="keyword">size_t</span>(<span class="number">1</span>))</span><br><span class="line">    &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;T&gt;::~<span class="built_in">shared_ptr</span>()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (--(*ref_count) == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">delete</span> m_ptr;</span><br><span class="line">		<span class="keyword">delete</span> ref_count;</span><br><span class="line">		m_ptr = <span class="literal">nullptr</span>;</span><br><span class="line">		ref_count = <span class="literal">nullptr</span>;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"引用为0，调用析构函数"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;T&gt;::<span class="built_in">shared_ptr</span>(<span class="keyword">const</span> <span class="built_in">shared_ptr</span>&amp; s_point)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> != &amp;s_point)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_ptr = s_point.m_ptr;</span><br><span class="line">		<span class="keyword">this</span>-&gt;ref_count = s_point.ref_count;</span><br><span class="line">		++(*<span class="keyword">this</span>-&gt;ref_count);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;T&gt;&amp; <span class="built_in">shared_ptr</span>&lt;T&gt;::<span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="built_in">shared_ptr</span>&amp; s_point)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(m_ptr == s_point.m_ptr)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (--(*ref_count) == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">delete</span> m_ptr;</span><br><span class="line">			<span class="keyword">delete</span> ref_count;</span><br><span class="line">			m_ptr = <span class="literal">nullptr</span>;</span><br><span class="line">			ref_count = <span class="literal">nullptr</span>;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"引用为0，调用析构函数"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		m_ptr = s_point.m_ptr;</span><br><span class="line">		ref_count = s_point.ref_count;</span><br><span class="line">		++(*ref_count);</span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">size_t</span> <span class="built_in">shared_ptr</span>&lt;T&gt;::GetCount()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> *ref_count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">inline</span> T&amp; <span class="built_in">shared_ptr</span>&lt;T&gt;::<span class="keyword">operator</span>*()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>-&gt;m_ptr)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> *m_ptr;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">inline</span> T* <span class="built_in">shared_ptr</span>&lt;T&gt;::<span class="keyword">operator</span>-&gt;()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>-&gt;m_ptr)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> m_ptr;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="list-vector-map-unordered-map"><a href="#list-vector-map-unordered-map" class="headerlink" title="list,vector,map,unordered_map"></a>list,vector,map,unordered_map</h4><h5 id="底层实现？"><a href="#底层实现？" class="headerlink" title="底层实现？"></a>底层实现？</h5><p>双向环状链表 ，数组，红黑树，哈希表（拉链法的）</p>
+<h5 id="添加元素会发生什么？（都是怎么操作的？）"><a href="#添加元素会发生什么？（都是怎么操作的？）" class="headerlink" title="添加元素会发生什么？（都是怎么操作的？）"></a>添加元素会发生什么？（都是怎么操作的？）</h5><p>对于序列式容器（vector、deque、list），删除当前的iterator会使后面所有元素的iterator都失效。这是因为vector，deque使用了连续分配的内存，删除一个元素导致后面所有的元素会向前移动一个位置。使用erase方法后，返回的是下一个有效的iterator。</p>
+<p>往某个位置插入一个元素，则这个位置之后的元素都要后移，因此后面的迭代器都会失效；如果引起内存的重新配置，所有的迭代器都将失效。</p>
+<p>对于关联容器（map，set），删除当前的iterator，仅仅会使当前的iterator失效</p>
+<p>插入一个元素，并不会对其他的节点造成影响</p>
+<h5 id="那么迭代器会怎样变化？"><a href="#那么迭代器会怎样变化？" class="headerlink" title="那么迭代器会怎样变化？"></a>那么迭代器会怎样变化？</h5><h4 id="你说你了解内存，那么我"><a href="#你说你了解内存，那么我" class="headerlink" title="你说你了解内存，那么我"></a>你说你了解内存，那么我</h4><p>画画画。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个东西放在栈区还是堆区？</p>
+<p>一般的STL内存管理器allocator都是用内存池来管理内存的，所以某个容器申请内存或释放内存都只是影响到内存池的剩余内存量，而不是真的把内存归还给系统。这样做一是为了避免内存碎片，二是提高了内存申请和释放的效率——不用每次都在系统内存里寻找一番。<br>真的让容器把不用的内存归还给系统的话，只能自己写一个allocator，并在容器的模板参数里使用它，而且STL的标准容器确实都留了这个接口。<br>不过要意识到这样做给程序性能和系统内存带来的影响。</p>
+<h5 id="你来实现一个申请栈区的函数"><a href="#你来实现一个申请栈区的函数" class="headerlink" title="你来实现一个申请栈区的函数"></a>你来实现一个申请栈区的函数</h5><p>画画画。比如说我现在有一个</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch[<span class="number">1024</span>*<span class="number">1024</span>];</span><br></pre></td></tr></table></figure>
+
+<p>来，在这里申请内存。</p>
+<p>不会。</p>
+<h5 id="new指定存储位置（placement-new"><a href="#new指定存储位置（placement-new" class="headerlink" title="new指定存储位置（placement new)"></a>new指定存储位置（placement new)</h5><p>一般来说，使用new申请空间时，是从系统的“堆”（heap）中分配空间。申请所得的空间的位置是根据当时的内存的实际使用情况决定的。但是，在某些特殊情况下，可能需要在已分配的特定内存创建对象，这就是所谓的“定位放置new”（placement new）操作。<br>定位放置new操作的语法形式不同于普通的new操作。例如，一般都用如下语句A *  p=new A;申请空间，而定位放置new操作则使用如下语句A *  p=new (ptr)A;申请空间，其中ptr就是程序员指定的内存首地址。考察如下程序。  </p>
+<h4 id="如果我当前有一个整机存的下的数据"><a href="#如果我当前有一个整机存的下的数据" class="headerlink" title="如果我当前有一个整机存的下的数据"></a>如果我当前有一个整机存的下的数据</h4><p>用什么存比较好？</p>
+<h5 id="为啥不使用B-树？"><a href="#为啥不使用B-树？" class="headerlink" title="为啥不使用B+树？"></a>为啥不使用B+树？</h5><p>嗯B+树更优秀一些。</p>
+<p>啊不行，我写不下去了。</p>
+<h4 id="来写个后序遍历非递归的形式"><a href="#来写个后序遍历非递归的形式" class="headerlink" title="来写个后序遍历非递归的形式"></a>来写个后序遍历非递归的形式</h4><h4 id="来个树上最远两点距离"><a href="#来个树上最远两点距离" class="headerlink" title="来个树上最远两点距离"></a>来个树上最远两点距离</h4><h4 id="现在有个人爬山，你来建个模"><a href="#现在有个人爬山，你来建个模" class="headerlink" title="现在有个人爬山，你来建个模"></a>现在有个人爬山，你来建个模</h4><p>他从早上9点到晚上9点，从山脚爬到了山顶<br>睡了一觉。<br>又从早上9点到晚上9点，从山顶下到了山脚。<br>问，不确定速度的情况下，会不会在某一个时刻，站在同一个台阶上。<br>你来建个模</p>
+<p>？？？</p>
+<h5 id="不可教也"><a href="#不可教也" class="headerlink" title="不可教也"></a>不可教也</h5><p>这里面几个变量？<br>我们可不可以用这些变量画二维图来观察关系？<br>那么时间一定是一维了，剩下的呢？画画画，x轴时间<br>y轴地点。好。那么你来画上山下山两条曲线。随便画。<br>那么？<br>有交点，说明什么？</p>
+<p>问题的本质其实是相遇问题。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/20/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%B8%E5%85%B3/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%B8%E5%85%B3/" rel="next" title="面试题相关">
+                <i class="fa fa-chevron-left"></i> 面试题相关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/09/%E9%9D%A2%E8%AF%95/%E6%89%8B%E6%92%95%EF%BC%8F%E7%AE%97%E6%B3%95/%E6%89%8B%E6%92%95%EF%BC%8F%E7%AE%97%E6%B3%95/" rel="prev" title="手撕／算法">
+                手撕／算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2019/09/24/面试/面经-从零开始（/面经-从零开始（/"
+           data-title="面经-从零开始（" data-url="http://oodtoodt.github.io/2019/09/24/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E7%BB%8F-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%88/%E9%9D%A2%E7%BB%8F-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%88/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#58"><span class="nav-number">1.</span> <span class="nav-text">58</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一面"><span class="nav-number">1.1.</span> <span class="nav-text">一面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#怎么把一些点括起来"><span class="nav-number">1.1.1.</span> <span class="nav-text">怎么把一些点括起来</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么数据库选择b-b树而不是红黑树"><span class="nav-number">1.1.2.</span> <span class="nav-text">为什么数据库选择b+&#x2F;b树而不是红黑树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp如何保证传输有序"><span class="nav-number">1.1.3.</span> <span class="nav-text">tcp如何保证传输有序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-在openfile的时候，文件指针指的是什么"><span class="nav-number">1.1.4.</span> <span class="nav-text">c++在openfile的时候，文件指针指的是什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程有了解吗"><span class="nav-number">1.1.5.</span> <span class="nav-text">多线程有了解吗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组为什么比链表快"><span class="nav-number">1.1.6.</span> <span class="nav-text">数组为什么比链表快</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盛趣"><span class="nav-number">2.</span> <span class="nav-text">盛趣</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一面-1"><span class="nav-number">2.1.</span> <span class="nav-text">一面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vector有一个容量，每次超过了都会翻倍容量复制一遍对吧，那么我当前有N个数和一个空的vector，你要复制多少次呢"><span class="nav-number">2.1.1.</span> <span class="nav-text">vector有一个容量，每次超过了都会翻倍容量复制一遍对吧，那么我当前有N个数和一个空的vector，你要复制多少次呢</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一个非常神秘的点集问题"><span class="nav-number">2.1.2.</span> <span class="nav-text">一个非常神秘的点集问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#给你一些一维的点，如何求-a-b-闭集上的点有哪些-有序怎么做-无序怎么做"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">给你一些一维的点，如何求[a,b)闭集上的点有哪些 有序怎么做 无序怎么做</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#如果变成二维呢"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">如果变成二维呢</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#那么这是一个近似的解对吧，我们如何优化这些近似，或者说有O-1-的算法吗"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">那么这是一个近似的解对吧，我们如何优化这些近似，或者说有O(1)的算法吗</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代器失效的本质是什么"><span class="nav-number">2.1.3.</span> <span class="nav-text">迭代器失效的本质是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#或者这个问题是-迭代器的本质是什么"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">或者这个问题是 迭代器的本质是什么</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有序数组，分析一下快排的复杂度？"><span class="nav-number">2.1.4.</span> <span class="nav-text">有序数组，分析一下快排的复杂度？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#如何变快？就如何优化掉这个N？"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">如何变快？就如何优化掉这个N？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TopK怎么解？"><span class="nav-number">2.1.5.</span> <span class="nav-text">TopK怎么解？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#那么这个partition的复杂度怎么样？"><span class="nav-number">2.1.5.1.</span> <span class="nav-text">那么这个partition的复杂度怎么样？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#蚂蚁对爬问题"><span class="nav-number">2.1.6.</span> <span class="nav-text">蚂蚁对爬问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#撞到就回头，最后掉下去，问你都掉下去，要撞多少次？"><span class="nav-number">2.1.6.1.</span> <span class="nav-text">撞到就回头，最后掉下去，问你都掉下去，要撞多少次？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#各种提示，问题最开始要先想什么？"><span class="nav-number">2.1.6.2.</span> <span class="nav-text">各种提示，问题最开始要先想什么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结论"><span class="nav-number">2.1.6.3.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hr面"><span class="nav-number">2.2.</span> <span class="nav-text">hr面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网易"><span class="nav-number">3.</span> <span class="nav-text">网易</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二面"><span class="nav-number">3.1.</span> <span class="nav-text">二面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#迷宫问题"><span class="nav-number">3.1.1.</span> <span class="nav-text">迷宫问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#进阶优化"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">进阶优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#高级操作"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">高级操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一个类扫描线问题…"><span class="nav-number">3.1.2.</span> <span class="nav-text">一个类扫描线问题…</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#如果当前的这个时间无比精确，你有更好的想法嘛"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">如果当前的这个时间无比精确，你有更好的想法嘛</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#如果我这个时间非常长，几天几周，你有更好的办法吗"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">如果我这个时间非常长，几天几周，你有更好的办法吗</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cache的实现"><span class="nav-number">3.1.3.</span> <span class="nav-text">cache的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#智能指针的实现"><span class="nav-number">3.1.4.</span> <span class="nav-text">智能指针的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#各种函数"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">各种函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hr面-1"><span class="nav-number">3.2.</span> <span class="nav-text">hr面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#百度"><span class="nav-number">4.</span> <span class="nav-text">百度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一面-2"><span class="nav-number">4.1.</span> <span class="nav-text">一面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说一下static的作用"><span class="nav-number">4.1.1.</span> <span class="nav-text">说一下static的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#刷刷刷"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">刷刷刷</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#嗯，那我这个东西要怎么赋值呢"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">嗯，那我这个东西要怎么赋值呢</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#那换一个，说下const的作用"><span class="nav-number">4.1.2.</span> <span class="nav-text">那换一个，说下const的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现一个智能指针"><span class="nav-number">4.1.3.</span> <span class="nav-text">实现一个智能指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#list-vector-map-unordered-map"><span class="nav-number">4.1.4.</span> <span class="nav-text">list,vector,map,unordered_map</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#底层实现？"><span class="nav-number">4.1.4.1.</span> <span class="nav-text">底层实现？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加元素会发生什么？（都是怎么操作的？）"><span class="nav-number">4.1.4.2.</span> <span class="nav-text">添加元素会发生什么？（都是怎么操作的？）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#那么迭代器会怎样变化？"><span class="nav-number">4.1.4.3.</span> <span class="nav-text">那么迭代器会怎样变化？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#你说你了解内存，那么我"><span class="nav-number">4.1.5.</span> <span class="nav-text">你说你了解内存，那么我</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#你来实现一个申请栈区的函数"><span class="nav-number">4.1.5.1.</span> <span class="nav-text">你来实现一个申请栈区的函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#new指定存储位置（placement-new"><span class="nav-number">4.1.5.2.</span> <span class="nav-text">new指定存储位置（placement new)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如果我当前有一个整机存的下的数据"><span class="nav-number">4.1.6.</span> <span class="nav-text">如果我当前有一个整机存的下的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#为啥不使用B-树？"><span class="nav-number">4.1.6.1.</span> <span class="nav-text">为啥不使用B+树？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#来写个后序遍历非递归的形式"><span class="nav-number">4.1.7.</span> <span class="nav-text">来写个后序遍历非递归的形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#来个树上最远两点距离"><span class="nav-number">4.1.8.</span> <span class="nav-text">来个树上最远两点距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#现在有个人爬山，你来建个模"><span class="nav-number">4.1.9.</span> <span class="nav-text">现在有个人爬山，你来建个模</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不可教也"><span class="nav-number">4.1.9.1.</span> <span class="nav-text">不可教也</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

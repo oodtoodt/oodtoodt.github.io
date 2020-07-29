@@ -1,0 +1,1015 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="old c++,home," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="这书确实好,这里是第一、二章，从法则01至12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="effectivecpp笔记-1">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/01/23/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-1/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="这书确实好,这里是第一、二章，从法则01至12">
+<meta property="article:published_time" content="2020-01-23T15:17:54.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:03:37.000Z">
+<meta property="article:author" content="eco_oodt">
+<meta property="article:tag" content="old c++">
+<meta property="article:tag" content="home">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/01/23/c++/effectivecpp笔记/effectivecpp笔记-1/"/>
+
+
+
+
+
+  <title>effectivecpp笔记-1 | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/01/23/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">effectivecpp笔记-1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-23T23:17:54+08:00">
+                2020-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/book-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">book_notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/23/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/01/23/c++/effectivecpp笔记/effectivecpp笔记-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/01/23/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-1/" class="leancloud_visitors" data-flag-title="effectivecpp笔记-1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这书确实好,这里是第一、二章，从法则01至12</p>
+<a id="more"></a>
+
+<hr>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>一如传言中的那样，有无读过此书的c++程序员是两个层次。<br>确实，这本书讲到了那些c++里隐蔽的、必要的许多知识。而且充满了实用性。<br>唯一的缺憾就是这本书实在是太早了（06年），那个时候c++11c++14c++17还没出世，c++还处在一个…混沌的开化时期（但是各个系统，尤其是模板、stl都已经几乎成型极具威力了），很多东西现在可以很方便的就避开，而无需像书中那样曲折的去实现——当然这种对照可以使我们更清晰。</p>
+<p>如果篇幅不长，我们不设3级标题，而仅仅以无序列表形式提供内容。</p>
+<h1 id="让自己习惯c"><a href="#让自己习惯c" class="headerlink" title="让自己习惯c++"></a>让自己习惯c++</h1><h2 id="01-视c-为语言联邦"><a href="#01-视c-为语言联邦" class="headerlink" title="01:视c++为语言联邦"></a>01:视c++为语言联邦</h2><ul>
+<li>c-part</li>
+<li>◊object-oriented c++(oop里的oo)</li>
+<li>Template c++</li>
+<li>stl</li>
+</ul>
+<h2 id="02-尽量以const、enum、inline替换-define"><a href="#02-尽量以const、enum、inline替换-define" class="headerlink" title="02:尽量以const、enum、inline替换#define"></a>02:尽量以const、enum、inline替换#define</h2><p>inline是宏的范畴，前二者用于常量。<br>现在有了新的constexpr了<br>好像还有啥，记不得了<br>using好像不太符合这几个的内容（指#define优化）</p>
+<h2 id="03-尽可能的使用const"><a href="#03-尽可能的使用const" class="headerlink" title="03:尽可能的使用const"></a>03:尽可能的使用const</h2><p>尤其是禁止如(a * b) = c这种操作：返回const<br>然而提到了const的各种问题：</p>
+<ul>
+<li>常量性不同可以被重载(这不是问题，是要注意的点)</li>
+<li>bitwise constness（无一可变）与logical constness（一定范围可变，客户端侦测不出）——引出了mutable，可以在const中修改的变量<br>注意很多成员函数不具备const性质却能通过bitwise测试，比如const函数返回reference指向对象内部。<br>mutable我第一次还是在lambda里见到的…可以对照。</li>
+<li>令non-const调用const避免大量重复内容<br>以下是一个关于const与non-const的例子。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextBlock</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>&amp; <span class="keyword">operator</span>[](<span class="built_in">std</span>::<span class="keyword">size_t</span> <span class="built_in">position</span>) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">text</span>[<span class="built_in">position</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span>&amp; <span class="keyword">operator</span>[](<span class="built_in">std</span>::<span class="keyword">size_t</span> <span class="built_in">position</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span>&amp;&gt;&#123;</span><br><span class="line">                <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> TextBlock&amp;&gt;(*<span class="keyword">this</span>)</span><br><span class="line">                    [<span class="built_in">position</span>]</span><br><span class="line">            &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+但是<br>这个两次转型(casting)总是看着非常别扭，不知道后面有没有更优雅的实现？</li>
+</ul>
+<p>这里提一嘴关于const和volatile<br>“const”含义是“请做为常量使用”，而并非“放心吧，那肯定是个常量”。</p>
+<p>“volatile”的含义是“请不要做没谱的优化，这个值可能变掉的”，而并非“你可以修改这个值”。</p>
+<h2 id="04-确定对象使用前已被初始化"><a href="#04-确定对象使用前已被初始化" class="headerlink" title="04:确定对象使用前已被初始化"></a>04:确定对象使用前已被初始化</h2><h3 id="总是初始化。"><a href="#总是初始化。" class="headerlink" title="总是初始化。"></a>总是初始化。</h3><p>尤其是在c++11统一了初始化规范（初始化列表）之后，有了标准，但是习惯不要落下。<br>而且c++11有了类成员的内部初始化。</p>
+<blockquote>
+<p>要记住这么多种初始化规则，并从中选用最合适的一种，绝非易事。<br>C++11的解决方法是对于所有的初始化，均可使用“{}-初始化变量列表”</p>
+</blockquote>
+<h3 id="按变量声明次序初始化"><a href="#按变量声明次序初始化" class="headerlink" title="按变量声明次序初始化"></a>按变量声明次序初始化</h3><p>而且按照先base后derived（继承）的顺序</p>
+<h3 id="建议用引用函数来初始化非本地静态变量"><a href="#建议用引用函数来初始化非本地静态变量" class="headerlink" title="建议用引用函数来初始化非本地静态变量"></a>建议用引用函数来初始化非本地静态变量</h3><p>(singleton的思想)<br>最常见为多编译单元内non-local static对象由「模板隐式具现化」形成<br>这里的static指的是作用域global或位于namespace内，或者在class或filne内被声明为static，简单的例子是<br>extern变量1，变量2使用变量1的某个函数，此时由于这两个变量是「不同的人在不同的时间在不同的源码文件建立起来的，是定义于不同编译单元内的non-local static对象」，无法确定变量1会在变量2之前被初始化。</p>
+<p>就是说，在调用之前我其实是用了个引用函数建立了static对象，在这个函数里我其实必然会进行初始化，所以就避免了所有的次序问题。且如果不调用就无构造析构成本。且是绝佳inline优化对象。<br>但是内涵static对象使他们在多线程中具有不确定性。一种做法是在单线程启动阶段全部调用一遍</p>
+<p>这一点不知道在新的版本中有无对应措施，有待继续学习。</p>
+<h1 id="构造-析构-赋值-运算"><a href="#构造-析构-赋值-运算" class="headerlink" title="构造/析构/赋值 运算"></a>构造/析构/赋值 运算</h1><p>constructors,Destructors,and Assignment Operators</p>
+<h2 id="05-了解c-默默编写并调用了哪些函数"><a href="#05-了解c-默默编写并调用了哪些函数" class="headerlink" title="05:了解c++默默编写并调用了哪些函数"></a>05:了解c++默默编写并调用了哪些函数</h2><p>指默认构造、拷贝构造、析构函数、拷贝赋值运算符<br>以及新的移动构造函数、移动赋值运算符</p>
+<p>但是默认的函数也是…有操作的。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>这里有一个问题：为什么默认的拷贝构造函数可以识别并调用已有的拷贝构造函数？</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NameObject</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    NameObject(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> T&amp; value);</span><br><span class="line">    NameObject(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name, <span class="keyword">const</span> T&amp; value);</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> nameValue;</span><br><span class="line">    T objectValue;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">NameObject&lt;<span class="keyword">int</span>&gt; <span class="title">no1</span><span class="params">(<span class="string">"Smallset Prime Number"</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="function">NameObject&lt;<span class="keyword">int</span>&gt; <span class="title">no2</span><span class="params">(no1)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这里no2默认的拷贝构造函数会调用string的拷贝构造函数以no1.nameValue来对no2的string初始化，int内置类型直接拷贝每bit。</p>
+<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><p>我也不推测了，直接上标准：（复制构造函数）</p>
+<blockquote>
+<p>初始化：<code>T a = b;</code>或 <code>T a(b);</code>，其中 b 类型为 T；<br>函数实参传递：<code>f(a)</code>;，其中 a 类型为 T 而 f 为<code>Ret f(T t)</code>；<br>函数返回：在如 <code>T f()</code>这样的函数内部的<code>return a;</code>，其中 a 类型为 T，它没有移动构造函数。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>若隐式声明的复制构造函数未被弃置，则当其被 ODR 式使用时，它为编译器所定义（即生成并编译函数体）。<br>对于 union 类型，隐式定义的复制构造函数（如同以 std::memmove）复制其对象表示。<br>对于非联合类类型（class 与 struct），<strong>该构造函数用直接初始化，按照初始化顺序，对对象的各基类和非静态成员进行完整的逐成员复制。</strong><br>若它满足对于 constexpr 构造函数的要求，则生成的复制构造函数为 constexpr。 (C++11 起)<br>当 T 拥有用户定义的析构函数或用户定义的复制赋值运算符时，隐式定义的复制构造函数的生成被弃用。(C++11 起)</p>
+</blockquote>
+<p>注意到加粗部分：用直接初始化进行完整对逐成员复制。复制=拷贝（copy）。直接初始化，其实就是<code>T a = &quot;aaa&quot;</code>这种形式，就是另一个拷贝构造函数了。<br>可以理解为优先调用拷贝构造函数，再考虑内置类型逐位复制。</p>
+<h3 id="更多牵涉…"><a href="#更多牵涉…" class="headerlink" title="更多牵涉…"></a>更多牵涉…</h3><p>这里其实还牵涉到了关于平凡(trivial)，也就是POD定义的问题，以及复制消除(copy-elision)的问题，还是很复杂的。</p>
+<p>写到这里我意识到我迟早要搞一篇专门弄一下这几个十分基础却很…难搞的东西。<br>c++无易事啊。</p>
+<h3 id="我们继续…"><a href="#我们继续…" class="headerlink" title="我们继续…"></a>我们继续…</h3><p>其实已经偏题蛮多了。+++。<br>默认的拷贝赋值运算符产生条件比较苛刻。<br>注意到c++11中到default，所以这里理解还是很重要的。</p>
+<h2 id="06-如果不想要编译器产生的函数，就要明确拒绝。"><a href="#06-如果不想要编译器产生的函数，就要明确拒绝。" class="headerlink" title="06:如果不想要编译器产生的函数，就要明确拒绝。"></a>06:如果不想要编译器产生的函数，就要明确拒绝。</h2><p>比如说阻止拷贝。于是对于拷贝构造函数或者拷贝赋值运算符…声不声明都很难受。</p>
+<ul>
+<li>使用private声明拷贝构造函数与拷贝赋值运算符。</li>
+<li>使用一层private继承来实现。</li>
+</ul>
+<p>不过针对这一问题，其实已经在c++11有了解决实现：delete。</p>
+<h2 id="07-为多态基类声明virtual析构函数"><a href="#07-为多态基类声明virtual析构函数" class="headerlink" title="07:为多态基类声明virtual析构函数"></a>07:为多态基类声明virtual析构函数</h2><p>对于factory(工厂)函数，即一「返回一个base class指针，指向新生成的derived class对象」的函数，会在delete的时候出现问题：<br>一指针指向 继承类 的对象，而那个对象却经由一个 基类 的指针被删除。<br>c++明确指出这是一个未定义行为。<br>解决方法：基类声明virtual析构函数。</p>
+<h3 id="任何带有virtual函数几乎确定应该有一个virtual析构函数。"><a href="#任何带有virtual函数几乎确定应该有一个virtual析构函数。" class="headerlink" title="任何带有virtual函数几乎确定应该有一个virtual析构函数。"></a>任何带有virtual函数几乎确定应该有一个virtual析构函数。</h3><p>（原因是这样的类几乎都是基类）</p>
+<h3 id="如果无virtual，一般意味不做基类，此时声明virtual函数是馊主意："><a href="#如果无virtual，一般意味不做基类，此时声明virtual函数是馊主意：" class="headerlink" title="如果无virtual，一般意味不做基类，此时声明virtual函数是馊主意："></a>如果无virtual，一般意味不做基类，此时声明virtual函数是馊主意：</h3><p>virtual函数会为对象增加一份vptr指针和由vptr指向的数组vtbl(虚函数指针和虚函数表)，维护这些东西会使其失去移植性（对象变大）。（除非你明确补偿vptr）</p>
+<h3 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h3><p> 标准string不带任何virtual函数，但有时程序员会错误的将其作为基类：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpecialString</span>:</span> <span class="keyword">public</span> <span class="built_in">std</span>::<span class="built_in">string</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>此时如果你在程序中无意将一个pointer-to-SpecialString转换为一个pointer-to-string，然后delete掉那个string指针，你立刻就会被流放到行为不明确的恶地上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SpecialString* pss = <span class="keyword">new</span> SpecialString(<span class="string">"Impending Doom"</span>);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span>* ps;</span><br><span class="line">ps = pss;</span><br><span class="line"><span class="keyword">delete</span> ps;</span><br></pre></td></tr></table></figure>
+<p>（老实说我写这个例子还用了好长时间，我确实不太熟悉这些东西。这里是资源泄漏，不会立刻boom。）</p>
+<h3 id="禁止派生"><a href="#禁止派生" class="headerlink" title="禁止派生"></a>禁止派生</h3><blockquote>
+<p>「很不幸c++无有一个final classes或sealed classes那样的禁止派生机制」</p>
+</blockquote>
+<p>很不幸我们在c++11里就有了final关键字。</p>
+<h3 id="pure-virtual-destructor"><a href="#pure-virtual-destructor" class="headerlink" title="pure virtual destructor"></a>pure virtual destructor</h3><p>为构建抽象对象可以特意使出纯虚析构函数。但是注意，你必须为这个函数提供一份定义。</p>
+<h4 id="析构函数的运作"><a href="#析构函数的运作" class="headerlink" title="析构函数的运作"></a>析构函数的运作</h4><p>最深层继承的class先调用析构函数，逐层调用基类。编译器会在纯虚类的派生类的析构函数中创建一个对纯虚类析构函数的调用动作。</p>
+<h3 id="并非所有基类设计为多态用途"><a href="#并非所有基类设计为多态用途" class="headerlink" title="并非所有基类设计为多态用途"></a>并非所有基类设计为多态用途</h3><p>标准string和stl都不被设计为作为基类使用。<br>有些作为基类，但是不是为了多态用途。这样的classes如</p>
+<ul>
+<li>Uncopyable</li>
+<li>input_iterator_tag<br>等等</li>
+</ul>
+<h2 id="08-别让异常逃离析构函数"><a href="#08-别让异常逃离析构函数" class="headerlink" title="08:别让异常逃离析构函数"></a>08:别让异常逃离析构函数</h2><p>c++并不禁止析构函数吐出异常，但不鼓励你这么做。<br>主要原因是析构可能会大量调用，这些异常太多了。两个异常同时存在不是结束程序就是导致不明确行为。<br>为了解决这个问题，你可以</p>
+<ul>
+<li>如果抛出异常就结束程序。</li>
+<li>吞下发生的异常。<br>一般而言，吞掉是坏主意，因为它压制了“某些动作失败”的重要信息。但优势也比负担草率结束程序或不明确行为带来的风险好。</li>
+</ul>
+<p>一个较佳的策略是重新设计接口，把调用某些析构函数中需要调用、且可能抛出异常的函数的责任从析构函数交给类客户（别的程序员、使用者）手上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DBConn</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        db.<span class="built_in">close</span>&#123;&#125;;</span><br><span class="line">        closed = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~DBConn()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!closed)&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                db.<span class="built_in">close</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(...)&#123;</span><br><span class="line">                制作运作记录，记录<span class="built_in">close</span>调用失败。</span><br><span class="line">                ...</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    DBConnection db;</span><br><span class="line">    <span class="keyword">bool</span> closed;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="09-绝不在构造和析构过程中调用virtual函数"><a href="#09-绝不在构造和析构过程中调用virtual函数" class="headerlink" title="09:绝不在构造和析构过程中调用virtual函数"></a>09:绝不在构造和析构过程中调用virtual函数</h2><p>所有事情的起因是继承类对象内的基类成分会先行构造。而如果这个构造函数中调用虚函数(即在继承类中重载过的…嗯考虑到不熟悉我就提一嘴)，而如果你调用继承类的构造函数，这个虚构函数是基类的成分！<br>我们去掉这些曲里拐弯的成分，来看这里的核心问题：<br>在base class构造函数virtual函数绝不会下降到derived classes阶层。<br>理由很简单，继承类的成员变量此时未被初始化，则此虚函数如果调用这些变量就会「变成一张通往不明确行为和彻夜调试大会的直达车票」<br>但有更根本的原因，在派生类的基类构造期间，对象类型是基类。当然如果你究编译器理由，他还是会告诉你上面那条。</p>
+<p>析构函数同理。</p>
+<h3 id="多个构造函数时"><a href="#多个构造函数时" class="headerlink" title="多个构造函数时"></a>多个构造函数时</h3><p>每个都需要执行某些相同工作，那么一种做法是把共同的初始化代码放到一个初始化函数如init内。<br>但这样做通常会隐藏编译器和连接器原本会报出的问题。<br>比如在init中调用pure virtual函数会终止程序，但如果这个函数不是pure而只是virtual的此时建立派生类的对象会调用基类版本的此函数。<br>一种解决方法是修改结构，总之不要有virtual在构造和析构中。</p>
+<p>当然现在允许了成员定义时初始化，可以省去一些多构造函数的问题。</p>
+<h2 id="令operator-返回一个reference-to-this"><a href="#令operator-返回一个reference-to-this" class="headerlink" title="令operator=返回一个reference to *this"></a>令operator=返回一个reference to *this</h2><p>考虑如下的解析</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x,y,z;</span><br><span class="line">x = y = z = <span class="number">15</span>;<span class="comment">// &lt;==&gt;</span></span><br><span class="line">x = (y = (z = <span class="number">15</span>));</span><br></pre></td></tr></table></figure>
+<p>为了实现这种连锁赋值，赋值操作符必须返回一个指向操作符左侧的实参的引用。适用于所有的赋值运算(<code>+=,*=</code>等等)</p>
+<p>注意这只是协议，并无强制性。</p>
+<h2 id="在operator-中处理「自我赋值」"><a href="#在operator-中处理「自我赋值」" class="headerlink" title="在operator= 中处理「自我赋值」"></a>在operator= 中处理「自我赋值」</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span>&#123;</span>...&#125;;</span><br><span class="line">Widget w;</span><br><span class="line">w = w;</span><br><span class="line"><span class="comment">//潜在的自我赋值</span></span><br><span class="line">a[i] = a[j];</span><br><span class="line">*px = *py;<span class="comment">//如果恰巧指向同一个东西</span></span><br></pre></td></tr></table></figure>
+<p>这些并不明显的自我赋值，是「别名」带来的结果。这里所谓「别名」指一个以上的方法指称某对象。<br>以下是问题</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bitmap</span>&#123;</span>...&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Bitmap* pb;</span><br><span class="line">&#125;;</span><br><span class="line">Widget&amp; Widget::<span class="keyword">operator</span>=(<span class="keyword">const</span> Widget&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> pb;</span><br><span class="line">    pb = <span class="keyword">new</span> Bitmap(*rhs.pb);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果此时rhs和<code>*this</code>是同一个对象，那么就会先删掉自己的东西，然后在赋值…嗯，最后指向一个已经被删除的对象。</p>
+<h3 id="解决法：调整语序"><a href="#解决法：调整语序" class="headerlink" title="解决法：调整语序"></a>解决法：调整语序</h3><p>传统做法是藉由一个证同测试来检验（就看我是不是我），但这仍存在异常方面的麻烦。<br>我们后面讨论异常安全性，这里注意到「精心安排的语句即可导出异常安全（以及顺带的，自我赋值安全）的代码」就够了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Widget&amp; Widget::<span class="keyword">operator</span>=(<span class="keyword">const</span> Widget&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">    Bitmap* pOrig = pb;记住原先的pb</span><br><span class="line">    pb = <span class="keyword">new</span> Bitmap(*rhs.pb);<span class="comment">//令pb指向新的(可能是同一个）*pb的一个副本</span></span><br><span class="line">    <span class="keyword">delete</span> pOrig;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然这里还有一个关乎效率的问题，要不要放证同测试在你。</p>
+<h3 id="解决法：copy-and-swap"><a href="#解决法：copy-and-swap" class="headerlink" title="解决法：copy and swap"></a>解决法：copy and swap</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(Widget&amp; rhs)</span></span>;<span class="comment">//交换*this和rhs的数据。</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line">Widget&amp; Widget::<span class="keyword">operator</span>=(<span class="keyword">const</span> Widget&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">    Widget temp(rhs);</span><br><span class="line">    swap(temp);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我总觉得这种东西看着很别扭。不过有了移动构造函数，我们这里的操作可以变得…更高效，但是实现方式大概不会有什么变化了。</p>
+<p>如果有看到更好的方式，记得记一下。</p>
+<h2 id="12-复制对象的全部成分"><a href="#12-复制对象的全部成分" class="headerlink" title="12:复制对象的全部成分"></a>12:复制对象的全部成分</h2><p>简单的说就是深拷贝<br>继承时是最容易忽略的：没有复制继承来的成员变量。</p>
+<p>c++11里统一初始化（成员变量初值）（划掉）。其实是using的使用延展有了继承构造函数解决了这里的问题。这里的问题其实可以解决很多。</p>
+<p>在之前，你需要：</p>
+<ul>
+<li>复制所有local成员变量</li>
+<li>调用所有base classes内的适当copying函数</li>
+</ul>
+<p>你不该令拷贝赋值操作符调用拷贝构造函数。<br>你不该令拷贝构造函数调用构造赋值操作符。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/old-c/" rel="tag"># old c++</a>
+          
+            <a href="/tags/home/" rel="tag"># home</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/19/c++/cpp-Template-Tutorial/cpp-Template-Tutorial/" rel="next" title="cpp-Template-Tutorial">
+                <i class="fa fa-chevron-left"></i> cpp-Template-Tutorial
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/01/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-2/" rel="prev" title="effectivecpp笔记-2">
+                effectivecpp笔记-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/01/23/c++/effectivecpp笔记/effectivecpp笔记-1/"
+           data-title="effectivecpp笔记-1" data-url="http://oodtoodt.github.io/2020/01/23/c++/effectivecpp%E7%AC%94%E8%AE%B0/effectivecpp%E7%AC%94%E8%AE%B0-1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让自己习惯c"><span class="nav-number">2.</span> <span class="nav-text">让自己习惯c++</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-视c-为语言联邦"><span class="nav-number">2.1.</span> <span class="nav-text">01:视c++为语言联邦</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-尽量以const、enum、inline替换-define"><span class="nav-number">2.2.</span> <span class="nav-text">02:尽量以const、enum、inline替换#define</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-尽可能的使用const"><span class="nav-number">2.3.</span> <span class="nav-text">03:尽可能的使用const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-确定对象使用前已被初始化"><span class="nav-number">2.4.</span> <span class="nav-text">04:确定对象使用前已被初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总是初始化。"><span class="nav-number">2.4.1.</span> <span class="nav-text">总是初始化。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按变量声明次序初始化"><span class="nav-number">2.4.2.</span> <span class="nav-text">按变量声明次序初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建议用引用函数来初始化非本地静态变量"><span class="nav-number">2.4.3.</span> <span class="nav-text">建议用引用函数来初始化非本地静态变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造-析构-赋值-运算"><span class="nav-number">3.</span> <span class="nav-text">构造&#x2F;析构&#x2F;赋值 运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#05-了解c-默默编写并调用了哪些函数"><span class="nav-number">3.1.</span> <span class="nav-text">05:了解c++默默编写并调用了哪些函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">3.1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准"><span class="nav-number">3.1.2.</span> <span class="nav-text">标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更多牵涉…"><span class="nav-number">3.1.3.</span> <span class="nav-text">更多牵涉…</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们继续…"><span class="nav-number">3.1.4.</span> <span class="nav-text">我们继续…</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#06-如果不想要编译器产生的函数，就要明确拒绝。"><span class="nav-number">3.2.</span> <span class="nav-text">06:如果不想要编译器产生的函数，就要明确拒绝。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#07-为多态基类声明virtual析构函数"><span class="nav-number">3.3.</span> <span class="nav-text">07:为多态基类声明virtual析构函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#任何带有virtual函数几乎确定应该有一个virtual析构函数。"><span class="nav-number">3.3.1.</span> <span class="nav-text">任何带有virtual函数几乎确定应该有一个virtual析构函数。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果无virtual，一般意味不做基类，此时声明virtual函数是馊主意："><span class="nav-number">3.3.2.</span> <span class="nav-text">如果无virtual，一般意味不做基类，此时声明virtual函数是馊主意：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个例子"><span class="nav-number">3.3.3.</span> <span class="nav-text">一个例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁止派生"><span class="nav-number">3.3.4.</span> <span class="nav-text">禁止派生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pure-virtual-destructor"><span class="nav-number">3.3.5.</span> <span class="nav-text">pure virtual destructor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#析构函数的运作"><span class="nav-number">3.3.5.1.</span> <span class="nav-text">析构函数的运作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并非所有基类设计为多态用途"><span class="nav-number">3.3.6.</span> <span class="nav-text">并非所有基类设计为多态用途</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#08-别让异常逃离析构函数"><span class="nav-number">3.4.</span> <span class="nav-text">08:别让异常逃离析构函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#09-绝不在构造和析构过程中调用virtual函数"><span class="nav-number">3.5.</span> <span class="nav-text">09:绝不在构造和析构过程中调用virtual函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多个构造函数时"><span class="nav-number">3.5.1.</span> <span class="nav-text">多个构造函数时</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#令operator-返回一个reference-to-this"><span class="nav-number">3.6.</span> <span class="nav-text">令operator&#x3D;返回一个reference to *this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在operator-中处理「自我赋值」"><span class="nav-number">3.7.</span> <span class="nav-text">在operator&#x3D; 中处理「自我赋值」</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决法：调整语序"><span class="nav-number">3.7.1.</span> <span class="nav-text">解决法：调整语序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决法：copy-and-swap"><span class="nav-number">3.7.2.</span> <span class="nav-text">解决法：copy and swap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-复制对象的全部成分"><span class="nav-number">3.8.</span> <span class="nav-text">12:复制对象的全部成分</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1246 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="company,java," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="oodt's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="我…我把整篇文章搬过来了！复制粘贴…https:&#x2F;&#x2F;vertxchina.github.io&#x2F;vertx-translation-chinese&#x2F;core&#x2F;Core.htmlhttps:&#x2F;&#x2F;vertx.io&#x2F;docs&#x2F;vertx-core&#x2F;java&#x2F;#_buffers">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vert.x-notes">
+<meta property="og:url" content="http://oodtoodt.github.io/2020/04/15/java-%E6%8A%80%E6%9C%AF%E6%A0%88/vertx-notes/vertx-notes/index.html">
+<meta property="og:site_name" content="oodt&#39;s blog">
+<meta property="og:description" content="我…我把整篇文章搬过来了！复制粘贴…https:&#x2F;&#x2F;vertxchina.github.io&#x2F;vertx-translation-chinese&#x2F;core&#x2F;Core.htmlhttps:&#x2F;&#x2F;vertx.io&#x2F;docs&#x2F;vertx-core&#x2F;java&#x2F;#_buffers">
+<meta property="article:published_time" content="2020-04-15T02:29:43.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:03:37.000Z">
+<meta property="article:author" content="eco_oodt">
+<meta property="article:tag" content="company">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oodtoodt.github.io/2020/04/15/java-技术栈/vertx-notes/vertx-notes/"/>
+
+
+
+
+
+  <title>vert.x-notes | oodt's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oodt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自杀之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://oodtoodt.github.io/2020/04/15/java-%E6%8A%80%E6%9C%AF%E6%A0%88/vertx-notes/vertx-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="eco_oodt">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/prpr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oodt's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vert.x-notes</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-15T10:29:43+08:00">
+                2020-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/frame/" itemprop="url" rel="index">
+                    <span itemprop="name">frame</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/frame/vert-x/" itemprop="url" rel="index">
+                    <span itemprop="name">vert.x</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/frame/vert-x/documentation/" itemprop="url" rel="index">
+                    <span itemprop="name">documentation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/15/java-%E6%8A%80%E6%9C%AF%E6%A0%88/vertx-notes/vertx-notes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/15/java-技术栈/vertx-notes/vertx-notes/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/04/15/java-%E6%8A%80%E6%9C%AF%E6%A0%88/vertx-notes/vertx-notes/" class="leancloud_visitors" data-flag-title="vert.x-notes">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我…我把整篇文章搬过来了！<br>复制粘贴…<br><a href="https://vertxchina.github.io/vertx-translation-chinese/core/Core.html" target="_blank" rel="noopener">https://vertxchina.github.io/vertx-translation-chinese/core/Core.html</a><br><a href="https://vertx.io/docs/vertx-core/java/#_buffers" target="_blank" rel="noopener">https://vertx.io/docs/vertx-core/java/#_buffers</a></p>
+<a id="more"></a>
+
+
+
+<h2 id="Are-you-fluent"><a href="#Are-you-fluent" class="headerlink" title="Are you fluent"></a>Are you fluent</h2><p>A fluent API是可以连锁调用许多方法的,比如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">request.response().puHeader(<span class="string">"Content-Type"</span>,<span class="string">"text/plain"</span>).write(<span class="string">"some text"</span>).end();</span><br><span class="line"><span class="comment">//but we dont force you, you still can ignore it</span></span><br><span class="line">HttpServerResponse response = request.response();</span><br><span class="line">response.putHeader(<span class="string">"Content-Type"</span>,<span class="string">"text/plain"</span>);</span><br><span class="line">response.write(<span class="string">"some text"</span>);</span><br><span class="line">response.end();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Don’t-call-us-we’ll-call-you"><a href="#Don’t-call-us-we’ll-call-you" class="headerlink" title="Don’t call us, we’ll call you"></a>Don’t call us, we’ll call you</h2><p>Vert.x APIs主要是事件驱动的。意味着如果Vert.x中发生的事情你感兴趣，Vert.x会通过事件的方法调用你</p>
+<blockquote>
+<p>Handler主要用于异步消息的处理（是一套Android提供的消息处理机制）：当发出一个消息之后，首先进入一个消息队列，发送消息的函数即刻返回，而另外一个部分在消息队列中逐一将消息取出，然后对消息进行处理，也就是发送消息和接收消息不是同步的处理。 这种机制通常用来处理相对耗时比较长的操作。<br>（无视就好，和这个什么关系都没有</p>
+</blockquote>
+<p>这里的Lambda/匿名函数/req-&gt;{//blablabla}就是一个处理器（Handler），在随后的例子中，我们用1stHandler以及2ndHandler来指代具体的匿名函数，让代码更加清晰明了，放在Verticle中类似：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyVerticle</span> <span class="keyword">extends</span> <span class="title">AbstractVerticle</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        vertx.createHttpServer().requestHandler(<span class="number">1</span>stHandler).listen(<span class="number">8080</span>);</span><br><span class="line">    vertx.createHttpServer().requestHandler(<span class="number">2</span>ndHandler).listen(<span class="number">8081</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你通过提供handlers来handle事件，比如如果你要收到一个时间事件你应该：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vertx.setPeriodic(<span class="number">1000</span>, id -&gt; &#123; <span class="comment">// This handler will get called every second System.out.println("timer fired!");</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//HTTP request</span></span><br><span class="line">server.requestHandler(request -&gt; &#123;</span><br><span class="line">  <span class="comment">// This handler will be called every time an HTTP request is received at the server</span></span><br><span class="line">  request.response().end(<span class="string">"hello world!"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>过以后当Vert.x有一个事件经过你的handler时，Vert.x将异步调用它。<br>这使我们想到Vert.x中的一些重要概念</p>
+<h2 id="Don’t-block-me"><a href="#Don’t-block-me" class="headerlink" title="Don’t block me!"></a>Don’t block me!</h2><p>除了极少数例外（某些文件系统以’Sync’结尾）,Vert.x中所有API均不会阻塞调用线程<br>如果可以立即提供结果，将立即返回结果，否则通常会在一段时间后提供处理程序以接受事件<br>没有Vert.xAPI阻塞意味着你可以用少量线程来处理大量并发<br>传统的blocking API可能会在以下情况下block：</p>
+<ul>
+<li>读数据from a socket</li>
+<li>写数据到磁盘</li>
+<li>向收件人发送消息并等待回复</li>
+<li>许多其他情况<br>上述情况下您的线程等待结果时无法执行其他任何操作——就很没用<br>阻塞API进行大量并发操作需要大量线程防止应用程序停止运行，线程在其所需内存（堆栈）和上下文切换方面都有开销<br>所以在现代应用所需的并发级别中，blocking方法无法扩展</li>
+</ul>
+<h2 id="Reactor-and-Multi-Reactor"><a href="#Reactor-and-Multi-Reactor" class="headerlink" title="Reactor and Multi-Reactor"></a>Reactor and Multi-Reactor</h2><p>在大多数情况下，Vert.x使用称为事件循环(event loop)的线程来调用处理程序。<br>「由于没有blocks」这句话将会大量的看到。因为它，event loop可以轻松地在事件到达时连续地将事件传递给不同的处理程序。event loop可以潜在地在短时间内交付大量事件，比如单event loop可以快速处理数千个HTTP requests——<br>我们称之为 Reactor Pattern（反应堆模式）<br>Node.js也实现了这种模式，但这不太一样。</p>
+<blockquote>
+<p>在标准的反应堆实现中，只有一个事件循环线程(single event loop thread)，该线程在一个循环中运行，将所有事件到达时将所有事件传递给它们。<br>单线程的麻烦是只能在任何时间运行在单个内核上，因此，如果您希望单线程反应堆应用程序能够在多核服务器上扩展，则必须启动并管理许多不同的流程<br>Vert.x在这里的工作方式有所不同。每个Vertx实例都维护多个事件循环，而不是单个事件循环。默认情况下，我们根据计算机上可用内核的数量选择数量，可以选择覆写<br>意味着单个Vertx进程可以在整个服务器上扩展<br>我们称之为多反应堆模式<br>即使Vertx实例维护多个事件循环，也不会同步执行任何特定handler，绝大数时间将使用完全相同的event loop进行调用</p>
+</blockquote>
+<h2 id="The-Golden-Rule-Don’t-Block-the-Event-Loop"><a href="#The-Golden-Rule-Don’t-Block-the-Event-Loop" class="headerlink" title="The Golden Rule - Don’t Block the Event Loop"></a>The Golden Rule - Don’t Block the Event Loop</h2><p>不要block event loop <strong>yourself</strong>！包括：</p>
+<ul>
+<li>thread.sleep()</li>
+<li>Waiting on a lock（等待锁）</li>
+<li>Waiting on a mutex or monitor(等待互斥或监视器 比如synchronized section）</li>
+<li>进行长时间的数据库操作并等待结果</li>
+<li>进行复杂的需要花费大量时间的计算</li>
+<li>自旋<br>那么多久的时间是可以等待的呢？取决于你的程序和并发量</li>
+</ul>
+<p><strong>数学并不难。</strong><br>如果您的应用程序没有响应，可能表明您在某处阻止了event loop，Vertx会自动记录警告，如果您在日志中看到这些警告您应进行调查：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread vertx-eventloop-thread-3 has been blocked for 20458 ms</span><br></pre></td></tr></table></figure>
+<p>Vertx还将提供堆栈跟踪来精确定位<br>在创建Vertx对象之前改变VertxOptions对象可以改变这些设置。</p>
+<h2 id="Running-blocking-code"><a href="#Running-blocking-code" class="headerlink" title="Running blocking code"></a>Running blocking code</h2><p>很多库，尤其是JVM生态系统中，有同步APIs和大量阻塞方法。像JDBC API，它固有的同步，那么无论Vertx多么努力，都无法使其变成异步的。<br>我们不会在一夜之间将所有方法写成异步的，所以我们提供了在Vertx安全使用传统的blocking APIs的办法<br>通过调用<code>executeBlocking</code>同时指定要执行的阻塞代码和执行了阻塞代码后被异步回调的结果程序来完成这个任务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vertx.excuteBlocking(promise -&gt;&#123;</span><br><span class="line">  <span class="comment">//Call some blocking API that takes a significant amount of time to return</span></span><br><span class="line">  String result = someAPI.blockingMethod(<span class="string">"hello"</span>);</span><br><span class="line">  promise.complete(result);</span><br><span class="line">&#125;,res -&gt;&#123;</span><br><span class="line">  System.out.println(<span class="string">"The result is: "</span> + res.result());</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>阻塞代码应在合理的时间内阻塞，这排除了长阻塞和轮询操作。当阻塞10秒钟以上时，阻塞线程检查器将在控制台上显示一条消息。长阻塞操作应使用由应用程序管理的专用线程，可以和事件总线或<code>runOnContext</code>和verticles交互。</p>
+</blockquote>
+<p>如果从同一上下文（比如相同的verticle 实例）多次调用<code>executeBlocking</code>，则会依次执行不同的<code>executeBlocking</code>.<br>如果您不关心顺序，那么<code>executeBlocking</code>也可以特定为ordered为false，任何executeBlocking都可能在工作池上并行执行<br>另一种可以选择的方法是用工作verticle(worker verticle)<br>Worker verticle总是通过一个worker pool里的来的线程执行的<br>blocking code默认在Vertx worker pool上执行，配置于<code>setWorkderPoolSize</code><br>可以出于其他目的创造pools：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">WorkerExecutor executor = vertx.createSharedWorkerExecutor(<span class="string">"my-worker-pool"</span>);</span><br><span class="line">executor.executeBlocking(promise -&gt; &#123;</span><br><span class="line">  <span class="comment">// Call some blocking API that takes a significant amount of time to return</span></span><br><span class="line">  String result = someAPI.blockingMethod(<span class="string">"hello"</span>);</span><br><span class="line">  promise.complete(result);</span><br><span class="line">&#125;, res -&gt; &#123;</span><br><span class="line">  System.out.println(<span class="string">"The result is: "</span> + res.result());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>注意worker executor如果不再用必须被关上</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">executor.close();</span><br></pre></td></tr></table></figure>
+<p>当使用相同的名称创建多个workers，它们会享用相同的pool，worker pool在所有worker executors关闭时会被销毁。<br>一个executor在Verticle创建后，Vertx会自动关闭它当Verticle取消部署后<br>可以在创建executors时配置它</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> poolSize = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2 minutes</span></span><br><span class="line"><span class="keyword">long</span> maxExecuteTime = <span class="number">2</span>;</span><br><span class="line">TimeUnit maxExecuteTimeUnit = TimeUnit.MINUTES;</span><br><span class="line"></span><br><span class="line">WorkerExecutor executor = vertx.createSharedWorkerExecutor(<span class="string">"my-worker-pool"</span>, poolSize, maxExecuteTime, maxExecuteTimeUnit);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Async-coordination（异步协调）"><a href="#Async-coordination（异步协调）" class="headerlink" title="Async coordination（异步协调）"></a>Async coordination（异步协调）</h2><p>Vertx <code>futures</code>可以实现多个异步结果的协调。它支持并发组合（并行运行多个异步操作）和顺序组合（链异步操作）</p>
+<h3 id="Concurrent-composition-并发组成-合并"><a href="#Concurrent-composition-并发组成-合并" class="headerlink" title="Concurrent composition(并发组成[合并?])"></a>Concurrent composition(并发组成[合并?])</h3><p><code>CompositeFuture.all</code>接受几个futures参数（最多6个），并返回一个future，当所有future都成功时，该future将成功；如果至少一个future失败，则将失败</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;HttpServer&gt; httpServerFuture = Future.future(promise -&gt; httpServer.listen(promise));</span><br><span class="line"></span><br><span class="line">Future&lt;NetServer&gt; netServerFuture = Future.future(promise -&gt; netServer.listen(promise));</span><br><span class="line"></span><br><span class="line">CompositeFuture.all(httpServerFuture, netServerFuture).onComplete(ar -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (ar.succeeded()) &#123;</span><br><span class="line">    <span class="comment">// All servers started</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// At least one server failed</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>所有被合并的<code>Future</code>中的操作同时运行。当组合的处理操作完成时，该方法返回的<code>Future</code>上绑定的处理器（Handler）会被调用。可以传入一个<code>Future</code>列表（可能为空）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CompositeFuture.all(Arrays.asList(future1, future2, future3));</span><br></pre></td></tr></table></figure>
+
+<p>any方法会等待第一个成功执行的Future，当任意一个Future成功得到结果，则该<code>Future</code>成功。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CompositeFuture.any(future1, future2).onComplete(ar -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (ar.succeeded()) &#123;</span><br><span class="line">    <span class="comment">// At least one is succeeded</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// All failed</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>join</code>方法的合并会等待所有的Future完成，无论成败，并将结果归并成一个Future，当至少一个Future执行失败，得到的Future就是失败的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CompositeFuture.join(future1, future2, future3).onComplete(ar -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (ar.succeeded()) &#123;</span><br><span class="line">    <span class="comment">// All succeeded</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// All completed and at least one failed</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>都可以传列表参，都最多有6个的限制。</p>
+<h3 id="Sequential-composition（顺序合并）"><a href="#Sequential-composition（顺序合并）" class="headerlink" title="Sequential composition（顺序合并）"></a>Sequential composition（顺序合并）</h3><p>与<code>all</code>和<code>any</code>实现的并发组合不同，<code>compose</code>方法用于顺序组合<code>Future</code>（chaining futures)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">FileSystem fs = vertx.fileSystem();</span><br><span class="line"></span><br><span class="line">Future&lt;Void&gt; fut1 = Future.future(promise -&gt; fs.createFile(<span class="string">"/foo"</span>, promise));</span><br><span class="line"></span><br><span class="line">Future&lt;Void&gt; startFuture = fut1</span><br><span class="line">  .compose(v -&gt; &#123;</span><br><span class="line">  <span class="comment">// When the file is created (fut1), execute this:</span></span><br><span class="line">  <span class="keyword">return</span> Future.&lt;Void&gt;future(promise -&gt; fs.writeFile(<span class="string">"/foo"</span>, Buffer.buffer(), promise));</span><br><span class="line">&#125;)</span><br><span class="line">  .compose(v -&gt; &#123;</span><br><span class="line">  <span class="comment">// When the file is written (fut2), execute this:</span></span><br><span class="line">  <span class="keyword">return</span> Future.future(promise -&gt; fs.move(<span class="string">"/foo"</span>, <span class="string">"/bar"</span>, promise));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>一个文件被创建(fut1)</li>
+<li>一些东西被写入到文件(fut2)</li>
+<li>文件被移走(startFuture)<br>如果全部成功，那么最终的startFuture也是成功的。</li>
+</ol>
+<p>例子中使用了：</p>
+<ul>
+<li><code>compose(mapper)</code>:当前future完成时，执行给出的函数体，返回一个future，返回的future完成时，组合完成</li>
+<li><code>compose(handler,next)</code>:当前future，执行相关代码并完成下一个future的处理（给出的处理器完成了给出的<code>next</code> future)<br>第二个例子中，处理器需要完成<code>next</code> future，以此来汇报处理成功或者失败</li>
+</ul>
+<h2 id="Verticles"><a href="#Verticles" class="headerlink" title="Verticles"></a>Verticles</h2><p>Vert.x通过开箱即用的方式提供了一个简单便捷的、可扩展的、类似Actor Model的部署和并发模型机制。您可以用此模型机制来保管您自己的代码组件。<br>它是可选的。</p>
+<blockquote>
+<p>Verticle 是由 Vert.x 部署和运行的代码块。默认情况一个 Vert.x 实例维护了N（默认情况下N = CPU核数 x 2）个 Event Loop 线程。Verticle 实例可使用任意 Vert.x 支持的编程语言编写，而且一个简单的应用程序也可以包含多种语言编写的 Verticle。</p>
+</blockquote>
+<p>这个模型不能说是严格的Actor模式的实现，但它确实有相似之处，特别是在并发、扩展性和部署等方面<br>您可以将 Verticle 想成 Actor Model 中的 Actor。<br>要使用该模型，您需要将您的代码组织成一系列的<strong>Verticle</strong>。</p>
+<p>一个应用程序通常是由在同一个 Vert.x 实例中同时运行的许多 Verticle 实例组合而成。不同的 Verticle 实例通过向 Event Bus 上发送消息来相互通信。</p>
+<h3 id="Writing-Verticle"><a href="#Writing-Verticle" class="headerlink" title="Writing Verticle"></a>Writing Verticle</h3><p>必须实现Verticle接口<br>直接从抽象类AbstractVerticle继承更简单。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyVerticle</span> <span class="keyword">extends</span> <span class="title">AbstractVerticle</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// Called when verticle is deployed</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// Optional - called when verticle is undeployed</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通常您需要重写start。Vertx部署Verticle时，它的start方法将被调用。<br>stop同理，Vertx撤销一个Verticle时它会被调用</p>
+<h3 id="Asynchronous-Verticle-start-and-stop-异步启动和终止"><a href="#Asynchronous-Verticle-start-and-stop-异步启动和终止" class="headerlink" title="Asynchronous Verticle start and stop(异步启动和终止)"></a>Asynchronous Verticle start and stop(异步启动和终止)</h3><p>比如您想在Verticle启动耗费时间的这个过程中做一些事，比如在<code>start</code>方法中部署其他的Verticle——<br>您不能在start方法中阻塞等待其他的Verticle部署完成<br>您可以实现异步版本的start来做它。这个版本的方法会以一个 Future 作参数被调用。方法执行完时，Verticle 实例<strong>并没有</strong>部署好（状态不被认为 deployed）。<br>稍后，您完成了所有您需要做的事（如：启动其他Verticle），您就可以调用 Future 的 complete（或 fail ）方法来标记启动完成或失败了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyVerticle</span> <span class="keyword">extends</span> <span class="title">AbstractVerticle</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span> HttpServer server;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(Future&lt;Void&gt; startFuture)</span> </span>&#123;</span><br><span class="line">   server = vertx.createHttpServer().requestHandler(req -&gt; &#123;</span><br><span class="line">     req.response()</span><br><span class="line">       .putHeader(<span class="string">"content-type"</span>, <span class="string">"text/plain"</span>)</span><br><span class="line">       .end(<span class="string">"Hello from Vert.x!"</span>);</span><br><span class="line">     &#125;);</span><br><span class="line"></span><br><span class="line">   <span class="comment">// Now bind the server:</span></span><br><span class="line">   server.listen(<span class="number">8080</span>, res -&gt; &#123;</span><br><span class="line">     <span class="keyword">if</span> (res.succeeded()) &#123;</span><br><span class="line">       startFuture.complete();</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       startFuture.fail(res.cause());</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//same stop method too</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyVerticle</span> <span class="keyword">extends</span> <span class="title">AbstractVerticle</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="comment">// Do something</span></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">(Future&lt;Void&gt; stopFuture)</span> </span>&#123;</span><br><span class="line">   obj.doSomethingThatTakesTime(res -&gt; &#123;</span><br><span class="line">     <span class="keyword">if</span> (res.succeeded()) &#123;</span><br><span class="line">       stopFuture.complete();</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       stopFuture.fail();</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不需要手动stop verticle启动的 HTTP server，会在…的时候自动撤销</p>
+<h3 id="Verticle-types"><a href="#Verticle-types" class="headerlink" title="Verticle types"></a>Verticle types</h3><ul>
+<li>Stardand Verticle：这是最常用的一类 Verticle —— 它们永远运行在 Event Loop 线程上。稍后的章节我们会讨论更多。</li>
+<li>Worker Verticle：这类 Verticle 会运行在 Worker Pool 中的线程上。一个实例绝对不会被多个线程同时执行。</li>
+</ul>
+<h4 id="Standard-Verticle"><a href="#Standard-Verticle" class="headerlink" title="Standard Verticle"></a>Standard Verticle</h4><p>当 Standard Verticle 被创建时，它会被分派给一个 Event Loop 线程，并在这个 Event Loop 中执行它的 start 方法。当您在一个 Event Loop 上调用了 Core API 中的方法并传入了处理器时，Vert.x 将保证用与调用该方法时相同的 Event Loop 来执行这些处理器。</p>
+<p>这意味着我们可以保证您的 Verticle 实例中所有的代码都是在相同Event Loop中执行（只要您不创建自己的线程并调用它！）</p>
+<p>同样意味着您可以将您的应用中的所有代码用单线程方式编写，让 Vert.x 去考虑线程和扩展问题。您不用再考虑 synchronized 和 volatile 的问题，也可以避免传统的多线程应用经常会遇到的竞态条件和死锁的问题。</p>
+<h4 id="worker-Verticle"><a href="#worker-Verticle" class="headerlink" title="worker Verticle"></a>worker Verticle</h4><p>正如之前所说的，这东西被设计来调用阻塞式代码，不会阻塞Event loop，由Vert.x中的 Worker Pool 中的线程执行。<br>如果您不想使用 Worker Verticle 来运行阻塞式代码，您还可以在一个Event Loop中直接使用 内联阻塞式代码。<br>若您想要将 Verticle 部署成一个 Worker Verticle，您可以通过 setWorker 方法来设置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DeploymentOptions options = <span class="keyword">new</span> DeploymentOptions().setWorker(<span class="keyword">true</span>);</span><br><span class="line">vertx.deployVerticle(<span class="string">"com.mycompany.MyOrderProcessorVerticle"</span>, options);</span><br></pre></td></tr></table></figure>
+<p>Worker Verticle 实例绝对不会在 Vert.x 中被多个线程同时执行，但它可以在不同时间由不同线程执行。</p>
+<blockquote>
+<p>警告：Multi-threaded Worker Verticle 是一个高级功能，大部分应用程序不会需要它。</p>
+</blockquote>
+<h4 id="Deploying-verticles-programmatically"><a href="#Deploying-verticles-programmatically" class="headerlink" title="Deploying verticles programmatically"></a>Deploying verticles programmatically</h4><blockquote>
+<p>通过 Verticle 实例 来部署 Verticle 仅限Java<br>您可以指定一个 Verticle 名称或传入您已经创建好的 Verticle 实例，使用任意一个 deployVerticle 方法来部署Verticle。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Verticle myVerticle = <span class="keyword">new</span> MyVerticle();</span><br><span class="line">vertx.deployVerticle(myVerticle);</span><br></pre></td></tr></table></figure>
+<p>指定 Verticle 的 名称 来部署它，这个名称会用于查找实例化 Verticle 的特定 VerticleFactory。<br>不同的 Verticle Factory 可用于实例化不同语言的 Verticle，也可用于其他目的，例如加载服务、运行时从Maven中获取Verticle实例等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vertx.deployVerticle(<span class="string">"com.mycompany.MyOrderProcessorVerticle"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 部署JavaScript的Verticle</span></span><br><span class="line">vertx.deployVerticle(<span class="string">"verticles/myverticle.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 部署Ruby的Verticle</span></span><br><span class="line">vertx.deployVerticle(<span class="string">"verticles/my_verticle.rb"</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Rules-for-mapping-a-verticle-name-to-a-verticle-factory-Verticle名称到Factory的映射规则"><a href="#Rules-for-mapping-a-verticle-name-to-a-verticle-factory-Verticle名称到Factory的映射规则" class="headerlink" title="Rules for mapping a verticle name to a verticle factory(Verticle名称到Factory的映射规则)"></a>Rules for mapping a verticle name to a verticle factory(Verticle名称到Factory的映射规则)</h4><p>Verticle 名称可以有一个前缀 —— 使用字符串紧跟着一个冒号，它用于查找存在的Factory，参考：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">js:foo.js <span class="comment">// Use the JavaScript verticle factory</span></span><br><span class="line">groovy:com.mycompany.SomeGroovyCompiledVerticle <span class="comment">// Use the Groovy verticle factory </span></span><br><span class="line">service:com.mycompany:myorderservice <span class="comment">// Uses the service verticle factory</span></span><br></pre></td></tr></table></figure>
+<p>如果不指定前缀，Vert.x将根据提供名字后缀来查找对应Factory，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo.js <span class="comment">// 将使用JavaScript的Factory</span></span><br><span class="line">SomeScript.groovy <span class="comment">// 将使用Groovy的Factory</span></span><br></pre></td></tr></table></figure>
+<p>都没指定，Vert.x将假定这个名字是一个Java 全限定类名（FQCN）然后尝试实例化它。</p>
+<h4 id="How-are-Verticle-Factories-located"><a href="#How-are-Verticle-Factories-located" class="headerlink" title="How are Verticle Factories located?"></a>How are Verticle Factories located?</h4><p>大部分Verticle Factory会从 classpath 中加载，并在 Vert.x 启动时注册。</p>
+<p>您同样可以使用编程的方式去注册或注销Verticle Factory：通过<code>registerVerticleFactory</code>方法和<code>unregisterVerticleFactory</code>方法。</p>
+<h4 id="Waiting-for-deployment-to-complete"><a href="#Waiting-for-deployment-to-complete" class="headerlink" title="Waiting for deployment to complete"></a>Waiting for deployment to complete</h4><p>Verticle的部署是异步方式，可能在<code>deploy</code>方法调用返回后一段时间才会完成部署。</p>
+<p>如果您想要在部署完成时被通知则可以指定一个完成处理器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vertx.deployVerticle(<span class="string">"com.mycompany.MyOrderProcessorVerticle"</span>, res -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (res.succeeded()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"Deployment id is: "</span> + res.result());</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"Deployment failed!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果部署成功，这个完成处理器的结果中将会包含部署ID的字符串。这个部署 ID可以在之后您想要撤销它时使用。</p>
+<h4 id="Undeploying-verticle-deployments"><a href="#Undeploying-verticle-deployments" class="headerlink" title="Undeploying verticle deployments"></a>Undeploying verticle deployments</h4><p>我们可以通过<code>undeploy</code>方法来撤销部署好的 Verticle。</p>
+<p>撤销操作也是异步的，因此若您想要在撤销完成过后收到通知则可以指定另一个完成处理器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vertx.undeploy(deploymentID, res -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (res.succeeded()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"Undeployed ok"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"Undeploy failed!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Specifying-number-of-veritcle-instances-设置-Verticle-实例数"><a href="#Specifying-number-of-veritcle-instances-设置-Verticle-实例数" class="headerlink" title="Specifying number of veritcle instances(设置 Verticle 实例数)"></a>Specifying number of veritcle instances(设置 Verticle 实例数)</h4><p>当使用名称部署一个 Verticle 时，您可以指定您想要部署的 Verticle 实例的数量。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DeploymentOptions options = <span class="keyword">new</span> DeploymentOptions().setInstances(<span class="number">16</span>);</span><br><span class="line">vertx.deployVerticle(<span class="string">"com.mycompany.MyOrderProcessorVerticle"</span>, options);</span><br></pre></td></tr></table></figure>
+<p>这个功能对于跨多核扩展时很有用。例如，您有一个实现了Web服务器的Verticle需要部署在多核的机器上，您可以部署多个实例来利用所有的核。</p>
+<h4 id="Passing-configuration-to-a-verticle"><a href="#Passing-configuration-to-a-verticle" class="headerlink" title="Passing configuration to a verticle"></a>Passing configuration to a verticle</h4><p>可在部署时传给 Verticle 一个 JSON 格式的配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JsonObject config = <span class="keyword">new</span> JsonObject().put(<span class="string">"name"</span>, <span class="string">"tim"</span>).put(<span class="string">"directory"</span>, <span class="string">"/blah"</span>);</span><br><span class="line">DeploymentOptions options = <span class="keyword">new</span> DeploymentOptions().setConfig(config);</span><br><span class="line">vertx.deployVerticle(<span class="string">"com.mycompany.MyOrderProcessorVerticle"</span>, options);</span><br></pre></td></tr></table></figure>
+<p>传入之后，这个配置可以通过 Context 对象或使用 config 方法访问。</p>
+<p>这个配置会以 JSON 对象（JsonObject）的形式返回，因此您可以用下边代码读取数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"Configuration: "</span> + config().getString(<span class="string">"name"</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="Accessing-environment-variables-in-a-Verticle-在-Verticle-中访问环境变量"><a href="#Accessing-environment-variables-in-a-Verticle-在-Verticle-中访问环境变量" class="headerlink" title="Accessing environment variables in a Verticle(在 Verticle 中访问环境变量)"></a>Accessing environment variables in a Verticle(在 Verticle 中访问环境变量)</h4><p>环境变量和系统属性可以直接通过 Java API 访问：</p>
+<p>System.getProperty(“prop”);<br>System.getenv(“HOME”);</p>
+<h4 id="Verticle-Isolation-Groups"><a href="#Verticle-Isolation-Groups" class="headerlink" title="Verticle Isolation Groups"></a>Verticle Isolation Groups</h4><blockquote>
+<p>警告：谨慎使用此功能，类加载器可能会导致您的应用难于调试，变得一团乱麻（can of worms）。<br>您可能需要部署一个Verticle，它包含的类要与应用程序中其他类隔离开来。比如您想要在一个Vert.x实例中部署两个同名不同版本的Verticle，或者不同的Verticle使用了同一个jar包的不同版本。<br>当使用隔离组时，您需要用 setIsolatedClassed 方法来提供一个您想隔离的类名列表。列表项可以是一个Java 限定类全名，也可以是包含通配符的可匹配某个包或子包的任何类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DeploymentOptions options = <span class="keyword">new</span> DeploymentOptions().setIsolationGroup(<span class="string">"mygroup"</span>);</span><br><span class="line">options.setIsolatedClasses(Arrays.asList(<span class="string">"com.mycompany.myverticle.*"</span>,</span><br><span class="line">                   <span class="string">"com.mycompany.somepkg.SomeClass"</span>, <span class="string">"org.somelibrary.*"</span>));</span><br><span class="line">vertx.deployVerticle(<span class="string">"com.mycompany.myverticle.VerticleClass"</span>, options);</span><br></pre></td></tr></table></figure>
+
+<h4 id="High-Availability"><a href="#High-Availability" class="headerlink" title="High Availability"></a>High Availability</h4><p>在这种方式下，当其中一个部署在 Vert.x 实例中的 Verticle 突然挂掉，这个 Verticle 可以在集群环境中的另一个 Vert.x 实例中重新部署。<br>若要启用高可用方式运行一个 Verticle，仅需要追加 -ha 参数，且无需 -cluster：<br><code>vertx run my-verticle.js -ha</code></p>
+<h4 id="Running-Verticles-from-the-command-line"><a href="#Running-Verticles-from-the-command-line" class="headerlink" title="Running Verticles from the command line"></a>Running Verticles from the command line</h4><p>您可以在 Maven 或 Gradle 项目中以正常方式添加 Vert.x Core 为依赖，在项目中直接使用 Vert.x。</p>
+<h4 id="Causing-Vert-x-to-exit"><a href="#Causing-Vert-x-to-exit" class="headerlink" title="Causing Vert.x to exit"></a>Causing Vert.x to exit</h4><p>Vert.x 实例维护的线程不是守护线程，因此它们会阻止JVM退出。</p>
+<p>如果您通过嵌入式的方式使用 Vert.x 并且完成了操作，您可以调用 close 方法关闭它。这将关闭所有内部线程池并关闭其他资源，允许JVM退出。</p>
+<h4 id="The-Context-object"><a href="#The-Context-object" class="headerlink" title="The Context object"></a>The Context object</h4><p>每个 Verticle 在部署的时候都会被分配一个 Context（根据配置不同，可以是Event Loop Context 或者 Worker Context），之后此 Verticle 上所有的普通代码都会在此 Context 上执行（即对应的 Event Loop 或Worker 线程）<br>您可以通过 getOrCreateContext 方法获取 Context 实例<br>若已经有一个 Context 和当前线程关联，那么它直接重用这个 Context 对象，如果没有则创建一个新的。您可以检查获取的 Context 的类型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Context context = vertx.getOrCreateContext();</span><br><span class="line"><span class="keyword">if</span> (context.isEventLoopContext()) &#123;</span><br><span class="line">  System.out.println(<span class="string">"Context attached to Event Loop"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (context.isWorkerContext()) &#123;</span><br><span class="line">  System.out.println(<span class="string">"Context attached to Worker Thread"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (context.isMultiThreadedWorkerContext()) &#123;</span><br><span class="line">  System.out.println(<span class="string">"Context attached to Worker Thread - multi threaded worker"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (! Context.isOnVertxThread()) &#123;</span><br><span class="line">  System.out.println(<span class="string">"Context not attached to a thread managed by vert.x"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当您获取了这个 Context 对象，您就可以在 Context 中异步执行代码了。换句话说，您提交的任务将会在同一个 Context 中运行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vertx.getOrCreateContext().runOnContext( (v) -&gt; &#123;</span><br><span class="line">  System.out.println(<span class="string">"This will be executed asynchronously in the same context"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当在同一个 Context 中运行了多个处理函数时，可能需要在它们之间共享数据。 Context 对象提供了存储和读取共享数据的方法。举例来说，它允许您将数据传递到 runOnContext 方法运行的某些操作中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> Context context = vertx.getOrCreateContext();</span><br><span class="line">context.put(<span class="string">"data"</span>, <span class="string">"hello"</span>);</span><br><span class="line">context.runOnContext((v) -&gt; &#123;</span><br><span class="line">  String hello = context.get(<span class="string">"data"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Executing-periodic-and-delayed-actions-执行周期性-延迟性操作"><a href="#Executing-periodic-and-delayed-actions-执行周期性-延迟性操作" class="headerlink" title="Executing periodic and delayed actions(执行周期性/延迟性操作)"></a>Executing periodic and delayed actions(执行周期性/延迟性操作)</h4><p>在 Vert.x 中，想要延迟之后执行或定期执行操作很常见。</p>
+<p>在 Standard Verticle 中您不能直接让线程休眠以引入延迟，因为它会阻塞 Event Loop 线程。取而代之是使用 Vert.x 定时器。定时器可以是一次性或周期性的</p>
+<h5 id="one-shot-Timers"><a href="#one-shot-Timers" class="headerlink" title="one-shot Timers"></a>one-shot Timers</h5><p>一次性计时器会在一定延迟后调用一个 Event Handler，以毫秒为单位计时。<br>您可以通过<code>setTimer</code>方法传递延迟时间和一个处理器来设置计时器的触发。<br>返回值是一个唯一的计时器id，该id可用于之后取消该计时器，这个计时器id会传入给处理器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> timerID = vertx.setTimer(<span class="number">1000</span>, id -&gt; &#123;</span><br><span class="line">  System.out.println(<span class="string">"And one second later this is printed"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"First this is printed"</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="Periodic-Timers"><a href="#Periodic-Timers" class="headerlink" title="Periodic Timers"></a>Periodic Timers</h5><p>和一次性的一模一样，只不过…<br>请记住这个计时器将会定期触发。如果您的定时任务会花费大量的时间，则您的计时器事件可能会连续执行甚至发生更坏的情况：重叠。这种情况，您应考虑使用<code>setTimer</code>方法，当任务执行完成时设置下一个计时器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> timerID = vertx.setPeriodic(<span class="number">1000</span>, id -&gt; &#123;</span><br><span class="line">  System.out.println(<span class="string">"And every second this is printed"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"First this is printed"</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="取消、清除"><a href="#取消、清除" class="headerlink" title="取消、清除"></a>取消、清除</h5><p>指定id,cancelTimer</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vertx.cancelTimer(timerID);</span><br></pre></td></tr></table></figure>
+
+<p>清除依然是Verticle被撤销时自动关闭</p>
+<h4 id="Verticle-worker-pool"><a href="#Verticle-worker-pool" class="headerlink" title="Verticle worker pool"></a>Verticle worker pool</h4><p>Verticle 使用 Vert.x 中的 Worker Pool 来执行阻塞式行为，例如 executeBlocking 或 Worker Verticle。</p>
+<p>可以在部署配置项中指定不同的Worker 线程池：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vertx.deployVerticle(<span class="string">"the-verticle"</span>, <span class="keyword">new</span> DeploymentOptions().setWorkerPoolName(<span class="string">"the-specific-pool"</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="The-Event-Bus"><a href="#The-Event-Bus" class="headerlink" title="The Event Bus"></a>The Event Bus</h3><p>Event Bus 是 Vert.x 的<strong>神经系统</strong>。</p>
+<p>每一个 Vert.x 实例都有一个单独的 Event Bus 实例。您可以通过 Vertx 实例的<code>eventBus</code>方法来获得对应的EventBus实例。</p>
+<p>您的应用中的不同部分通过 Event Bus 相互通信，无论它们使用哪一种语言实现，无论它们在同一个 Vert.x 实例中或在不同的 Vert.x 实例中。</p>
+<p>甚至可以通过桥接的方式允许在浏览器中运行的客户端JavaScript在相同的Event Bus上相互通信。</p>
+<p>Event Bus可形成跨越多个服务器节点和多个浏览器的点对点的分布式消息系统。</p>
+<p>Event Bus支持发布/订阅、点对点、请求/响应的消息通信方式。</p>
+<p>Event Bus的API很简单。基本上只涉及注册处理器、撤销处理器和发送和发布消息。</p>
+<p>首先来看些基本概念和理论。</p>
+<h4 id="The-Theory"><a href="#The-Theory" class="headerlink" title="The Theory"></a>The Theory</h4><h5 id="Addressing"><a href="#Addressing" class="headerlink" title="Addressing"></a>Addressing</h5><p>消息会被 Event Bus 发送到一个 地址(address)。</p>
+<p>同任何花哨的寻址方案相比，Vert.x的地址格式并不麻烦。Vert.x中的地址是一个简单的字符串，任意字符串都合法。当然，使用某种模式来命名仍然是明智的。如：使用点号来划分命名空间。</p>
+<p>一些合法的地址形如：<code>europe.news.feed1</code>、<code>acme.games.pacman</code>、<code>sausages</code>和<code>X</code>。</p>
+<h5 id="Handlers"><a href="#Handlers" class="headerlink" title="Handlers"></a>Handlers</h5><p>消息在处理器（Handler）中被接收。您可以在某个地址上注册一个处理器来接收消息。</p>
+<p>同一个地址可以注册许多不同的处理器，一个处理器也可以注册在多个不同的地址上。</p>
+<h5 id="publish-subscribe-messaging"><a href="#publish-subscribe-messaging" class="headerlink" title="publish/subscribe messaging"></a>publish/subscribe messaging</h5><p>发布/订阅消息<br>Event Bus支持<strong>发布消息</strong>功能。</p>
+<p>消息将被发布到一个地址中，发布意味着会将信息传递给所有注册在该地址上的处理器。这和<strong>发布/订阅模式</strong>很类似。</p>
+<h5 id="Point-to-point-and-Request-Response-messaging"><a href="#Point-to-point-and-Request-Response-messaging" class="headerlink" title="Point-to-point and Request-Response messaging"></a>Point-to-point and Request-Response messaging</h5><p>Event Bus也支持<strong>点对点</strong>消息模式。</p>
+<p>消息将被发送到一个地址中，Vert.x将会把消息分发到某个注册在该地址上的处理器。若这个地址上有不止一个注册过的处理器，它将使用 不严格的轮询算法 选择其中一个。</p>
+<p>点对点消息传递模式下，可在消息发送的时候指定一个应答处理器（可选）。</p>
+<p>当接收者收到消息并且已经被处理时，它可以选择性决定回复该消息，若选择回复则绑定的应答处理器将会被调用。当发送者收到回复消息时，它也可以回复，这个过程可以不断重复。通过这种方式可以允许在两个不同的 Verticle 之间设置一个对话窗口。这种消息模式被称作<strong>请求-响应</strong>模式。</p>
+<h5 id="Best-effort-delivery"><a href="#Best-effort-delivery" class="headerlink" title="Best-effort delivery"></a>Best-effort delivery</h5><p>Vert.x会尽它最大努力去传递消息，并且不会主动丢弃消息。这种方式称为 尽力传输(Best-effort delivery)。</p>
+<p>但是，当 Event Bus 中的全部或部分发生故障时，则可能会丢失消息。</p>
+<p>若您的应用关心丢失的消息，您应该编写具有幂等性的处理器，并且您的发送者可以在恢复后重试。(接口幂等：无论客户端调用服务端接口发起多少次请求，有且只有一次有效。)</p>
+<p>RPC通信通常情况下有三种语义：at least once、at most once 和 exactly once。不同语义情况下要考虑的情况不同。</p>
+<h5 id="Types-of-messages"><a href="#Types-of-messages" class="headerlink" title="Types of messages"></a>Types of messages</h5><p>Vert.x 默认允许任何基本/简单类型、String 或<code>buffers</code>作为消息发送。不过在 Vert.x 中的通常做法是使用 JSON 格式来发送消息。</p>
+<p>JSON 对于 Vert.x 支持的所有语言都是非常容易创建、读取和解析的，因此它已经成为了Vert.x中的通用语(lingua franca)。但是若您不想用 JSON，我们并不强制您使用它。</p>
+<p>Event Bus 非常灵活，它支持在 Event Bus 中发送任意对象。您可以通过为您想要发送的对象自定义一个<code>codec</code>来实现。</p>
+<h4 id="The-Event-Bus-API"><a href="#The-Event-Bus-API" class="headerlink" title="The Event Bus API"></a>The Event Bus API</h4><h5 id="Getting-the-event-bus"><a href="#Getting-the-event-bus" class="headerlink" title="Getting the event bus"></a>Getting the event bus</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus eb = vertx.eventBus();</span><br></pre></td></tr></table></figure>
+<p>对于每一个 Vert.x 实例来说它是单例的。</p>
+<h5 id="Registering-Handlers"><a href="#Registering-Handlers" class="headerlink" title="Registering Handlers"></a>Registering Handlers</h5><p>最简单的注册处理器的方式是使用 consumer 方法，这儿有个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">EventBus eb = vertx.eventBus();</span><br><span class="line"></span><br><span class="line">eb.consumer(<span class="string">"news.uk.sport"</span>, message -&gt; &#123;</span><br><span class="line">  System.out.println(<span class="string">"I have received a message: "</span> + message.body());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当一个消息达到您的处理器，该处理器会以 message 为参数被调用。</p>
+<p>调用 consumer 方法会返回一个 MessageConsumer 对象。该对象随后可用于撤销处理器、或将处理器用作流式处理。</p>
+<p>您也可以不设置处理器而使用 consumer 方法直接返回一个 MessageConsumer，之后再来设置处理器。如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">EventBus eb = vertx.eventBus();</span><br><span class="line"></span><br><span class="line">MessageConsumer&lt;String&gt; consumer = eb.consumer(<span class="string">"news.uk.sport"</span>);</span><br><span class="line">consumer.handler(message -&gt; &#123;</span><br><span class="line">  System.out.println(<span class="string">"I have received a message: "</span> + message.body());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在集群模式下的Event Bus上注册处理器时，注册信息会花费一些时间才能传播到集群中的所有节点。</p>
+<p>若您希望在完成注册后收到通知，您可以在 MessageConsumer 对象上注册一个 completion handler。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">consumer.completionHandler(res -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (res.succeeded()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"The handler registration has reached all nodes"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"Registration failed!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="Un-registering-Handlers"><a href="#Un-registering-Handlers" class="headerlink" title="Un-registering Handlers"></a>Un-registering Handlers</h5><p>您可以通过 unregister() 方法来注销处理器。</p>
+<p>若您在集群模式下的 Event Bus 中撤销处理器，则同样会花费一些时间在节点中传播。若您想在完成后收到通知，可以使用unregister(handler) 方法注册处理器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">consumer.unregister(res -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (res.succeeded()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"The handler un-registration has reached all nodes"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"Un-registration failed!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="Publishing-messages"><a href="#Publishing-messages" class="headerlink" title="Publishing messages"></a>Publishing messages</h5><p>发布消息很简单，只需使用<code>publish</code>方法指定一个地址去发布即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eventBus.publish(<span class="string">"news.uk.sport"</span>, <span class="string">"Yay! Someone kicked a ball"</span>);</span><br></pre></td></tr></table></figure>
+<p>这个消息将会传递给所有在地址 news.uk.sport 上注册过的处理器。</p>
+<h5 id="Sending-messages"><a href="#Sending-messages" class="headerlink" title="Sending messages"></a>Sending messages</h5><p>与发布消息的不同之处在于，发送(send)的消息只会传递给在该地址注册的其中一个处理器，这就是点对点模式。Vert.x 使用不严格的轮询算法来选择绑定的处理器。<br>publish改成send即可</p>
+<h5 id="Setting-headers-on-messages"><a href="#Setting-headers-on-messages" class="headerlink" title="Setting headers on messages"></a>Setting headers on messages</h5><p>在 Event Bus 上发送的消息可包含头信息。这可通过在发送或发布时提供的 DeliveryOptions 来指定。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DeliveryOptions options = <span class="keyword">new</span> DeliveryOptions();</span><br><span class="line">options.addHeader(<span class="string">"some-header"</span>, <span class="string">"some-value"</span>);</span><br><span class="line">eventBus.send(<span class="string">"news.uk.sport"</span>, <span class="string">"Yay! Someone kicked a ball"</span>, options);</span><br></pre></td></tr></table></figure>
+
+<h5 id="Message-ordering"><a href="#Message-ordering" class="headerlink" title="Message ordering"></a>Message ordering</h5><p>Vert.x将按照特定发送者发送消息的顺序来传递消息给特定处理器。</p>
+<h5 id="The-Message-object"><a href="#The-Message-object" class="headerlink" title="The Message object"></a>The Message object</h5><p>您在消息处理器中接收到的对象的类型是<code>Message</code>。</p>
+<p>消息的<code>body</code>对应发送或发布的对象。消息的头信息可以通过<code>headers</code>方法获取。</p>
+<h5 id="Acknowledging-messages-sending-replies"><a href="#Acknowledging-messages-sending-replies" class="headerlink" title="Acknowledging messages / sending replies"></a>Acknowledging messages / sending replies</h5><p>当使用 send 方法发送消息时，Event Bus会尝试将消息传递到注册在Event Bus上的 MessageConsumer中。在某些情况下，发送者需要知道消费者何时收到消息并<em>处理</em>了消息。</p>
+<p>消费者可以通过调用<code>reply</code>方法来应答这个消息。</p>
+<p>当这种情况发生时，它会将消息回复给发送者并且在发送者中调用应答处理器来处理回复的消息。<br>看这个例子会更清楚：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Thre receiver</span></span><br><span class="line">MessageConsumer&lt;String&gt; consumer = eventBus.consumer(<span class="string">"news.uk.sport"</span>);</span><br><span class="line">consumer.handler(message -&gt; &#123;</span><br><span class="line">  System.out.println(<span class="string">"I have received a message: "</span> + message.body());</span><br><span class="line">  message.reply(<span class="string">"how interesting!"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//The sender</span></span><br><span class="line">eventBus.request(<span class="string">"news.uk.sport"</span>, <span class="string">"Yay! Someone kicked a ball across a patch of grass"</span>, ar -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (ar.succeeded()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"Received reply: "</span> + ar.result().body());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="Sending-with-timeouts"><a href="#Sending-with-timeouts" class="headerlink" title="Sending with timeouts"></a>Sending with timeouts</h5><p>当发送带有应答处理器的消息时，可以在 DeliveryOptions 中指定一个超时时间。如果在这个时间之内没有收到应答，则会以失败为参数调用应答处理器。默认超时是 30 秒。</p>
+<h5 id="Send-Failures"><a href="#Send-Failures" class="headerlink" title="Send Failures"></a>Send Failures</h5><p>消息发送可能会因为其他原因失败，包括：</p>
+<ul>
+<li>没有可用的处理器来接收消息</li>
+<li>接收者调用了 fail 方法显式声明失败</li>
+</ul>
+<p>发生这些情况时，应答处理器将会以这些失败为参数被调用。</p>
+<h5 id="Message-Codecs"><a href="#Message-Codecs" class="headerlink" title="Message Codecs"></a>Message Codecs</h5><p>您可以在 Event Bus 中发送任何对象，只要你为这个对象类型注册一个编解码器 MessageCodec。消息编解码器有一个名称，您需要在发送或发布消息时通过 DeliveryOptions 来指定：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">eventBus.registerCodec(myCodec);</span><br><span class="line"></span><br><span class="line">DeliveryOptions options = <span class="keyword">new</span> DeliveryOptions().setCodecName(myCodec.name());</span><br><span class="line"></span><br><span class="line">eventBus.send(<span class="string">"orders"</span>, <span class="keyword">new</span> MyPOJO(), options);</span><br></pre></td></tr></table></figure>
+<p>若您总是希望某个类使用将特定的编解码器，那么您可以为这个类注册默认编解码器。这样您就不需要在每次发送的时候使用 DeliveryOptions 来指定了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eventBus.registerDefaultCodec(MyPOJO<span class="class">.<span class="keyword">class</span>, <span class="title">myCodec</span>)</span>;</span><br><span class="line"></span><br><span class="line">eventBus.send(<span class="string">"orders"</span>, <span class="keyword">new</span> MyPOJO());</span><br></pre></td></tr></table></figure>
+<p>您可以通过 unregisterCodec 方法注销某个消息编解码器。</p>
+<p>消息编解码器的编码和解码不一定使用同一个类型。例如您可以编写一个编解码器来发送 MyPOJO 类的对象，但是当消息发送给处理器后解码成 MyOtherPOJO 对象。</p>
+<h5 id="Clustered-Event-Bus"><a href="#Clustered-Event-Bus" class="headerlink" title="Clustered Event Bus"></a>Clustered Event Bus</h5><p>Event Bus 不仅仅存在于单个 Vert.x 实例中。通过您在网络上将不同的 Vert.x 实例集群在一起，它可以形成一个单一的、分布式的Event Bus。</p>
+<h5 id="Clustering-programmatically"><a href="#Clustering-programmatically" class="headerlink" title="Clustering programmatically"></a>Clustering programmatically</h5><p>若您用编程的方式创建 Vert.x 实例（Vertx），则可以通过将 Vert.x 实例配置成集群模式来获取集群模式的Event Bus：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">VertxOptions options = <span class="keyword">new</span> VertxOptions();</span><br><span class="line">Vertx.clusteredVertx(options, res -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (res.succeeded()) &#123;</span><br><span class="line">    Vertx vertx = res.result();</span><br><span class="line">    EventBus eventBus = vertx.eventBus();</span><br><span class="line">    System.out.println(<span class="string">"We now have a clustered event bus: "</span> + eventBus);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"Failed: "</span> + res.cause());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="Clustering-on-the-command-line"><a href="#Clustering-on-the-command-line" class="headerlink" title="Clustering on the command line"></a>Clustering on the command line</h5><p>-cluster</p>
+<h4 id="Automatic-clean-up-in-verticles"><a href="#Automatic-clean-up-in-verticles" class="headerlink" title="Automatic clean-up in verticles"></a>Automatic clean-up in verticles</h4><p>若您在 Verticle 中注册了 Event Bus 的处理器，那么这些处理器在 Verticle 被撤销的时候会自动被注销。</p>
+<h4 id="Configuring-the-event-bus"><a href="#Configuring-the-event-bus" class="headerlink" title="Configuring the event bus"></a>Configuring the event bus</h4><p>Event Bus 是可以配置的，这对于以集群模式运行的 Event Bus 是非常有用的。Event Bus 使用 TCP 连接发送和接收消息，因此可以通过<code>EventBusOptions</code>对TCP连接进行全面的配置。由于 Event Bus 同时用作客户端和服务器，因此这些配置近似于<code>NetClientOptions</code>和<code>NetServerOptions</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">VertxOptions options = <span class="keyword">new</span> VertxOptions()</span><br><span class="line">    .setEventBusOptions(<span class="keyword">new</span> EventBusOptions()</span><br><span class="line">        .setSsl(<span class="keyword">true</span>)</span><br><span class="line">        .setKeyStoreOptions(<span class="keyword">new</span> JksOptions().setPath(<span class="string">"keystore.jks"</span>).setPassword(<span class="string">"wibble"</span>))</span><br><span class="line">        .setTrustStoreOptions(<span class="keyword">new</span> JksOptions().setPath(<span class="string">"keystore.jks"</span>).setPassword(<span class="string">"wibble"</span>))</span><br><span class="line">        .setClientAuth(ClientAuth.REQUIRED)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">Vertx.clusteredVertx(options, res -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (res.succeeded()) &#123;</span><br><span class="line">    Vertx vertx = res.result();</span><br><span class="line">    EventBus eventBus = vertx.eventBus();</span><br><span class="line">    System.out.println(<span class="string">"We now have a clustered event bus: "</span> + eventBus);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"Failed: "</span> + res.cause());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上边代码段描述了如何在Event Bus中使用SSL连接替换传统的TCP连接。</p>
+<blockquote>
+<p>警告：若要在集群模式下保证安全性，您 必须 将集群管理器配置成加密的或强制安全的。参考集群管理器的文档获取更多细节。</p>
+</blockquote>
+<p>Event Bus 的配置需要在所有集群节点中保持一致性。</p>
+<p>EventBusOptions还允许您指定 Event Bus 是否运行在集群模式下，以及它的主机信息和端口。您可使用 setClustered、getClusterHost和 getClusterPort 方法来设置。</p>
+<p>在容器中使用时，您也可以配置公共主机和端口号：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">VertxOptions options = <span class="keyword">new</span> VertxOptions()</span><br><span class="line">    .setEventBusOptions(<span class="keyword">new</span> EventBusOptions()</span><br><span class="line">        .setClusterPublicHost(<span class="string">"whatever"</span>)</span><br><span class="line">        .setClusterPublicPort(<span class="number">1234</span>)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">Vertx.clusteredVertx(options, res -&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (res.succeeded()) &#123;</span><br><span class="line">    Vertx vertx = res.result();</span><br><span class="line">    EventBus eventBus = vertx.eventBus();</span><br><span class="line">    System.out.println(<span class="string">"We now have a clustered event bus: "</span> + eventBus);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"Failed: "</span> + res.cause());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><p>和其他一些语言不同，Java 没有对 JSON 的原生支持（first class support），因此我们提供了两个类，以便在 Vert.x 应用中处理 JSON 更容易。</p>
+<h3 id="JSON-object"><a href="#JSON-object" class="headerlink" title="JSON object"></a>JSON object</h3><p>JsonObject 类用来描述JSON对象。</p>
+<p>一个JSON 对象基本上只是一个 Map 结构。它具有字符串的键，值可以是任意一种JSON 支持的类型（如 string, number, boolean）。</p>
+<p>JSON 对象也支持 null 值。</p>
+<h4 id="Creating-JSON-objects-创建-JSON-对象"><a href="#Creating-JSON-objects-创建-JSON-对象" class="headerlink" title="Creating JSON objects 创建 JSON 对象"></a>Creating JSON objects 创建 JSON 对象</h4><p>可以使用默认构造函数创建空的JSON对象。</p>
+<p>您可以通过一个 JSON 格式的字符串创建JSON对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String jsonString = <span class="string">"&#123;\"foo\":\"bar\"&#125;"</span>;</span><br><span class="line">JsonObject object = <span class="keyword">new</span> JsonObject(jsonString);</span><br></pre></td></tr></table></figure>
+<p>您可以从通过一个Map创建JSON对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">map.put(<span class="string">"foo"</span>, <span class="string">"bar"</span>);</span><br><span class="line">map.put(<span class="string">"xyz"</span>, <span class="number">3</span>);</span><br><span class="line">JsonObject object = <span class="keyword">new</span> JsonObject(map);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Putting-entries-into-a-JSON-object-将键值对放入-JSON-对象"><a href="#Putting-entries-into-a-JSON-object-将键值对放入-JSON-对象" class="headerlink" title="Putting entries into a JSON object 将键值对放入 JSON 对象"></a>Putting entries into a JSON object 将键值对放入 JSON 对象</h4><p>使用put 方法可以将值放入到JSON对象里。</p>
+<p>这个API是流式的，因此这个方法可以被链式地调用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JsonObject object = <span class="keyword">new</span> JsonObject();</span><br><span class="line">object.put(<span class="string">"foo"</span>, <span class="string">"bar"</span>).put(<span class="string">"num"</span>, <span class="number">123</span>).put(<span class="string">"mybool"</span>, <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Getting-values-from-a-JSON-object-从-JSON-对象获取值"><a href="#Getting-values-from-a-JSON-object-从-JSON-对象获取值" class="headerlink" title="Getting values from a JSON object 从 JSON 对象获取值"></a>Getting values from a JSON object 从 JSON 对象获取值</h4><p>您可使用 getXXX 方法从JSON对象中获取值。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String val = jsonObject.getString(<span class="string">"some-key"</span>);</span><br><span class="line"><span class="keyword">int</span> intVal = jsonObject.getInteger(<span class="string">"some-other-key"</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Mapping-between-JSON-objects-and-Java-objects-JSON-对象和-Java-对象间的映射"><a href="#Mapping-between-JSON-objects-and-Java-objects-JSON-对象和-Java-对象间的映射" class="headerlink" title="Mapping between JSON objects and Java objects JSON 对象和 Java 对象间的映射"></a>Mapping between JSON objects and Java objects JSON 对象和 Java 对象间的映射</h4><p>您可以从 Java 对象的字段创建一个JSON 对象，如下所示：</p>
+<p>你可以通过一个JSON 对象来实例化一个Java 对象并填充字段值。如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">request.bodyHandler(buff -&gt; &#123;</span><br><span class="line">  JsonObject jsonObject = buff.toJsonObject();</span><br><span class="line">  User javaObject = jsonObject.mapTo(User<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在最简单的情况下，如果 Java 类中所有的字段都是 public（或者有 public 的 getter/setter）时，并且有一个 public 的默认构造函数（或不定义构造函数），mapFrom 和 mapTo 都应该成功。</p>
+<p>只要不存在对象的循环引用，嵌套的 Java 对象可以被序列化/反序列化为嵌套的JSON对象。</p>
+<h4 id="Encoding-a-JSON-object-to-a-String-将-JSON-对象编码成字符串"><a href="#Encoding-a-JSON-object-to-a-String-将-JSON-对象编码成字符串" class="headerlink" title="Encoding a JSON object to a String 将 JSON 对象编码成字符串"></a>Encoding a JSON object to a String 将 JSON 对象编码成字符串</h4><p>您可使用 encode 方法将一个对象编码成字符串格式。</p>
+<p>如要得到更优美、格式化的字符串，可以使用 encodePrettily 方法。</p>
+<h3 id="JSON-arrays-JSON-数组"><a href="#JSON-arrays-JSON-数组" class="headerlink" title="JSON arrays JSON 数组"></a>JSON arrays JSON 数组</h3><p>JsonArray 类用来描述 JSON数组。</p>
+<p>一个JSON 数组是一个值的序列（值的类型可以是 string、number、boolean 等）。</p>
+<p>JSON 数组同样可以包含 null 值。</p>
+<h4 id="Creating-JSON-arrays-创建-JSON-数组"><a href="#Creating-JSON-arrays-创建-JSON-数组" class="headerlink" title="Creating JSON arrays 创建 JSON 数组"></a>Creating JSON arrays 创建 JSON 数组</h4><p>可以使用默认构造函数创建空的JSON数组。</p>
+<p>您可以从JSON格式的字符串创建一个JSON数组：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String jsonString = <span class="string">"[\"foo\",\"bar\"]"</span>;</span><br><span class="line">JsonArray array = <span class="keyword">new</span> JsonArray(jsonString);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Adding-entries-into-a-JSON-array-将数组项添加到JSON数组"><a href="#Adding-entries-into-a-JSON-array-将数组项添加到JSON数组" class="headerlink" title="Adding entries into a JSON array 将数组项添加到JSON数组"></a>Adding entries into a JSON array 将数组项添加到JSON数组</h4><p>您可以使用 add 方法添加数组项到JSON数组中：</p>
+<h4 id="Getting-values-from-a-JSON-array"><a href="#Getting-values-from-a-JSON-array" class="headerlink" title="Getting values from a JSON array"></a>Getting values from a JSON array</h4><p>您可使用 getXXX 方法从JSON 数组中获取值。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String val = array.getString(<span class="number">0</span>);</span><br><span class="line">Integer intVal = array.getInteger(<span class="number">1</span>);</span><br><span class="line">Boolean boolVal = array.getBoolean(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Encoding-a-JSON-array-to-a-String"><a href="#Encoding-a-JSON-array-to-a-String" class="headerlink" title="Encoding a JSON array to a String"></a>Encoding a JSON array to a String</h4><p>您可使用 encode 将一个 JsonArray 编码成字符串格式。</p>
+<h4 id="Creating-arbitrary-JSON"><a href="#Creating-arbitrary-JSON" class="headerlink" title="Creating arbitrary JSON"></a>Creating arbitrary JSON</h4><p>这里一直假设您在使用有效的表示形式<br>如果你不确定，你应该用Json.decodeValue</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Object object = Json.decodeValue(arbitraryJson);</span><br><span class="line"><span class="keyword">if</span> (object <span class="keyword">instanceof</span> JsonObject) &#123;</span><br><span class="line">  <span class="comment">// That's a valid json object</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (object <span class="keyword">instanceof</span> JsonArray) &#123;</span><br><span class="line">  <span class="comment">// That's a valid json array</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (object <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">  <span class="comment">// That's valid string</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// etc...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Json-Pointers"><a href="#Json-Pointers" class="headerlink" title="Json Pointers"></a>Json Pointers</h2><p>你可以用pointers来查询或写入。可以用字符串、URI或者人工添加地址来构造JsonPointer</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JsonPointer pointer1 = JsonPointer.from(<span class="string">"/hello/world"</span>);</span><br><span class="line"><span class="comment">// Build a pointer manually</span></span><br><span class="line">JsonPointer pointer2 = JsonPointer.create()</span><br><span class="line">  .append(<span class="string">"hello"</span>)</span><br><span class="line">  .append(<span class="string">"world"</span>);</span><br></pre></td></tr></table></figure>
+<p>pointer初始化之后，用<code>queryJson</code>来查询JSON值，用<code>writerJson</code>更新</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Object result1 = objectPointer.queryJson(jsonObject);</span><br><span class="line"><span class="comment">// Query a JsonArray</span></span><br><span class="line">Object result2 = arrayPointer.queryJson(jsonArray);</span><br><span class="line"><span class="comment">// Write starting from a JsonObject</span></span><br><span class="line">objectPointer.writeJson(jsonObject, <span class="string">"new element"</span>);</span><br><span class="line"><span class="comment">// Write starting from a JsonObject</span></span><br><span class="line">arrayPointer.writeJson(jsonArray, <span class="string">"new element"</span>);</span><br></pre></td></tr></table></figure>
+<p>提供JsonPointerIterator实现后你可以对任意对象model使用Vert.x Json Pointer</p>
+<h2 id="Buffers"><a href="#Buffers" class="headerlink" title="Buffers"></a>Buffers</h2><p>在 Vert.x 内部，大部分数据被重新组织成 Buffer 格式。</p>
+<p>一个 Buffer 是可以读取或写入的0个或多个字节序列，并且根据需要可以自动扩容、将任意字节写入 Buffer。您也可以将 Buffer 想象成字节数组（类似于 JDK 中的 ByteBuffer）。</p>
+<h3 id="Creating-buffers"><a href="#Creating-buffers" class="headerlink" title="Creating buffers"></a>Creating buffers</h3><p>可以使用静态方法 Buffer.buffer 来创建 Buffer。</p>
+<p>Buffer 可以从字符串或字节数组初始化，或者直接创建空的 Buffer。</p>
+<p>这儿有一些创建 Buffer 的例子。</p>
+<p>创建一个空的 Buffer：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Buffer buff = Buffer.buffer();</span><br></pre></td></tr></table></figure>
+<p>从字符串创建一个 Buffer，这个 Buffer 中的字符会以 UTF-8 格式编码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Buffer buff = Buffer.buffer(<span class="string">"some string"</span>);</span><br></pre></td></tr></table></figure>
+<p>从字符串创建一个 Buffer，这个字符串可以用指定的编码方式编码，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Buffer buff = Buffer.buffer(<span class="string">"some string"</span>, <span class="string">"UTF-16"</span>);</span><br></pre></td></tr></table></figure>
+<p>从字节数组 byte[] 创建 Buffer：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[] &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>&#125;;</span><br><span class="line">Buffer buff = Buffer.buffer(bytes);</span><br></pre></td></tr></table></figure>
+<p>创建一个指定初始大小的 Buffer。若您知道您的 Buffer 会写入一定量的数据，您可以创建 Buffer 并指定它的大小。这使得这个 Buffer 初始化时分配了更多的内存，比数据写入时重新调整大小的效率更高。注意以这种方式创建的 Buffer 是<strong>空的</strong>。它不会创建一个填满了 0 的Buffer。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Buffer buff = Buffer.buffer(<span class="number">10000</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Writing-to-a-Buffer"><a href="#Writing-to-a-Buffer" class="headerlink" title="Writing to a Buffer"></a>Writing to a Buffer</h3><h4 id="Appending-to-a-Buffer"><a href="#Appending-to-a-Buffer" class="headerlink" title="Appending to a Buffer"></a>Appending to a Buffer</h4><h4 id="Random-access-buffer-writes"><a href="#Random-access-buffer-writes" class="headerlink" title="Random access buffer writes"></a>Random access buffer writes</h4><h3 id="Reading-from-a-Buffer"><a href="#Reading-from-a-Buffer" class="headerlink" title="Reading from a Buffer"></a>Reading from a Buffer</h3><h3 id="Working-with-unsigned-numbers"><a href="#Working-with-unsigned-numbers" class="headerlink" title="Working with unsigned numbers"></a>Working with unsigned numbers</h3><h3 id="Buffer-length"><a href="#Buffer-length" class="headerlink" title="Buffer length"></a>Buffer length</h3><h3 id="Copying-buffers"><a href="#Copying-buffers" class="headerlink" title="Copying buffers"></a>Copying buffers</h3><h3 id="Slicing-buffers"><a href="#Slicing-buffers" class="headerlink" title="Slicing buffers"></a>Slicing buffers</h3><h3 id="Buffer-re-use"><a href="#Buffer-re-use" class="headerlink" title="Buffer re-use"></a>Buffer re-use</h3><h2 id="Writing-TCP-servers-and-clients"><a href="#Writing-TCP-servers-and-clients" class="headerlink" title="Writing TCP servers and clients"></a>Writing TCP servers and clients</h2><h3 id="Creating-a-TCP-server"><a href="#Creating-a-TCP-server" class="headerlink" title="Creating a TCP server"></a>Creating a TCP server</h3><h3 id="Configuring-a-TCP-server"><a href="#Configuring-a-TCP-server" class="headerlink" title="Configuring a TCP server"></a>Configuring a TCP server</h3><h3 id="Start-the-Server-Listening"><a href="#Start-the-Server-Listening" class="headerlink" title="Start the Server Listening"></a>Start the Server Listening</h3><h3 id="Listening-on-a-random-port"><a href="#Listening-on-a-random-port" class="headerlink" title="Listening on a random port"></a>Listening on a random port</h3><h3 id="Getting-notified-of-incoming-connections"><a href="#Getting-notified-of-incoming-connections" class="headerlink" title="Getting notified of incoming connections"></a>Getting notified of incoming connections</h3><h3 id="Reading-data-from-the-socket"><a href="#Reading-data-from-the-socket" class="headerlink" title="Reading data from the socket"></a>Reading data from the socket</h3><h3 id="Writing-data-to-a-socket"><a href="#Writing-data-to-a-socket" class="headerlink" title="Writing data to a socket"></a>Writing data to a socket</h3><h3 id="Closed-handler"><a href="#Closed-handler" class="headerlink" title="Closed handler"></a>Closed handler</h3><h3 id="Handling-exceptions"><a href="#Handling-exceptions" class="headerlink" title="Handling exceptions"></a>Handling exceptions</h3><h3 id="Event-bus-write-handler"><a href="#Event-bus-write-handler" class="headerlink" title="Event bus write handler"></a>Event bus write handler</h3><h3 id="Local-and-remote-addresses"><a href="#Local-and-remote-addresses" class="headerlink" title="Local and remote addresses"></a>Local and remote addresses</h3><h3 id="Sending-files-or-resources-from-the-classpath"><a href="#Sending-files-or-resources-from-the-classpath" class="headerlink" title="Sending files or resources from the classpath"></a>Sending files or resources from the classpath</h3><h3 id="Streaming-sockets"><a href="#Streaming-sockets" class="headerlink" title="Streaming sockets"></a>Streaming sockets</h3><h3 id="Upgrading-connections-to-SSL-TLS"><a href="#Upgrading-connections-to-SSL-TLS" class="headerlink" title="Upgrading connections to SSL/TLS"></a>Upgrading connections to SSL/TLS</h3><h3 id="Closing-a-TCP-Server"><a href="#Closing-a-TCP-Server" class="headerlink" title="Closing a TCP Server"></a>Closing a TCP Server</h3><h3 id="Automatic-clean-up-in-verticles-1"><a href="#Automatic-clean-up-in-verticles-1" class="headerlink" title="Automatic clean-up in verticles"></a>Automatic clean-up in verticles</h3><h3 id="Scaling-sharing-TCP-servers"><a href="#Scaling-sharing-TCP-servers" class="headerlink" title="Scaling - sharing TCP servers"></a>Scaling - sharing TCP servers</h3><hr>
+<h3 id="Creating-a-TCP-client"><a href="#Creating-a-TCP-client" class="headerlink" title="Creating a TCP client"></a>Creating a TCP client</h3><h3 id="Configuring-a-TCP-client"><a href="#Configuring-a-TCP-client" class="headerlink" title="Configuring a TCP client"></a>Configuring a TCP client</h3><p>Making connections<br>Configuring connection attempts<br>Logging network activity<br>Configuring servers and clients to work with SSL/TLS</p>
+<h4 id="Enabling-SSL-TLS-on-the-server"><a href="#Enabling-SSL-TLS-on-the-server" class="headerlink" title="Enabling SSL/TLS on the server"></a>Enabling SSL/TLS on the server</h4><h4 id="Specifying-key-certificate-for-the-server"><a href="#Specifying-key-certificate-for-the-server" class="headerlink" title="Specifying key/certificate for the server"></a>Specifying key/certificate for the server</h4><h4 id="Specifying-trust-for-the-server"><a href="#Specifying-trust-for-the-server" class="headerlink" title="Specifying trust for the server"></a>Specifying trust for the server</h4><h4 id="Enabling-SSL-TLS-on-the-client"><a href="#Enabling-SSL-TLS-on-the-client" class="headerlink" title="Enabling SSL/TLS on the client"></a>Enabling SSL/TLS on the client</h4><h4 id="Client-trust-configuration"><a href="#Client-trust-configuration" class="headerlink" title="Client trust configuration"></a>Client trust configuration</h4><h4 id="Specifying-key-certificate-for-the-client"><a href="#Specifying-key-certificate-for-the-client" class="headerlink" title="Specifying key/certificate for the client"></a>Specifying key/certificate for the client</h4><h4 id="Self-signed-certificates-for-testing-and-development-purposes"><a href="#Self-signed-certificates-for-testing-and-development-purposes" class="headerlink" title="Self-signed certificates for testing and development purposes"></a>Self-signed certificates for testing and development purposes</h4><h4 id="Revoking-certificate-authorities"><a href="#Revoking-certificate-authorities" class="headerlink" title="Revoking certificate authorities"></a>Revoking certificate authorities</h4><h4 id="Configuring-the-Cipher-suite"><a href="#Configuring-the-Cipher-suite" class="headerlink" title="Configuring the Cipher suite"></a>Configuring the Cipher suite</h4><h4 id="Configuring-TLS-protocol-versions"><a href="#Configuring-TLS-protocol-versions" class="headerlink" title="Configuring TLS protocol versions"></a>Configuring TLS protocol versions</h4><h4 id="SSL-engine"><a href="#SSL-engine" class="headerlink" title="SSL engine"></a>SSL engine</h4><h4 id="Server-Name-Indication-SNI"><a href="#Server-Name-Indication-SNI" class="headerlink" title="Server Name Indication (SNI)"></a>Server Name Indication (SNI)</h4><h4 id="Application-Layer-Protocol-Negotiation-ALPN"><a href="#Application-Layer-Protocol-Negotiation-ALPN" class="headerlink" title="Application-Layer Protocol Negotiation (ALPN)"></a>Application-Layer Protocol Negotiation (ALPN)</h4><h5 id="OpenSSL-ALPN-support"><a href="#OpenSSL-ALPN-support" class="headerlink" title="OpenSSL ALPN support"></a>OpenSSL ALPN support</h5><h5 id="Jetty-ALPN-support"><a href="#Jetty-ALPN-support" class="headerlink" title="Jetty-ALPN support"></a>Jetty-ALPN support</h5><h2 id="Using-a-proxy-for-client-connections"><a href="#Using-a-proxy-for-client-connections" class="headerlink" title="Using a proxy for client connections"></a>Using a proxy for client connections</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/company/" rel="tag"># company</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/14/java-%E6%8A%80%E6%9C%AF%E6%A0%88/log4j2-notes/log4j2-notes/" rel="next" title="log4j2-notes">
+                <i class="fa fa-chevron-left"></i> log4j2-notes
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/16/java-%E6%8A%80%E6%9C%AF%E6%A0%88/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/AQS/" rel="prev" title="java-AQS">
+                java-AQS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/04/15/java-技术栈/vertx-notes/vertx-notes/"
+           data-title="vert.x-notes" data-url="http://oodtoodt.github.io/2020/04/15/java-%E6%8A%80%E6%9C%AF%E6%A0%88/vertx-notes/vertx-notes/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/prpr.jpg"
+               alt="eco_oodt" />
+          <p class="site-author-name" itemprop="name">eco_oodt</p>
+           
+              <p class="site-description motion-element" itemprop="description">---自虐一点 开心一点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Are-you-fluent"><span class="nav-number">1.</span> <span class="nav-text">Are you fluent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Don’t-call-us-we’ll-call-you"><span class="nav-number">2.</span> <span class="nav-text">Don’t call us, we’ll call you</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Don’t-block-me"><span class="nav-number">3.</span> <span class="nav-text">Don’t block me!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reactor-and-Multi-Reactor"><span class="nav-number">4.</span> <span class="nav-text">Reactor and Multi-Reactor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Golden-Rule-Don’t-Block-the-Event-Loop"><span class="nav-number">5.</span> <span class="nav-text">The Golden Rule - Don’t Block the Event Loop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Running-blocking-code"><span class="nav-number">6.</span> <span class="nav-text">Running blocking code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Async-coordination（异步协调）"><span class="nav-number">7.</span> <span class="nav-text">Async coordination（异步协调）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Concurrent-composition-并发组成-合并"><span class="nav-number">7.1.</span> <span class="nav-text">Concurrent composition(并发组成[合并?])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequential-composition（顺序合并）"><span class="nav-number">7.2.</span> <span class="nav-text">Sequential composition（顺序合并）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Verticles"><span class="nav-number">8.</span> <span class="nav-text">Verticles</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Writing-Verticle"><span class="nav-number">8.1.</span> <span class="nav-text">Writing Verticle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Asynchronous-Verticle-start-and-stop-异步启动和终止"><span class="nav-number">8.2.</span> <span class="nav-text">Asynchronous Verticle start and stop(异步启动和终止)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verticle-types"><span class="nav-number">8.3.</span> <span class="nav-text">Verticle types</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Standard-Verticle"><span class="nav-number">8.3.1.</span> <span class="nav-text">Standard Verticle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#worker-Verticle"><span class="nav-number">8.3.2.</span> <span class="nav-text">worker Verticle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deploying-verticles-programmatically"><span class="nav-number">8.3.3.</span> <span class="nav-text">Deploying verticles programmatically</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rules-for-mapping-a-verticle-name-to-a-verticle-factory-Verticle名称到Factory的映射规则"><span class="nav-number">8.3.4.</span> <span class="nav-text">Rules for mapping a verticle name to a verticle factory(Verticle名称到Factory的映射规则)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-are-Verticle-Factories-located"><span class="nav-number">8.3.5.</span> <span class="nav-text">How are Verticle Factories located?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Waiting-for-deployment-to-complete"><span class="nav-number">8.3.6.</span> <span class="nav-text">Waiting for deployment to complete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Undeploying-verticle-deployments"><span class="nav-number">8.3.7.</span> <span class="nav-text">Undeploying verticle deployments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Specifying-number-of-veritcle-instances-设置-Verticle-实例数"><span class="nav-number">8.3.8.</span> <span class="nav-text">Specifying number of veritcle instances(设置 Verticle 实例数)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Passing-configuration-to-a-verticle"><span class="nav-number">8.3.9.</span> <span class="nav-text">Passing configuration to a verticle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Accessing-environment-variables-in-a-Verticle-在-Verticle-中访问环境变量"><span class="nav-number">8.3.10.</span> <span class="nav-text">Accessing environment variables in a Verticle(在 Verticle 中访问环境变量)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Verticle-Isolation-Groups"><span class="nav-number">8.3.11.</span> <span class="nav-text">Verticle Isolation Groups</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#High-Availability"><span class="nav-number">8.3.12.</span> <span class="nav-text">High Availability</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Running-Verticles-from-the-command-line"><span class="nav-number">8.3.13.</span> <span class="nav-text">Running Verticles from the command line</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Causing-Vert-x-to-exit"><span class="nav-number">8.3.14.</span> <span class="nav-text">Causing Vert.x to exit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-Context-object"><span class="nav-number">8.3.15.</span> <span class="nav-text">The Context object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Executing-periodic-and-delayed-actions-执行周期性-延迟性操作"><span class="nav-number">8.3.16.</span> <span class="nav-text">Executing periodic and delayed actions(执行周期性&#x2F;延迟性操作)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#one-shot-Timers"><span class="nav-number">8.3.16.1.</span> <span class="nav-text">one-shot Timers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Periodic-Timers"><span class="nav-number">8.3.16.2.</span> <span class="nav-text">Periodic Timers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#取消、清除"><span class="nav-number">8.3.16.3.</span> <span class="nav-text">取消、清除</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Verticle-worker-pool"><span class="nav-number">8.3.17.</span> <span class="nav-text">Verticle worker pool</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Event-Bus"><span class="nav-number">8.4.</span> <span class="nav-text">The Event Bus</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#The-Theory"><span class="nav-number">8.4.1.</span> <span class="nav-text">The Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Addressing"><span class="nav-number">8.4.1.1.</span> <span class="nav-text">Addressing</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handlers"><span class="nav-number">8.4.1.2.</span> <span class="nav-text">Handlers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#publish-subscribe-messaging"><span class="nav-number">8.4.1.3.</span> <span class="nav-text">publish&#x2F;subscribe messaging</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Point-to-point-and-Request-Response-messaging"><span class="nav-number">8.4.1.4.</span> <span class="nav-text">Point-to-point and Request-Response messaging</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Best-effort-delivery"><span class="nav-number">8.4.1.5.</span> <span class="nav-text">Best-effort delivery</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Types-of-messages"><span class="nav-number">8.4.1.6.</span> <span class="nav-text">Types of messages</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-Event-Bus-API"><span class="nav-number">8.4.2.</span> <span class="nav-text">The Event Bus API</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Getting-the-event-bus"><span class="nav-number">8.4.2.1.</span> <span class="nav-text">Getting the event bus</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Registering-Handlers"><span class="nav-number">8.4.2.2.</span> <span class="nav-text">Registering Handlers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Un-registering-Handlers"><span class="nav-number">8.4.2.3.</span> <span class="nav-text">Un-registering Handlers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Publishing-messages"><span class="nav-number">8.4.2.4.</span> <span class="nav-text">Publishing messages</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Sending-messages"><span class="nav-number">8.4.2.5.</span> <span class="nav-text">Sending messages</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Setting-headers-on-messages"><span class="nav-number">8.4.2.6.</span> <span class="nav-text">Setting headers on messages</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Message-ordering"><span class="nav-number">8.4.2.7.</span> <span class="nav-text">Message ordering</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Message-object"><span class="nav-number">8.4.2.8.</span> <span class="nav-text">The Message object</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Acknowledging-messages-sending-replies"><span class="nav-number">8.4.2.9.</span> <span class="nav-text">Acknowledging messages &#x2F; sending replies</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Sending-with-timeouts"><span class="nav-number">8.4.2.10.</span> <span class="nav-text">Sending with timeouts</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Send-Failures"><span class="nav-number">8.4.2.11.</span> <span class="nav-text">Send Failures</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Message-Codecs"><span class="nav-number">8.4.2.12.</span> <span class="nav-text">Message Codecs</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Clustered-Event-Bus"><span class="nav-number">8.4.2.13.</span> <span class="nav-text">Clustered Event Bus</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Clustering-programmatically"><span class="nav-number">8.4.2.14.</span> <span class="nav-text">Clustering programmatically</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Clustering-on-the-command-line"><span class="nav-number">8.4.2.15.</span> <span class="nav-text">Clustering on the command line</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Automatic-clean-up-in-verticles"><span class="nav-number">8.4.3.</span> <span class="nav-text">Automatic clean-up in verticles</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Configuring-the-event-bus"><span class="nav-number">8.4.4.</span> <span class="nav-text">Configuring the event bus</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON"><span class="nav-number">9.</span> <span class="nav-text">JSON</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON-object"><span class="nav-number">9.1.</span> <span class="nav-text">JSON object</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Creating-JSON-objects-创建-JSON-对象"><span class="nav-number">9.1.1.</span> <span class="nav-text">Creating JSON objects 创建 JSON 对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Putting-entries-into-a-JSON-object-将键值对放入-JSON-对象"><span class="nav-number">9.1.2.</span> <span class="nav-text">Putting entries into a JSON object 将键值对放入 JSON 对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Getting-values-from-a-JSON-object-从-JSON-对象获取值"><span class="nav-number">9.1.3.</span> <span class="nav-text">Getting values from a JSON object 从 JSON 对象获取值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mapping-between-JSON-objects-and-Java-objects-JSON-对象和-Java-对象间的映射"><span class="nav-number">9.1.4.</span> <span class="nav-text">Mapping between JSON objects and Java objects JSON 对象和 Java 对象间的映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Encoding-a-JSON-object-to-a-String-将-JSON-对象编码成字符串"><span class="nav-number">9.1.5.</span> <span class="nav-text">Encoding a JSON object to a String 将 JSON 对象编码成字符串</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON-arrays-JSON-数组"><span class="nav-number">9.2.</span> <span class="nav-text">JSON arrays JSON 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Creating-JSON-arrays-创建-JSON-数组"><span class="nav-number">9.2.1.</span> <span class="nav-text">Creating JSON arrays 创建 JSON 数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adding-entries-into-a-JSON-array-将数组项添加到JSON数组"><span class="nav-number">9.2.2.</span> <span class="nav-text">Adding entries into a JSON array 将数组项添加到JSON数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Getting-values-from-a-JSON-array"><span class="nav-number">9.2.3.</span> <span class="nav-text">Getting values from a JSON array</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Encoding-a-JSON-array-to-a-String"><span class="nav-number">9.2.4.</span> <span class="nav-text">Encoding a JSON array to a String</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Creating-arbitrary-JSON"><span class="nav-number">9.2.5.</span> <span class="nav-text">Creating arbitrary JSON</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Json-Pointers"><span class="nav-number">10.</span> <span class="nav-text">Json Pointers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffers"><span class="nav-number">11.</span> <span class="nav-text">Buffers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-buffers"><span class="nav-number">11.1.</span> <span class="nav-text">Creating buffers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writing-to-a-Buffer"><span class="nav-number">11.2.</span> <span class="nav-text">Writing to a Buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Appending-to-a-Buffer"><span class="nav-number">11.2.1.</span> <span class="nav-text">Appending to a Buffer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Random-access-buffer-writes"><span class="nav-number">11.2.2.</span> <span class="nav-text">Random access buffer writes</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reading-from-a-Buffer"><span class="nav-number">11.3.</span> <span class="nav-text">Reading from a Buffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Working-with-unsigned-numbers"><span class="nav-number">11.4.</span> <span class="nav-text">Working with unsigned numbers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer-length"><span class="nav-number">11.5.</span> <span class="nav-text">Buffer length</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Copying-buffers"><span class="nav-number">11.6.</span> <span class="nav-text">Copying buffers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slicing-buffers"><span class="nav-number">11.7.</span> <span class="nav-text">Slicing buffers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer-re-use"><span class="nav-number">11.8.</span> <span class="nav-text">Buffer re-use</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Writing-TCP-servers-and-clients"><span class="nav-number">12.</span> <span class="nav-text">Writing TCP servers and clients</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-a-TCP-server"><span class="nav-number">12.1.</span> <span class="nav-text">Creating a TCP server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuring-a-TCP-server"><span class="nav-number">12.2.</span> <span class="nav-text">Configuring a TCP server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Start-the-Server-Listening"><span class="nav-number">12.3.</span> <span class="nav-text">Start the Server Listening</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Listening-on-a-random-port"><span class="nav-number">12.4.</span> <span class="nav-text">Listening on a random port</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Getting-notified-of-incoming-connections"><span class="nav-number">12.5.</span> <span class="nav-text">Getting notified of incoming connections</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reading-data-from-the-socket"><span class="nav-number">12.6.</span> <span class="nav-text">Reading data from the socket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writing-data-to-a-socket"><span class="nav-number">12.7.</span> <span class="nav-text">Writing data to a socket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Closed-handler"><span class="nav-number">12.8.</span> <span class="nav-text">Closed handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Handling-exceptions"><span class="nav-number">12.9.</span> <span class="nav-text">Handling exceptions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-bus-write-handler"><span class="nav-number">12.10.</span> <span class="nav-text">Event bus write handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-and-remote-addresses"><span class="nav-number">12.11.</span> <span class="nav-text">Local and remote addresses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sending-files-or-resources-from-the-classpath"><span class="nav-number">12.12.</span> <span class="nav-text">Sending files or resources from the classpath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Streaming-sockets"><span class="nav-number">12.13.</span> <span class="nav-text">Streaming sockets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Upgrading-connections-to-SSL-TLS"><span class="nav-number">12.14.</span> <span class="nav-text">Upgrading connections to SSL&#x2F;TLS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Closing-a-TCP-Server"><span class="nav-number">12.15.</span> <span class="nav-text">Closing a TCP Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Automatic-clean-up-in-verticles-1"><span class="nav-number">12.16.</span> <span class="nav-text">Automatic clean-up in verticles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scaling-sharing-TCP-servers"><span class="nav-number">12.17.</span> <span class="nav-text">Scaling - sharing TCP servers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-a-TCP-client"><span class="nav-number">12.18.</span> <span class="nav-text">Creating a TCP client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuring-a-TCP-client"><span class="nav-number">12.19.</span> <span class="nav-text">Configuring a TCP client</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Enabling-SSL-TLS-on-the-server"><span class="nav-number">12.19.1.</span> <span class="nav-text">Enabling SSL&#x2F;TLS on the server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Specifying-key-certificate-for-the-server"><span class="nav-number">12.19.2.</span> <span class="nav-text">Specifying key&#x2F;certificate for the server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Specifying-trust-for-the-server"><span class="nav-number">12.19.3.</span> <span class="nav-text">Specifying trust for the server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Enabling-SSL-TLS-on-the-client"><span class="nav-number">12.19.4.</span> <span class="nav-text">Enabling SSL&#x2F;TLS on the client</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Client-trust-configuration"><span class="nav-number">12.19.5.</span> <span class="nav-text">Client trust configuration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Specifying-key-certificate-for-the-client"><span class="nav-number">12.19.6.</span> <span class="nav-text">Specifying key&#x2F;certificate for the client</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Self-signed-certificates-for-testing-and-development-purposes"><span class="nav-number">12.19.7.</span> <span class="nav-text">Self-signed certificates for testing and development purposes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Revoking-certificate-authorities"><span class="nav-number">12.19.8.</span> <span class="nav-text">Revoking certificate authorities</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Configuring-the-Cipher-suite"><span class="nav-number">12.19.9.</span> <span class="nav-text">Configuring the Cipher suite</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Configuring-TLS-protocol-versions"><span class="nav-number">12.19.10.</span> <span class="nav-text">Configuring TLS protocol versions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSL-engine"><span class="nav-number">12.19.11.</span> <span class="nav-text">SSL engine</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Server-Name-Indication-SNI"><span class="nav-number">12.19.12.</span> <span class="nav-text">Server Name Indication (SNI)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Application-Layer-Protocol-Negotiation-ALPN"><span class="nav-number">12.19.13.</span> <span class="nav-text">Application-Layer Protocol Negotiation (ALPN)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#OpenSSL-ALPN-support"><span class="nav-number">12.19.13.1.</span> <span class="nav-text">OpenSSL ALPN support</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Jetty-ALPN-support"><span class="nav-number">12.19.13.2.</span> <span class="nav-text">Jetty-ALPN support</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-a-proxy-for-client-connections"><span class="nav-number">13.</span> <span class="nav-text">Using a proxy for client connections</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">eco_oodt</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"oodtoodtgithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9nyYGut00EwMsBkAM79MHdVT-gzGzoHsz", "S2d0pfqMODa7ipkySemFGTdl");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
